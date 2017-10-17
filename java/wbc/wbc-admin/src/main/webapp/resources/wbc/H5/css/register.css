@@ -1,0 +1,7 @@
+@import url('bootstrap.min.css');
+@import url('global.css');
+@import url('material.css');
+@import url('ripples.min.css');
+
+.form{width:90%; margin:0 auto;}
+.btn-primary-br{ border-radius:8px; font-size:20px;}

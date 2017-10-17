@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="format-detection" content="email=no" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" name="viewport">
+	<script src="http://192.168.11.240:6678/socket.io/socket.io.js"></script>
+	<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<title>title</title>
+</head>
+<body>
+	<div id="event"></div>
+</body>
+	<script type="text/javascript">
+	    $(document).ready(function() 
+		{
+	    	var socket = io.connect("ws://192.168.11.240:6678");
+		    socket.on("notice",function(data)
+		   	{
+		    	if(data instanceof Array)
+		    	{
+			    	data.forEach(function(e)
+			    	{  
+			    	    $("#event").append("<div>" + JSON.parse(e).value + "</div>");
+			    	});
+		    	}
+		    	else
+		    	{
+		    		if(JSON.parse(data) == "-9")
+		    		{
+		    			$("#event").html("");
+		    			return;
+		    		}
+		    		
+			    	$("#event").append("<div>" + JSON.parse(data).value + "</div>");
+		    	}
+			});
+	    });
+	</script>
+</html>

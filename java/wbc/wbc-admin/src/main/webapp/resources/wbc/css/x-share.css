@@ -1,0 +1,97 @@
+body{background-color: #2e3238;}
+.share{z-index: 1;position: relative;max-width: 750px;margin: 0 auto;}
+.share-match{background-color: #363b41;padding: 0 4%;}
+.share-match-header{margin-top: 15px;width: 100%;}
+.share-match-title{color: #fff;font-size: 16px;text-align: center;margin-top: 30px;}
+.share-match-game{position: relative;color: #fff;margin-top: 20px;padding-bottom:20px; }
+.share-match-game .one{position:absolute;opacity: 0.3;width: 25%;left: 37.5%;top: 17%;}
+.share-match-game .two{overflow: hidden;position: relative;z-index: 2;}
+.share-match-game .two div{width: 16%;position: relative;}
+.share-match-game .two div:after{padding-top: 100%;display: block;content: '';}
+.share-match-game .two div img{width: 100%;border-radius: 50%;position: absolute;top: 0;left: 0;}
+.share-match-game .two .message{float: left;width: 68%;position: absolute;top: 50%;margin-top: -21px;left: 16%}
+.share-match-game .two .message .li1,.share-match-game .two .message .li2{float: left;width: 50%;}
+.share-match-game .two .message .li1{border-right:1px solid #5d6166;}
+.share-match-game .two .message .li1 p{text-align: right;margin-right: 10px;}
+.share-match-game .two .message .li2 p{margin-left: 10px;}
+.share-match-game .two .message .li1 p span,.share-match-game .two .message .li2 p span{color: #999999;margin: 0 3px;}
+.share-match-game .three{overflow: hidden;position: relative;z-index: 2;margin-top: 15px;}
+.share-match-game .three span{display: block;float: left;}
+.share-match-game .three .span1,.share-match-game .three .span3{width: 25%;text-align: center;color: #999999;}
+.share-match-game .three .span2{width: 50%;text-align: center;color: #31c3a2;}
+.share-match-game .three .span2 img{height: 12px;vertical-align: middle;margin: 0 5px 3px 0;}
+.share-match-game .three .span3{overflow:hidden;}
+.share-match-game .three .span3 span{float:right;}
+.match-message{overflow: hidden;padding: 20px 4%;}
+.match-message li{height: 42px;}
+.match-message .one{width: 10%;height:100%;float: left;}
+.match-message .one img{height: 42px;border-radius: 50%;}
+.match-message .two{width: 30%;float: left;padding-left: 20px;}
+.match-message .two p{color: #fff;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-right: 10px;}
+.match-message .two span{width: 50px;height: 15px;margin-top: 4px;}
+.match-message .three{width: 44%;float: left;}
+.match-message .three img{height: 15px;margin: 3px 0;}
+.match-message .three p{color: #999999;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.match-message .three p span{color: #31C3A2;}
+.match-message .four{width: 16%;position: relative;float: left;}
+.match-message .four .img1{height: 36px;top:3px;float: right;position: relative;border-radius: 50%;}
+.match-message .four .img2{position: absolute;height:42px;z-index: 2;right: -3px;top: 0;}
+.have-phone-number{height: 130px;width: 92%;margin-left: 4%;background-image: url("../images/hongbao_bg_x.png");background-size: 100% 100%;margin-top: 10px;position: relative;margin-bottom: 40px;}
+.have-phone-number div{position: relative;top: 25px;left: 8%;}
+.have-phone-number div img{height: 39px;}
+.have-phone-number div span{color: #fff;font-size: 24px;position: relative;top: 6px;}
+.have-phone-number p{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;position: absolute;bottom: 0;height: 35px;line-height: 14px;color: #fff;padding: 0 20px;width: 100%;font-size: 12px;text-align: center;padding-top: 2px;}
+.have-phone-number p span{color: #31C3A2;}
+.no-phone-number{width: 74%;margin-left: 13%;padding-bottom: 40px;}
+.no-phone-number input{width: 100%;border:0;border-bottom: 1px solid #31C3A2;background-color: transparent;font-size: 18px;margin-top: 30px;color: #fff;}
+.no-phone-number button{width: 100%;font-size: 18px;margin-top: 20px;}
+.no-phone-number button img{height: 18px;margin:0 5px 3px 0;}
+.luck-title{font-size: 18px;color: #fff;padding:0 4%;overflow: auto;}
+.luck-title .title{width: 34%;text-align: center;float: left;}
+.luck-title .line{width: 32%;border-top: 1px solid #999999;float: left;margin-top: 13.5px;}
+.luck-rank{padding: 0 4%;margin-top: 10px;}
+.luck-rank li{height: 75px;padding: 10px 0;}
+.luck-rank li img{width: 55px;height: 55px;border-radius: 50%;display: block;float: left;}
+.luck-rank li p{margin-left: 70px;color: #fff;font-size: 14px;}
+.luck-rank li .luck-message{margin-top: 7px;}
+.luck-rank li .luck-time{color: #607d8b;font-size: 12px;overflow: hidden;}
+.luck-rank li .luck-time .first{max-width: 60%;display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;float: left;}
+.luck-rank li .luck-time span img{width: auto;height: 14px;  border-radius: 50%;display: block; float: left;margin: 2px 3px 0 0;}
+.rule{margin-top: 10px;padding: 10px 4% 0 4%;font-size: 14px;color: #d4d4d4;}
+.rule p{margin-bottom: 10px;}
+.co-31{color: #31c3a2!important;}
+.co-60{color: #607d8b;}
+.span1-win{color:#fdbb05;margin:0 5px;}
+/* 提示   */
+.tishi-shade{background-color: rgba(0,0,0,0.5);position: fixed;width: 100%;height: 100%;left: 0;top: 0;z-index: 9999;}
+.tishi-main{width: 74%;margin-left: 13%;background-color: #2e3238;padding: 0 0 10px 0;border-radius: 5px;position: fixed;z-index: 10000;top: 50%;margin-top: -71.5px}
+.tishi-main span{background-image: url("../images/close_new.png");background-size: 100%;width: 15px;height: 15px;display: block;float: right;margin:10px 10px 0 0;}
+.tishi-main img{position: relative;width: 30px;height: 30px;border-radius: 50%;left: 50%;margin-left: -15px;margin-top: 25px;}
+.tishi-main p{color: #999999;font-size: 18px;text-align: center;margin-top: 10px;}
+.tishi-main button{margin: 15px auto 0 auto;display: block;}
+.initbanner{
+    max-width: 750px;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    margin: 0 auto;
+    z-index: 999;
+    background: rgba(0,0,0,0.6);
+    }
+    .initbanner img{
+        margin-left: 10%;
+        width: 78%;
+        height:80%;
+    }
+    .xxx{
+        margin-top: 37px;
+    }
+    .icon-guanbi{
+        color: #34C3A2;
+        font-size: 3em;
+    }

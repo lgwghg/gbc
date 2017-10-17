@@ -1,0 +1,110 @@
+a:hover{color: #31C3A2;}
+a:focus{color: #31C3A2;}
+.match-list{margin-top: 16px;}
+.match-list-li{margin-bottom: 20px;}
+.match-list-top{width: 100%;height: 36px;line-height:36px;background-color: #3d4148;margin: 0;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 0 15px;position: relative;}
+.match-list-top a{display: block;width: 100%;height: 100%;}
+.match-list-top:hover{background-color: #51555b;}
+.match-list-top a span{display:block;color: #fff;}
+.match-list-top a span img{width: 22px;height: 22px;margin-right: 5px;}
+.match-list-top a .view1{width: 100px;position: absolute;left: 50%;margin-left: -50px;text-align: center;}
+.match-list-comment{height: 70px;background-color: #2e3238;border-radius: 0 0 8px 8px;position: relative;overflow: hidden;}
+.match-list-comment .view1{width: 30px;height: 30px;border-radius: 50%;margin: 20px 0 0 15px;float: left;}
+.match-list-comment .view2{margin-left:15px;height: 100%;float: left;}
+.match-list-comment .view2 p{line-height: 16px;height: 16px;font-size: 12px;}
+.match-list-comment .view2 .one{margin-top: 19px;max-width: 525px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;color: #929292;}
+.match-list-comment .view3{position: absolute;right: 0;bottom: 0;width: 24px;height: 24px;background-image: url("../images/close_x.png");cursor: pointer;}
+/**/
+.match-list-message{overflow: hidden;padding: 0;margin: 0;position: relative;}
+.match-list-message .middle{position: absolute;width: 40px;height: 40px;line-height: 40px;text-align: center;font-size: 18px;color: #fff;background-color: #31c3a2;font-weight: bold;left: 50%;margin-left: -20px;z-index: 1;top: 35px;border-radius: 50%;}
+.match-list-message li{list-style: none;}
+.match-list-message .message-left{width: 55%;height: 110px;float: left;border-bottom-left-radius: 10px;background-color: #2e3238;cursor: pointer;}
+.match-list-message-one .message-left:hover{background-color: #2f5a56;}
+.match-list-message .message-left ul{float: right;margin-right: 60px;}
+.match-list-message .message-left ul li{float: left;color: #fff;font-weight: bold;height: 110px;position: relative;}
+.match-list-message .message-left ul .view1{margin-right: 16px;}
+.match-list-message .message-left ul .view1 p{height:22px;line-height: 22px;}
+.match-list-message .message-left ul .view1 .one{margin-top: 33px;text-align: right;}
+.match-list-message .message-left ul .view2{padding: 17px 0 18px 0;margin-right: 16px;}
+.match-list-message .message-left ul .view2 img{border-radius: 50%;}
+.match-list-message .message-left ul .view3 p{height: 22px;line-height: 22px;margin-top: 44px;}
+.match-list-message .message-right{width: 45%;float: right;height: 110px;position: relative;background-color: #33383e;border-bottom-right-radius: 10px;}
+.match-list-message .message-right-a{position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 50%;
+    height: 200%;
+    left: -10%;
+    top: -40%;
+    background-color: #33383e;
+    transform:rotate(29deg);
+    -ms-transform:rotate(29deg); 	/* IE 9 */
+    -moz-transform:rotate(29deg); 	/* Firefox */
+    -webkit-transform:rotate(29deg); /* Safari 和 Chrome */
+    -o-transform:rotate(29deg);
+    cursor: pointer;
+}
+.match-list-message .message-right ul{position: relative;z-index: 1;width: 100%;height: 100%;cursor: pointer}
+.match-list-message .message-right ul li{float: left;color: #fff;font-weight: bold;height: 110px;position: relative;}
+.match-list-message .message-right ul .view1{height: 22px;line-height: 22px;margin-top: 44px;}
+.match-list-message .message-right ul .view2{padding: 17px 0 18px 0;margin-left: 16px;}
+.match-list-message .message-right ul .view2 img{border-radius: 50%;}
+.match-list-message .message-right ul .view3{margin-left: 16px;}
+.match-list-message .message-right ul .view3 p{height:22px;line-height: 22px;}
+.match-list-message .message-right ul .view3 .one{margin-top: 33px;}
+.match-list-message .message-right-o{background-color: #31c3a2!important;}
+/**/
+.match-list-bottom-pour{padding: 15px 0;width: 100%;background-color: #2e393d;border-radius: 0 0 8px 8px;}
+.match-list-bottom-pour p{height: 30px;line-height: 30px;text-align: center}
+.match-list-bottom-pour p span{display:inline-block;line-height: 30px;vertical-align: top;}
+.match-list-bottom-pour .view1 input{background-color: transparent;border: none;border-bottom: 1px solid #bebfc0;outline: none;color: #fff;width: 110px;height: 30px;padding: 0 5px;}
+.match-list-bottom-pour .view1 .one{background-image: url("../images/money_x.png");width: 24px;height: 24px;margin-top: 2px;}
+.match-list-bottom-pour .view1 .two{cursor: pointer;margin-left: 10px;}
+.match-list-bottom-pour .view2{color: #31c3a2;padding-left: 167px;}
+.match-list-bottom-pour .view3{background-color: #1c9076;color: #fff;border: 0;border-radius: 5px;width: 200px;height: 45px;padding: 0;margin: 5px 200px;}
+.match-list-bottom-pour .view4{width: 280px;margin-left: 160px;padding: 0;margin-top: -8px;}
+.match-list-bottom-pour .view4 .one{color: #999999;float: left;}
+.match-list-bottom-pour .view4 .two{color: #999999;float: right;}
+
+/*已投注*/
+.match-list-message-two .message-left{width: 55%;height: 110px;float: left;background-color: #2e3238;cursor: pointer;}
+.match-list-message-two .message-left ul{float: right;margin-right: 60px;}
+.match-list-message-two .message-left ul li{float: left;color: #fff;font-weight: bold;height: 110px;position: relative;}
+.match-list-message-two .message-left ul .view1{margin-right: 16px;}
+.match-list-message-two .message-left ul .view1 p{height:22px;line-height: 22px;}
+.match-list-message-two .message-left ul .view1 .one{margin-top: 33px;text-align: right;}
+.match-list-message-two .message-left ul .view2{padding: 17px 0 18px 0;margin-right: 16px;}
+.match-list-message-two .message-left ul .view2 img{border-radius: 50%;}
+.match-list-message-two .message-left ul .view3 span{position: absolute;top: 20px;}
+.match-list-message-two .message-left ul .view3 p{height: 22px;line-height: 22px;margin-top: 44px;}
+.match-list-message-two .message-right{width: 45%;float: right;height: 110px;position: relative;background-color: #33383e;}
+.match-list-message-two .message-right ul{position: relative;z-index: 1;width: 100%;height: 100%;cursor: pointer;}
+.match-list-message-two .message-right ul li{float: left;color: #fff;font-weight: bold;height: 110px;position: relative;}
+.match-list-message-two .message-right ul .view1{height: 22px;line-height: 22px;margin-top: 44px;}
+.match-list-message-two .message-right ul .view1 span{position: absolute;top: -24px;}
+.match-list-message-two .message-right ul .view2{padding: 17px 0 18px 0;margin-left: 16px;}
+.match-list-message-two .message-right ul .view2 img{border-radius: 50%;}
+.match-list-message-two .message-right ul .view3{margin-left: 16px;}
+.match-list-message-two .message-right ul .view3 p{height:22px;line-height: 22px;}
+.match-list-message-two .message-right ul .view3 .one{margin-top: 33px;}
+.co_31{color: #31c3a2!important;}
+.co_00{color: #000!important;}
+.co_be{color: #bebfc0;}
+.co_ff{color: #fff;}
+.co_92{color: #929292;}
+.co_ffb{color: #ffba00;}
+.ft_18_bo{font-size: 18px;font-weight: bold;}
+.bg_31{background-color: #31c3a2!important;}
+.bg_2f{background-color: #2f5a56!important;}
+
+/*重写进度条样式*/
+.slider.slider-horizontal{width: 240px;background: transparent;}
+.tooltip-inner{padding: 0 8px;font-size: 12px;border-radius: 8px;min-width: 37px;height: 16px;line-height: 16px;background-color: #166654;margin: 14px 0 0 36px;}
+.tooltip.top .tooltip-arrow{display: none;}
+.slider-handle{width: 10px;height: 10px;background-color: #31c3a2;background-image: none;}
+.slider.slider-horizontal .slider-track{height: 5px;background-image:none;}
+.slider-track-low, .slider-track-high{background-color: #262e30;}
+.slider-selection{background-color: #262e30;background-image: none;}
+.slider.slider-horizontal .slider-tick, .slider.slider-horizontal .slider-handle{margin-top: -3px;margin-left: -5px;}
+.match-list-choose{height: 180px!important;line-height: 180px!important;text-align: center;color: #fff;width: 100%;background-color: #2e393d;font-size: 24px;font-weight: bold;border-radius: 0 0 10px 10px;}
+.match-list-choose a{color: #31C3A2;}

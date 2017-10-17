@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.jc.mapper.ICommentMapper">
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.jc.model.Comment">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="gb_id" property="gbId"/> <!-- 比赛对战ID-->
+		<result column="user_id" property="userId"/> <!-- 用户ID-->
+		<result column="content" property="content"/> <!-- 评论内容-->
+		<result column="create_time" property="createTime"/> <!-- 评论时间-->
+		<result column="p_comment_id" property="pCommentId"/> <!-- 上级评论ID-->
+		<result column="is_deleted" property="isDeleted"/> <!-- 默认0     1：已删除   0：未删除-->
+		<result column="update_time" property="updateTime"/> <!-- 更新时间-->
+		<result column="update_operator_id" property="updateOperatorId"/> <!-- 更新人-->
+	</resultMap>
+	
+	<!-- t_comment字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			c.id AS "id", <!-- 唯一标识-->
+			c.gb_id AS "gbId", <!-- 比赛对战ID-->
+			c.user_id AS "userId", <!-- 用户ID-->
+			c.content AS "content", <!-- 评论内容-->
+			c.create_time AS "createTime", <!-- 评论时间-->
+			c.p_comment_id AS "pCommentId", <!-- 上级评论ID-->
+			c.is_deleted AS "isDeleted", <!-- 默认0     1：已删除   0：未删除-->
+			c.update_time AS "updateTime", <!-- 更新时间-->
+			c.update_operator_id AS "updateOperatorId", <!-- 更新人-->
+			u1.nick_name AS "updateOperatorNickName", <!-- 更新人名称-->
+		</trim>
+	</sql>
+	
+	<!-- t_comment简字段列表-->
+	<sql id="columnList_j">
+		<trim suffixOverrides=",">
+			c.id AS "id", <!-- 唯一标识-->
+			c.user_id AS "userId", <!-- 用户ID-->
+			c.content AS "content", <!-- 评论内容-->
+			c.create_time AS "createTime", <!-- 评论时间-->
+			<!-- 回复 -->
+			h.id AS "answerComment.id",<!-- 回复ID-->
+			h.user_id AS "answerComment.userId",<!-- 回复用户ID-->
+			h.content AS "answerComment.content", <!-- 回复内容-->
+			h.create_time AS "answerComment.createTime", <!-- 回复时间-->
+			h.p_comment_id AS "answerComment.pCommentId", <!-- 上级评论ID-->
+		</trim>
+	</sql>
+	
+	<sql id="commentJoins">
+		INNER JOIN tb_user u ON u.u_id = c.user_id
+		LEFT JOIN tb_user u1 ON u1.u_id = c.update_operator_id
+	</sql>
+	
+	<!-- 查询t_comment分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.jc.model.Comment">
+		select  
+			<include refid="columnList"/>
+		from t_comment c
+		<include refid="commentJoins"/>
+		
+		<where> 
+			<if test="nickName != null and nickName != ''">
+				AND u.nick_Name LIKE concat('%',#{nickName},'%')
+			</if>
+			<if test="gbId != null and gbId != ''">
+				AND gb_id=#{gbId}
+			</if>
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增t_comment -->
+	<insert id="insert" parameterType="com.webside.jc.model.Comment">
+		insert into t_comment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- ID-->
+		<if test="gbId != null">gb_id,</if><!-- 比赛对战ID-->
+		<if test="userId != null">user_id,</if><!-- 用户ID-->
+		<if test="content != null">content,</if><!-- 评论内容-->
+		<if test="createTime != null">create_time,</if><!-- 评论时间-->
+		<if test="pcommentId != null">p_comment_id,</if><!-- 上级评论ID-->
+		<if test="isDeleted != null">is_deleted,</if><!-- 默认0     1：已删除   0：未删除-->
+		<if test="updateTime != null">update_time,</if><!-- 更新时间-->
+		<if test="updateOperatorId != null">update_operator_id,</if><!-- 更新人-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- ID-->
+		<if test="gbId != null">#{gbId},</if><!-- 比赛对战ID-->
+		<if test="userId != null">#{userId},</if><!-- 用户ID-->
+		<if test="content != null">#{content},</if><!-- 评论内容-->
+		<if test="createTime != null">#{createTime},</if><!-- 评论时间-->
+		<if test="pcommentId != null">#{pcommentId},</if><!-- 上级评论ID-->
+		<if test="isDeleted != null">#{isDeleted},</if><!-- 默认0     1：已删除   0：未删除-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 更新时间-->
+		<if test="updateOperatorId != null">#{updateOperatorId},</if><!-- 更新人-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_comment -->
+	<select id="findById" resultType="com.webside.jc.model.Comment" parameterType="String">
+		select  
+			<include refid="columnList"/>
+		from t_comment c
+		<include refid="commentJoins"/>
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_comment -->
+	<update id="update" parameterType="com.webside.jc.model.Comment">
+		update t_comment
+		<set>
+			<trim suffixOverrides=",">
+				<if test="isDeleted != null">is_deleted=#{isDeleted},</if><!-- 默认0     1：已删除   0：未删除-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 更新时间-->
+				<if test="updateOperatorId != null">update_operator_id=#{updateOperatorId},</if><!-- 更新人-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 查询t_comment简字段分页 -->
+	<select id="queryPartListByPage" parameterType="map" resultType="com.webside.jc.model.Comment">
+		select <include refid="columnList_j"/> from (
+			select  
+				<trim suffixOverrides=",">
+					id, <!-- 唯一标识-->
+					user_id, <!-- 用户ID-->
+					content, <!-- 评论内容-->
+					create_time, <!-- 评论时间-->
+				</trim>
+			from t_comment
+			<where>  
+				(p_comment_id is null or p_comment_id = '')
+				<if test="isDeleted != null and isDeleted != ''">
+					AND is_deleted=#{isDeleted}
+				</if>
+				<if test="gbId != null and gbId != ''">
+					AND gb_id=#{gbId}
+				</if>
+			</where>
+			order by create_time DESC
+			limit #{start},#{pageSize}
+		) c 
+		left join t_comment h ON c.id = h.p_comment_id and h.is_deleted=#{isDeleted}
+		order by c.create_time DESC,h.create_time
+	</select>
+	
+	<!-- 根据id删除t_comment -->
+	<delete id="deleteById" parameterType="String">
+		delete from t_comment 
+		where id = #{id}
+	</delete>
+	
+	<!-- 根据上级id删除t_comment -->
+	<delete id="deleteByPid" parameterType="String">
+		delete from t_comment 
+		where p_comment_id = #{pid}
+	</delete>
+</mapper>

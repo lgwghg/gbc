@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.system.sn.mapper.ISysNoticeMapper">
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.system.sn.entities.SysNotice">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="title" property="title"/> <!-- 标题-->
+		<result column="content" property="content"/> <!-- 通知内容-->
+		<result column="add_time" property="createTime"/> <!-- 创建时间-->
+		<result column="sys_user_id" property="createOperatorId"/> <!-- 添加人员id-->
+		<result column="status" property="status"/> <!-- 状态 1：有效 0 无效 默认1-->
+	</resultMap>
+	
+	<!-- t_sys_notice字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			a.id AS "id", <!-- 唯一标识-->
+			a.title AS "title", <!-- 标题-->
+			a.content AS "content", <!-- 通知内容-->
+			a.add_time AS "createTime", <!-- 创建时间-->
+			a.sys_user_id AS "createOperatorId", <!-- 添加人员id-->
+			c.nick_name AS "createOperatorName", <!-- 添加人员昵称-->
+			a.status AS "status", <!-- 状态 1：有效 0 无效 默认1-->
+		</trim>
+	</sql>
+	
+	<sql id="tableJoins">
+		LEFT JOIN tb_user c ON c.u_id = a.sys_user_id
+	</sql>	
+	
+	<!-- 查询t_sys_notice分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.system.sn.entities.SysNotice">
+		select  
+			<include refid="columnList"/>
+		from t_sys_notice a
+		<include refid="tableJoins"/>
+		<where>  
+			<if test="title != null and title != ''">
+				AND lower(a.title) like concat('%',lower(#{title}),'%')
+			</if>
+			<if test="status != null and status != ''">
+				AND status=#{status}
+			</if>
+			<if test="beginCreateTime != null and beginCreateTime != '' and (endCreateTime == null or endCreateTime == '')">
+				AND a.add_time >= #{beginCreateTime}
+			</if>
+			<if test="(beginCreateTime == null or beginCreateTime == '') and endCreateTime != null and endCreateTime != ''">
+				AND a.add_time &lt;= #{endCreateTime}
+			</if>
+			<if test="beginCreateTime != null and endCreateTime != null and beginCreateTime != '' and endCreateTime != ''">
+				AND a.add_time BETWEEN #{beginCreateTime} AND #{endCreateTime}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增t_sys_notice -->
+	<insert id="insert" 
+			keyProperty="id"
+			parameterType="com.webside.system.sn.entities.SysNotice">
+		insert into t_sys_notice
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 主键-->
+		<if test="title != null">title,</if><!-- 标题-->
+		<if test="content != null">content,</if><!-- 通知内容-->
+		<if test="createTime != null">add_time,</if><!-- 创建时间-->
+		<if test="createOperatorId != null">sys_user_id,</if><!-- 添加人员-->
+		<if test="status != null">status,</if><!-- 状态 1：有效 0 无效 默认1-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 主键-->
+		<if test="title != null">#{title},</if><!-- 标题-->
+		<if test="content != null">#{content},</if><!-- 通知内容-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		<if test="createOperatorId != null">#{createOperatorId},</if><!-- 添加人员-->
+		<if test="status != null">#{status},</if><!-- 状态 1：有效 0 无效 默认1-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_sys_notice -->
+	<select id="findById" resultType="com.webside.system.sn.entities.SysNotice" parameterType="String">
+		select  
+			<include refid="columnList"/>
+		from t_sys_notice a
+		<include refid="tableJoins"/>
+		where a.id = #{id}
+	</select>
+	
+	<!-- 更新t_sys_notice -->
+	<update id="update" parameterType="com.webside.system.sn.entities.SysNotice">
+		update t_sys_notice
+		<set>
+			<trim suffixOverrides=",">
+				<if test="title != null">title=#{title},</if><!-- 标题-->
+				<if test="content != null">content=#{content},</if><!-- 通知内容-->
+				<if test="status != null">status=#{status},</if><!-- 状态 1：有效 0 无效 默认1-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除t_sys_notice -->
+	<delete id="deleteById" parameterType="String">
+		delete from t_sys_notice 
+		where id = #{id}
+	</delete>
+</mapper>

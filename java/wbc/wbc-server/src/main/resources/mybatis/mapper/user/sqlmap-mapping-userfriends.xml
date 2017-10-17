@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.friends.mapper.IUserFriendsMapper">
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.user.friends.entities.UserFriends">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="friend_id" property="friendId"/> <!-- 好友ID-->
+		<result column="user_id" property="userId"/> <!-- 用户ID-->
+		<result column="create_time" property="createTime"/> <!-- 新增时间-->
+		<result column="reward_gold_num" property="rewardGoldNum"/> <!-- 奖励G币数量-->
+	</resultMap>
+	
+	<!-- t_user_friends字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 唯一标识-->
+			friend_id, <!-- 好友ID-->
+			user_id, <!-- 用户ID-->
+			create_time, <!-- 新增时间-->
+			reward_gold_num, <!-- 奖励G币数量-->
+		</trim>
+	</sql>
+	
+	<!-- t_user_friends简字段列表-->
+	<sql id="columnList_j">
+		<trim suffixOverrides=",">
+			c.nick_name AS "friendNickName", <!-- 好友昵称-->
+			a.create_time AS "createTime", <!-- 新增时间-->
+			a.reward_gold_num AS "rewardGoldNum", <!-- 奖励G币数量-->
+		</trim>
+	</sql>
+	
+	<sql id="tableJoins">
+		LEFT JOIN tb_user c ON c.u_id = a.friend_id
+	</sql>
+	
+	<!-- 查询t_user_friends简字段分页 -->
+	<select id="queryPartListByPage" parameterType="map" resultType="com.webside.user.friends.entities.UserFriends">
+		select  
+			<include refid="columnList_j"/>
+		from t_user_friends a
+		<include refid="tableJoins"/>
+		<where>  
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增t_user_friends -->
+	<insert id="insert" 
+			keyProperty="id"
+			parameterType="com.webside.user.friends.entities.UserFriends">
+		insert into t_user_friends
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 主键-->
+		<if test="friendId != null">friend_id,</if><!-- 好友ID-->
+		<if test="userId != null">user_id,</if><!-- 用户ID-->
+		<if test="createTime != null">create_time,</if><!-- 新增时间-->
+		<if test="rewardGoldNum != null">reward_gold_num,</if><!-- 奖励G币数量-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 主键-->
+		<if test="friendId != null">#{friendId},</if><!-- 好友ID-->
+		<if test="userId != null">#{userId},</if><!-- 用户ID-->
+		<if test="createTime != null">#{createTime},</if><!-- 新增时间-->
+		<if test="rewardGoldNum != null">#{rewardGoldNum},</if><!-- 奖励G币数量-->
+		</trim>
+	</insert>
+	
+	<!-- 根据好友id查询数据 -->
+	<select id="findByFriendId" parameterType="map" resultType="com.webside.user.friends.entities.UserFriends">
+		select  
+			<include refid="columnList"/>
+		from t_user_friends
+		<where>  
+			<if test="friendId != null and friendId != ''">
+				AND friend_id=#{friendId}
+			</if>
+			<if test="rewardGoldNum != null and rewardGoldNum != ''">
+				AND reward_gold_num=#{rewardGoldNum}
+			</if>
+		</where>
+	</select>
+</mapper>

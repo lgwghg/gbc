@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.match.mapper.ITeamGameMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.match.entities.TeamGame">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="team_id" property="teamId"/> <!-- 战队ID-->
+		<result column="game_id" property="gameId"/> <!-- 游戏ID-->
+	</resultMap>
+	
+	<!-- t_team_game字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 唯一标识-->
+			team_id, <!-- 战队ID-->
+			game_id, <!-- 游戏ID-->
+		</trim>
+	</sql>
+	
+	<!-- t_team_game有关联字段列表-->
+	<sql id="columnList_join">
+		<trim suffixOverrides=",">
+			a.id AS "id", <!-- 唯一标识-->
+			a.team_id AS "teamId", <!-- 战队ID-->
+			t.team_name AS "teamName", <!-- 战队ID-->
+			a.game_id AS "gameId", <!-- 游戏ID-->
+		</trim>
+	</sql>
+	
+	<sql id="tableJoins">
+		LEFT JOIN t_team t ON t.id = a.team_id
+	</sql>
+	
+	<!-- 查询t_team_game分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_team_game 
+		<where>  
+			<if test="teamId != null and teamId != ''">
+				AND team_id=#{teamId}
+			</if>
+			<if test="gameId != null and gameId != ''">
+				AND game_id=#{gameId}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增t_team_game -->
+	<insert id="insert" 
+			keyProperty="id"
+			parameterType="com.webside.match.entities.TeamGame" flushCache="true">
+		insert into t_team_game
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 主键-->
+		<if test="teamId != null">team_id,</if><!-- 战队ID-->
+		<if test="gameId != null">game_id,</if><!-- 游戏ID-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 主键-->
+		<if test="teamId != null">#{teamId},</if><!-- 战队ID-->
+		<if test="gameId != null">#{gameId},</if><!-- 游戏ID-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_team_game -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_team_game 
+		where id = #{id}
+	</select>
+	
+	<!-- 根据战队ID删除t_team_game -->
+	<delete id="deleteByTeamId" parameterType="String" flushCache="true">
+		delete from t_team_game 
+		where team_id = #{teamId}
+	</delete>
+	
+	<!-- 根据游戏id查询t_team_game -->
+	<select id="findListByGameId" parameterType="String" resultType="com.webside.match.entities.TeamGame" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList_join"/>
+		from t_team_game a
+		<include refid="tableJoins"/>
+		<where>  
+			AND game_id=#{gameId}
+		</where>
+	</select>
+</mapper>

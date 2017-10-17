@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>bocai分享页</title>
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_7d5yvokkelgzaor.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="css/fallback.css">
+    <link rel="stylesheet" type="text/css" href="css/ripples.min.css">
+    <link type="text/css" rel="stylesheet" href="css/base.css">
+    <link type="text/css" rel="stylesheet" href="css/x-share.css">
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="c-bg"><img src="images/index_bj.jpg"></div>
+<div class="fenxiang hide"><img src="images/fenxiang_x.png"></div>
+<div class="lottery">
+    <img src="images/dazhi_header.png" class="lottery-header">
+    <p class="lottery-name">大支</p>
+    <p class="lottery-title">请输入您的手机号：</p>
+    <input type="text" class="lottery-text">
+    <div class="lottery-number hide">101</div>
+    <button class="btn btn-primary btn-raised lottery-btn lottery-btn1">立即领取</button>
+    <button class="btn btn-primary btn-raised lottery-btn lottery-btn2 hide">分享好友</button>
+</div>
+<div class="luck-rule">
+    <p class="luck-title hide">看看大家手气</p>
+    <ul class="luck-rank hide">
+        <li>
+            <img src="images/dazhi_header.png">
+            <div>
+                <p class="luck-message">
+                    <span>曾德志</span>
+                    <span class="fr">4元</span>
+                </p>
+                <p class="luck-time">刚刚领取</p>
+            </div>
+        </li>
+        <li>
+            <img src="images/dazhi_header.png">
+            <div>
+                <p class="luck-message">
+                    <span>曾德志</span>
+                    <span class="fr">4元</span>
+                </p>
+                <p class="luck-time">38分钟前领取</p>
+            </div>
+        </li>
+        <li>
+            <img src="images/dazhi_header.png">
+            <div>
+                <p class="luck-message">
+                    <span>曾德志</span>
+                    <span class="fr">4元</span>
+                </p>
+                <p class="luck-time">1小时前领取</p>
+            </div>
+        </li>
+    </ul>
+    <p class="luck-title mt-30">活动规则</p>
+    <div class="rule">
+        <p>1.G币新老用户同享</p>
+        <p>2.赠送G币不能参与兑换商品。</p>
+        <p>3.G币仅限在G菠菜平台下的限制时间内使用。</p>
+        <p>4.仅限在线菠菜使用，且领取人手机号、领取G币时输入的手机号和账号中的手机号需为同一手机号</p>
+        <p>5.其他未尽事宜，请咨询客服：kefu@gbocai.com</p>
+    </div>
+</div>
+<p class="web-name">G菠菜</p>
+<p class="web-filing">Copyright © 2017 Gbocai.com</p>
+<!--提示-->
+<div class="tishi">
+    <div class="tishi-shade"></div>
+    <div class="tishi-main">
+        <span></span>
+        <img src="images/tishi_x.png">
+        <p>您当前操作的页面已过期!</p>
+        <button class="btn btn-primary btn-raised">确定</button>
+    </div>
+</div>
+</body>
+<script src="js/material.js"></script>
+<script src="js/ripples.min.js"></script>
+<script>
+    $.material.init();
+</script>
+<script>
+    $(function(){
+        $(".lottery-btn1").click(function(){
+            $(".lottery-btn1,.lottery-text").addClass("hide");
+            $(".lottery-btn2,.lottery-number,.luck-title,.luck-rank").removeClass("hide");
+            $(".lottery-title").html("获得<img src='images/money2_x.png'>币:");
+        })
+        $(".lottery-btn2").click(function(){
+            $(".fenxiang").removeClass("hide");
+        })
+        $(".fenxiang").click(function(){
+            $(this).addClass("hide");
+        })
+        $(".tishi-main button,.tishi-main span").click(function(){
+            $(".tishi").addClass("hide");
+        })
+    })
+</script>
+</html>

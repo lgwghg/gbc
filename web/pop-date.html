@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>任务中心</title>
+
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
+		<link rel="stylesheet" type="text/css" href="css/ripples.min.css">
+	    <link rel="stylesheet" type="text/css" href="css/base.css">
+		
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css">
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootstrap-datetimepicker.js"></script>
+		<script src="js/bootstrap-datetimepicker.fr.js"></script>
+       
+       <style type="text/css">
+       	.s-btn{ background: red; display: block; border-radius: 8px; width:70px; text-align: center; padding: 0px 5px; background: none; border: 1px solid #31c3a2;}
+       	.s-btn a{ color:#31c3a2 ;}
+       	.s-btn:hover{ background:rgba(0,0,0,0.5);}
+       </style>
+       
+	</head>
+
+	<body>
+
+		
+<button class="btn btn-primary btn-raised" data-toggle="modal" data-target="#myModal1">立即兑换</button>
+
+			
+
+<!-- 模态框（Modal） -->
+
+	<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:500px; background:#2E3238;">
+        <div class="modal-content" style="background:#2E3238">
+            <div class="modal-header">
+                <button type="button" class="close close-x" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+               <h3 class="modal-title" id="myModalLabel" style="color: #fff;">
+					编辑ROLL
+				</h3>
+				
+				
+			
+						<div class="row" style="color: #fff; margin-top: 40px;">
+							<div class="col-xs-12 span4">
+								<div class="media">
+	<a rel="nofollow" href="#" class="pull-left">
+		<img src="images/c-shouwang.png" class="media-object img-circle" alt='' width="60" height="60" /></a>
+									<div class="media-body">
+			<h4 class="media-heading">小C <span class="lv-x" style="display: inline-table;"></span></h4> 
+						<div class="s-btn btn"><a href="javascript:;">竞技达人</a></div>
+						这里是个人简介！ 此处无法编辑！
+									</div>
+								</div>
+							</div>
+						
+						</div>
+             
+				
+				
+            </div>
+            
+            <div class="modal-body">
+            	  
+               <form role="form">
+                
+               
+                	<div class="form-group" style="margin: 0;">
+							  <label class="control-label" for="inputLarge">活动说明* |</label>
+							  <input class="form-control input-lg" id="inputLarge" type="text">
+			</div>
+				   
+		<div class="row" style="color:#bdbdbd; margin: 0;">
+	<div class="col-xs-2 span3 pull-left" style="padding: 0; margin-top:40px;">活动时间*</div>
+	<div class="col-xs-4 span3" style="padding: 0;"><input type='text' class="form-control" id='datetimepicker3' /></div>
+	<div class="col-xs-1 span3 text-center" style="padding: 0; margin-top:40px;">至</div>
+	<div class="col-xs-5 span3" style="padding: 0;"> <input type='text' class="form-control" id='datetimepicker4' /></div>
+</div>
+			<div class="form-group" style="margin: 0;">
+							 
+<input class="form-control input-lg" id="inputLarge" type="text" value="直播间" style="color: #bdbdbd; font-size: 14px;">
+			</div>
+                  <div class="form-group" style="margin: 0;">
+				
+<input class="form-control input-lg" id="inputLarge_s" type="text" value="新浪微博" style="color: #bdbdbd; font-size: 14px;">
+			</div>
+			
+			
+			
+                 	<div class="form-group" style="margin: 0;">
+							  
+		<input class="form-control input-lg" id="inputLarge" type="text" value="粉丝群" style="color: #bdbdbd; font-size: 14px;">
+			</div>
+							
+                </form>
+
+              
+			
+               
+                
+                
+                <div style="color: #607d8b;">
+                	<p>温馨提醒：</p>
+                	<p>1)、创建活动后，请尽快添加该活动的奖品池，只有奖品池中有饰品，大家
+才能看或者参加该活动。</p>
+              <p>2)、如果您在该活动的截止时间内，没有将奖品池中的饰品ROLL出，
+Gbocai系统将自动在其10分钟后帮您ROLL出.</p>
+                	
+                </div>
+           <button class="view3 btn btn-primary btn-block btn-raised" style="margin-top:30px;">提交</button>
+              
+              
+              
+            </div>
+           
+        </div>
+    </div>
+</div>
+	</body>
+	<script src="js/material.js"></script>
+	<script src="js/ripples.min.js"></script>
+	<script>
+		$.material.init();
+	</script>
+
+	
+	
+	<script type="text/javascript">
+				            $(function () {
+				                $('#datetimepicker3').datetimepicker({});
+				                $('#datetimepicker4').datetimepicker({});
+				                
+				                
+				                
+				                //弹窗居中
+    $("[data-toggle='modal']").click(function () {
+        var _target = $(this).attr('data-target')
+        t = setTimeout(function () {
+            var _modal = $(_target).find(".modal-dialog")
+            _modal.animate({'margin-top': parseInt(($(window).height() - _modal.height()) / 10)}, 10)
+        }, 10)
+    });
+				            });
+				            
+				            
+				        </script>
+
+</html>

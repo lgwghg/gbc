@@ -1,0 +1,63 @@
+body{width:100%;
+	max-width:640px;
+	margin:0 auto;
+	background:#fff;
+	min-width:320px;}
+
+ul,ol,li{list-style-type:none;}
+a{color:#383838; outline:none; text-decoration:none;}
+a:hover{text-decoration:none;}
+.fl{float:left;}
+.fr{float:right;}
+
+.main{width:100%;max-width:640px;  margin-top:10%; padding:0;}
+.banner{ margin:0}
+.banner img{width:100%;max-width:640px;margin:0 auto;}
+
+.menu {width:100%;max-width:640px; margin-top:10%;}
+
+.nav-tabs{height:auto; overflow:hidden; border:none;}
+.nav-tabs ul{ padding:0; margin:0; list-style:none;}
+.nav-tabs ul li{float:left; background:white; margin-top:30px; width:25%; text-align:center;}
+.nav-tabs ul li a{ text-decoration:none;  border:none;  outline:none; }
+.nav-tabs ul li a span.iconfont {
+    font-size:3.5em;
+    color:#7C8085;
+    padding:0 0.9em;
+	text-decoration:none;
+	-webkit-transition:.5s all;
+	-moz-transition:.5s all; 
+	transition:.5s all; 
+}
+
+
+.nav-tabs ul li a h5 {font-size: 1.3em;color: #7C8085; margin-top:0.5em; text-align:center; white-space:nowrap;}
+.nav-tabs > ul li.active >a h5 {color: #34C3A2;  border:none;}
+.nav-tabs > ul li.active a span.iconfont { color:#34C3A2; }
+
+.colse{text-align: center; margin-top:90px;}
+.colse a{font-size:3.5em; text-decoration:none; color:#737373}
+@media(min-width:320px) and (max-width:479px){
+	  .nav-tabs ul li a h5 {font-size:0.8em; text-align:center;}
+		.nav-tabs ul li a span.iconfont{font-size:2.1em;}
+		.nav-tabs ul li{ text-align:center;}
+	}
+
+	.initbanner{
+		max-width: 750px;
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		text-align: center;
+		margin: 0 auto;
+		}
+		.initbanner img{
+		    margin-left: 10%;
+			width: 78%;
+			height:80%;
+		}
+

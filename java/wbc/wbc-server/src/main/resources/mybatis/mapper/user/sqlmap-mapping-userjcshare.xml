@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.share.mapper.IUserJcShareMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.user.share.entities.UserJcShare">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="gb_id" property="gbId"/> <!-- 比赛ID-->
+		<result column="SHARE_USER_ID" property="shareUserId"/>
+		<result column="USER_MOBILE" property="userMobile"/><!-- 领取G币的手机号 -->
+		<result column="gold" property="gold"/> <!-- 领取的G币数量-->
+		<result column="create_time" property="createTime"/> <!-- 领取G币的时间-->
+		<result column="user_desc" property="userDesc"/>
+		<result column="lucky" property="lucky"/>
+	</resultMap>
+	
+	<!-- t_user_jc_share字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides="," >
+			id, <!-- 唯一标识-->
+			gb_id, <!-- 竞猜ID-->
+			SHARE_USER_ID,<!-- 菠菜竞猜分享人id -->
+			USER_MOBILE,<!-- 领取G币的手机号 -->
+			gold, <!-- 领取的G币数量-->
+			create_time, <!-- 领取G币的时间-->
+			user_desc,
+			lucky,
+		</trim>
+	</sql>
+	
+	<!-- 查询t_user_jc_share分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_jc_share 
+		<where>
+			<if test="gbId != null and gbId != ''">
+				AND gb_id=#{gbId}
+			</if>
+			<if test="shareUserId != null and shareUserId != ''">
+				AND SHARE_USER_ID=#{shareUserId}
+			</if>
+			<if test="userMobile != null and userMobile !=''">
+				AND USER_MOBILE = #{userMobile}
+			</if>
+			<if test="gold != null and gold != ''">
+				AND gold=#{gold}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增t_user_jc_share -->
+	<insert id="insert"  parameterType="com.webside.user.share.entities.UserJcShare">
+		insert into t_user_jc_share
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="gbId != null">gb_id,</if><!-- 比赛ID-->
+		<if test="shareUserId != null">SHARE_USER_ID,</if>
+		<if test="userMobile != null">USER_MOBILE,</if>
+		<if test="gold != null">gold,</if><!-- 领取的G币数量-->
+		<if test="createTime != null">create_time,</if><!-- 领取G币的时间-->
+		<if test="userDesc != null">user_desc,</if>
+		<if test="lucky != null">lucky,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="gbId != null">#{gbId},</if><!-- 竞猜ID-->
+		<if test="shareUserId != null">#{shareUserId},</if>
+		<if test="userMobile != null">#{userMobile},</if>
+		<if test="gold != null">#{gold},</if><!-- 领取的G币数量-->
+		<if test="createTime != null">#{createTime},</if><!-- 领取G币的时间-->
+		<if test="userDesc != null">#{userDesc},</if>
+		<if test="lucky != null">#{lucky},</if>
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_user_jc_share -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_jc_share 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_user_jc_share -->
+	<update id="update" parameterType="com.webside.user.share.entities.UserJcShare" flushCache="true">
+		update t_user_jc_share
+		<set>
+			<trim suffixOverrides=",">
+				<if test="gbId != null">gb_id=#{gbId},</if><!-- 比赛ID-->
+				<if test="shareUserId != null">SHARE_USER_ID = #{shareUserId},</if>
+				<if test="userMobile != null">USER_MOBILE = #{userMobile},</if>
+				<if test="gold != null">gold=#{gold},</if><!-- 领取的G币数量-->
+				<if test="createTime != null">create_time=#{createTime},</if><!-- 领取G币的时间-->
+				<if test="userDesc != null">user_desc=#{userDesc},</if>
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_user_jc_share -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_user_jc_share  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_user_jc_share -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_user_jc_share 
+		where id = #{id}
+	</delete>
+	
+	<select id="todayGetRedPurseNum" parameterType="Map" resultType="Integer">
+		select count(1) from t_user_jc_share
+		where user_mobile = #{userMobile}
+		and create_time >= #{time}
+	</select>
+	
+	<select id="queryJcShareByMobile" resultMap="resultMap" parameterType="Map">
+		select  
+			<include refid="columnList"/>
+		from t_user_jc_share 
+		where USER_MOBILE = #{userMobile}
+			AND create_time >= #{createTime}
+	</select>
+</mapper>

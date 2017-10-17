@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.task.mapper.ITaskMapper">
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.user.task.entities.Task">
+		<id column="id" property="id"/> <!-- -->
+		<result column="task_name" property="taskName"/> <!-- -->
+		<result column="type" property="type"/> <!-- 类型：1：一次性任务   0：每日任务-->
+		<result column="task_type" property="taskType"/>
+		<result column="image" property="image"/> <!-- -->
+		<result column="description" property="description"/> <!-- -->
+		<result column="num" property="num"/> <!-- 任务需要完成的次数-->
+		<result column="gold" property="gold"/> <!-- 完成任务的奖励金币-->
+		<result column="state" property="state"/> <!-- 状态：0有效    1：无效   默认0-->
+		<result column="create_time" property="createTime"/> <!-- 创建时间-->
+	</resultMap>
+	
+	<!-- t_task字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- -->
+			task_name, <!-- -->
+			type,<!-- 类型：1：一次性任务   0：每日任务-->
+			task_type, 
+			image, <!-- -->
+			description, <!-- -->
+			num, <!-- 任务需要完成的次数-->
+			gold, <!-- 完成任务的奖励金币-->
+			state, <!-- 状态：0有效    1：无效   默认0-->
+			create_time, <!-- 创建时间-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_task分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap">
+		select  
+			<include refid="columnList"/>
+		from t_task 
+		<trim suffix="WHERE" suffixOverrides="AND | OR">  
+			<if test="taskName != null and taskName != ''">
+				AND task_name like concat('%',#{taskName},'%')
+			</if>
+			<if test="taskType != null and taskType != ''">
+				AND task_type=#{taskType}
+			</if>
+			<if test="type != null and type != ''">
+				AND type=#{type}
+			</if>
+			<if test="image != null and image != ''">
+				AND image=#{image}
+			</if>
+			<if test="description != null and description != ''">
+				AND description=#{description}
+			</if>
+			<if test="num != null and num != ''">
+				AND num=#{num}
+			</if>
+			<if test="gold != null and gold != ''">
+				AND gold=#{gold}
+			</if>
+			<if test="state != null and state != ''">
+				AND state=#{state}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+		</trim>
+	</select>
+	<select id="queryTaskByTaskType" parameterType="Integer" resultMap="resultMap">
+		select  
+			<include refid="columnList"/>
+		from t_task
+		where task_type = #{taskType} and state=0
+	</select>
+	<!-- 新增t_task -->
+	<insert id="insert" parameterType="com.webside.user.task.entities.Task">
+		insert into t_task
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="taskName != null">task_name,</if><!-- -->
+		<if test="type != null">type,</if><!-- 类型：1：一次性任务   0：每日任务-->
+		<if test="taskType != null">task_type,</if>
+		<if test="image != null">image,</if><!-- -->
+		<if test="description != null">description,</if><!-- -->
+		<if test="num != null">num,</if><!-- 任务需要完成的次数-->
+		<if test="gold != null">gold,</if><!-- 完成任务的奖励金币-->
+		<if test="state != null">state,</if><!-- 状态：0有效    1：无效   默认0-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="taskName != null">#{taskName},</if><!-- -->
+		<if test="type != null">#{type},</if><!-- 类型：1：一次性任务   0：每日任务-->
+		<if test="taskType != null">#{taskType},</if>
+		<if test="image != null">#{image},</if><!-- -->
+		<if test="description != null">#{description},</if><!-- -->
+		<if test="num != null">#{num},</if><!-- 任务需要完成的次数-->
+		<if test="gold != null">#{gold},</if><!-- 完成任务的奖励金币-->
+		<if test="state != null">#{state},</if><!-- 状态：0有效    1：无效   默认0-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_task -->
+	<select id="findById" resultMap="resultMap" parameterType="String" >
+		select  
+			<include refid="columnList"/>
+		from t_task 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_task -->
+	<update id="update" parameterType="com.webside.user.task.entities.Task" >
+		update t_task
+		<set>
+			<trim suffixOverrides=",">
+				<if test="taskName != null">task_name=#{taskName},</if><!-- -->
+				<if test="taskType != null">type=#{type},</if><!-- 类型：1：一次性任务   0：每日任务-->
+				<if test="taskType != null">task_type=#{taskType},</if>
+				<if test="image != null">image=#{image},</if><!-- -->
+				<if test="description != null">description=#{description},</if><!-- -->
+				<if test="num != null">num=#{num},</if><!-- 任务需要完成的次数-->
+				<if test="gold != null">gold=#{gold},</if><!-- 完成任务的奖励金币-->
+				<if test="state != null">state=#{state},</if><!-- 状态：0有效    1：无效   默认0-->
+				<if test="createTime != null">create_time=#{createTime},</if><!-- 创建时间-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_task -->
+	<delete id="deleteBatchById" parameterType="list" >
+		delete from t_task  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_task -->
+	<delete id="deleteById" parameterType="String" >
+		delete from t_task 
+		where id = #{id}
+	</delete>
+</mapper>

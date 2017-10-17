@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.goods.mapper.IGoodsMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.goods.model.Goods">
+		<id column="id" property="id"/> <!-- 唯一标识 "findListForMall"-->
+		<result column="goods_name" property="goodsName"/> <!-- 商品名称-->
+		<result column="goods_img" property="goodsImg"/> <!-- 商品图片-->
+		<result column="goods_gold" property="goodsGold"/> <!-- 商品金币-->
+		<result column="goods_num" property="goodsNum"/> <!-- 商品数量-->
+		<result column="exchange_count" property="exchangeCount"/> <!-- 兑换数量-->
+		<result column="add_user_id" property="addUserId"/> <!-- 创建人-->
+		<result column="add_user_name" property="addUserName"/> <!-- 创建人-->
+		<result column="create_time" property="createTime"/> <!-- 添加时间-->
+		<result column="update_time" property="updateTime"/> <!-- 修改时间-->
+		<result column="update_user_id" property="updateUserId"/> <!-- 修改人-->
+		<result column="update_user_name" property="updateUserName"/> <!-- 修改人-->
+		<result column="desc" property="desc"/> <!-- 商品描述-->
+		<result column="type" property="type"/> <!-- 类型 1：实物 2：虚拟物品-->
+		<result column="is_max" property="isMax"/> <!-- 1 无限库存-->
+		<result column="status" property="status"/> <!-- 状态 1: 有效 0 无效-->
+	</resultMap>
+	
+	<!-- t_goods字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			t.id, <!-- 唯一标识-->
+			t.goods_name, <!-- 商品名称-->
+			t.goods_img, <!-- 商品图片-->
+			t.goods_gold, <!-- 商品金币-->
+			t.goods_num, <!-- 商品数量-->
+			t.add_user_id, <!-- 创建人-->
+			t.create_time, <!-- 添加时间-->
+			t.update_time, <!-- 修改时间-->
+			t.update_user_id, <!-- 修改人-->
+			t.`desc`, <!-- 商品描述-->
+			t.type, <!-- 类型 1：实物 2：虚拟物品-->
+			t.is_max, <!-- 1：无限库存-->
+			t.status, <!-- 状态 1: 有效 0 无效-->
+			au.NICK_NAME ADD_USER_NAME,
+			uu.NICK_NAME UPDATE_USER_NAME,
+		</trim>
+	</sql>
+	
+	<!-- 查询t_goods分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_goods t
+		LEFT JOIN tb_user au on au.u_id = t.ADD_USER_ID
+		LEFT JOIN tb_user uu on uu.u_id = t.UPDATE_USER_ID
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="goodsName != null and goodsName != ''">
+				AND t.goods_name like concat('%',#{goodsName},'%')
+			</if>
+			<if test="goodsImg != null and goodsImg != ''">
+				AND t.goods_img=#{goodsImg}
+			</if>
+			<if test="goodsGold != null and goodsGold != ''">
+				AND t.goods_gold=#{goodsGold}
+			</if>
+			<if test="wallet != null and wallet != ''">
+				AND t.goods_gold &lt;= #{wallet}
+			</if>
+			<if test="minNum != null and minNum != ''">
+				AND t.goods_num > #{minNum}
+			</if>
+			<if test="goodsNum != null and goodsNum != ''">
+				AND t.goods_num=#{goodsNum}
+			</if>
+			<if test="addUserId != null and addUserId != ''">
+				AND t.add_user_id=#{addUserId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND t.create_time=#{createTime}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND t.update_time=#{updateTime}
+			</if>
+			<if test="updateUserId != null and updateUserId != ''">
+				AND t.update_user_id=#{updateUserId}
+			</if>
+			<if test="desc != null and desc != ''">
+				AND t.desc=#{desc}
+			</if>
+			<if test="type != null and type != ''">
+				AND t.type=#{type}
+			</if>
+			<if test="isMax != null and isMax != ''">
+				AND t.is_max=#{isMax}
+			</if>
+			<if test="status != null and status != ''">
+				AND t.status=#{status}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_goods -->
+	<insert id="insert" parameterType="com.webside.goods.model.Goods">
+		insert into t_goods
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!--唯一主键-->
+		<if test="goodsName != null">goods_name,</if><!-- 商品名称-->
+		<if test="goodsImg != null">goods_img,</if><!-- 商品图片-->
+		<if test="goodsGold != null">goods_gold,</if><!-- 商品金币-->
+		<if test="goodsNum != null">goods_num,</if><!-- 商品数量-->
+		<if test="addUserId != null">add_user_id,</if><!-- 创建人-->
+		<if test="createTime != null">create_time,</if><!-- 添加时间-->
+		<if test="updateTime != null">update_time,</if><!-- 修改时间-->
+		<if test="updateUserId != null">update_user_id,</if><!-- 修改人-->
+		<if test="desc != null">`desc`,</if><!-- 商品描述-->
+		<if test="type != null">type,</if><!-- 类型 1：实物 2：虚拟物品-->
+		<if test="isMax != null">is_max,</if>
+		<if test="status != null">status,</if><!-- 状态 1: 有效 0 无效-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 唯一主键-->
+		<if test="goodsName != null">#{goodsName},</if><!-- 商品名称-->
+		<if test="goodsImg != null">#{goodsImg},</if><!-- 商品图片-->
+		<if test="goodsGold != null">#{goodsGold},</if><!-- 商品金币-->
+		<if test="goodsNum != null">#{goodsNum},</if><!-- 商品数量-->
+		<if test="addUserId != null">#{addUserId},</if><!-- 创建人-->
+		<if test="createTime != null">#{createTime},</if><!-- 添加时间-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 修改时间-->
+		<if test="updateUserId != null">#{updateUserId},</if><!-- 修改人-->
+		<if test="desc != null">#{desc},</if><!-- 商品描述-->
+		<if test="type != null">#{type},</if><!-- 类型 1：实物 2：虚拟物品-->
+		<if test="isMax != null">#{isMax},</if>
+		<if test="status != null">#{status},</if><!-- 状态 1: 有效 0 无效-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_goods -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_goods t
+		LEFT JOIN tb_user au on au.u_id = t.ADD_USER_ID
+		LEFT JOIN tb_user uu on uu.u_id = t.UPDATE_USER_ID
+		where t.id = #{id}
+	</select>
+	
+	<!-- 更新t_goods -->
+	<update id="update" parameterType="com.webside.goods.model.Goods" flushCache="true">
+		update t_goods
+		<set>
+			<trim suffixOverrides=",">
+				<if test="goodsName != null">goods_name=#{goodsName},</if><!-- 商品名称-->
+				<if test="goodsImg != null">goods_img=#{goodsImg},</if><!-- 商品图片-->
+				<if test="goodsGold != null">goods_gold=#{goodsGold},</if><!-- 商品金币-->
+				<if test="goodsNum != null">goods_num=#{goodsNum},</if><!-- 商品数量-->
+				<if test="addUserId != null">add_user_id=#{addUserId},</if><!-- 创建人-->
+				<if test="createTime != null">create_time=#{createTime},</if><!-- 添加时间-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+				<if test="updateUserId != null">update_user_id=#{updateUserId},</if><!-- 修改人-->
+				<if test="desc != null">`desc`=#{desc},</if><!-- 商品描述-->
+				<if test="type != null">type=#{type},</if><!-- 类型 1：实物 2：虚拟物品-->
+				<if test="isMax != null">is_max=#{isMax},</if>
+				<if test="status != null">status=#{status},</if><!-- 状态 1: 有效 0 无效-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_goods -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_goods  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_goods -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_goods 
+		where id = #{id}
+	</delete>
+	
+	<!-- 更新t_goods -->
+	<update id="updateGoodsNumByStockId" parameterType="map" flushCache="true">
+		update t_goods t,(select gs.GOODS_ID from t_goods_stock gs where gs.ID in 
+			<foreach collection="ids" item ="id" open="(" separator="," close=")">
+		    	#{id}  
+		    </foreach>
+		 ) tt set t.GOODS_NUM = t.GOODS_NUM + #{num}
+		where t.ID = tt.GOODS_ID
+	</update>
+	
+	<!-- 更新库存 -->
+	<update id="updateGoodsNum" parameterType="map" flushCache="true">
+		update t_goods g,(select t.ID GOODS_ID, count(gs.ID) GOODS_NUM
+			FROM t_goods t
+			LEFT JOIN t_goods_stock gs ON gs.GOODS_ID = t.ID AND gs.`STATUS`=1 AND IFNULL(gs.EFFECTIVE_TIME, #{currentTime}) >= #{currentTime}
+			WHERE 1=1
+			GROUP BY t.ID
+		) gs set g.GOODS_NUM = gs.GOODS_NUM
+		WHERE g.ID = gs.GOODS_ID
+	</update>
+	
+	<!-- 验证商品名称 -->
+	<select id="checkGoodsName" resultType="int" parameterType="map" flushCache="true" useCache="true">
+		select count(1) from t_goods t
+		<where>
+			AND lower(t.goods_name) = lower(#{goodsName})
+			<if test="id != null and id != ''">
+				AND t.id != #{id}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 验证库存 -->
+	<select id="checkGoodsNumBeforeDel" resultType="int" parameterType="map" flushCache="true" useCache="true">
+		select count(1) from t_goods t 
+		left join t_goods_stock gs on gs.goods_id = t.id
+		where t.GOODS_NUM + #{num} &lt; 0
+		and gs.ID in
+		<foreach collection="ids" item ="id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</select>
+	
+	<select id="findListForMall" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select t.ID,t.GOODS_NAME,t.GOODS_NUM,t.GOODS_IMG,t.GOODS_GOLD,t.`DESC`,t.TYPE,t.IS_MAX,count(uel.ID) EXCHANGE_COUNT
+		FROM t_goods t
+		LEFT JOIN t_goods_stock gs ON gs.GOODS_ID = t.ID
+		left join t_user_exchange_log uel on uel.STOCK_ID = gs.ID and uel.EXCHANGE_STATUS != 0
+		<trim prefix="WHERE" prefixOverrides="AND | OR"> 
+			<choose>
+				<when test="id != null and id != ''">
+					AND t.id=#{id}
+				</when>
+				<otherwise>
+					(t.goods_num > 0 or t.IS_MAX = 1)
+				</otherwise>
+			</choose> 
+			and t.status = 1
+		</trim>
+		GROUP BY t.ID,t.GOODS_NAME,t.GOODS_NUM,t.GOODS_IMG,t.GOODS_GOLD,t.`DESC`,t.TYPE,t.IS_MAX
+	</select>
+</mapper>

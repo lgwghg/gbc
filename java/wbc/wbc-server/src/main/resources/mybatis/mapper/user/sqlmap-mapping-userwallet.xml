@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.wallet.mapper.IUserWalletMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.user.wallet.entities.UserWallet">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="user_id" property="userId"/> <!-- 用户ID-->
+		<result column="gold" property="gold"/> <!-- G币-->
+		<result column="sys_gold_num" property="sysGoldNum"/> <!-- 赠送G币-->
+		<result column="update_time" property="updateTime"/> <!-- 修改时间-->
+	</resultMap>
+	
+	<!-- t_user_wallet字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 唯一标识-->
+			user_id, <!-- 用户ID-->
+			gold, <!-- G币-->
+			sys_gold_num, <!-- 赠送G币-->
+			update_time, <!-- 修改时间-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_user_wallet分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_wallet 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="gold != null and gold != ''">
+				AND gold=#{gold}
+			</if>
+			<if test="sysGoldNum != null and sysGoldNum != ''">
+				AND sys_gold_num=#{sysGoldNum}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND update_time=#{updateTime}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 根据ID查询t_user_wallet -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_wallet 
+		where id = #{id}
+	</select>
+	<select id="findWalletByUserId" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_wallet 
+		where user_id = #{userId}
+	</select>
+	<!-- 更新t_user_wallet -->
+	<update id="update" parameterType="com.webside.user.wallet.entities.UserWallet" flushCache="true">
+		update t_user_wallet
+		<set>
+			<trim suffixOverrides=",">
+				<if test="gold != null">gold = #{gold},</if><!-- G币-->
+				<if test="sysGoldNum != null">sys_gold_num = #{sysGoldNum},</if><!-- 赠送G币-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+			</trim>
+		</set>
+		where user_id=#{userId} and update_time = #{updateT}
+	</update>
+	
+	<!-- 根据ID列表删除t_user_wallet -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_user_wallet  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_user_wallet -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_user_wallet 
+		where id = #{id}
+	</delete>
+</mapper>

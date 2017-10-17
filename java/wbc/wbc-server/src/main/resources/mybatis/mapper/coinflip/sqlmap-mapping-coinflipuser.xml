@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.coinflip.mapper.ICoinflipUserMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.coinflip.model.CoinflipUser">
+		<id column="id" property="id"/> <!-- -->
+		<result column="room_id" property="roomId"/> <!-- 房间id-->
+		<result column="user_id" property="userId"/> <!-- 用户id-->
+		<result column="room_owner" property="roomOwner"/> <!-- 房主 1：是房主   0：参与者  默认0-->
+		<result column="gold_num" property="goldNum"/> <!-- 参与的金币数-->
+		<result column="is_coin_front" property="isCoinFront"/> <!-- 用户正反面  0：正面   1：反面，房主可以选择任意一面，其他参与者则是另外一面-->
+		<result column="create_time" property="createTime"/> <!-- 创建时间-->
+		<result column="update_time" property="updateTime"/> <!-- 更新时间-->
+	</resultMap>
+	
+	<!-- t_coinflip_user字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- -->
+			room_id, <!-- 房间id-->
+			user_id, <!-- 用户id-->
+			room_owner, <!-- 房主 1：是房主   0：参与者  默认0-->
+			gold_num, <!-- 参与的金币数-->
+			is_coin_front, <!-- 用户正反面  0：正面   1：反面，房主可以选择任意一面，其他参与者则是另外一面-->
+			create_time, <!-- 创建时间-->
+			update_time, <!-- 更新时间-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_coinflip_user分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_coinflip_user 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="roomId != null and roomId != ''">
+				AND room_id=#{roomId}
+			</if>
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="roomOwner != null and roomOwner != ''">
+				AND room_owner=#{roomOwner}
+			</if>
+			<if test="goldNum != null and goldNum != ''">
+				AND gold_num=#{goldNum}
+			</if>
+			<if test="isCoinFront != null and isCoinFront != ''">
+				AND is_coin_front=#{isCoinFront}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND update_time=#{updateTime}
+			</if>
+		</trim>
+	</select>
+	
+	<select id="findJoinUserByRoomId" parameterType="String" resultType="com.webside.coinflip.model.CoinflipUser">
+		select  
+			cu.id, <!-- -->
+			cu.room_id as roomId, <!-- 房间id-->
+			cu.user_id as userId, <!-- 用户id-->
+			cu.room_owner as roomOwner, <!-- 房主 1：是房主   0：参与者  默认0-->
+			cu.gold_num as goldNum, <!-- 参与的金币数-->
+			cu.is_coin_front as isCoinFront, <!-- 用户正反面  0：正面   1：反面，房主可以选择任意一面，其他参与者则是另外一面-->
+			cu.create_time as createTime, <!-- 创建时间-->
+			cu.update_time as updateTime, <!-- 更新时间-->
+			u.nick_name as userNick,
+			u.photo as userPhoto
+		from t_coinflip_user cu inner join tb_user u on cu.user_id = u.u_id
+		where cu.room_id = #{roomId} and cu.status = 0
+	</select>
+	<select id="findRoomOwnerByRoomId" parameterType="String" resultType="com.webside.coinflip.model.CoinflipUser">
+		select  
+			cu.id, <!-- -->
+			cu.room_id as roomId, <!-- 房间id-->
+			cu.user_id as userId, <!-- 用户id-->
+			cu.room_owner as roomOwner, <!-- 房主 1：是房主   0：参与者  默认0-->
+			cu.gold_num as goldNum, <!-- 参与的金币数-->
+			cu.is_coin_front as isCoinFront, <!-- 用户正反面  0：正面   1：反面，房主可以选择任意一面，其他参与者则是另外一面-->
+			cu.create_time as createTime, <!-- 创建时间-->
+			cu.update_time as updateTime, <!-- 更新时间-->
+			u.nick_name as userNick,
+			u.photo as userPhoto
+		from t_coinflip_user cu inner join tb_user u on cu.user_id = u.u_id
+		where cu.room_id = #{roomId} and cu.status = 0 and cu.room_owner = 1
+	</select>
+	<!-- 新增t_coinflip_user -->
+	<insert id="insert" parameterType="com.webside.coinflip.model.CoinflipUser">
+		insert into t_coinflip_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="roomId != null">room_id,</if><!-- 房间id-->
+		<if test="userId != null">user_id,</if><!-- 用户id-->
+		<if test="roomOwner != null">room_owner,</if><!-- 房主 1：是房主   0：参与者  默认0-->
+		<if test="goldNum != null">gold_num,</if><!-- 参与的金币数-->
+		<if test="isCoinFront != null">is_coin_front,</if><!-- 用户正反面  0：正面   1：反面，房主可以选择任意一面，其他参与者则是另外一面-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		<if test="updateTime != null">update_time,</if><!-- 更新时间-->
+		<if test="status != null">status,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="roomId != null">#{roomId},</if><!-- 房间id-->
+		<if test="userId != null">#{userId},</if><!-- 用户id-->
+		<if test="roomOwner != null">#{roomOwner},</if><!-- 房主 1：是房主   0：参与者  默认0-->
+		<if test="goldNum != null">#{goldNum},</if><!-- 参与的金币数-->
+		<if test="isCoinFront != null">#{isCoinFront},</if><!-- 用户正反面  0：正面   1：反面，房主可以选择任意一面，其他参与者则是另外一面-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 更新时间-->
+		<if test="status != null">#{status},</if>
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_coinflip_user -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_coinflip_user 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_coinflip_user -->
+	<update id="updateById" parameterType="com.webside.coinflip.model.CoinflipUser" flushCache="true">
+		update t_coinflip_user
+		<set>
+			<trim suffixOverrides=",">
+				<if test="roomId != null">room_id=#{roomId},</if><!-- 房间id-->
+				<if test="userId != null">user_id=#{userId},</if><!-- 用户id-->
+				<if test="roomOwner != null">room_owner=#{roomOwner},</if><!-- 房主 1：是房主   0：参与者  默认0-->
+				<if test="goldNum != null">gold_num=#{goldNum},</if><!-- 参与的金币数-->
+				<if test="goldAmount != null">gold_amount=#{goldAmount},</if><!-- 个人下注金币总额-->
+				<if test="isCoinFront != null">is_coin_front=#{isCoinFront},</if><!-- 用户正反面  0：正面   1：反面，房主可以选择任意一面，其他参与者则是另外一面-->
+				<if test="createTime != null">create_time=#{createTime},</if><!-- 创建时间-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 更新时间-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_coinflip_user -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_coinflip_user  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_coinflip_user -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_coinflip_user 
+		where id = #{id}
+	</delete>
+</mapper>

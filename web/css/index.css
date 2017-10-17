@@ -1,0 +1,66 @@
+.bodyer{width:100%; background:url(../images/index_bj.png) no-repeat top;position: fixed;width: 100%;height: 100%;}
+
+.header{background:none;}
+.header .btn{padding:8px 30px}
+.welc{ color:#afd6cd}
+.match_thing{ background:#2e3238; border-radius:5px; height:760px;}
+.match_thing .title{ height:42px; padding:0px; margin:0px; line-height:42px; background:#22252A; border-radius:5px 5px 0 0;}
+.match_thing .title ul{ padding:0px; list-style:none; margin:0;}
+.match_thing .title ul li{ float:left; width:33%; padding:0 20px; color:#FFF;   white-space: nowrap;}
+.list{ position:relative; height:104px; margin:14px}
+.list-bg{width: 100%;height: 100%;position: absolute;}
+.list table{ height:104px; color:#FFF;cursor: pointer;position: relative;z-index: 1;}
+.list table:hover{background-color: #3d4148;}
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th{vertical-align: middle;}
+.profit_top{ background:#2e3238; height: 372px; border-radius: 5px;}
+.profit_top .title{ background: #22252A url(../images/top_style.png) no-repeat 15px 17px;  height:42px; padding:0px; margin:0px; line-height:42px; border-radius:5px 5px 0 0; padding: 0 20px 0 32px; color:#FFF ;}
+.profit_top .title a{ color:#FFF;}
+.guess{ background: url(../images/guess.png) no-repeat 0px 10px; padding:16px; height: 36px;}
+.guess-rank-list{ background:#16191d; display: inline-block;height: 26px;line-height: 23px;
+          text-align: center;width: 26px; border-radius: 100%; position: relative; top: 10px; 
+          border: 1px solid #a19787;}
+.guess-rank-list.media{ border: 1px solid #e3e3e3;}
+.get{ background:#16191d; display: inline-block;height:39px;line-height:35px;
+         text-align: center;width:39px; border-radius: 100%; border: 1px solid #1DB070; margin-right:2px;}
+.page-header_2 {
+	padding-bottom:7px;
+	border-bottom: 1px dashed #666666
+}
+.page-header-groub{}
+.page-header-groub tr{ border-bottom: 1px solid #2f383e; margin: 0px 0 3px; padding-bottom:5px; display: block;}
+.last{border: none;}
+.tip{border-bottom: 3px solid #2f393f; position: relative; padding-bottom: 10px;  color: #fff;}
+.tip .gren{height: 3px; max-height: 3px; background: #32C3A2; width: 85px; position: absolute; right: 0; top: 31px;}
+.pos{ background: url(../images/top1.png) no-repeat; position: absolute; right:60px; width: 34px; height: 29px; top: 0;}
+.st::after{ content: "st"; position: absolute; left:24px;  font-size: 11px; top: 127px;}
+.ed::after{ content: "ed"; position: absolute; left:24px;  font-size: 11px; top: 190px;}
+.rd::after{ content: "rd"; position: absolute; left:24px;  font-size: 11px; top:250px;}
+.text-st{color: #32c3a2;}
+.text-st img{margin: 0 10px 0 20px}
+.hot-game{padding:0;text-align: center;}
+.hot-game img{ border-radius: 8px;}
+.pic_pot{ position: relative;}
+.pic_pot .ab_text{ position: relative; bottom:30px; color:#fff; }
+.bordder{position:relative ;}
+.bordder .line{ width: 1px; max-width: 1px; background:#2f383e; line-height:0; position: absolute; left:-4px; 
+                height: 110px; top: 17px;}
+                
+.guess_f{ background: url(../images/guess.png) no-repeat; width: 26px; height: 26px;}
+
+.page-header-3{
+    border-bottom: 1px solid #2f383e;
+    margin: 25px 0 20px;
+    padding-bottom: 4px;
+}
+
+@media screen and (max-width: 767px) {
+    .table-responsive {
+        border: none;
+    }
+}
+
+
+/*弹框*/
+/*#c-zck{
+	margin-bottom: 0;
+}*/

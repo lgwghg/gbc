@@ -1,0 +1,5 @@
+.serviceError {position: absolute; top: 50%; left: 50%; margin: -210px 0 0 -490px; width: 980px; height: 386px;}
+.serviceError .return{position:absolute; right: 265px; top: 155px;} 
+.serviceError .return500{position:absolute; right: 230px; top: 155px;}
+.serviceError404{ position:absolute; top:50%; left:50%; margin:-320px 0 0 -490px; width:980px;   height:625px; }
+.serviceError404 .return404{position:absolute; right:210px; top: 100px;}

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>兑换</title>
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_3r9wb1z2j32qpvi.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.dropdown.css">   
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/inform.css">
+    <link rel="stylesheet" type="text/css" href="css/exchange.css">
+    <link rel="stylesheet" type="text/css" href="css/fallback.css">
+    <link rel="stylesheet" type="text/css" href="css/ripples.min.css">
+    <link rel="stylesheet" type="text/css" href="css/magic-check.css"> 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.dropdown.js"></script>
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+    <script>
+        document.createElement('video');
+    </script>
+    <![endif]-->
+
+</head>
+<body>
+<div class="bodyer"></div>
+<div class="container-fluid" style="margin:0; padding:0;">
+    <div id="inc_header"></div>
+    <!-- main -->
+    <div class="container c-informwrap">
+        <div class="pull-left c-informleft">
+            <div class="sidebar">
+                <ul>
+                    <li class="btn btn-block c-vnav"><a href="javascript:void(1)"><i class="iconfont icon-aboutme"></i>我的账户</a>
+                    </li>
+                    <li class="btn btn-block c-vnav"><a href="javascript:void(1)"><i class="iconfont icon-jingcai"></i>我的竞猜</a>
+                    </li>
+                    <li class="btn btn-block c-vnav"><a href="javascript:void(1)"><i class="iconfont icon-dizhi"></i>收货地址</a>
+                    </li>
+                    <li class="btn btn-block c-vnav"><a href="javascript:void(1)"><i class="iconfont icon-duihuan"></i>兑换</a>
+                    </li>
+                    <li class="btn btn-block c-vnav"><a href="javascript:void(1)"><i
+                            class="iconfont icon-jiaoyijilu"></i>交易记录</a></li>
+                    <li class="btn btn-block c-vnav"><a href="javascript:void(1)"><i
+                            class="iconfont icon-wodetongzhi"></i>我的通知</a></li>
+                    <li class="btn btn-block c-vnav"><a href="javascript:void(1)"><i class="iconfont icon-haoyou"></i>推荐好友</a>
+                    </li>
+                    <li class="btn btn-block c-vnav last"><a href="javascript:void(1)"><i class="iconfont icon-FAQ"></i>FAQS</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="c-informright pull-left">
+         <ul style="overflow: hidden; padding-left: 10px;">
+            <li class="exrecord activecolor">商品兑换记录</li>
+            <li class="exrecord">CDKEY兑换记录</li>
+          </ul>
+            <div class="item-exmall exhide exshow">
+            <div style="color:#fff; padding-left: 10px;">
+            <input id="conserve" type="checkbox" class="magic-checkbox" name="all" value=""/>
+                <label class="hold" for="conserve">全选</label>
+             <button type="button" class="btn c-salemall" style="margin-left: 575px;">全部出售
+                        </button> 
+                        
+                         
+                  <div class="form-group pull-cdownlist">
+                    <select class="form-control">
+                      <option value="1">未领取</option>
+                      <option value="2">已领取</option>
+                      <option value="3">出售中</option>
+                      <option value="4">发货中</option>
+                      <option value="5">已发货</option>
+                    </select>
+                  </div>         
+        </div>            
+            <ul class="c-changelist ft-14">
+                <li class="row">
+                    <div class="col-xs-2">
+                        <div class="c-checkbox">
+                        <input id="123" type="checkbox" class="magic-checkbox" name="son" value="">
+                        <label class="hold" for="123"></label>
+                        </div>
+                        <a href=""><img title="实物不出售" src="images/c-shouwang.png" width="100%" height="100%"/></a>
+                    </div>
+                    <div class="col-xs-8">
+                        <p><span>守望先锋数字畅玩包</span></p>
+
+                        <p class="mt-5 mb-20"><span>36000</span>金币</p>
+                        <span>2016.11.17</span>&nbsp;&nbsp;<span>15&nbsp;:&nbsp;00</span>
+                    </div>
+                    <div class="col-xs-2 c_sand">
+                        <p>
+                            <a class="pull-right" href="#">未领取</a>
+                        </p>
+                        <button type="button" class="btn btn-primary btn-raised pull-right"><strong>领 取</strong>
+                        </button>
+                        <div class="bounced">
+                            <p><b>网址：</b><a href="#">https://www.bai3333333333333333333333333333du.com/</a></p>
+                            <p><b>卡号：</b><span>14312412444444444444444444444124</span><a href="#" class="ml-15">复制</a></p>
+                            <p><b>密码：</b><span>141241444444444444444444444444442412</span></p>
+                        </div>
+                    </div>
+                </li>
+                <li class="row">
+                    <div class="col-xs-2">
+                        <div class="c-checkbox">
+                        <div class="tishi-tip">实物不出售</div>
+                        <input type="checkbox" class="magic-checkbox disc-checkbox" name="" value="" disabled="">
+                        <label class="hold"></label>
+                        </div>
+                        <a href=""><img src="images/c-shouwang.png" width="100%" height="100%"/></a>
+                    </div>
+                    <div class="col-xs-8">
+                        <p><span>守望先锋数字畅玩包</span></p>
+
+                        <p class="mt-5 mb-20"><span>36000</span>金币</p>
+                        <span>2016.11.17</span>&nbsp;&nbsp;<span>15&nbsp;:&nbsp;00</span>
+                                     <button type="button" class="btn c-saleon pull-right">全部出售
+                        </button>  
+                    </div>
+                    <div class="col-xs-2 c_sand">
+                        <p>
+                            <a class="pull-right" href="#">未领取</a>
+                        </p>
+                        <button type="button" class="btn btn-primary btn-raised pull-right"><strong>领 取</strong>
+                        </button>
+                                                 <div class="bounced">
+                            <p><b>网址：</b><a href="#">https://www.bai3333333333333333333333333333du.com/</a></p>
+                            <p><b>卡号：</b><span>14312412444444444444444444444124</span><a href="#" class="ml-15">复制</a></p>
+                            <p><b>密码：</b><span>141241444444444444444444444444442412</span></p>
+                        </div> 
+                    </div>
+                </li>
+                <li class="row">
+                    <div class="col-xs-2">
+                        <input type="checkbox" class="c-checkbox" name="son" value="">                    
+                        <a href=""><img src="images/c-shouwang.png" width="100%" height="100%"/></a>
+                    </div>
+                    <div class="col-xs-8">
+                        <p><span>守望先锋数字畅玩包</span></p>
+
+                        <p class="mt-5 mb-20"><span>36000</span>金币</p>
+                        <span>2016.11.17</span>&nbsp;&nbsp;<span>15&nbsp;:&nbsp;00</span>
+                    </div>
+                    <div class="col-xs-2">
+                        <p>
+                            <a class="pull-right" href="#">未领取</a>
+                        </p>
+                        <button type="button" class="btn btn-primary btn-raised pull-right"><strong>领 取</strong>
+                        </button>
+                    </div>
+                </li>
+                <li class="row">
+                    <div class="col-xs-2">
+                        <input type="checkbox" class="c-checkbox" name="son" value="">                    
+                        <a href=""><img src="images/c-shouwang.png" width="100%" height="100%"/></a>
+                    </div>
+                    <div class="col-xs-8">
+                        <p><span>守望先锋数字畅玩包</span></p>
+
+                        <p class="mt-5 mb-20"><span>36000</span>金币</p>
+                        <span>2016.11.17</span>&nbsp;&nbsp;<span>15&nbsp;:&nbsp;00</span>
+                    </div>
+                    <div class="col-xs-2">
+                        <p>
+                            <a class="pull-right" href="#">未领取</a>
+                        </p>
+                        <button type="button" class="btn btn-primary btn-raised pull-right"><strong>领 取</strong>
+                        </button>
+                    </div>
+                </li>
+                <li class="row">
+                    <div class="col-xs-2">
+                        <input type="checkbox" class="c-checkbox" name="son" value="">                    
+                        <a href=""><img src="images/c-shouwang.png" width="100%" height="100%"/></a>
+                    </div>
+                    <div class="col-xs-8">
+                        <p><span>守望先锋数字畅玩包</span></p>
+
+                        <p class="mt-5 mb-20"><span>36000</span>金币</p>
+                        <span>2016.11.17</span>&nbsp;&nbsp;<span>15&nbsp;:&nbsp;00</span>
+                    </div>
+                    <div class="col-xs-2">
+                        <p>
+                            <a class="pull-right" href="#">未领取</a>
+                        </p>
+                        <button type="button" class="btn btn-primary btn-raised pull-right"><strong>领 取</strong>
+                        </button>
+                    </div>
+                </li>
+                <li class="row">
+                    <div class="col-xs-2">
+                        <input type="checkbox" class="c-checkbox disc-checkbox" name="son" value="" disabled="">                    
+                        <a href=""><img src="images/c-shouwang.png" width="100%" height="100%"/></a>
+                    </div>
+                    <div class="col-xs-8">
+                        <p><span>守望先锋数字畅玩包</span></p>
+
+                        <p class="mt-5 mb-20"><span>36000</span>金币</p>
+                        <span>2016.11.17</span>&nbsp;&nbsp;<span>15&nbsp;:&nbsp;00</span>
+                    </div>
+                    <div class="col-xs-2">
+                        <p>
+                            <a class="pull-right" href="#">未领取</a>
+                        </p>
+                        <button type="button" class="btn btn-primary btn-raised pull-right"><strong>领 取</strong>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+            </div>
+            <div class="table-responsive cdkey exhide item-exmall">
+            <table class="table" style="margin-bottom: 2px;">
+                <thead>
+                    <th>兑换时间</th>
+                    <th>CDKEY</th>
+                    <th>备注</th>
+                    <th></th>
+                </thead>
+            </table>
+              <table class="table" style=" background: #2d3137;">
+                <tbody>
+                  <tr>
+                    <td><i class="iconfont icon-xiaoxitongzhi"></i>
+                    <span>2016-09-09</span>
+                    <span>10:48:45</span></td>
+                    <td>5465465465465465465</td>
+                    <td>500万G币兑换成功</td>
+                  </tr>
+                  <tr>
+                    <td><i class="iconfont icon-xiaoxitongzhi"></i>
+                    <span>2016-09-09</span>
+                    <span>10:48:45</span></td>
+                    <td>5465465465465465465</td>
+                    <td>59000000万G币兑换成功</td>
+                  </tr>
+                  <tr>
+                    <td><i class="iconfont icon-xiaoxitongzhi"></i>
+                    <span>2016-09-09</span>
+                    <span>10:48:45</span></td>
+                    <td>5465465465465465465</td>
+                    <td>5万G币兑换成功</td>
+                  </tr>
+                  <tr>
+                    <td><i class="iconfont icon-xiaoxitongzhi"></i>
+                    <span>2016-09-09</span>
+                    <span>10:48:45</span></td>
+                    <td>5465465465465465465</td>
+                    <td>5万G币兑换成功</td>
+                  </tr>
+                  <tr>
+                    <td><i class="iconfont icon-xiaoxitongzhi"></i>
+                    <span>2016-09-09</span>
+                    <span>10:48:45</span></td>
+                    <td>5465465465465465465</td>
+                    <td>5万G币兑换成功</td>
+                  </tr>
+                  <tr>
+                    <td><i class="iconfont icon-xiaoxitongzhi"></i>
+                    <span>2016-09-09</span>
+                    <span>10:48:45</span></td>
+                    <td>5465465465465465465</td>
+                    <td>5万G币兑换成功</td>
+                  </tr>
+                  <tr>
+                    <td><i class="iconfont icon-xiaoxitongzhi"></i>
+                    <span>2016-09-09</span>
+                    <span>10:48:45</span></td>
+                    <td>5465465465465465465</td>
+                    <td>5万G币兑换成功</td>
+                  </tr>
+                  <tr>
+                    <td><i class="iconfont icon-xiaoxitongzhi"></i>
+                    <span>2016-09-09</span>
+                    <span>10:48:45</span></td>
+                    <td>5465465465465465465</td>
+                    <td>5万G币兑换成功</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ul class="pagination">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">&lt;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#" style="border:none;">...</a></li>
+                <li><a href="#">23</a></li>
+                <li><a href="#">&gt;</a></li>
+                <li><a href="#">尾页</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="inc_footer"></div>
+</div>
+<div class="fatherwrap" style="position: fixed; top: 25%; right: 0px;">
+<div class="c-betwrap" style="float: left; margin-top: 162px;">
+<div class="c-betindication"><span></span><span></span></div>
+<div class="c-bet">投注历史</div>
+</div>
+<div class="table-responsive chushi">
+                <div style="">
+                    <h2 class="pull-left col-md-7" style="background: #3d4148; padding: 18px 22px; font-size: 16px; color: #fff; font-weight: 600;">已参与的比赛</h2>
+                     <ul class="pull-right list-inline col-md-5" style="background: #3d4148; color: #999; padding: 15px 22px 16px 0px; max-height: 53px; overflow: hidden;">
+                        <li style="margin-right: 20px;"><span class="tip_circle" style="background: #4f4c42;">W</span>赢</li>
+                        <li style="margin-right: 20px;"><span class="tip_circle" style="background: #4f4c42;">L</span>输</li>
+                        <li><span class="tip_circle" style="background: #0c6954;">N</span>待结束</li>
+                    </ul>   
+               </div>
+                <table class="table" style="margin-bottom: 0;">
+                    <thead class="ft-14">
+               
+                    </thead>
+                    <tbody style="background: #2e3238; color: #fff;">
+                        <tr>
+                            <td style="padding-right: 0;"><span class="tip_circle tip_circletwo" style="background: #0c6954;">N</span></td>
+                            <td>
+                                <span class="mr-30 nametip_c">fjkasdjfklsdrrrrrrrrrrrrrrrrrr555555555555555555555533333333333333333333333333333333333333333333333333333333333333</span><span class="mr-30 nametip_c">b03</span><span class="nametip_c">jfkljaskldjfkl</span><br />
+                                <span class="nametip_c" style="max-width: 300px; color: #607d8b;">范亚太超级锦标赛中国区上线预选赛</span>
+                            </td>
+                            <td>
+                                <span class="nametip_c">121313</span><br />
+                                <span style="color: #607d8b;">本次下注</span>
+                            </td>
+                             <td>
+                                <span class="nametip_c">121313</span><br />
+                                <span style="color: #607d8b;">本次收益</span>
+                            </td>
+                             <td>
+                                <span class="nametip_c" style="max-width: 150px;">2016.11.17&nbsp;15:00</span><br />
+                                <span style="color: #607d8b;">开始时间</span>
+                            </td>
+                            <td>
+                            <button type="button" class="btn btn-primary btn-raised"><strong>查看</strong></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-right: 0;"><span class="tip_circle tip_circletwo" style="background: #e4a713;">W</span></td>
+                           <td>
+                                <span class="mr-30 nametip_c">fjkasdjfklsdrrrrrrrrrrrrrrrrrr555555555555555555555533333333333333333333333333333333333333333333333333333333333333</span><span class="mr-30 nametip_c">b03</span><span class="nametip_c">jfkljaskldjfkl</span><br />
+                                <span class="nametip_c" style="max-width: 300px; color: #607d8b;">范亚太超级锦标赛中国区上线预选赛</span>
+                            </td>
+                            <td>
+                                <span class="nametip_c">121313</span><br />
+                                <span style="color: #607d8b;">本次下注</span>
+                            </td>
+                             <td>
+                                <span class="nametip_c">121313</span><br />
+                                <span style="color: #607d8b;">本次收益</span>
+                            </td>
+                             <td>
+                                <span class="nametip_c" style="max-width: 150px;">2016.11.17&nbsp;15:00</span><br />
+                                <span style="color: #607d8b;">开始时间</span>
+                            </td>
+                            <td>
+                            <button type="button" class="btn btn-primary btn-raised"><strong>查看</strong></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-right: 0;"><span class="tip_circle tip_circletwo" style="background: #4f4c42;">L</span></td>
+                           <td>
+                                <span class="mr-30 nametip_c">fjkasdjfklsdrrrrrrrrrrrrrrrrrr555555555555555555555533333333333333333333333333333333333333333333333333333333333333</span><span class="mr-30 nametip_c">b03</span><span class="nametip_c">jfkljaskldjfkl</span><br />
+                                <span class="nametip_c" style="max-width: 300px; color: #607d8b;">范亚太超级锦标赛中国区上线预选赛</span>
+                            </td>
+                            <td>
+                                <span class="nametip_c">121313</span><br />
+                                <span style="color: #607d8b;">本次下注</span>
+                            </td>
+                             <td>
+                                <span class="nametip_c">121313</span><br />
+                                <span style="color: #607d8b;">本次收益</span>
+                            </td>
+                             <td>
+                                <span class="nametip_c" style="max-width: 150px;">2016.11.17&nbsp;15:00</span><br />
+                                <span style="color: #607d8b;">开始时间</span>
+                            </td>
+                            <td>
+                            <button type="button" class="btn btn-primary btn-raised"><strong>查看</strong></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-right: 0;"><span class="tip_circle tip_circletwo" style="background: #4f4c42;">L</span></td>
+                            <td>
+                                <span>fjkasdjfklsd</span><span>b03</span><span>jfkljaskldjfkl</span><br />
+                                <span class="nametip_c" style="max-width: 300px; color: #607d8b;">范亚太超级锦标赛中国区上线预选赛</span>
+                            </td>
+                            <td>
+                                <span>121313</span><br />
+                                <span style="color: #607d8b;">本次下注</span>
+                            </td>
+                             <td>
+                                <span>121313</span><br />
+                                <span style="color: #607d8b;">本次收益</span>
+                            </td>
+                             <td>
+                                <span>2016.11.17&nbsp;15:00</span><br />
+                                <span style="color: #607d8b;">开始时间</span>
+                            </td>
+                            <td>
+                            <button type="button" class="btn btn-primary btn-raised"><strong>查看</strong></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-right: 0;"><span class="tip_circle tip_circletwo" style="background: #e4a713;">W</span></td>
+                            <td>
+                                <span class="mr-30 nametip_c">fjkasdjfklsdrrrrrrrrrrrrrrrrrr555555555555555555555533333333333333333333333333333333333333333333333333333333333333</span><span class="mr-30 nametip_c">b03</span><span class="nametip_c">jfkljaskldjfkl</span><br />
+                                <span class="nametip_c" style="max-width: 300px; color: #607d8b;">范亚太超级锦标赛中国区上线预选赛</span>
+                            </td>
+                            <td>
+                                <span class="nametip_c">121313</span><br />
+                                <span style="color: #607d8b;">本次下注</span>
+                            </td>
+                             <td>
+                                <span class="nametip_c">121313</span><br />
+                                <span style="color: #607d8b;">本次收益</span>
+                            </td>
+                             <td>
+                                <span class="nametip_c" style="max-width: 150px;">2016.11.17&nbsp;15:00</span><br />
+                                <span style="color: #607d8b;">开始时间</span>
+                            </td>
+                            <td>
+                            <button type="button" class="btn btn-primary btn-raised"><strong>查看</strong></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-right: 0;"><span class="tip_circle tip_circletwo" style="background: #e4a713;"></span></td>
+                            <td>
+                                <span class="mr-30 nametip_c"></span><span class="mr-30 nametip_c"></span><span class="nametip_c"></span><br />
+                                <span class="nametip_c" style="max-width: 300px; color: #607d8b;"></span>
+                            </td>
+                            <td>
+                                <span class="nametip_c"></span><br />
+                                <span style="color: #607d8b;"></span>
+                            </td>
+                             <td>
+                                <span class="nametip_c"></span><br />
+                                <span style="color: #607d8b;"></span>
+                            </td>
+                             <td>
+                                <span class="nametip_c" style="max-width: 150px;"></span><br />
+                                <span style="color: #607d8b;"></span>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="height: 50px; background: #3d4148;"></div>
+            </div>
+            </div>
+</body>
+<script src="js/material.js"></script>
+<script src="js/ripples.min.js"></script>
+<script>
+    $.material.init();
+</script>
+<script>
+    $(function () {
+        //ajaxGetDate();
+        //异步加载头尾
+        $.get("header.html", function (data) {
+            $(data).appendTo("#inc_header");
+        }, "html");
+        $.get("footer.html", function (data) {
+            $(data).appendTo("#inc_footer");
+        }, "html");
+        // $.getScript("js/jquery.min.js");
+        // $.getScript("js/bootstrap.min.js");
+
+
+    });
+
+    $(function () {
+        $(".c-changelist>li>div>.btn").click(function () {
+            $(this).html("查 看").css({"background": "#3d4148", "outline": "none", "onfocus": "none"});
+            $(this).prev("p").find("a").css("color", "#767678").html("已领取")
+        })
+    })
+    $(function(){
+        $(".c-changelist>li>div>.btn").click(function(){
+            // var $bounced = $(this).next()
+            // if($bounced.is(":hidden")){
+            //     $bounced.show();
+            // }else{
+            //     $bounced.hide();
+            // }            
+             $(this).next().toggle().closest("li").siblings().find(".bounced").hide();
+        })
+              // $(document).bind("click",function(e){ 
+              //   var target = $(e.target); 
+              //   if(target.closest("li").length == 0){ 
+              //   $(".bounced").hide(); 
+              //   } 
+              //   }) 
+    })
+    $(function(){
+        $("input[name='all']").click(function(){
+            if($(this).is(":checked")){
+                $("input[name='son']").prop("checked",true);
+            }else{
+                $("input[name='son']").prop("checked",false);
+            }  
+            $(".disc-checkbox").prop("checked",false);
+      })
+    })
+    $(function(){
+        $(".c-checkbox").mouseenter(function(){
+            $(".tishi-tip").fadeIn(); 
+        })
+          $(".c-checkbox").mouseout(function(){
+            $(".tishi-tip").fadeOut() 
+        })
+    })
+    $(".pull-cdownlist select").dropdown();
+    $(function(){
+                var flag = true;
+        $(".c-betwrap").click(function(){
+
+            if(flag){
+            $(this).find(".c-betindication span:eq(0)").css({"transition":"transform 2s","transform":"rotate(40deg)"});
+            $(this).find(".c-betindication span:eq(1)").css({"transition":"transform 2s","transform":"translateY(-13px) rotate(-40deg)"});
+            $(this).find(".c-bet").remove();
+            $(this).next(".table-responsive").addClass("cuxian");
+            flag = false;
+            }else{
+            $(this).find(".c-betindication span:eq(0)").css({"transition":"transform 2s","transform":"rotate(-40deg)"});
+            $(this).find(".c-betindication span:eq(1)").css({"transition":"transform 2s","transform":"translateY(-13px) rotate(40deg)"});
+            $(this).next(".table-responsive").removeClass("cuxian");
+            $(this).append('<div class="c-bet">投注历史</div>'); 
+            flag = true;
+            }
+        })
+    })
+    $(function(){
+        $(".exrecord").click(function(){
+            var index = $(this).index();
+            $(this).addClass("activecolor").siblings().removeClass("activecolor");
+            $(".item-exmall").eq(index).addClass("exshow").siblings().removeClass("exshow");
+        });
+    });
+</script>
+<script src="js/siderbar.js"></script>
+</html>
+
+				
+				
+				
+				
+				
+				

@@ -1,0 +1,104 @@
+
+@font-face {font-family: "hoicon";
+  src: url('iconfont.eot?t=1464251038'); /* IE9*/
+  src: url('iconfont.eot?t=1464251038#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1464251038') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1464251038') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1464251038#hoicon') format('svg'); /* iOS 4.1- */
+}
+
+.hi {
+    font-family:"hoicon" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+.hi-lg {
+    font-size: 1.33333333em;
+    line-height: .75em;
+    vertical-align: -10%
+}
+.hi-2x {font-size: 2em}
+.hi-3x {font-size: 3em}
+.hi-4x {font-size: 4em}
+.hi-5x {font-size: 5em}
+.hci-original:before {content: "原"}
+.hci-new:before {content: "新"}
+.hi-user:before { content: "\e602"; }
+.hi-add:before { content: "\e603"; }
+.hi-left:before { content: "\e604"; }
+.hi-clock:before { content: "\e605"; }
+.hi-music:before { content: "\e606"; }
+.hi-home:before { content: "\e607"; }
+.hi-delete:before { content: "\e608"; }
+.hi-email:before { content: "\e609"; }
+.hi-minus:before { content: "\e60a"; }
+.hi-weixin:before { content: "\e60b"; }
+.hi-comment:before { content: "\e64b"; }
+.hi-share:before { content: "\e60c"; }
+.hi-more:before { content: "\e60d"; }
+.hi-fire:before { content: "\e636"; }
+.hi-xiaolian:before { content: "\e64c"; }
+.hi-edit:before { content: "\e60e"; }
+.hi-refresh:before { content: "\e60f"; }
+.hi-top-circle:before { content: "\e639"; }
+.hi-bottom-circle:before { content: "\e63a"; }
+.hi-search:before { content: "\e610"; }
+.hi-add-circle:before { content: "\e611"; }
+.hi-download:before { content: "\e612"; }
+.hi-info-circle:before { content: "\e613"; }
+.hi-lock:before { content: "\e614"; }
+.hi-link:before { content: "\e641"; }
+.hi-level:before { content: "\e648"; }
+.hi-check-circle:before { content: "\e615"; }
+.hi-pencil:before { content: "\e616"; }
+.hi-unlock:before { content: "\e617"; }
+.hi-wifi:before { content: "\e618"; }
+.hi-picture:before { content: "\e619"; }
+.hi-question:before { content: "\e600"; }
+.hi-info:before { content: "\e61a"; }
+.hi-tag:before { content: "\e63b"; }
+.hi-mobile:before { content: "\e61b"; }
+.hi-eye:before { content: "\e63c"; }
+.hi-upload:before { content: "\e63d"; }
+.hi-phone:before { content: "\e61c"; }
+.hi-browser:before { content: "\e601"; }
+.hi-arrowbottom:before { content: "\e642"; }
+.hi-list:before { content: "\e61d"; }
+.hi-check:before { content: "\e61e"; }
+.hi-question-circle:before { content: "\e61f"; }
+.hi-right:before { content: "\e637"; }
+.hi-gender:before { content: "\e620"; }
+.hi-run:before { content: "\e638"; }
+.hi-barcode:before { content: "\e643"; }
+.hi-wx-send:before { content: "\e645"; }
+.hi-user-circle:before { content: "\e621"; }
+.hi-qq:before { content: "\e622"; }
+.hi-delete-cirecle:before { content: "\e623"; }
+.hi-female:before { content: "\e624"; }
+.hi-send:before { content: "\e632"; }
+.hi-calendar:before { content: "\e625"; }
+.hi-add-circle1:before { content: "\e644"; }
+.hi-order:before { content: "\e626"; }
+.hi-verify:before { content: "\e627"; }
+.hi-chart:before { content: "\e63e"; }
+.hi-signout:before { content: "\e628"; }
+.hi-signin:before { content: "\e629"; }
+.hi-server:before { content: "\e62a"; }
+.hi-thumbs-up:before { content: "\e649"; }
+.hi-thumbs-down:before { content: "\e64a"; }
+.hi-keyboard:before { content: "\e633"; }
+.hi-headset:before { content: "\e62b"; }
+.hi-studio:before { content: "\e63f"; }
+.hi-more-vertical:before { content: "\e646"; }
+.hi-reg:before { content: "\e634"; }
+.hi-minus-circle:before { content: "\e62c"; }
+.hi-ding:before { content: "\e640"; }
+.hi-loading:before { content: "\e62d"; }
+.hi-userinfo:before { content: "\e62e"; }
+.hi-noresult:before { content: "\e62f"; }
+.hi-mapmarker:before { content: "\e630"; }
+.hi-wx-circle:before { content: "\e647"; }
+.hi-message:before { content: "\e635"; }
+.hi-male:before { content: "\e631"; }

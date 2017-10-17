@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.task.mapper.IUserTaskMapper">
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.user.task.entities.UserTask">
+		<id column="id" property="id"/> <!-- -->
+		<result column="user_id" property="userId"/> <!-- 用户名称-->
+		<result column="task_id" property="taskId"/> <!-- 任务id-->
+		<result column="complete_num" property="completeNum"/> <!-- 任务完成次数-->
+		<result column="create_time" property="createTime"/> <!-- 任务创建时间-->
+		<result column="gold" property="gold"/> <!-- 奖励金币-->
+		<result column="completed_state" property="completedState"/> <!-- 任务完成的状态，0：未完成,1：已完成 ,2：已领取   默认0-->
+	</resultMap>
+	<resultMap id="userTaskVoResultMap" type="com.webside.user.task.entities.UserTaskVo">
+		<id column="id" property="task.id"/> <!-- -->
+		<result column="task_name" property="task.taskName"/> <!-- -->
+		<result column="type" property="task.type"/> <!-- 类型：1：一次性任务   0：每日任务-->
+		<result column="task_type" property="task.taskType"/>
+		<result column="image" property="task.image"/> <!-- -->
+		<result column="description" property="task.description"/> <!-- -->
+		<result column="num" property="task.num"/> <!-- 任务需要完成的次数-->
+		<result column="gold" property="task.gold"/> <!-- 完成任务的奖励金币-->
+		<result column="state" property="task.state"/> <!-- 状态：0有效    1：无效   默认0-->
+		<result column="create_time" property="task.createTime"/> <!-- 创建时间-->
+		
+		
+		<result column="ut_id" property="userTask.id"/> <!-- -->
+		<result column="user_id" property="userTask.userId"/> <!-- 用户名称-->
+		<result column="task_id" property="userTask.taskId"/> <!-- 任务id-->
+		<result column="complete_num" property="userTask.completeNum"/> <!-- 任务完成次数-->
+		<result column="ut_create_time" property="userTask.createTime"/> <!-- 任务创建时间-->
+		<result column="ut_gold" property="userTask.gold"/> <!-- 奖励金币-->
+		<result column="completed_state" property="userTask.completedState"/> <!-- 任务完成的状态，0：未完成,1：已完成 ,2：已领取   默认0-->
+		
+	</resultMap>
+	
+	<!-- t_user_task字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- -->
+			user_id, <!-- 用户名称-->
+			task_id, <!-- 任务id-->
+			complete_num, <!-- 任务完成次数-->
+			create_time, <!-- 任务创建时间-->
+			gold, <!-- 奖励金币-->
+			completed_state, <!-- 任务完成的状态，0：未完成,1：已完成 ,2：已领取   默认0-->
+		</trim>
+	</sql>
+	<sql id="userTaskVoColumnList">
+		<trim suffixOverrides=",">
+			t.id, <!-- -->
+			t.task_name, <!-- -->
+			t.type,<!-- 类型：1：一次性任务   0：每日任务-->
+			t.task_type, 
+			t.image, <!-- -->
+			t.description, <!-- -->
+			t.num, <!-- 任务需要完成的次数-->
+			t.gold, <!-- 完成任务的奖励金币-->
+			t.state, <!-- 状态：0有效    1：无效   默认0-->
+			t.create_time, <!-- 创建时间-->
+			
+			ut.id as ut_id, <!-- -->
+			ut.user_id, <!-- 用户名称-->
+			ut.task_id, <!-- 任务id-->
+			ut.complete_num, <!-- 任务完成次数-->
+			ut.create_time as ut_create_time, <!-- 任务创建时间-->
+			ut.gold as ut_gold, <!-- 奖励金币-->
+			ut.completed_state, <!-- 任务完成的状态，0：未完成,1：已完成 ,2：已领取   默认0-->
+		</trim>
+	</sql>
+	<!-- 查询t_user_task分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap">
+		select  
+			<include refid="columnList"/>
+		from t_user_task 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="taskId != null and taskId != ''">
+				AND task_id=#{taskId}
+			</if>
+			<if test="completeNum != null and completeNum != ''">
+				AND complete_num=#{completeNum}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="gold != null and gold != ''">
+				AND gold=#{gold}
+			</if>
+			<if test="completedState != null and completedState != ''">
+				AND completed_state=#{completedState}
+			</if>
+		</trim>
+	</select>
+	<select id="queryUserTaskVoListByPg" parameterType="map" resultMap="userTaskVoResultMap">
+		select  
+			<include refid="userTaskVoColumnList"/>
+		from t_task t left join t_user_task ut on t.id = ut.task_id AND (ut.user_id=#{userId} or ut.user_id is null)
+			AND ((t.type=0 and (ut.create_time >= #{createTime} or ut.create_time is null)) or (type=1))
+		where t.state=0
+			<if test="taskType != null">
+				AND t.task_type=#{taskType}
+			</if>
+			<if test="completedState != null">
+				AND ut.completed_state=#{completedState}
+			</if>
+		order by ut.completed_state asc, t.type asc
+	</select>
+	<!-- 新增t_user_task -->
+	<insert id="insert"  parameterType="com.webside.user.task.entities.UserTask">
+		insert into t_user_task
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="userId != null">user_id,</if><!-- 用户名称-->
+		<if test="taskId != null">task_id,</if><!-- 任务id-->
+		<if test="completeNum != null">complete_num,</if><!-- 任务完成次数-->
+		<if test="createTime != null">create_time,</if><!-- 任务创建时间-->
+		<if test="gold != null">gold,</if><!-- 奖励金币-->
+		<if test="completedState != null">completed_state,</if><!-- 任务完成的状态，0：未完成,1：已完成 ,2：已领取   默认0-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="userId != null">#{userId},</if><!-- 用户名称-->
+		<if test="taskId != null">#{taskId},</if><!-- 任务id-->
+		<if test="completeNum != null">#{completeNum},</if><!-- 任务完成次数-->
+		<if test="createTime != null">#{createTime},</if><!-- 任务创建时间-->
+		<if test="gold != null">#{gold},</if><!-- 奖励金币-->
+		<if test="completedState != null">#{completedState},</if><!-- 任务完成的状态，0：未完成,1：已完成 ,2：已领取   默认0-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_user_task -->
+	<select id="findById" resultMap="resultMap" parameterType="String" >
+		select  
+			<include refid="columnList"/>
+		from t_user_task 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_user_task -->
+	<update id="update" parameterType="com.webside.user.task.entities.UserTask" >
+		update t_user_task
+		<set>
+			<trim suffixOverrides=",">
+				<if test="completeNum != null">complete_num=#{completeNum},</if><!-- 任务完成次数-->
+				<if test="gold != null">gold=#{gold},</if><!-- 奖励金币-->
+				<if test="completedState != null">completed_state=#{completedState},</if><!-- 任务完成的状态，0：未完成,1：已完成 ,2：已领取   默认0-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_user_task -->
+	<delete id="deleteBatchById" parameterType="list" >
+		delete from t_user_task  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_user_task -->
+	<delete id="deleteById" parameterType="String" >
+		delete from t_user_task 
+		where id = #{id}
+	</delete>
+</mapper>

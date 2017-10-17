@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>交易记录</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/inform.css">
+    <link rel="stylesheet" type="text/css" href="css/deal.css">
+    <link rel="stylesheet" type="text/css" href="css/exchange.css">
+    <link rel="stylesheet" type="text/css" href="css/fallback.css">
+    <link rel="stylesheet" type="text/css" href="css/ripples.min.css">
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_3r9wb1z2j32qpvi.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+    <script>
+        document.createElement('video');
+    </script>
+    <![endif]-->
+    
+    <style type="text/css">
+	body {height: 100%; background: #1e2124; padding:0; margin:0}
+	.header_l{ height:80px; background:#22252A; border-bottom:1px solid #000000;}
+	.header_logo{ width:1200px; margin:0 auto;}
+	.logo_l{ margin-top:20px; opacity:0.3; filter:alpha(opacity=30);}
+	.main_l{ width:1200px; margin:50px auto;}
+	.left_l{ width:240px;  float:left; background:#2F3239; padding:10px 0 10px 10px;}
+	.left_l ul,.right_l .content_l ul{ padding:0; margin:0; list-style:none;}
+	.left_l ul li{ line-height:30px;  margin:10px 0;}
+	.left_l ul li span{ display:inline-table; height:30px; }
+	.left_l ul li span.load_d{ background:#22252A; width:15px; height:15px; margin-top:5px}
+	.left_l ul li span.load_p{ background:#22252A; width:60px; height:10px;  vertical-align: middle; margin-bottom: 8px; margin-left: 10px;}
+	.right_l{ width:925px; float:right;}
+	.right_l .titel{ background:#2E3339; width:100px; height:10px; margin:0}
+	.right_l .content_l{ background:#2E3339; width:100%; margin-top:15px; padding:10px; }
+
+</style>
+
+</head>
+<body>
+
+<!--loading-->
+<div class="loading">
+         <div class="header_l">
+             <div class="header_logo">
+             <img src="images/LOGO_nobeta.png" class="logo" />
+             </div>
+         </div>
+         
+         <div class="main_l">
+              <div class="left_l">
+                 <ul>
+                    <li><span class="load_d"></span><span class="load_p"></span></li>
+                    <li><span class="load_d"></span><span class="load_p"></span></li>
+                    <li><span class="load_d"></span><span class="load_p"></span></li>
+                    <li><span class="load_d"></span><span class="load_p"></span></li>
+                    
+                 </ul>
+              </div>
+              <div class="right_l">
+                <p class="titel"></p>
+                
+                <div class="content_l left">
+                <ul>
+                    <li><span class="load_d"></span><span class="load_p" style="width:92%"></span></li>
+                    <li><span class="load_d"></span><span class="load_p" style="width:92%"></span></li>
+                   
+                    
+                 </ul>
+                </div>
+              </div>
+         </div>
+</div>
+<!--loading-->
+
+
+<div class="hide">
+<div class="bodyer"></div>
+<div class="container-fluid" style="margin:0; padding:0;">
+    <div id="inc_header"></div>
+    <!-- main -->
+    <div class="container c-informwrap">
+        <div class="pull-left c-informleft">
+            <div class="sidebar">
+                <ul>
+                    <li class="btn btn-block c-vnav"><a href="javascript:void(1)"><i class="iconfont icon-aboutme"></i>我的账户</a>
+                    </li>
+                    <li class="btn btn-block c-vnav"><a href="javascript:void(1)"><i class="iconfont icon-jingcai"></i>我的竞猜</a>
+                    </li>
+                    <li class="btn btn-block c-vnav"><a href="javascript:void(1)"><i class="iconfont icon-dizhi"></i>收货地址</a>
+                    </li>
+                    <li class="btn btn-block c-vnav"><a href="javascript:void(1)"><i class="iconfont icon-duihuan"></i>兑换</a>
+                    </li>
+                    <li class="btn btn-block c-vnav"><a href="javascript:void(1)"><i
+                            class="iconfont icon-jiaoyijilu"></i>交易记录</a></li>
+                    <li class="btn btn-block c-vnav"><a href="javascript:void(1)"><i
+                            class="iconfont icon-wodetongzhi"></i>我的通知</a></li>
+                    <li class="btn btn-block c-vnav"><a href="javascript:void(1)"><i class="iconfont icon-haoyou"></i>推荐好友</a>
+                    </li>
+                    <li class="btn btn-block c-vnav last"><a href="javascript:void(1)"><i class="iconfont icon-FAQ"></i>FAQS</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="c-informright pull-left">
+            <p class="ft-16 pt-5 pb-20">交易记录</p>
+
+            <div class="table-responsive" style="border: none;">
+                <table class="table">
+                    <thead class="ft-14">
+                    <tr>
+                        <th>交易时间</th>
+                        <th>类型</th>
+                        <th>金额</th>
+                        <th>信息</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><span>2016-09-09</span>&nbsp;&nbsp;<span>10&nbsp;:&nbsp;48</span></td>
+                        <td>竞猜</td>
+                        <td><span>-15</span>金币</td>
+                        <td>参与竞猜(7629852)</td>
+                    </tr>
+                    <tr>
+                        <td><span>2016-09-09</span>&nbsp;&nbsp;<span>10&nbsp;:&nbsp;48</span></td>
+                        <td>充值</td>
+                        <td><span>-15</span>金币</td>
+                        <td>参与竞猜(7629852)</td>
+                    </tr>
+                    <tr>
+                        <td><span>2016-09-09</span>&nbsp;&nbsp;<span>10&nbsp;:&nbsp;48</span></td>
+                        <td>竞猜</td>
+                        <td><span>-165</span>金币</td>
+                        <td>参与竞猜(7629852)</td>
+                    </tr>
+                    <tr>
+                        <td><span>2016-09-09</span>&nbsp;&nbsp;<span>10&nbsp;:&nbsp;48</span></td>
+                        <td>充值</td>
+                        <td><span>-165</span>金币</td>
+                        <td>参与竞猜(7629852)</td>
+                    </tr>
+                    <tr>
+                        <td><span>2016-09-09</span>&nbsp;&nbsp;<span>10&nbsp;:&nbsp;48</span></td>
+                        <td>竞猜</td>
+                        <td><span>+175</span>金币</td>
+                        <td>参与竞猜(7629852)</td>
+                    </tr>
+                    <tr>
+                        <td><span>2016-09-09</span>&nbsp;&nbsp;<span>10&nbsp;:&nbsp;48</span></td>
+                        <td>充值</td>
+                        <td><span>-15</span>金币</td>
+                        <td>参与竞猜(7629852)</td>
+                    </tr>
+                    <tr>
+                        <td><span>2016-09-09</span>&nbsp;&nbsp;<span>10&nbsp;:&nbsp;48</span></td>
+                        <td>充值</td>
+                        <td><span>-15</span>金币</td>
+                        <td>参与竞猜(7629852)</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ul class="pagination" id="pagination">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">&lt;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#" style="border:none;">...</a></li>
+                <li><a href="#">23</a></li>
+                <li><a href="#">&gt;</a></li>
+                <li><a href="#">尾页</a></li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    <div style='height: 250px;'>
+    </div>
+    <div id="inc_footer"></div>
+</div>
+
+</body>
+<script src="js/material.js"></script>
+<script src="js/ripples.min.js"></script>
+<script>
+    $.material.init();
+</script>
+<script>
+    $(function () {
+        //ajaxGetDate();
+        //异步加载头尾
+        $.get("header.html", function (data) {
+            $(data).appendTo("#inc_header");
+        }, "html");
+        $.get("footer.html", function (data) {
+            $(data).appendTo("#inc_footer");
+        }, "html");
+        // $.getScript("js/jquery.min.js");
+        // $.getScript("js/bootstrap.min.js");
+
+
+    });
+
+
+</script>
+<script src="js/siderbar.js"></script>
+
+<script type="text/javascript">
+window.onload=function(){
+	$(".hide").show();
+	$(".loading").hide();
+}
+</script>
+</html>
+
+				
+				
+				
+				
+				
+				

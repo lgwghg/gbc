@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.deposit.mapper.IUserDepositLogMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.user.deposit.entities.UserDepositLog">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="user_id" property="userId"/> <!-- 用户ID-->
+		<result column="order_name" property="orderName"/> <!-- 订单标题-->
+		<result column="type" property="type"/> <!-- 充值平台 1：支付宝，2：微信-->
+		<result column="order_no" property="orderNo"/> <!-- 交易订单编号-->
+		<result column="ud_gold" property="udGold"/> <!-- 充值金额-->
+		<result column="order_time" property="orderTime"/> <!-- 下单时间-->
+		<result column="pay_time" property="payTime"/> <!-- 支付时间-->
+		<result column="is_pay_success" property="isPaySuccess"/> <!-- 是否支付成功 1:是 0：否　，默认初始化未0-->
+		<result column="remarks" property="remarks"/>
+	</resultMap>
+	
+	<!-- t_user_deposit_log字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 唯一标识-->
+			user_id, <!-- 用户ID-->
+			order_name, <!-- 订单标题-->
+			type, <!-- 充值平台 1：支付宝，2：微信-->
+			order_no, <!-- 交易订单编号-->
+			ud_gold, <!-- 充值金额-->
+			order_time, <!-- 下单时间-->
+			pay_time, <!-- 支付时间-->
+			is_pay_success, <!-- 是否支付成功 1:是 0：否　，默认初始化未0-->
+			remarks,
+		</trim>
+	</sql>
+	
+	<!-- 查询t_user_deposit_log分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_deposit_log 
+		<where>  
+			<if test="id != null and id != ''">
+				AND id=#{id}
+			</if>
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="orderName != null and orderName != ''">
+				AND order_name=#{orderName}
+			</if>
+			<choose>
+				<when test="type != null and type != ''">
+					AND type=#{type}
+				</when>
+				<otherwise>
+					AND type != 0
+				</otherwise>
+			</choose>
+			<if test="orderNo != null and orderNo != ''">
+				AND order_no=#{orderNo}
+			</if>
+			<if test="udGold != null and udGold != ''">
+				AND ud_gold=#{udGold}
+			</if>
+			<if test="beginOrderTime != null and beginOrderTime != ''">
+				AND order_time &gt; #{beginOrderTime}
+			</if>
+			<if test="endOrderTime != null and endOrderTime != ''">
+				AND order_time &lt; #{endOrderTime}
+			</if>
+			<if test="payTime != null and payTime != ''">
+				AND pay_time=#{payTime}
+			</if>
+			<if test="isPaySuccess != null and isPaySuccess != ''">
+				AND is_pay_success=#{isPaySuccess}
+			</if>
+			<if test="remarks != null and remarks != ''">
+				AND remarks like concat('%',#{remarks},'%')
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增t_user_deposit_log -->
+	<insert id="insert" parameterType="com.webside.user.deposit.entities.UserDepositLog">
+		insert into t_user_deposit_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="userId != null">user_id,</if><!-- 用户ID-->
+		<if test="orderName != null">order_name,</if><!-- 订单标题-->
+		<if test="type != null">type,</if><!-- 充值平台 1：支付宝，2：微信-->
+		<if test="orderNo != null">order_no,</if><!-- 交易订单编号-->
+		<if test="udGold != null">ud_gold,</if><!-- 充值金额-->
+		<if test="orderTime != null">order_time,</if><!-- 下单时间-->
+		<if test="payTime != null">pay_time,</if><!-- 支付时间-->
+		<if test="isPaySuccess != null">is_pay_success,</if><!-- 是否支付成功 1:是 0：否　，默认初始化未0-->
+		<if test="remarks != null">remarks,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="userId != null">#{userId},</if><!-- 用户ID-->
+		<if test="orderName != null">#{orderName},</if><!-- 订单标题-->
+		<if test="type != null">#{type},</if><!-- 充值平台 1：支付宝，2：微信-->
+		<if test="orderNo != null">#{orderNo},</if><!-- 交易订单编号-->
+		<if test="udGold != null">#{udGold},</if><!-- 充值金额-->
+		<if test="orderTime != null">#{orderTime},</if><!-- 下单时间-->
+		<if test="payTime != null">#{payTime},</if><!-- 支付时间-->
+		<if test="isPaySuccess != null">#{isPaySuccess},</if><!-- 是否支付成功 1:是 0：否　，默认初始化未0-->
+		<if test="remarks != null">#{remarks},</if>
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_user_deposit_log -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_deposit_log 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_user_deposit_log -->
+	<update id="update" parameterType="com.webside.user.deposit.entities.UserDepositLog" flushCache="true">
+		update t_user_deposit_log
+		<set>
+			<trim suffixOverrides=",">
+				<if test="userId != null">user_id=#{userId},</if><!-- 用户ID-->
+				<if test="orderName != null">order_name=#{orderName},</if><!-- 订单标题-->
+				<if test="type != null">type=#{type},</if><!-- 充值平台 1：支付宝，2：微信-->
+				<if test="orderNo != null">order_no=#{orderNo},</if><!-- 交易订单编号-->
+				<if test="udGold != null">ud_gold=#{udGold},</if><!-- 充值金额-->
+				<if test="orderTime != null">order_time=#{orderTime},</if><!-- 下单时间-->
+				<if test="payTime != null">pay_time=#{payTime},</if><!-- 支付时间-->
+				<if test="isPaySuccess != null">is_pay_success=#{isPaySuccess},</if><!-- 是否支付成功 1:是 0：否　，默认初始化未0-->
+				<if test="remarks != null">remarks=#{remarks},</if>
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_user_deposit_log -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_user_deposit_log  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_user_deposit_log -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_user_deposit_log 
+		where id = #{id}
+	</delete>
+	
+	<!-- 任务调度执行清除15天前的未付款充值记录 -->
+	<delete id="executeClearLog" flushCache="true">
+		delete from t_user_deposit_log  
+		where is_pay_success = '0' and type != "0" and order_no is null and TO_DAYS(NOW()) - TO_DAYS(FROM_UNIXTIME(order_time/1000)) >15
+	</delete>
+	
+	<select id="getUserWdGold" parameterType="String" resultType="java.lang.String">
+		select SUM(t.UD_GOLD)*100 from t_user_deposit_log t 
+		where t.TYPE = 0
+		and t.USER_ID = #{userId}
+		and t.IS_PAY_SUCCESS = 0
+	</select>
+</mapper>

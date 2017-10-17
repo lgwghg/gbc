@@ -1,0 +1,24 @@
+@import url('global.css');
+@import url('font.css');
+
+.successful{ width:90%; margin:70px auto; text-align:center;}
+.successful h2,.successful h3,.successful h4 { font-weight:100;}
+.contact{ position:relative; width:90%; margin:100px auto 20px auto;  height:30px; border-top:1px solid #abadaf;  }
+
+.contact .txt{ width:50%; background:#2e3238; height:50px; margin:0 auto; text-align:center; position:absolute; left:25%; bottom:15px;  line-height:50px; font-size:25px; color:#B3B4B5;}
+.tel{ margin:0 auto; width:250px; text-align:left;color:#797C80}
+.tel p{ line-height:30px;}
+.wz:link{ color:#31c3a2;}
+.wx_font{color:#B3B4B5;}
+
+
+
+
+
+
+@media(max-width:479px){
+	.successful{ margin:30px auto;}
+	.mt60{ margin-top:20px;}
+	.contact{ margin:40px auto 20px auto;}
+	.wzz{ font-size:15px;}
+	}

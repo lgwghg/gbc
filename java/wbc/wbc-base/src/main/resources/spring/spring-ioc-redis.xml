@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:c="http://www.springframework.org/schema/c"
+	   xmlns:redis="http://www.springframework.org/schema/redis"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    					   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    					   http://www.springframework.org/schema/redis 
+    					   http://www.springframework.org/schema/redis/spring-redis-1.0.xsd"
+	   default-lazy-init="false">
+
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="${redis.maxIdle}" />
+		<property name="minIdle" value="${redis.minIdle}" />
+	</bean>
+
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg index="0" ref="jedisPoolConfig" />
+		<constructor-arg index="1" value="${redis.host}" type="java.lang.String"/>
+		<constructor-arg index="2" value="${redis.port}" type="int"/>
+		<constructor-arg index="3" value="${redis.timeout}" type="int" />
+		<!-- <constructor-arg index="4" value="${redis.password}" /> -->
+	</bean>
+	
+	<bean id="jedisManager" class="com.webside.shiro.cache.redis.JedisManager">
+		<property name="jedisPool" ref="jedisPool" />
+	</bean>
+	
+	<bean id="jedisShiroSessionRepository" class="com.webside.shiro.cache.redis.JedisShiroSessionRepository">
+		<property name="jedisManager" ref="jedisManager" />
+	</bean>
+	
+	<!-- 工厂实现： redisConnectionFactory-->
+	<bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
+		<property name="hostName" 	value="${redis.host}" />
+		<property name="port" 		value="${redis.port}" />
+		<property name="database"   value="${redis.database}" />
+		<property name="poolConfig" ref="jedisPoolConfig" />
+	</bean>
+	
+	<!-- 模板实现： -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="redisConnectionFactory" />
+		
+		<property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+		
+		<property name="valueSerializer" >
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+	</bean>
+	<!-- redis End -->
+	
+	<bean id="redisCache" class="com.webside.shiro.cache.redis.RedisCache">
+		<property name="redisTemplate" ref="redisTemplate" />
+		<property name="expire" value="${redis.expire}" />
+	</bean>
+	
+	<bean id="redisCacheManager" class="com.webside.shiro.cache.redis.ShiroRedisCacheManager">
+		<property name="cache" ref="redisCache" />
+	</bean>
+	
+	<bean id="messageListener" class="org.springframework.data.redis.listener.adapter.MessageListenerAdapter">
+        <property name="delegate" ref="messageDelegateListener" /> <!--这里的messageDelegateListener在后面的文件中注解的，这里对应的具体消息处理类的实现-->
+        <property name="serializer" ref="jdkSerializer" />
+    </bean> 
+ 
+    <!-- the default ConnectionFactory -->
+    <bean id="jdkSerializer" class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+ 
+    <redis:listener-container>
+        <!-- the method attribute can be skipped as the default method name is "handleMessage" -->
+        <redis:listener ref="messageListener" serializer="jdkSerializer" method="handleMessage" topic="console" />
+    </redis:listener-container>
+</beans>

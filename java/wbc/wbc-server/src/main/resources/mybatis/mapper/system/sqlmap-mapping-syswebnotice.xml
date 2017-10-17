@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.system.sn.mapper.ISysWebNoticeMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.system.sn.entities.SysWebNotice">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="code" property="code"/> <!-- 编码-->
+		<result column="title" property="title"/> <!-- 标题-->
+		<result column="content" property="content"/> <!-- 通知内容-->
+		<result column="add_time" property="addTime"/> <!-- 创建时间-->
+		<result column="sys_user_id" property="sysUserId"/> <!-- 添加人员-->
+		<result column="sys_user_name" property="sysUserName"/> <!-- 添加人员-->
+		<result column="type" property="type"/> <!-- 1.公告 2.更新 3.介绍 4.使用帮助 5.用户须知 6.反馈-->
+		<result column="sequence" property="sequence"/> <!-- 排序-->
+		<result column="status" property="status"/> <!-- 状态 1：有效 0 无效 默认1-->
+	</resultMap>
+	
+	<!-- t_sys_web_notice字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			t.id, <!-- 唯一标识-->
+			t.code, <!-- 编码 -->
+			t.title, <!-- 标题-->
+			t.content, <!-- 通知内容-->
+			t.add_time, <!-- 创建时间-->
+			t.sys_user_id, <!-- 添加人员-->
+			u.nick_name sys_user_name,
+			t.type, <!-- 1.公告 2.更新 3.介绍 4.使用帮助 5.用户须知 6.反馈-->
+			t.sequence, <!-- 排序-->
+			t.status, <!-- 状态 1：有效 0 无效 默认1-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_sys_web_notice分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_sys_web_notice t
+		left join tb_user u on u.u_id = t.sys_user_id
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="id != null and id != ''">
+				AND id=#{id}
+			</if>
+			<if test="code != null and code != ''">
+				AND code=#{code}
+			</if>
+			<if test="title != null and title != ''">
+				AND title like concat('%',#{title},'%')
+			</if>
+			<if test="content != null and content != ''">
+				AND content like concat('%',#{content},'%')
+			</if>
+			<if test="addTime != null and addTime != ''">
+				AND add_time=#{addTime}
+			</if>
+			<if test="sysUserId != null and sysUserId != ''">
+				AND sys_user_id=#{sysUserId}
+			</if>
+			<if test="type != null and type != ''">
+				AND type=#{type}
+			</if>
+			<if test="sequence != null and sequence != ''">
+				AND sequence=#{sequence}
+			</if>
+			<if test="status != null and status != ''">
+				AND status=#{status}
+			</if>
+			<if test="noStatus != null and noStatus != ''">
+				AND status != #{noStatus}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_sys_web_notice -->
+	<insert id="insert" parameterType="com.webside.system.sn.entities.SysWebNotice" flushCache="true">
+		insert into t_sys_web_notice
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		id,
+		<if test="code != null">code,</if><!-- 编码 -->
+		<if test="title != null">title,</if><!-- 标题-->
+		<if test="content != null">content,</if><!-- 通知内容-->
+		<if test="addTime != null">add_time,</if><!-- 创建时间-->
+		<if test="sysUserId != null">sys_user_id,</if><!-- 添加人员-->
+		<if test="type != null">type,</if><!-- 1.公告 2.更新 3.介绍 4.使用帮助 5.用户须知 6.反馈-->
+		<if test="sequence != null">sequence,</if><!-- 排序-->
+		<if test="status != null">status,</if><!-- 状态 1：有效 0 无效 默认1-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		#{id},
+		<if test="code != null">#{code},</if><!-- 编码 -->
+		<if test="title != null">#{title},</if><!-- 标题-->
+		<if test="content != null">#{content},</if><!-- 通知内容-->
+		<if test="addTime != null">#{addTime},</if><!-- 创建时间-->
+		<if test="sysUserId != null">#{sysUserId},</if><!-- 添加人员-->
+		<if test="type != null">#{type},</if><!-- 1.公告 2.更新 3.介绍 4.使用帮助 5.用户须知 6.反馈-->
+		<if test="sequence != null">#{sequence},</if><!-- 排序-->
+		<if test="status != null">#{status},</if><!-- 状态 1：有效 0 无效 默认1-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_sys_web_notice -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_sys_web_notice t
+		left join tb_user u on u.u_id = t.sys_user_id
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_sys_web_notice -->
+	<update id="update" parameterType="com.webside.system.sn.entities.SysWebNotice" flushCache="true">
+		update t_sys_web_notice
+		<set>
+			<trim suffixOverrides=",">
+				<if test="code != null">code=#{code},</if><!-- 编码 -->
+				<if test="title != null">title=#{title},</if><!-- 标题-->
+				<if test="content != null">content=#{content},</if><!-- 通知内容-->
+				<if test="addTime != null">add_time=#{addTime},</if><!-- 创建时间-->
+				<if test="sysUserId != null">sys_user_id=#{sysUserId},</if><!-- 添加人员-->
+				<if test="type != null">type=#{type},</if><!-- 1.公告 2.更新 3.介绍 4.使用帮助 5.用户须知 6.反馈-->
+				sequence=#{sequence},<!-- 排序-->
+				<if test="status != null">status=#{status},</if><!-- 状态 1：有效 0 无效 默认1-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_sys_web_notice -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_sys_web_notice  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_sys_web_notice -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_sys_web_notice 
+		where id = #{id}
+	</delete>
+</mapper>

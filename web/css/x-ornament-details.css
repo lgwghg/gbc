@@ -1,0 +1,143 @@
+.co-af{color: #afb0b2!important;}
+.co-31{color: #31c3a2!important;}
+.co-ff{color: #ffffff!important;}
+.ornament-left{padding: 0 5px 0 0;}
+.ornament-right{padding: 0 0 0 15px;}
+.ornament-left-explain{border-radius: 8px;overflow: hidden;}
+.ornament-left-title .view1{height: 42px;line-height: 42px;background-color: #22252a;}
+.ornament-left-title .view1 .one{display: inline-block;width: 10px;height: 10px;margin-left: 10px;background-color: #31C3A2;border-radius: 50%;}
+.ornament-left-title .view1 .two{color: #afb0b2;margin-left: 10px;}
+.ornament-left-explain .view1 .three,.ornament-left-explain .view1 .four{height: 32px;width: 122px;margin-right: 10px;float: right;line-height: 32px;margin-top: 5px;border: 0;border-radius: 16px;padding: 0;}
+.ornament-left-explain .view1 .three{color: #afb0b2;background-color: #3d4148;}
+.ornament-left-explain .view1 .three:hover,.ornament-left-explain .view1 .three:focus{color: #afb0b2;background-color: #444850!important;}
+.ornament-left-explain .view1 .four{color: #fff;background-color: #31C3A2;}
+.ornament-left-explain .view1 .four img{margin: 0 5px 2px 0;}
+.ornament-left-explain .view2{background-color: #2e3238;padding: 18px 20px;}
+.ornament-left-explain .view2 .two{color: #afb0b2;margin-top: 5px;}
+.ornament-left-screen{margin-top: 20px;height: 42px;line-height: 42px;position: relative;}
+.ornament-left-screen li{float: left;color:#afb0b2;margin-left: 10px;text-align: center;background-color: #22252a;border-radius: 8px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;cursor: pointer;}
+.ornament-left-screen li:first-child{margin-left: 0;}
+.ornament-left-screen .checked{color: #fff;background-color: #31C3A2;}
+.ornament-left-screen .view1{width: 160px;}
+.ornament-left-screen .view2{width: 110px;}
+.ornament-left-screen .view3{width: 65px;}
+.ornament-left-screen .view5{position: absolute;width: 100%;top:52px;left: 0;margin-left: 0;background-color: #2e3238;cursor: auto;z-index: 100;}
+.ornament-left-screen .view5 .one{position: absolute;color: #000;right: 10px;top: 15px;line-height: 0;cursor: pointer;}
+.ornament-left-screen .view5 .middle-search{width: 100%;position: relative;margin-top: 10px;}
+.ornament-left-screen .view5 .middle-search a{position: absolute;left: 370px;color: #fff;}
+.ornament-left-screen .view5 .two{overflow: hidden;padding: 0 28px 0 27px;margin-top: 20px;}
+.ornament-left-screen .view5 .two li{width: 100px;margin-left: 10px;margin-bottom: 10px;}
+.ornament-left-screen .view5 .two .checked{background-color: #31C3A2;color: #fff;}
+.ornament-left-screen .view5 .two li:nth-child(5n+1){margin-left: 0;}
+.ornament-left-screen .view5 .three{height: 45px;line-height: 45px;}
+.ornament-left-screen .view5 .three .pagination{margin: 10px 0;}
+.ornament-left-screen .view5 .three .pagination li{float: left;color: #afb0b2;margin-left: 0;text-align: center;background-color: transparent;border-radius: 8px;overflow: inherit;}
+.ornament-left-prize{margin-top: 20px;border-radius: 8px;overflow: hidden;}
+.ornament-left-prize .view2{padding: 20px 15px 0 15px;overflow: hidden;background-color: #2e3238;}
+.ornament-left-prize .view2 li{width: 85px;height: 85px;border:1px solid #31C3A2;border-radius: 8px;float: left;margin-left: 11px;margin-bottom: 20px;position: relative;}
+.ornament-left-prize .view2 li .delete-prize{position: absolute;width: 18px;height: 18px;top: 8px;right: 8px;cursor: pointer;}
+.ornament-left-prize .view2 li:nth-child(6n+1){margin-left: 0;}
+.ornament-left-prize .view2 .add-prize{background-color: #3d4148;border: 0;cursor: pointer;}
+.ornament-left-prize .view2 .add-prize img{margin-left:33.5px;margin-top: 33.5px;}
+.ornament-left-prize .view3{background-color: #2e3238;color: #afb0b2;padding: 0 0 0 15px;}
+.ornament-left-prize .view3 .two{border: 0;background-color: transparent;border-bottom: 1px solid #41494c;width: 70px;text-align: center;margin-left: 5px;}
+.ornament-left-prize .view3 .three{padding: 0;width: 65px;height: 32px;margin-left: 5px;}
+.ornament-left-prize .view3 .four{margin-left: 5px;}
+.ornament-left-participation{margin-top: 20px;border-radius: 8px;overflow: hidden;}
+.ornament-left-participation .view1 .three{color: #afb0b2;}
+.ornament-left-participation .view1 .four{float: right;margin: 5px 0;height: 32px;margin-right: 10px;width: 62px;padding: 0;}
+.ornament-left-participation .view2{background-color: #2e3238;color: #afb0b2;height: 135px;line-height: 135px;text-align: center;}
+.ornament-left-participation .view3{background-color: #2e3238;color: #afb0b2;overflow: hidden;padding:20px 22.5px 5px 22.5px;}
+.ornament-left-participation .view3 div{width: 60px;margin-left: 60px;float: left;margin-bottom: 15px;}
+.ornament-left-participation .view3 div:nth-child(5n+1){margin-left: 0;}
+.ornament-left-participation .view3 div img{width: 50px;height: 50px;border-radius: 50%;margin-left: 5px;}
+.ornament-left-participation .view3 div p{width: 60px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;text-align: center;}
+.ornament-personal-information{width: 585px;height: 220px;position: relative;overflow: hidden;}
+.ornament-personal-information .bg{width: 100%;height: 160px;top:60px;position: absolute;border-radius: 8px;}
+.ornament-personal-information .view1{overflow: hidden;position: relative;z-index: 1;}
+.ornament-personal-information .view1 .left{width: 120px;margin-left: 40px;float: left;}
+.ornament-personal-information .view1 .left img{width: 120px;height:120px;border-radius: 50%;}
+.ornament-personal-information .view1 .left span{margin-left: 29px;}
+.ornament-personal-information .view1 .right{margin-left: 20px;float: left;width: 405px;}
+.ornament-personal-information .view1 .right .one{margin-top: 30px;height: 30px;}
+.ornament-personal-information .view1 .right .one .first{color: #fff;font-size: 18px;display: inline-block;}
+.ornament-personal-information .view1 .right .one .second{display: inline-block;margin-left: 20px;}
+.ornament-personal-information .view1 .right .one .second span{width: 70px;height: 20px;line-height: 20px;color: #31C3A2;border:1px solid #31C3A2;border-radius: 10px;display: inline-block;text-align: center;margin-left: 10px;}
+.ornament-personal-information .view1 .right .one .second span:first-child{margin-left: 0;}
+.ornament-personal-information .view1 .right .two{color: #afb0b2;margin-top: 10px;}
+.ornament-personal-information .view2{width: 505px;margin-left: 40px;position: relative;z-index: 1;overflow: hidden;margin-top: 16px;}
+.ornament-personal-information .view2 li{width: 245px;height: 40px;text-align: center;float: left;border-radius: 20px;margin-bottom: 15px;cursor: pointer;}
+.ornament-personal-information .view2 li:nth-child(2n+1){border: 1px solid #31C3A2;color: #fff;}
+.ornament-personal-information .view2 li:nth-child(2n){background-color:#31C3A2;color: #fff;margin-left: 15px;}
+.ornament--right-room{border-radius: 8px;overflow: hidden;margin-top: 20px;}
+.ornament--right-room .view2{width: 100%;padding:0 10px;background-color: #2e3238;position: relative;}
+.ornament--right-room .view2 .rotate{width: 100%;height: 100%;position: absolute;left: 0;top: 0;}
+.ornament-left-participation-before{margin-top: 20px;}
+.ornament-left-participation-before .view1{background-color: #22252a;height: 42px;line-height: 42px;overflow: hidden;border-radius: 8px 8px 0 0;}
+.ornament-left-participation-before .view1 .three{color: #afb0b2;}
+.ornament-left-participation-before .view1 li{float: left;color: #afb0b2;padding: 0 35px;cursor: pointer;}
+.ornament-left-participation-before .view1 .checked{border-bottom: 3px solid #31C3A2;color: #31C3A2;height: 42px;}
+.ornament-left-participation-before .view2{background-color: #2e3238;padding: 20px 10px 0 10px;}
+.ornament-left-participation-before .view2 .title{background-color: #363e44;overflow: hidden;padding-left: 20px;height: 36px;line-height: 36px;}
+.ornament-left-participation-before .view2 .title div{float: left;color: #fff;}
+.ornament-left-participation-before .view2 .title .one{width: 180px;}
+.ornament-left-participation-before .view2 .title .two{width: 190px;padding-left: 10px;}
+.ornament-left-participation-before .view2 .title .three{width: 185px;}
+.ornament-left-participation-before .view2 .content{padding-left: 20px;border-bottom: 1px solid #42494e;line-height: 74px;}
+.ornament-left-participation-before .view2 .content:last-child{border-bottom: 0;}
+.ornament-left-participation-before .view2 .content .one,.ornament-left-participation-before .view2 .content .two,.ornament-left-participation-before .view2 .content .three{float: left;color: #afb0b2;}
+.ornament-left-participation-before .view2 .content .one{width: 180px;}
+.ornament-left-participation-before .view2 .content .two{width: 190px;}
+.ornament-left-participation-before .view2 .content .two img{width: 48px;height: 48px;border-radius: 50%;}
+.ornament-left-participation-before .view2 .content .two span{margin-left: 5px;}
+.ornament-left-participation-before .view2 .content .three{width: 185px;padding-top: 9.5px;}
+.ornament-left-participation-before .view2 .content .three li{width: 55px;height: 55px;float:left;margin-left: 10px;margin-bottom: 9.5px;position: relative;}
+.ornament-left-participation-before .view2 .content .three li .prize-img{width: 100%;height: 100%;vertical-align: top;border-radius: 8px;border: 1px solid #31C3A2;}
+.prize-message{position: absolute;left: 73px;top:-83px;width: 170px;border: 1px solid #31C3A2;border-radius: 8px;background-color: #2e3238;padding: 10px 10px 0 10px;z-index: 1;}
+.prize-message-img{width: 150px;height: 150px;}
+.prize-message-img2{position: absolute;left: -18px;top: 94px;}
+.prize-message-ms-one,.prize-message-ms-two{height: 20px;line-height: 20px;}
+.prize-message-ms-one{margin-top: 10px;}
+.prize-message-ms-two{margin-bottom: 10px;}
+.prize-message-ms-three{height: 40px;line-height: 40px;}
+.prize-message-ms-three .icon{background: #e4a713 none repeat scroll 0 0;border-radius: 50%;color: #363b42;display: inline-block;height: 20px;line-height: 20px;text-align: center;width: 20px;margin-right: 3px;font-weight: bold;}
+.ornament-left-participation-before .view2 .content .three li:nth-child(3n+1){margin-left: 0;}
+.ornament-left-participation-before .view3{background-color: #2e3238;text-align: center;border-radius: 0 0 8px 8px;}
+
+/*1*/
+.ornament-left-prize .view3 .five{margin: 0;padding: 0;}
+.ornament-left-prize .view3 .five label{color: #afb0b2;}
+.ornament-left-prize .view3 .five label:hover,.ornament-left-prize .view3 .five label:focus{color: #afb0b2;}
+.ornament-left-prize .view3 .five .checkbox-material{margin-right: 5px;}
+.ornament-left-prize .view3 .five .checkbox-material .check{border: 2px solid #afb0b2;}
+
+/*µ¯´°*/
+.myModalAdd .modal-body .view1{margin-top: 28px;}
+.myModalAdd .modal-body .view1 .one{width: 92px;float: left;height: 38px;line-height: 38px;}
+.myModalAdd .modal-body .view1 .form-group{width: 360px;float: left;margin: 0;padding: 0;}
+.myModalAdd .modal-body .view1 .form-group input{margin: 0;color: #fff;padding: 0 0 0 5px;text-align: left;}
+.myModalAdd .modal-body .view1 .form-group .help-block{font-size: 14px;color: #607D8B;margin-top: 15px;}
+.myModalAdd .modal-body .view1 .form-group ul{width: 100%;background-color: #2e3238;top: 38px;padding: 0;}
+.myModalAdd .modal-body .view1 .form-group ul li{width: 100%;background-color: #2e3238;color: #607d8b;padding: 0 0 0 5px;height: 28px;line-height: 28px;}
+.myModalAdd .modal-body .view1 .form-group ul li:hover{background-color: #31c3a2;color: #fff;}
+.myModalAdd .modal-body .view1-label{padding-left: 97px;color: #607D8B;margin-top: 15px;width: 100%;height: 21px;}
+.myModalAdd .modal-body .view1 .two{width: 360px;float: left;margin: 0;padding: 0;overflow: hidden;}
+.myModalAdd .modal-body .view1 .two li{width: 60px;margin-left: 15px;border-radius: 8px;overflow: hidden;float: left;margin-bottom: 15px;cursor: pointer;}
+.myModalAdd .modal-body .view1 .two .checked{border: 2px solid #31C3A2;}
+.myModalAdd .modal-body .view1 .two li img{width: 100%;height: 100%;}
+.myModalAdd .modal-body .view1 .two li:nth-child(5n+1){margin-left: 0;}
+.myModalAdd .modal-body .view2{margin-top: 25px;padding-bottom: 0;}
+.myModalAdd .modal-body .view2 .checkbox{margin-bottom: 0;}
+.myModalAdd .modal-body .view2 .checkbox-material{margin-right: 5px;}
+.myModalAdd .modal-body .view2 .checkbox-material .check{border: 2px solid #fff;}
+.myModalAdd .modal-body .view3{color: #607D8B;margin-top: 10px;}
+.myModalAdd .modal-body .view4{width: 100%;height: 42px;line-height: 42px;padding: 0;}
+
+
+
+
+
+
+
+
+

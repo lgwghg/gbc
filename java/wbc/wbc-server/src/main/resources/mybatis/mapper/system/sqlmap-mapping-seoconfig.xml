@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.system.seo.mapper.ISeoConfigMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.system.seo.entities.SeoConfig">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="keywords" property="keywords"/> <!-- keywords-->
+		<result column="description" property="description"/> <!-- description-->
+		<result column="title" property="title"/> <!-- title-->
+		<result column="type" property="type"/> <!-- 类别: 1通用 2首页 3主页 4对战列表 5对战详情 6个人主页-->
+		<result column="create_time" property="createTime"/> <!-- 创建时间-->
+		<result column="update_time" property="updateTime"/> <!-- 修改时间-->
+	</resultMap>
+	
+	<!-- t_seo_config字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 唯一标识-->
+			keywords, <!-- keywords-->
+			description, <!-- description-->
+			title, <!-- title-->
+			type, <!-- 类别: 1通用 2首页 3主页 4对战列表 5对战详情 6个人主页-->
+			create_time, <!-- 创建时间-->
+			update_time, <!-- 修改时间-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_seo_config分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_seo_config 
+		<where>
+			<if test="keywords != null and keywords != ''">
+				AND keywords like concat('%',#{keywords},'%')
+			</if>
+			<if test="description != null and description != ''">
+				AND description like concat('%',#{description},'%')
+			</if>
+			<if test="title != null and title != ''">
+				AND title like concat('%',#{title},'%')
+			</if>
+			<if test="type != null and type != ''">
+				AND type=#{type}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND update_time=#{updateTime}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增t_seo_config -->
+	<insert id="insert" 
+			keyProperty="id"
+			parameterType="com.webside.system.seo.entities.SeoConfig" flushCache="true">
+		insert into t_seo_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 主键-->
+		<if test="keywords != null">keywords,</if><!-- keywords-->
+		<if test="description != null">description,</if><!-- description-->
+		<if test="title != null">title,</if><!-- title-->
+		<if test="type != null">type,</if><!-- 类别: 1通用 2首页 3主页 4对战列表 5对战详情 6个人主页-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 主键-->
+		<if test="keywords != null">#{keywords},</if><!-- keywords-->
+		<if test="description != null">#{description},</if><!-- description-->
+		<if test="title != null">#{title},</if><!-- title-->
+		<if test="type != null">#{type},</if><!-- 类别: 1通用 2首页 3主页 4对战列表 5对战详情 6个人主页-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_seo_config -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_seo_config 
+		where id = #{id}
+	</select>
+	
+	<!-- 根据类型查询t_seo_config -->
+	<select id="findByType" resultType="int" parameterType="map" flushCache="false" useCache="true">
+		select  
+			count(1)
+		from t_seo_config 
+		<where>
+			AND type = #{type}
+			<if test="id != null and id != ''">
+				AND id != #{id}
+			</if>
+		</where>
+		
+	</select>
+	
+	<!-- 更新t_seo_config -->
+	<update id="update" parameterType="com.webside.system.seo.entities.SeoConfig" flushCache="true">
+		update t_seo_config
+		<set>
+			<trim suffixOverrides=",">
+				<if test="keywords != null">keywords=#{keywords},</if><!-- keywords-->
+				<if test="description != null">description=#{description},</if><!-- description-->
+				<if test="title != null">title=#{title},</if><!-- title-->
+				<if test="type != null">type=#{type},</if><!-- 类别: 1通用 2首页 3主页 4对战列表 5对战详情 6个人主页-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_seo_config -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_seo_config  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_seo_config -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_seo_config 
+		where id = #{id}
+	</delete>
+</mapper>

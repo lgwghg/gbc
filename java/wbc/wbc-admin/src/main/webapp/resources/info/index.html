@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no" />
+<meta name="format-detection" content="email=no" />
+<meta
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+    name="viewport">
+<title>晴天聊天室</title>
+<link rel="stylesheet"
+    href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="inc/css/sunny-chat.css">
+<link href="inc/font/iconfont.css" rel="stylesheet" />
+<script src="http://192.168.11.165:9090/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="container">
+        <form class="form-signin" action="#">
+            <div class="form-group">
+                <input id=sunny-nickname type="text"
+                    class="form-control input-lg" placeholder="请输入昵称"
+                    maxlength="10">
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="button">开始聊天</button>
+        </form>
+    </div>
+    <div id="sunny-chat-container">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed"
+                        data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Sunny Chat</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li id="sunny-show-name"><a href="#"></a></li>
+                        <li><a href="#" id="sunny-chat-logout">退出</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2 col-sm-offset-1 sidebar">
+                    <div class="title">在线用户</div>
+                    <ul class="nav user-list"></ul>
+                </div>
+                <div class="col-sm-8 col-sm-offset-3 main">
+                    <div class="title">
+                        聊天框 <i class="hi hi-qq"></i>
+                    </div>
+                    <div id="sunny-chat-info"></div>
+                    <div class="cbox-ats">
+                        <div class="expression">
+                            <a href="javascript:void(0);"
+                                id="sunny-chat-expression"><i
+                                class="hi hi-lg hi-xiaolian"></i></a>
+                        </div>
+                        <input type="text" class="form-control"
+                            id="sunny-chat-input" placeholder="有什么想要说的吗?"
+                            maxlength="100">
+                        <div class="send">
+                            <button id="sunny-chat-send" type="button"
+                                class="btn btn-success">
+                                发送&nbsp;<i class="hi hi-send"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="sunny-expression-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="inc/chat/js/sunny-chat.js"></script>
+<script src="inc/chat/js/expression.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $.SunnyExpression("#sunny-chat-expression");
+        $.SunnyChat();
+    });
+</script>
+</html>

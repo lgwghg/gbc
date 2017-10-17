@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.match.mapper.IGameEventMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.match.entities.GameEvent">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="game_id" property="gameId"/> <!-- 游戏ID-->
+		<result column="event_name" property="eventName"/> <!-- 赛事名称-->
+		<result column="event_img" property="eventImg"/> <!-- 赛事图片-->
+		<result column="start_time" property="startTime"/> <!-- 开始时间-->
+		<result column="end_time" property="endTime"/> <!-- 结束时间-->
+		<result column="ge_status" property="geStatus"/> <!-- 状态 1：开始 0：结束 默认1-->
+		<result column="create_user" property="createOperatorId"/> <!-- 创建人-->
+		<result column="create_time" property="createTime"/> <!-- 创建时间-->
+		<result column="update_user" property="updateOperatorId"/> <!-- 修改人-->
+		<result column="update_time" property="updateTime"/> <!-- 修改时间-->
+	</resultMap>
+	
+	<!-- t_game_event字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			a.id AS "id", <!-- 唯一标识-->
+			a.game_id AS "gameId", <!-- 游戏ID-->
+			g.game_name AS "gameName", <!-- 游戏名称-->
+			a.event_name AS "eventName", <!-- 赛事名称-->
+			a.event_img AS "eventImg", <!-- 赛事图片-->
+			a.start_time AS "startTime", <!-- 开始时间-->
+			a.end_time AS "endTime", <!-- 结束时间-->
+			a.ge_status AS "geStatus", <!-- 状态 1：开始 0：结束 默认1-->
+			a.create_user AS "createOperatorId", <!-- 创建人-->
+			c.nick_name AS "createOperatorName", <!-- 创建者昵称-->
+			a.create_time AS "createTime", <!-- 创建时间-->
+			a.update_user AS "updateOperatorId", <!-- 修改人-->
+			a.update_time AS "updateTime", <!-- 修改时间-->
+			u.nick_name AS "updateOperatorName", <!-- 修改人昵称-->
+		</trim>
+	</sql>
+	
+	<!-- t_game_event简字段列表-->
+	<sql id="columnList_j">
+		<trim suffixOverrides=",">
+			a.id AS "id", <!-- 唯一标识-->
+			a.game_id AS "gameId", <!-- 游戏ID-->
+			a.event_name AS "eventName", <!-- 赛事名称-->
+			a.event_img AS "eventImg", <!-- 赛事图片-->
+			a.start_time AS "startTime", <!-- 开始时间-->
+			a.end_time AS "endTime", <!-- 结束时间-->
+			a.ge_status AS "geStatus", <!-- 状态 1：开始 0：结束 默认1-->
+		</trim>
+	</sql>
+
+	<sql id="tableJoins">
+		LEFT JOIN tb_user c ON c.u_id = a.create_user
+		LEFT JOIN tb_user u ON u.u_id = a.update_user
+		LEFT JOIN t_game g ON g.id = a.game_id
+	</sql>
+	
+	<!-- 查询t_game_event分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.match.entities.GameEvent" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_game_event a
+		<include refid="tableJoins"/>
+		<where>  
+			<if test="gameId != null and gameId != ''">
+				AND a.game_id=#{gameId}
+			</if>
+			<if test="eventName != null and eventName != ''">
+				AND lower(a.event_name) like concat('%',lower(#{eventName}),'%')
+			</if>
+			<if test="startTime != null and startTime != ''">
+				AND a.start_time >= #{startTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND a.end_time &lt;= #{endTime}
+			</if>
+			<if test="geStatus != null and geStatus != ''">
+				AND a.ge_status=#{geStatus}
+			</if>
+			<if test="beginCreateTime != null and beginCreateTime != '' and (endCreateTime == null or endCreateTime == '')">
+				AND a.create_time >= #{beginCreateTime}
+			</if>
+			<if test="(beginCreateTime == null or beginCreateTime == '') and endCreateTime != null and endCreateTime != ''">
+				AND a.create_time &lt;= #{endCreateTime}
+			</if>
+			<if test="beginCreateTime != null and endCreateTime != null and beginCreateTime != '' and endCreateTime != ''">
+				AND a.create_time BETWEEN #{beginCreateTime} AND #{endCreateTime}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增t_game_event -->
+	<insert id="insert" 
+			keyProperty="id"
+			parameterType="com.webside.match.entities.GameEvent" flushCache="true">
+		insert into t_game_event
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 主键-->
+		<if test="gameId != null">game_id,</if><!-- 游戏ID-->
+		<if test="eventName != null">event_name,</if><!-- 赛事名称-->
+		<if test="eventImg != null">event_img,</if><!-- 赛事图片-->
+		<if test="startTime != null">start_time,</if><!-- 开始时间-->
+		<if test="endTime != null">end_time,</if><!-- 结束时间-->
+		<if test="geStatus != null">ge_status,</if><!-- 状态 1：开始 0：结束 默认1-->
+		<if test="createOperatorId != null">create_user,</if><!-- 创建人-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 主键-->
+		<if test="gameId != null">#{gameId},</if><!-- 游戏ID-->
+		<if test="eventName != null">#{eventName},</if><!-- 赛事名称-->
+		<if test="eventImg != null">#{eventImg},</if><!-- 赛事图片-->
+		<if test="startTime != null">#{startTime},</if><!-- 开始时间-->
+		<if test="endTime != null">#{endTime},</if><!-- 结束时间-->
+		<if test="geStatus != null">#{geStatus},</if><!-- 状态 1：开始 0：结束 默认1-->
+		<if test="createOperatorId != null">#{createOperatorId},</if><!-- 创建人-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_game_event -->
+	<select id="findById" resultType="com.webside.match.entities.GameEvent" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_game_event a
+		<include refid="tableJoins"/>
+		where a.id = #{id}
+	</select>
+	
+	<!-- 更新t_game_event -->
+	<update id="update" parameterType="com.webside.match.entities.GameEvent" flushCache="true">
+		update t_game_event
+		<set>
+			<trim suffixOverrides=",">
+				<if test="gameId != null">game_id=#{gameId},</if><!-- 游戏ID-->
+				<if test="eventName != null">event_name=#{eventName},</if><!-- 赛事名称-->
+				<if test="eventImg != null">event_img=#{eventImg},</if><!-- 赛事图片-->
+				<if test="startTime != null">start_time=#{startTime},</if><!-- 开始时间-->
+				<if test="endTime != null">end_time=#{endTime},</if><!-- 结束时间-->
+				<if test="geStatus != null">ge_status=#{geStatus},</if><!-- 状态 1：开始 0：结束 默认1-->
+				<if test="updateOperatorId != null">update_user=#{updateOperatorId},</if><!-- 修改人-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除t_game_event -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_game_event 
+		where id = #{id}
+	</delete>
+	
+	<!-- 根据名称查询赛事，如id不为空且需要排除id -->
+	<select id="findByEventName" resultType="int" parameterType="map" flushCache="false" useCache="true">
+		select  
+			count(1)
+		from t_game_event a
+		<where>
+			AND lower(a.event_name) = lower(#{eventName})
+			<if test="id != null and id != ''">
+				AND a.id != #{id}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 查询t_game_event简字段分页 -->
+	<select id="queryPartListByPage" parameterType="map" resultType="com.webside.match.entities.GameEvent" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList_j"/>
+		from t_game_event a
+		<where>  
+			<if test="gameId != null and gameId != ''">
+				AND a.game_id=#{gameId}
+			</if>
+			<if test="eventName != null and eventName != ''">
+				AND lower(a.event_name) like concat('%',lower(#{eventName}),'%')
+			</if>
+			<if test="startTime != null and startTime != ''">
+				AND a.start_time >= #{startTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND a.end_time &lt;= #{endTime}
+			</if>
+			<if test="nowTime != null and nowTime != ''">
+				AND a.end_time >= #{nowTime}
+			</if>
+			<if test="geStatus != null and geStatus != ''">
+				AND a.ge_status=#{geStatus}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 查询竞猜页面赛事列表分页 -->
+	<select id="gbGameEventList" parameterType="map" resultType="com.webside.match.entities.GameEvent" flushCache="false" useCache="true">
+		select  
+			cast(a.start_time/1000-unix_timestamp(now()) AS signed) as "distanceTime",
+			<include refid="columnList_j"/>
+		from t_game_event a
+		<where>  
+				AND a.end_time/1000>unix_timestamp(now())
+			<if test="gameId != null and gameId != ''">
+				AND a.game_id=#{gameId}
+			</if>
+			<if test="geStatus != null and geStatus != ''">
+				AND a.ge_status=#{geStatus}
+			</if>
+		</where>
+	</select>
+</mapper>

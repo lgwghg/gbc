@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.roll.mapper.IRollWinnerMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.roll.model.RollWinner">
+		<id column="id" property="id"/> <!-- 主键ID-->
+		<result column="user_id" property="userId"/> <!-- 获奖人员-->
+		<result column="pool_id" property="poolId"/> <!-- 奖品-->
+		<result column="num" property="num"/> <!-- 次数-->
+		<result column="win_time" property="winTime"/> <!-- 获奖时间-->
+		<result column="status" property="status"/> <!-- 状态-->
+	</resultMap>
+	
+	<!-- t_roll_winner字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 主键ID-->
+			user_id, <!-- 获奖人员-->
+			pool_id, <!-- 奖品-->
+			num, <!-- 次数-->
+			win_time, <!-- 获奖时间-->
+			status, <!-- 状态-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_roll_winner分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_roll_winner 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="poolId != null and poolId != ''">
+				AND pool_id=#{poolId}
+			</if>
+			<if test="num != null and num != ''">
+				AND num=#{num}
+			</if>
+			<if test="winTime != null and winTime != ''">
+				AND win_time=#{winTime}
+			</if>
+			<if test="status != null and status != ''">
+				AND status=#{status}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_roll_winner -->
+	<insert id="insert" parameterType="com.webside.roll.model.RollWinner" flushCache="true">
+		insert into t_roll_winner
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!--唯一主键-->
+		<if test="userId != null">user_id,</if><!-- 获奖人员-->
+		<if test="poolId != null">pool_id,</if><!-- 奖品-->
+		<if test="num != null">num,</if><!-- 次数-->
+		<if test="winTime != null">win_time,</if><!-- 获奖时间-->
+		<if test="status != null">status,</if><!-- 状态-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 唯一主键-->
+		<if test="userId != null">#{userId},</if><!-- 获奖人员-->
+		<if test="poolId != null">#{poolId},</if><!-- 奖品-->
+		<if test="num != null">#{num},</if><!-- 次数-->
+		<if test="winTime != null">#{winTime},</if><!-- 获奖时间-->
+		<if test="status != null">#{status},</if><!-- 状态-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_roll_winner -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_roll_winner 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_roll_winner -->
+	<update id="update" parameterType="com.webside.roll.model.RollWinner" flushCache="true">
+		update t_roll_winner
+		<set>
+			<trim suffixOverrides=",">
+				<if test="userId != null">user_id=#{userId},</if><!-- 获奖人员-->
+				<if test="poolId != null">pool_id=#{poolId},</if><!-- 奖品-->
+				<if test="num != null">num=#{num},</if><!-- 次数-->
+				<if test="winTime != null">win_time=#{winTime},</if><!-- 获奖时间-->
+				<if test="status != null">status=#{status},</if><!-- 状态-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_roll_winner -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_roll_winner  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_roll_winner -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_roll_winner 
+		where id = #{id}
+	</delete>
+	
+	<select id="getMaxRollNum" resultType="int" parameterType="String" flushCache="false" useCache="false">
+		SELECT IFNULL(max(t.NUM),0) FROM t_roll_winner t
+		LEFT JOIN t_roll_pool rp ON rp.ID = t.POOL_ID
+		WHERE rp.ROOM_ID = #{roomId}
+	</select>
+	
+	<!-- ============================================== 自定义vo ======================================================================================== -->
+	<sql id="columnWinnerListVo">
+		<trim suffixOverrides=",">
+			t.num,
+			rp.ROOM_ID AS "roomId",
+			t.USER_ID AS "winnerId",
+			u.NICK_NAME AS "winnerName",
+			t.WIN_TIME AS "winTime",
+			u.PHOTO AS "photo"
+		</trim>
+	</sql>
+	
+	<sql id="columnPoolListVo">
+		<trim suffixOverrides=",">
+			t.ID AS "id",
+		  	t.ROOM_ID AS "roomId",
+			t.GOLD AS "gold",
+			t.EXCHANGE_ID AS "exchangeId",
+			g.GOODS_NAME AS "goodsName",
+		</trim>
+	</sql>
+	
+	<resultMap id="rollWinnerVoResultMap" type="com.webside.roll.vo.RollWinnerVo">
+		<id property="num" column="num" />
+		<id property="roomId" column="roomId" />
+		<id property="winnerId" column="winnerId" />
+		<collection property="poolList" column="{num=num,roomId=roomId,winnerId=winnerId}" select="selectPoolList" />	<!-- 奖品 -->
+	</resultMap>
+	
+	<select id="selectPoolList" resultType="com.webside.roll.model.RollPool" flushCache="false" useCache="false">
+		SELECT <include refid="columnPoolListVo"/>
+		FROM t_roll_pool t
+		LEFT JOIN t_roll_winner rw on rw.POOL_ID = t.ID
+		LEFT JOIN t_user_exchange_log uel on uel.ID = t.EXCHANGE_ID
+		LEFT JOIN t_goods_stock gs on gs.ID = uel.STOCK_ID
+		LEFT JOIN t_goods g on g.ID = gs.GOODS_ID
+		WHERE t.room_id = #{roomId}
+		AND rw.USER_ID = #{winnerId}
+		AND rw.NUM = #{num}
+	</select>
+	
+	<select id="getRollWinnerListByPage" parameterType="map" resultMap="rollWinnerVoResultMap" flushCache="true" useCache="false">
+		SELECT DISTINCT <include refid="columnWinnerListVo"/>
+		FROM t_roll_winner t
+		LEFT JOIN t_roll_pool rp on rp.ID = t.POOL_ID
+		LEFT JOIN tb_user u ON u.u_id = t.USER_ID
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="userId != null and userId != ''">
+				AND t.user_id=#{userId}
+			</if>
+			<if test="poolId != null and poolId != ''">
+				AND t.pool_id=#{poolId}
+			</if>
+			<if test="status != null and status != ''">
+				AND t.status=#{status}
+			</if>
+			<if test="num != null and num != ''">
+				AND t.num=#{num}
+			</if>
+			<if test="roomId != null and roomId != ''">
+				AND rp.ROOM_ID = #{roomId}
+			</if>
+		</trim>
+	</select>
+</mapper>

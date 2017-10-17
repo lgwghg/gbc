@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.cdkey.mapper.ICdKeyMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.user.cdkey.entities.CdKey">
+		<id column="id" property="id"/> <!-- 主键-->
+		<result column="type" property="type"/> <!-- cdkey类型0：商品 1：G币 2：体验币-->
+		<result column="goods_id" property="goodsId"/> <!-- 商品id-->
+		<result column="gold" property="gold"/> <!-- G币值-->
+		<result column="cdkey_code" property="cdkeyCode"/> <!-- cdkey兑换码-->
+		<result column="state" property="state"/> <!-- 状态0：未兑换  1：已兑换  默认0-->
+		<result column="start_time" property="startTime"/> <!-- -->
+		<result column="end_time" property="endTime"/> <!-- -->
+		<result column="create_time" property="createTime"/> <!-- 生成时间-->
+		<result column="create_user_id" property="createUserId"/> <!-- 生成人id-->
+		<result column="exchange_time" property="exchangeTime"/> <!-- 兑换时间-->
+		<result column="exchange_user_id" property="exchangeUserId"/> <!-- 兑换人id-->
+	</resultMap>
+	
+	<!-- t_cd_key字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 主键-->
+			type, <!-- cdkey类型0：商品 1：G币 2：体验币-->
+			goods_id, <!-- 商品id-->
+			gold, <!-- G币值-->
+			cdkey_code, <!-- cdkey兑换码-->
+			state, <!-- 状态0：未兑换  1：已兑换  默认0-->
+			start_time, <!-- -->
+			end_time, <!-- -->
+			create_time, <!-- 生成时间-->
+			create_user_id, <!-- 生成人id-->
+			exchange_time, <!-- 兑换时间-->
+			exchange_user_id, <!-- 兑换人id-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_cd_key分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" >
+		select  
+			<include refid="columnList"/>
+		from t_cd_key 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="type != null and type != ''">
+				AND type=#{type}
+			</if>
+			<if test="goodsId != null and goodsId != ''">
+				AND goods_id=#{goodsId}
+			</if>
+			<if test="gold != null and gold != ''">
+				AND gold=#{gold}
+			</if>
+			<if test="cdkeyCode != null and cdkeyCode != ''">
+				AND cdkey_code=#{cdkeyCode}
+			</if>
+			<if test="state != null and state != ''">
+				AND state=#{state}
+			</if>
+			<if test="beginStartTime != null and beginStartTime != ''">
+				AND start_time >= #{beginStartTime}
+			</if>
+			<if test="endStartTime != null and endStartTime != ''">
+				AND start_time <![CDATA[ < ]]> #{endStartTime}
+			</if>
+			<if test="beginEndTime != null and beginEndTime != ''">
+				AND end_time >= #{beginEndTime}
+			</if>
+			<if test="endEndTime != null and endEndTime != ''">
+				AND end_time <![CDATA[ < ]]> #{endEndTime}
+			</if>
+			<if test="beginCreateTime != null and beginCreateTime != ''">
+				AND create_time >= #{beginCreateTime}
+			</if>
+			<if test="endCreateTime != null and endCreateTime != ''">
+				AND create_time <![CDATA[ < ]]> #{endCreateTime}
+			</if>
+			<if test="createUserId != null and createUserId != ''">
+				AND create_user_id=#{createUserId}
+			</if>
+			<if test="beginExchangeTime != null and beginExchangeTime != ''">
+				AND exchange_time >= #{beginExchangeTime}
+			</if>
+			<if test="endExchangeTime != null and endExchangeTime != ''">
+				AND exchange_time <![CDATA[ < ]]> #{endExchangeTime}
+			</if>
+			<if test="exchangeUserId != null and exchangeUserId != ''">
+				AND exchange_user_id=#{exchangeUserId}
+			</if>
+		</trim>
+	</select>
+	<!-- 新增t_cd_key -->
+	<insert id="insert" 
+			useGeneratedKeys="true" 
+			parameterType="com.webside.user.cdkey.entities.CdKey">
+		insert into t_cd_key
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="type != null">type,</if><!-- cdkey类型0：商品 1：G币 2：体验币-->
+		<if test="goodsId != null">goods_id,</if><!-- 商品id-->
+		<if test="gold != null">gold,</if><!-- G币值-->
+		<if test="cdkeyCode != null">cdkey_code,</if><!-- cdkey兑换码-->
+		<if test="state != null">state,</if><!-- 状态0：未兑换  1：已兑换  默认0-->
+		<if test="startTime != null">start_time,</if><!-- -->
+		<if test="endTime != null">end_time,</if><!-- -->
+		<if test="createTime != null">create_time,</if><!-- 生成时间-->
+		<if test="createUserId != null">create_user_id,</if><!-- 生成人id-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="type != null">#{type},</if><!-- cdkey类型0：商品 1：G币 2：体验币-->
+		<if test="goodsId != null">#{goodsId},</if><!-- 商品id-->
+		<if test="gold != null">#{gold},</if><!-- G币值-->
+		<if test="cdkeyCode != null">#{cdkeyCode},</if><!-- cdkey兑换码-->
+		<if test="state != null">#{state},</if><!-- 状态0：未兑换  1：已兑换  默认0-->
+		<if test="startTime != null">#{startTime},</if><!-- -->
+		<if test="endTime != null">#{endTime},</if><!-- -->
+		<if test="createTime != null">#{createTime},</if><!-- 生成时间-->
+		<if test="createUserId != null">#{createUserId},</if><!-- 生成人id-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_cd_key -->
+	<select id="findById" resultMap="resultMap" parameterType="String" >
+		select  
+			<include refid="columnList"/>
+		from t_cd_key 
+		where id = #{id}
+	</select>
+	<select id="queryCdkeyListByIds" resultMap="resultMap" parameterType="Map">
+		select  
+			<include refid="columnList"/>
+		from t_cd_key 
+		where id in <foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</select>
+	<!-- 更新t_cd_key -->
+	<update id="update" parameterType="com.webside.user.cdkey.entities.CdKey" >
+		update t_cd_key
+		<set>
+			<trim suffixOverrides=",">
+				<if test="type != null">type=#{type},</if><!-- cdkey类型0：商品 1：G币 2：体验币-->
+				<if test="goodsId != null">goods_id=#{goodsId},</if><!-- 商品id-->
+				<if test="gold != null">gold=#{gold},</if><!-- G币值-->
+				<if test="cdkeyCode != null">cdkey_code=#{cdkeyCode},</if><!-- cdkey兑换码-->
+				<if test="state != null">state=#{state},</if><!-- 状态0：未兑换  1：已兑换  默认0-->
+				<if test="startTime != null">start_time=#{startTime},</if><!-- -->
+				<if test="endTime != null">end_time=#{endTime},</if><!-- -->
+				<if test="exchangeTime != null">exchange_time=#{exchangeTime},</if><!-- 兑换时间-->
+				<if test="exchangeUserId != null">exchange_user_id=#{exchangeUserId},</if><!-- 兑换人id-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_cd_key -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_cd_key  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_cd_key -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_cd_key 
+		where id = #{id}
+	</delete>
+</mapper>

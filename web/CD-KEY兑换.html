@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>CD-KEY兑换</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
+		<link rel="stylesheet" type="text/css" href="css/fallback.css">
+		<link rel="stylesheet" type="text/css" href="css/ripples.min.css">
+		<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_7d5yvokkelgzaor.css">
+		<link rel="stylesheet" type="text/css" href="css/base.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css">
+		<link rel="stylesheet" type="text/css" href="css/inform.css">
+		<link rel="stylesheet" type="text/css" href="css/myaccount.css">
+		<link rel="stylesheet" type="text/css" href="css/cropper.min.css">
+		<link rel="stylesheet" type="text/css" href="css/sitelogo.css">
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/cropper.min.js"></script>
+		<script src="js/sitelogo.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+    
+    <style type="text/css">
+    	.text_sm,.text_sm a{ color: #31c3a2; margin-left: 10px;}
+    	
+    </style>
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+		<!--[if lt IE 9]>
+    <script>
+        document.createElement('video');
+    </script>
+    <![endif]-->
+
+	</head>
+
+	<body>
+		<div class="container-fluid" style="margin:0; padding:0;">
+			<div class="bodyer"></div>
+			<div id="inc_header"></div>
+			<!-- main -->
+			<div class="container c-informwrap" style="">
+				<div class="pull-left c-informleft">
+					
+					<iframe src="sideBar.html" style="width:100%;height:500px; border: none;"></iframe>
+				</div>
+				<div class="c-informright pull-left">
+				
+					<p class="ft-16 pt-5 pb-20">CDKEY兑换</p>
+					<div class="c-centerwrap" style="width: 100%; padding: 3px 10px 90px;">
+					<form action="" style="padding: 0 20px; width: 50%; margin: 20px auto;">
+            <div class="form-group label-floating mt-50">
+                <label class="control-label">输入CDKEY</label>
+                <input type="text" class="form-control text_input" style="text-align:left">
+                <span class="help-block" style="color: red;">CDKEY输入错误！</span>
+            </div>
+           
+        
+            <div class="form-group label-floating mt-50" style="width:60%;">
+                <label class="control-label">123456</label>
+                <input type="text" class="form-control text_input" style="text-align:left">
+                <span class="help-block">验证码错误</span>
+                <span id="countdown"  style="position: absolute; bottom:15px; right: 0px; ;padding: 0;padding: 0;"><img src="images/bxbx.jpg"></span>
+            </div>
+            
+            <div class="mt-20">
+             <button class="btn btn-primary btn-raised btn-sm">兑换</button>
+             <span><a href="javascript:;" class="text_sm">兑换记录</a></span>
+            </div>
+        </form>
+        
+         <div class="login-main-bottom" style="padding: 0 20px;">
+            <p class="mt-30">
+                <span>CDKEY兑换说明：</span>
+                
+            </p>
+            <p class="mt-5" style="color: #4e636e;">
+              1、无论兑换何种CDKEY，在CDKEY有效期内只能兑换成功一次。
+            </p>
+            
+             <p class="mt-5" style="color: #4e636e;">
+             2、各种非官方渠道获得的CD KEY都有可能无法兑换、兑换失败、兑换不到您想要的商品。请尽量避免在第三方渠道购买CD KEY。
+            </p>
+            
+            <p class="mt-5" style="color: #4e636e;">
+             3、如您使用的是“商品兑换CDKEY”，请在商品兑换记录查询商品情况。
+            </p>
+           
+        </div>
+					</div>
+					
+					
+
+					
+				
+				</div>
+
+			</div>
+			<div id="inc_footer" style=" position: fixed; bottom: 0; width: 100%;"></div>
+		</div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width:500px; background:#2E3238;">
+				<div class="modal-content" style="background:#2E3238">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+						<h4 class="modal-title link-white" id="myModalLabel">
+					<strong>金币充值</strong>
+				</h4>
+						<h5 class="link-white mt-20">充值金额</h5>
+					</div>
+					<div class="modal-body">
+						<div class="jingbi">
+							<ul>
+								<li>
+									<a href="javascript:;" class="btn btn-primary">10元</a><span>+ 10 金币</span></li>
+								<li>
+									<a href="javascript:;" class="btn btn-primary">20元</a><span>+ 10 金币</span></li>
+								<li>
+									<a href="javascript:;" class="btn btn-primary">50元</a><span>+ 10 金币</span></li>
+								<li>
+									<a href="javascript:;" class="last btn btn-primary">100元</a><span>+ 10 金币</span></li>
+								<li>
+									<a href="javascript:;" class="btn btn-primary">200元</a><span>+ 10 金币</span></li>
+								<li>
+									<a href="javascript:;" class="btn btn-primary">500元</a><span>+ 10 金币</span></li>
+								<li>
+									<a href="javascript:;" class="btn btn-primary">1000元</a><span>+ 10 金币</span></li>
+								<li><input type="text" class="form-control text_input" placeholder="30"><span>+ 30 金币</span></li>
+							</ul>
+						</div>
+
+						<p class="young mt-20">*充值金币后，您将可以使用金币进行竞猜。
+							<a href="javascript:;">如何竞猜？</a>
+						</p>
+
+						<p class="link-white mt-30">请选择支付方式</p>
+
+						<div class="mt-5 pos-r" style="width:60%;">
+							<div class="line_s"></div>
+							<label class="myradio-label">
+                            <span><img src="images/wx.png">微信支付</span>
+                            <input class="myradio-radio" type="radio" name="myradio-radio">
+                            <span class="myradio-radioInput"></span>
+                        </label>
+
+							<label class="myradio-label fr">
+                            <span><img src="images/zf.png">微信支付</span>
+                            <input class="myradio-radio" type="radio" name="myradio-radio">
+                            <span class="myradio-radioInput"></span>
+                        </label>
+
+							<p>
+			<button type="button" class="btn btn-primary btn-raised mt-25" style="width:105px">
+                     <strong>确认充值</strong>
+                     </button>
+							</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 模态框（Modal） -->
+	</body>
+	<script src="js/material.js"></script>
+	<script src="js/ripples.min.js"></script>
+	<script>
+		$.material.init();
+	</script>
+	<script>
+		$(function() {
+			$(".c-informgroup").click(function() {
+				$(this).children('.c-xiala').toggle().closest(".c-informgroup").siblings(".c-informgroup").children(".c-xiala").hide();
+			})
+		})
+		$(function() {
+			//ajaxGetDate();
+			//异步加载头尾
+			$.get("header.html", function(data) {
+				$(data).appendTo("#inc_header");
+			}, "html");
+			$.get("footer.html", function(data) {
+				$(data).appendTo("#inc_footer");
+			}, "html");
+			// $.getScript("js/jquery.min.js");
+			// $.getScript("js/bootstrap.min.js");
+	
+          
+        });
+	</script>
+	<script src="js/siderbar.js"></script>
+
+</html>

@@ -1,0 +1,412 @@
+.playdescription{
+	height: 98px;
+	border-radius: 8px;
+	background: #22252a;
+	padding: 15px 0 15px 20px;
+}
+.playdescription h2{
+	font-size: 14px;
+	font-weight: 800;
+	color: #ffffff;
+	margin-bottom: 10px;
+}
+.playdescription p{
+	margin: 5px 0;
+	color: #5a727e;
+}
+.rolladd{
+	display: inline-block;
+	width: 206px;
+	height: 42px;
+	line-height: 42px;
+	border-radius: 8px;
+	padding: 0;
+	font-weight: 800;
+}
+.createvent{
+	min-height: 208px;
+	border-radius: 8px;
+	background: #2e3238;
+	overflow: hidden;
+	padding-bottom: 5px;
+}
+.createvent header{
+	height: 42px;
+	line-height: 42px;
+	border-radius: 8px 8px 0 0;
+	background: #22252a;
+	color: #afb0b2;
+	padding: 0 12px;
+	margin-bottom: 5px;
+}
+.createvent .eventcard{
+	width: 228px;
+	height: 68px;
+	border-radius: 8px;
+	background: #3d4148;
+	float: left;
+	margin: 5px;
+	padding: 15px 20px;
+	color: #afb0b2;
+	position: relative;
+}
+.createvent .eventcard:hover{
+	background: #22252a;
+}
+.createvent .eventcard:hover i{
+	color: #31c3a2;
+}
+.eventcard p{
+	width: 158px;
+	height: 30px;
+	line-height: 16px;
+	margin-left: 30px;
+	margin-top: 2px;
+	position: relative;
+	padding-left: 15px;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	word-break: break-all;
+	overflow: hidden;
+}
+.eventcard i{
+	position: absolute;
+}
+.eventcard i:before{
+		font-size: 30px;
+		position: absolute;
+		left: 6px;
+		top: -4px;
+}
+.eventcard .icon-0100:before{
+		font-size: 25px;
+		font-weight: bold;
+}
+.rollroom article{
+	height: 1374px;
+	width: 902px;
+	border-radius: 8px; 
+	background: #2e3238;
+}
+article nav {
+	background: #22252a;
+	border-radius: 8px 8px 0 0;
+	text-align: left;
+}
+article nav a{
+	display: inline-block;
+	height: 42px;
+	line-height: 42px;
+	width: 150px;
+	text-align: center;
+	box-sizing: border-box;
+	color: #afb0b2;
+}
+article nav a:before{
+	content:"";
+	margin-right: 5px;
+}
+article nav a:hover{
+	border-bottom: 3px solid #31c3a2;
+
+}
+.rollroom aside{
+	height: 1374px;
+	width: 288px;
+}
+.searcher{
+	width: 194px;
+	height: 36px;
+	outline: none;
+}
+.personcard{
+	width: 274px;
+	height: 398px;
+	margin: 9px;
+	padding: 18px 1px 15px;
+	float: left;
+	background: url(../images/fangjianbg.png) center no-repeat;
+}
+.personcard:hover{
+	background: url(../images/fangjianbgborder.png) center no-repeat;
+}
+.personcard:hover .pcfooter .icon-eye{
+	background: #31c3a2;
+	color: #fff;
+}
+.pcheader{
+	width: 100%;
+	height: 114px;
+	text-align: center;
+	font-size: 0;
+}
+.pcheader span{
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+.name{
+	color: #afb0b2;
+	font-size: 14px;
+	margin: 5px 0;
+}
+.persondj{
+	display: inline-block;
+	box-sizing: border-box;
+	width: 68px;
+	height: 20px;
+	line-height: 18px;
+	border-radius: 10px;
+	font-size: 12px;
+	margin: 0 5px;
+	padding: 0;
+}
+.rollroom .persondj31{
+	border: 1px solid #31c3a2;
+	color: #31c3a2;
+}
+.rollroom .persondj115{
+	border: 1px solid #dba115;
+	color: #dba115;
+}
+.pccontent{
+	width: 100%;
+	height: 202px;
+	text-align: center;
+	font-size: 0;
+	border-bottom: 1px solid #373e42;
+}
+.imgwrap{
+	width: 100%;
+	height: 74px;
+	background: #2e3238;
+	padding: 10px 5px;
+	margin-bottom: 10px;
+}
+.imgwrap span{
+	display: inline-block;
+	width: 54px;
+	height: 54px;
+	border-radius: 5px;
+	border: 1px solid #31c3a2;
+	overflow: hidden;
+	margin: 0 5px;
+}
+.pccontent-item{
+	width: 200px;
+	height: 15px;
+	line-height: 15px;
+	font-size: 14px;
+	text-align: left;
+	margin-bottom: 10px;
+	color: #afb0b2;
+	position: relative;
+}
+.item-jianjie{
+	height: 30px;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	word-break: break-all;
+	overflow: hidden;
+}
+.pcitem-title{
+	font-size: 14px;
+	color: #afb0b2;
+	margin-bottom: 4px
+}
+.pcfooter{
+	text-align: center;
+}
+.pcfooter .icon-eye{
+	display: inline-block;
+	width: 142px;
+	height: 32px;
+	line-height: 32px;
+	background: #363b42;
+	border: 1px solid #31c3a2;
+	color:#31c3a2; 
+	border-radius: 50px;
+	padding: 0;
+}
+.icon-eye:before{
+	margin-right: 4px;
+	font-size: 15px;
+}
+.tuijiandb{
+	text-align: center;
+	width: 100%;
+	height: 542px;
+	border-radius: 8px;
+	background: #2e3238;
+}
+.dbheader{
+	height: 42px;
+	background: #22252a url(../images/adisecardbg.png) center no-repeat;
+	background-size: 100% 42px;
+	border-radius: 8px 8px 0 0;
+}
+.dbcontent ul{
+	width: 100%;
+	height: 502px;
+	padding: 10px 0px;
+}
+.dbcontent li{
+	height: 88px;
+	background: url(../images/dbperson.png) center no-repeat;
+	margin: 7px 0px;
+	padding: 5px 15px 10px 52px;
+	position: relative;
+	font-size: 0;
+}
+.c-roundpoint{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	position: absolute;
+	left: 33px;
+	top: 39px;
+}
+.dbcontent figure span{
+	display: inline-block;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+	position: absolute;
+	top: 20px;
+	left: 52px;
+}
+.dbcontent p{
+	text-align: left;
+	width: 162px;
+	font-size: 14px;
+	float: right;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #afb0b2;
+	margin: 2px 0;
+}
+.partyaward{
+	text-align: center;
+	width: 100%;
+	height: 672px;
+	border-radius: 8px;
+}
+.pwheader{
+	text-align: left;
+	height: 42px;
+	line-height: 42px;
+	border-radius: 8px 8px 0 0;
+	background: #22252a;
+	padding: 0 15px;
+	color: #afb0b2;
+}
+.pwcontent{
+	width: 100%;
+	height: 632px;
+	border-radius: 0 0 8px 8px;
+}
+.pwcontent li{
+	height: 126px;
+	padding: 10px 0;
+	background: #2e3238;
+}
+.pwcontent li:last-child{
+	border-radius: 0 0 8px 8px;
+}
+.pwcontent li:last-child .imgwrap{
+	background: none;
+}
+.pwcontent p{
+	margin: 5px 0;
+	color: #afb0b2;
+}
+.pwimgwrap{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	overflow: hidden; 
+	vertical-align: middle;
+}
+.awardname,.awardtime{
+	display: inline-block;
+	width: 45px;
+	line-height: 27px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	vertical-align: top;
+}
+.awardtime{
+	width: 60px;
+}
+.middle-search{position: absolute;top: 2px;right: 10px}
+.middle-search input{width: 194px;height: 36px;border: 0;background-color: #2e3238;border-radius: 20px;padding: 0 32px 0 10px;color: #fff;outline: none;}
+.icon-sousuo{position: absolute;width: 16px;height: 16px;right: 12px;top: -2px;color: #fff;}
+.roll-contentwrap{
+	font-size: 0;
+	margin-top: 30px;
+}
+.avatar{
+	display: inline-block;
+	vertical-align: top;
+	width: 70px;
+	height: 70px;
+	overflow: hidden;
+	border-radius: 50%;
+}
+.roll-content{
+	display: inline-block;
+	margin-left: 16px;
+}
+.r-title{
+	font-size: 0;
+	color: #fff;
+}
+.r-name{
+	font-size: 14px;
+	line-height: 18px;
+	margin-right: 9px;
+}
+.r-brand{
+	display: inline-block;
+	vertical-align: top;
+}
+.r-introduce{
+	font-size: 14px;
+	color: #fff;
+	max-width: 366px;
+	display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    word-break: break-all;
+    overflow: hidden;
+}
+.datefordt{
+	display: flex;
+}
+.dateson{
+	flex: 1;
+	position: relative;
+}
+.dateson:first-child{
+	margin-left: 66px;
+}
+.dateson:last-child{
+	margin-left: 20px;
+}
+.datesontext{
+	position: absolute;
+	top: 0;
+	left: -17px;
+}
+.fromwrap{
+	margin-bottom: 20px;
+}

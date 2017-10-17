@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.roll.mapper.IRollRoomMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.roll.model.RollRoom">
+		<id column="id" property="id"/> <!-- 主键ID-->
+		<result column="user_id" property="userId"/> <!-- 房主-->
+		<result column="start_time" property="startTime"/> <!-- 开始时间-->
+		<result column="end_time" property="endTime"/> <!-- 结束时间-->
+		<result column="room_url" property="roomUrl"/> <!-- 直播间-->
+		<result column="sina_url" property="sinaUrl"/> <!-- 新浪微博-->
+		<result column="qq_num" property="qqNum"/> <!-- QQ群-->
+		<result column="remarks" property="remarks"/> <!-- 活动说明-->
+		<result column="room_code" property="roomCode"/> <!-- 自定义房间号-->
+		<result column="status" property="status"/> <!-- 状态-->
+	</resultMap>
+	
+	<!-- t_roll_room字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 主键ID-->
+			user_id, <!-- 房主-->
+			start_time, <!-- 开始时间-->
+			end_time, <!-- 结束时间-->
+			room_url, <!-- 直播间-->
+			sina_url, <!-- 新浪微博-->
+			qq_num, <!-- QQ群-->
+			remarks, <!-- 活动说明-->
+			room_code, <!-- 自定义房间号-->
+			status, <!-- 状态-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_roll_room分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_roll_room 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="startTime != null and startTime != ''">
+				AND start_time=#{startTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND end_time=#{endTime}
+			</if>
+			<if test="roomUrl != null and roomUrl != ''">
+				AND room_url=#{roomUrl}
+			</if>
+			<if test="sinaUrl != null and sinaUrl != ''">
+				AND sina_url=#{sinaUrl}
+			</if>
+			<if test="qqNum != null and qqNum != ''">
+				AND qq_num=#{qqNum}
+			</if>
+			<if test="remarks != null and remarks != ''">
+				AND remarks=#{remarks}
+			</if>
+			<if test="roomCode != null and roomCode != ''">
+				AND room_code=#{roomCode}
+			</if>
+			<if test="status != null and status != ''">
+				AND status=#{status}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_roll_room -->
+	<insert id="insert" parameterType="com.webside.roll.model.RollRoom" flushCache="true">
+		insert into t_roll_room
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!--唯一主键-->
+		<if test="userId != null">user_id,</if><!-- 房主-->
+		<if test="startTime != null">start_time,</if><!-- 开始时间-->
+		<if test="endTime != null">end_time,</if><!-- 结束时间-->
+		<if test="roomUrl != null">room_url,</if><!-- 直播间-->
+		<if test="sinaUrl != null">sina_url,</if><!-- 新浪微博-->
+		<if test="qqNum != null">qq_num,</if><!-- QQ群-->
+		<if test="remarks != null">remarks,</if><!-- 活动说明-->
+		<if test="roomCode != null">room_code,</if><!-- 自定义房间号-->
+		<if test="status != null">status,</if><!-- 状态-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 唯一主键-->
+		<if test="userId != null">#{userId},</if><!-- 房主-->
+		<if test="startTime != null">#{startTime},</if><!-- 开始时间-->
+		<if test="endTime != null">#{endTime},</if><!-- 结束时间-->
+		<if test="roomUrl != null">#{roomUrl},</if><!-- 直播间-->
+		<if test="sinaUrl != null">#{sinaUrl},</if><!-- 新浪微博-->
+		<if test="qqNum != null">#{qqNum},</if><!-- QQ群-->
+		<if test="remarks != null">#{remarks},</if><!-- 活动说明-->
+		<if test="roomCode != null">#{roomCode},</if><!-- 自定义房间号-->
+		<if test="status != null">#{status},</if><!-- 状态-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_roll_room -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_roll_room 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_roll_room -->
+	<update id="update" parameterType="com.webside.roll.model.RollRoom" flushCache="true">
+		update t_roll_room
+		<set>
+			<trim suffixOverrides=",">
+				<if test="userId != null">user_id=#{userId},</if><!-- 房主-->
+				<if test="startTime != null">start_time=#{startTime},</if><!-- 开始时间-->
+				<if test="endTime != null">end_time=#{endTime},</if><!-- 结束时间-->
+				<if test="roomUrl != null">room_url=#{roomUrl},</if><!-- 直播间-->
+				<if test="sinaUrl != null">sina_url=#{sinaUrl},</if><!-- 新浪微博-->
+				<if test="qqNum != null">qq_num=#{qqNum},</if><!-- QQ群-->
+				<if test="remarks != null">remarks=#{remarks},</if><!-- 活动说明-->
+				<if test="roomCode != null">room_code=#{roomCode},</if><!-- 自定义房间号-->
+				<if test="status != null">status=#{status},</if><!-- 状态-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_roll_room -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_roll_room  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_roll_room -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_roll_room 
+		where id = #{id}
+	</delete>
+	
+	<!-- 获取roll了几次 -->
+	<select id="getRollNumByRoomId" resultType="int" parameterType="String" flushCache="false" useCache="false">
+		SELECT DISTINCT rw.NUM from t_roll_winner rw
+		LEFT JOIN t_roll_pool t on rw.POOL_ID = t.ID
+		WHERE t.ROOM_ID = #{roomId}
+		ORDER BY rw.NUM desc
+	</select>
+	
+	<select id="getIdForRollEnd" resultType="String" parameterType="long" flushCache="false" useCache="false">
+		SELECT DISTINCT t.ID FROM t_roll_room t
+		JOIN t_roll_pool rp on rp.ROOM_ID = t.ID
+		WHERE t.END_TIME &lt;= #{endTime}
+		AND NOT EXISTS (
+		  SELECT 1 FROM t_roll_winner rw where rw.POOL_ID = rp.ID
+		)
+	</select>
+	
+	<!-- ============================================== 自定义vo ======================================================================================== -->
+	<sql id="columnRoomListVo">
+		<trim suffixOverrides=",">
+			t.ID AS "id",
+  			t.ROOM_CODE AS "roomCode",
+			t.USER_ID AS "userId",
+			u.NICK_NAME AS "userName",
+			u.PHOTO AS "userPhoto",
+			u.SIGN AS "sign",
+			t.START_TIME AS "startTime",
+			t.END_TIME AS "endTime",
+			t.REMARKS AS "remarks",
+			t.ROOM_URL AS "roomUrl",
+			t.SINA_URL AS "sinaUrl",
+			t.QQ_NUM AS "qqNum",
+			t.`STATUS` AS "status",
+			COUNT(distinct rm.ID) count,
+			SUM(IFNULL(rp.GOLD,0)+IFNULL(uel.EXCHANGE_GOLD,0)) sum,
+			CASE WHEN t.END_TIME <![CDATA[<=]]> unix_timestamp(now()) * 1000 THEN 0 ELSE 1 END AS endState,
+		</trim>
+	</sql>
+	
+	<sql id="columnMemberListVo">
+		<trim suffixOverrides=",">
+			t.ID AS "id",
+		  	t.ROOM_ID AS "roomId",
+			t.USER_ID AS "memberId",
+			u.NICK_NAME AS "memberName",
+			u.PHOTO AS "photo"
+		</trim>
+	</sql>
+	
+	<resultMap id="rollRoomVoResultMap" type="com.webside.roll.vo.RollRoomVo">
+		<id property="id" column="id" />
+		<collection property="memberList" column="{id=id}" select="selectMemberList" />	<!-- 参与人员 -->
+	</resultMap>
+	
+	<select id="selectMemberList" resultType="com.webside.roll.vo.RollMemberVo" flushCache="false" useCache="false">
+		SELECT <include refid="columnMemberListVo"/>
+		FROM t_roll_member t
+		LEFT JOIN tb_user u ON u.u_id = t.USER_ID
+		WHERE t.room_id = #{id}
+	</select>
+	
+	<select id="getRollRoomListByPage" parameterType="map" resultMap="rollRoomVoResultMap" flushCache="false" useCache="false">
+		SELECT <include refid="columnRoomListVo"/>
+		FROM t_roll_room t
+		LEFT JOIN tb_user u ON u.u_id = t.USER_ID
+		LEFT JOIN t_roll_member rm on rm.ROOM_ID = t.ID
+		LEFT JOIN t_roll_pool rp on rp.ROOM_ID = t.ID
+		LEFT JOIN t_user_exchange_log uel on uel.ID = rp.EXCHANGE_ID
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="userId != null and userId != ''">
+				AND t.user_id=#{userId}
+			</if>
+			<if test="memberId != null and memberId != ''">
+				AND rm.user_id=#{memberId}
+			</if>
+			<if test="searchName != null and searchName != ''">
+				AND (u.nick_name like concat('%',#{searchName},'%') OR t.ROOM_CODE like concat('%',#{searchName},'%'))
+			</if>
+			<if test="startTime != null and startTime != ''">
+				AND t.start_time=#{startTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND t.end_time=#{endTime}
+			</if>
+			<if test="roomCode != null and roomCode != ''">
+				AND (t.room_code=#{roomCode} or t.id=#{roomCode})
+			</if>
+			<if test="status != null and status != ''">
+				AND t.status=#{status}
+			</if>
+			<if test="roomId != null and roomId != ''">
+				AND t.id=#{roomId}
+			</if>
+			<if test="id != null and id != ''">
+				AND t.id=#{id}
+			</if>
+			<if test="isOwner != null and isOwner != 'true'">
+				AND NOT EXISTS (
+					SELECT 1 FROM t_roll_winner rw where rw.POOL_ID = rp.ID
+				)
+				AND rp.ID IS NOT NULL
+			</if>
+		</trim>
+		GROUP BY t.ID,
+  			t.ROOM_CODE,
+			t.USER_ID,
+			u.NICK_NAME,
+			u.PHOTO,
+			u.SIGN ,
+			t.START_TIME,
+			t.END_TIME ,
+			t.REMARKS ,
+			t.ROOM_URL,
+			t.SINA_URL ,
+			t.QQ_NUM ,
+			t.`STATUS`
+	</select>
+	
+	<select id="getRollRoomListForHot" parameterType="map" resultType="com.webside.roll.vo.RollRoomVo" flushCache="false" useCache="false">
+		SELECT t.ID,t.ROOM_CODE AS "roomCode",t.REMARKS,u.NICK_NAME AS "userName",u.photo AS "userPhoto"
+			,SUM(IFNULL(rp.GOLD,0)+IFNULL(uel.EXCHANGE_GOLD,0)) sum
+		FROM t_roll_room t
+		LEFT JOIN tb_user u on u.u_id = t.USER_ID
+		LEFT JOIN t_roll_pool rp on rp.ROOM_ID = t.ID
+		LEFT JOIN t_user_exchange_log uel on uel.ID = rp.EXCHANGE_ID
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="userId != null and userId != ''">
+				AND t.user_id=#{userId}
+			</if>
+			AND t.END_TIME > #{currentTime}
+			AND NOT EXISTS (
+				SELECT 1 FROM t_roll_winner rw where rw.POOL_ID = rp.ID
+			)
+			AND rp.ID IS NOT NULL
+		</trim>
+		GROUP BY t.ID,t.ROOM_CODE,t.REMARKS,u.NICK_NAME,u.photo
+		ORDER BY sum desc
+	</select>
+</mapper>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.address.mapper.IAddressMapper">
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.address.entities.Address">
+		<result column="id" property="id"/> <!-- 主见-->
+		<result column="province_id" property="provinceId"/> <!-- 省份id-->
+		<result column="province_name" property="provinceName"/> <!-- 省份名称-->
+		<result column="city_id" property="cityId"/> <!-- 市id-->
+		<result column="city_name" property="cityName"/> <!-- 市名称-->
+		<result column="area_id" property="areaId"/> <!-- 区/县id-->
+		<result column="area_name" property="areaName"/> <!-- 区/县名称-->
+		<result column="zip" property="zip"/> <!-- 邮编-->
+		<result column="code" property="code"/> <!-- 区号-->
+		<result column="address_detail" property="addressDetail"/> <!-- 详细地址-->
+		<result column="user_id" property="userId"/> <!-- 用户id-->
+		<result column="receiver_name" property="receiverName"/> <!-- 收货人姓名-->
+		<result column="mobile" property="receiverMobile"/> <!-- -->
+		<result column="is_default" property="isDefault"/> <!-- 是否是默认地址 默认值：0； 0非默认，1默认-->
+		<result column="is_deleted" property="isDeleted"/> <!-- 是否删除 默认值0； 0是未删除，1是已删除-->
+		<result column="create_time" property="createTime"/> <!-- -->
+		<result column="update_time" property="updateTime"/> <!-- -->
+	</resultMap>
+	
+	<!-- address字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 主见-->
+			province_id, <!-- 省份id-->
+			province_name, <!-- 省份名称-->
+			city_id, <!-- 市id-->
+			city_name, <!-- 市名称-->
+			area_id, <!-- 区/县id-->
+			area_name, <!-- 区/县名称-->
+			zip, <!-- 邮编-->
+			code, <!-- 区号-->
+			address_detail, <!-- 详细地址-->
+			user_id, <!-- 用户id-->
+			receiver_name, <!-- 收货人姓名-->
+			mobile, <!-- -->
+			is_default, <!-- 是否是默认地址 默认值：0； 0非默认，1默认-->
+			is_deleted, <!-- 是否删除 默认值0； 0是未删除，1是已删除-->
+			create_time, <!-- -->
+			update_time, <!-- -->
+		</trim>
+	</sql>
+	
+	<!-- 查询address分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap">
+		select  
+			<include refid="columnList"/>
+		from t_sys_address
+		where is_deleted = 0
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+		<!-- <trim suffix="WHERE" suffixOverrides="AND | OR">  
+			<if test="provinceId != null and provinceId != ''">
+				AND province_id=#{provinceId}
+			</if>
+			<if test="cityId != null and cityId != ''">
+				AND city_id=#{cityId}
+			</if>
+			<if test="areaId != null and areaId != ''">
+				AND area_id=#{areaId}
+			</if>
+			<if test="addressDetail != null and addressDetail != ''">
+				AND address_detail=#{addressDetail}
+			</if>
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="receiverName != null and receiverName != ''">
+				AND receiver_name=#{receiverName}
+			</if>
+			<if test="mobile != null and mobile != ''">
+				AND mobile=#{mobile}
+			</if>
+			<if test="isDefault != null and isDefault != ''">
+				AND is_default=#{isDefault}
+			</if>
+			<if test="isDeleted != null and isDeleted != ''">
+				AND is_deleted=#{isDeleted}
+			</if>
+		</trim> -->
+	</select>
+	
+	<!-- 新增address -->
+	<insert id="insert" parameterType="com.webside.address.entities.Address">
+		insert into t_sys_address
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 主见-->
+		<if test="provinceId != null">province_id,</if><!-- 省份id-->
+		<if test="provinceName != null">province_name,</if><!-- 省份名称-->
+		<if test="cityId != null">city_id,</if><!-- 市id-->
+		<if test="cityName != null">city_name,</if><!-- 市名称-->
+		<if test="areaId != null">area_id,</if><!-- 区/县id-->
+		<if test="areaName != null">area_name,</if><!-- 区/县名称-->
+		<if test="zip != null">zip,</if><!-- 邮编-->
+		<if test="code != null">code,</if><!-- 区号-->
+		<if test="addressDetail != null">address_detail,</if><!-- 详细地址-->
+		<if test="userId != null">user_id,</if><!-- 用户id-->
+		<if test="receiverName != null">receiver_name,</if><!-- 收货人姓名-->
+		<if test="receiverMobile != null">mobile,</if><!-- -->
+		<if test="isDefault != null">is_default,</if><!-- 是否是默认地址 默认值：0； 0非默认，1默认-->
+		<if test="isDeleted != null">is_deleted,</if><!-- 是否删除 默认值0； 0是未删除，1是已删除-->
+		<if test="createTime != null">create_time,</if><!-- -->
+		<if test="updateTime != null">update_time,</if><!-- -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 主见-->
+		<if test="provinceId != null">#{provinceId},</if><!-- 省份id-->
+		<if test="provinceName != null">#{provinceName},</if><!-- 省份名称-->
+		<if test="cityId != null">#{cityId},</if><!-- 市id-->
+		<if test="cityName != null">#{cityName},</if><!-- 市名称-->
+		<if test="areaId != null">#{areaId},</if><!-- 区/县id-->
+		<if test="areaName != null">#{areaName},</if><!-- 区/县名称-->
+		<if test="zip != null">#{zip},</if><!-- 邮编-->
+		<if test="code != null">#{code},</if><!-- 区号-->
+		<if test="addressDetail != null">#{addressDetail},</if><!-- 详细地址-->
+		<if test="userId != null">#{userId},</if><!-- 用户id-->
+		<if test="receiverName != null">#{receiverName},</if><!-- 收货人姓名-->
+		<if test="receiverMobile != null">#{receiverMobile},</if><!-- -->
+		<if test="isDefault != null">#{isDefault},</if><!-- 是否是默认地址 默认值：0； 0非默认，1默认-->
+		<if test="isDeleted != null">#{isDeleted},</if><!-- 是否删除 默认值0； 0是未删除，1是已删除-->
+		<if test="createTime != null">#{createTime},</if><!-- -->
+		<if test="updateTime != null">#{updateTime},</if><!-- -->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询address -->
+	<select id="findById" resultMap="resultMap" parameterType="String" >
+		select  
+			<include refid="columnList"/>
+		from t_sys_address 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新address -->
+	<update id="update" parameterType="com.webside.address.entities.Address" >
+		update t_sys_address
+		<set>
+			<trim suffixOverrides=",">
+				<if test="provinceId != null">province_id=#{provinceId},</if><!-- 省份id-->
+				<if test="provinceName != null">province_name=#{provinceName},</if><!-- 省份名称-->
+				<if test="cityId != null">city_id=#{cityId},</if><!-- 市id-->
+				<if test="cityName != null">city_name=#{cityName},</if><!-- 市名称-->
+				<if test="areaId != null">area_id=#{areaId},</if><!-- 区/县id-->
+				<if test="areaName != null">area_name=#{areaName},</if><!-- 区/县名称-->
+				<if test="zip != null">zip=#{zip},</if><!-- 邮编-->
+				<if test="code != null">code=#{code},</if><!-- 区号-->
+				<if test="addressDetail != null">address_detail=#{addressDetail},</if><!-- 详细地址-->
+				<if test="receiverName != null">receiver_name=#{receiverName},</if><!-- 收货人姓名-->
+				<if test="receiverMobile != null">mobile=#{receiverMobile},</if><!-- -->
+				<if test="isDefault != null">is_default=#{isDefault},</if><!-- 是否是默认地址 默认值：0； 0非默认，1默认-->
+				<if test="isDeleted != null">is_deleted=#{isDeleted},</if><!-- 是否删除 默认值0； 0是未删除，1是已删除-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- -->
+			</trim>
+		</set>
+		where id = #{id} and user_id = #{userId}
+	</update>
+	
+	<!-- 根据ID列表删除address -->
+	<delete id="deleteBatchById" parameterType="list" >
+		delete from t_sys_address where id 
+		<foreach collection="addressIdList" item="addressId" open="(" close=")" separator=",">
+			#{addressId}
+		</foreach>
+	</delete>
+	
+	<!-- 根据ID删除address -->
+	<delete id="deleteById" parameterType="String" >
+		delete from t_sys_address where id = #{id}
+	</delete>
+	<!-- 查询所有的省份 -->
+	<select id="queryAllProvince" resultType="com.webside.address.entities.Province">
+		select id as id,
+		provinceid as provinceId,
+		province
+		from t_sys_province
+	</select>
+	<!-- 根据省份id查询城市 -->
+	<select id="queryCityByProvinceId" parameterType="String" resultType="com.webside.address.entities.City">
+		select id,
+			provinceid as provinceId,
+			cityid as cityId,
+			city
+			from t_sys_city
+		where provinceid = #{provinceId}
+	</select>
+	<!-- 根据城市id查询区、县 -->
+	<select id="queryAreaByCityId" parameterType="String" resultType="com.webside.address.entities.Area">
+		select id,
+			cityid as cityId,
+			areaid as areaId,
+			area
+			from t_sys_area
+		where cityid = #{cityId}
+	</select>
+	
+	<!-- 根据区、县 id查询邮编区号-->
+	<select id="queryZipcodeByAreaId" parameterType="String" resultType="com.webside.address.entities.Zipcode">
+		select id,
+			areaid as areaId,
+			zip,
+			code
+			from t_sys_zipcode
+		where areaid = #{areaId}
+	</select>
+	
+	<select id="findDefaultMyAddressByUserId" parameterType="String" resultMap="resultMap">
+		select  
+			<include refid="columnList"/>
+		from t_sys_address 
+		where user_id = #{userId} and is_deleted = 0
+		order by is_default desc, update_time desc
+		limit 1;
+	</select>
+	<select id="findAddressByUserIdAndId" parameterType="Map" resultMap="resultMap">
+		select  
+			<include refid="columnList"/>
+		from t_sys_address 
+		where user_id = #{userId} and id = #{id} and is_deleted = 0
+	</select>
+	
+	<update id="updateCancelDefaultAddress" parameterType="Map">
+		update t_sys_address
+		set is_default = 0, update_time = #{updateTime}
+		where user_id = #{userId} and is_default = 1 and is_deleted = 0
+	</update>
+	
+	<update id="updateSetDefaultAddress" parameterType="Map">
+		update t_sys_address
+		set is_default = 1, update_time = #{updateTime}
+		where id = #{id} and user_id = #{userId}  and is_default = 0 and is_deleted = 0
+	</update>
+	
+	<select id="queryUserAddressCount" parameterType="String" resultType="Integer">
+		select count(1) from t_sys_address where user_id = #{userId} and is_deleted = 0
+	</select>
+</mapper>

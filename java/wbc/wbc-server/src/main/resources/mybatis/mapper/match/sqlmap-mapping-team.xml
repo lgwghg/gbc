@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.match.mapper.ITeamMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.match.entities.Team">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="team_name" property="teamName"/> <!-- 团队名称-->
+		<result column="team_icon" property="teamIcon"/> <!-- 战队图标-->
+		<result column="team_dec" property="teamDec"/> <!-- 团队说明-->
+		<result column="team_status" property="teamStatus"/> <!-- 团队状态: 1:有效 0：无效 默认1-->
+		<result column="sort_num" property="sortNum"/> <!-- 排序-->
+		<result column="create_user" property="createOperatorId"/> <!-- 创建人-->
+		<result column="create_time" property="createTime"/> <!-- 创建时间-->
+		<result column="update_user" property="updateOperatorId"/> <!-- 修改人-->
+		<result column="update_time" property="updateTime"/> <!-- 修改时间-->
+	</resultMap>
+	
+	<!-- t_team字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			a.id AS "id", <!-- 唯一标识-->
+			a.team_name AS "teamName", <!-- 团队名称-->
+			a.team_icon AS "teamIcon", <!-- 战队图标-->
+			a.team_dec AS "teamDec", <!-- 团队说明-->
+			a.team_status AS "teamStatus", <!-- 团队状态: 1:有效 0：无效 默认1-->
+			a.sort_num AS "sortNum", <!-- 排序-->
+			a.create_user AS "createOperatorId", <!-- 创建人-->
+			c.nick_name AS "createOperatorName", <!-- 创建者昵称-->
+			a.create_time AS "createTime", <!-- 创建时间-->
+			a.update_user AS "updateOperatorId", <!-- 修改人-->
+			a.update_time AS "updateTime", <!-- 修改时间-->
+			u.nick_name AS "updateOperatorName", <!-- 修改人昵称-->
+		</trim>
+	</sql>
+	
+	<sql id="tableJoins">
+		LEFT JOIN tb_user c ON c.u_id = a.create_user
+		LEFT JOIN tb_user u ON u.u_id = a.update_user
+	</sql>
+		
+	<!-- 查询t_team分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.match.entities.Team" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_team a
+		<include refid="tableJoins"/>
+		<where>  
+			<if test="teamName != null and teamName != ''">
+				AND lower(a.team_name) like concat('%',lower(#{teamName}),'%')
+			</if>
+			<if test="teamStatus != null and teamStatus != ''">
+				AND team_status=#{teamStatus}
+			</if>
+			<if test="beginCreateTime != null and beginCreateTime != '' and (endCreateTime == null or endCreateTime == '')">
+				AND a.create_time >= #{beginCreateTime}
+			</if>
+			<if test="(beginCreateTime == null or beginCreateTime == '') and endCreateTime != null and endCreateTime != ''">
+				AND a.create_time &lt;= #{endCreateTime}
+			</if>
+			<if test="beginCreateTime != null and endCreateTime != null and beginCreateTime != '' and endCreateTime != ''">
+				AND a.create_time BETWEEN #{beginCreateTime} AND #{endCreateTime}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增t_team -->
+	<insert id="insert" 
+			keyProperty="id"
+			parameterType="com.webside.match.entities.Team" flushCache="true">
+		insert into t_team
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 主键-->
+		<if test="teamName != null">team_name,</if><!-- 团队名称-->
+		<if test="teamIcon != null">team_icon,</if><!-- 战队图标-->
+		<if test="teamDec != null">team_dec,</if><!-- 团队说明-->
+		<if test="teamStatus != null">team_status,</if><!-- 团队状态: 1:有效 0：无效 默认1-->
+		<if test="sortNum != null">sort_num,</if><!-- 排序-->
+		<if test="createOperatorId != null">create_user,</if><!-- 创建人-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 主键-->
+		<if test="teamName != null">#{teamName},</if><!-- 团队名称-->
+		<if test="teamIcon != null">#{teamIcon},</if><!-- 战队图标-->
+		<if test="teamDec != null">#{teamDec},</if><!-- 团队说明-->
+		<if test="teamStatus != null">#{teamStatus},</if><!-- 团队状态: 1:有效 0：无效 默认1-->
+		<if test="sortNum != null">#{sortNum},</if><!-- 排序-->
+		<if test="createOperatorId != null">#{createOperatorId},</if><!-- 创建人-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_team -->
+	<select id="findById" resultType="com.webside.match.entities.Team" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_team a
+		<include refid="tableJoins"/>
+		where a.id = #{id}
+	</select>
+	
+	<!-- 更新t_team -->
+	<update id="update" parameterType="com.webside.match.entities.Team" flushCache="true">
+		update t_team
+		<set>
+			<trim suffixOverrides=",">
+				<if test="teamName != null">team_name=#{teamName},</if><!-- 团队名称-->
+				<if test="teamIcon != null">team_icon=#{teamIcon},</if><!-- 战队图标-->
+				<if test="teamDec != null">team_dec=#{teamDec},</if><!-- 团队说明-->
+				<if test="teamStatus != null">team_status=#{teamStatus},</if><!-- 团队状态: 1:有效 0：无效 默认1-->
+				<if test="sortNum != null">sort_num=#{sortNum},</if><!-- 排序-->
+				<if test="updateOperatorId != null">update_user=#{updateOperatorId},</if><!-- 修改人-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除t_team -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_team 
+		where id = #{id}
+	</delete>
+	
+	<!-- 根据名称查询战队，如id不为空且需要排除id -->
+	<select id="findByTeamName" resultType="int" parameterType="map" flushCache="false" useCache="true">
+		select  
+			count(1)
+		from t_team a
+		<where>
+			AND lower(a.team_name) = lower(#{teamName})
+			<if test="id != null and id != ''">
+				AND a.id != #{id}
+			</if>
+		</where>
+	</select>
+</mapper>

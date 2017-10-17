@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.coinflip.mapper.ICoinflipRoomMapper">
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.coinflip.model.CoinflipRoom">
+		<id column="id" property="id"/> <!-- -->
+		<result column="random" property="random"/> <!-- 正方赢的几率(小于1大于0的随机数)-->
+		<result column="hash_key" property="key"/> <!-- key-->
+		<result column="hash_code" property="hashCode"/> <!-- 由random和key通过MD5加密获得的hash值-->
+		<result column="total_gold_num" property="totalGoldNum"/> <!-- 比赛下注总金币数-->
+		<result column="owner_gold_num" property="ownerGoldNum" />
+		<result column="password" property="password"/> <!-- 房间密码-->
+		<result column="status" property="status"/> <!-- 状态：0初始状态   1：已加入   2：未开奖  3：已开奖-->
+		<result column="create_time" property="createTime"/> <!-- 房间创建时间-->
+		<result column="update_time" property="updateTime"/> <!-- 更新时间-->
+		<result column="creator_id" property="creatorId"/> <!-- 创建人id-->
+		<result column="updator_id" property="updatorId"/> <!-- 更新人id-->
+		<result column="join_time" property="joinTime"/>
+		<result column="open_time" property="openTime"/>
+	</resultMap>
+	
+	<!-- t_coinflip_room字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- -->
+			random, <!-- 正方赢的几率(小于1大于0的随机数)-->
+			hash_key, <!-- key-->
+			hash_code, <!-- 由random和key通过MD5加密获得的hash值-->
+			total_gold_num, <!-- 比赛下注总金币数-->
+			owner_gold_num,
+			password, <!-- 房间密码-->
+			status, <!-- 状态：0初始状态   1：已加入   2：未开奖  3：已开奖-->
+			create_time, <!-- 房间创建时间-->
+			update_time, <!-- 更新时间-->
+			creator_id, <!-- 创建人id-->
+			updator_id, <!-- 更新人id-->
+			join_time,
+			open_time,
+		</trim>
+	</sql>
+	
+	<!-- 查询t_coinflip_room分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_coinflip_room 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="random != null and random != ''">
+				AND random=#{random}
+			</if>
+			<if test="key != null and key != ''">
+				AND hash_key=#{key}
+			</if>
+			<if test="hashCode != null and hashCode != ''">
+				AND hash_code=#{hashCode}
+			</if>
+			<if test="totalGoldNum != null and totalGoldNum != ''">
+				AND total_gold_num=#{totalGoldNum}
+			</if>
+			<if test="password != null and password != ''">
+				AND password=#{password}
+			</if>
+			<if test="status != null and status != ''">
+				AND status=#{status}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND update_time=#{updateTime}
+			</if>
+			<if test="creatorId != null and creatorId != ''">
+				AND creator_id=#{creatorId}
+			</if>
+			<if test="updatorId != null and updatorId != ''">
+				AND updator_id=#{updatorId}
+			</if>
+			<if test="beginCreateTime != null and beginCreateTime != ''">
+				 AND create_time >= #{beginCreateTime}
+			</if>
+			<if test="endCreateTime != null and endCreateTime != ''">
+				 AND create_time &lt;= #{endCreateTime}
+			</if>
+			<if test="beginOpenTime != null and beginOpenTime != ''">
+				 and open_time >= #{beginOpenTime}
+			</if>
+			<if test="endOpenTime != null and endOpenTime != ''">
+				 and open_time &lt;= #{endOpenTime}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_coinflip_room -->
+	<insert id="insert" 
+			parameterType="com.webside.coinflip.model.CoinflipRoom">
+		insert into t_coinflip_room
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="random != null">random,</if><!-- 正方赢的几率(小于1大于0的随机数)-->
+		<if test="key != null">hash_key,</if><!-- key-->
+		<if test="hashCode != null">hash_code,</if><!-- 由random和key通过MD5加密获得的hash值-->
+		<if test="ownerGoldNum">owner_gold_num,</if>
+		<if test="totalGoldNum != null">total_gold_num,</if><!-- 比赛下注总金币数-->
+		<if test="password != null">password,</if><!-- 房间密码-->
+		<if test="status != null">status,</if><!-- 状态：0初始状态   1：已加入   2：未开奖  3：已开奖-->
+		<if test="createTime != null">create_time,</if><!-- 房间创建时间-->
+		<if test="updateTime != null">update_time,</if><!-- 更新时间-->
+		<if test="creatorId != null">creator_id,</if><!-- 创建人id-->
+		<if test="updatorId != null">updator_id,</if><!-- 更新人id-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="random != null">#{random},</if><!-- 正方赢的几率(小于1大于0的随机数)-->
+		<if test="key != null">#{key},</if><!-- key-->
+		<if test="hashCode != null">#{hashCode},</if><!-- 由random和key通过MD5加密获得的hash值-->
+		<if test="ownerGoldNum != null">#{ownerGoldNum},</if>
+		<if test="totalGoldNum != null">#{totalGoldNum},</if><!-- 比赛下注总金币数-->
+		<if test="password != null">#{password},</if><!-- 房间密码-->
+		<if test="status != null">#{status},</if><!-- 状态：0初始状态   1：已加入   2：未开奖  3：已开奖  4:已关闭-->
+		<if test="createTime != null">#{createTime},</if><!-- 房间创建时间-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 更新时间-->
+		<if test="creatorId != null">#{creatorId},</if><!-- 创建人id-->
+		<if test="updatorId != null">#{updatorId},</if><!-- 更新人id-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_coinflip_room -->
+	<select id="findById" resultMap="resultMap" parameterType="String" >
+		select  
+			<include refid="columnList"/>
+		from t_coinflip_room 
+		where id = #{id}
+	</select>
+	
+	<select id="queryPlayingCoinflip" resultMap="resultMap">
+		select  
+			id, <!-- -->
+			hash_code, <!-- 由random和key通过MD5加密获得的hash值-->
+			owner_gold_num,
+			total_gold_num, <!-- 比赛下注总金币数-->
+			password, <!-- 房间密码-->
+			status, <!-- 状态：0初始状态   1：已加入   2：未开奖  3：已开奖  4:已取消-->
+			create_time, <!-- 房间创建时间-->
+			update_time, <!-- 更新时间-->
+			creator_id, <!-- 创建人id-->
+			updator_id, <!-- 更新人id-->
+			join_time,
+			open_time
+		from t_coinflip_room 
+		where status in (0,1,2)
+		order by owner_gold_num desc, create_time desc
+	</select>
+	<!-- 查询我创建和我参与的所有游戏 分页 -->
+	<select id="queryMyJoinListByPage" parameterType="Map" resultMap="resultMap">
+		select 
+			r.id, <!-- -->
+			r.random,
+			r.hash_key,
+			r.hash_code, <!-- 由random和key通过MD5加密获得的hash值-->
+			r.owner_gold_num,
+			r.total_gold_num, <!-- 比赛下注总金币数-->
+			r.password, <!-- 房间密码-->
+			r.status, <!-- 状态：0初始状态   1：已加入   2：未开奖  3：已开奖  4:已取消-->
+			r.create_time, <!-- 房间创建时间-->
+			r.update_time, <!-- 更新时间-->
+			r.creator_id, <!-- 创建人id-->
+			r.updator_id, <!-- 更新人id-->
+			r.join_time,
+			r.open_time
+		from t_coinflip_room r 
+		INNER JOIN (select u.room_id as room_id from t_coinflip_user u where u.user_id = #{userId} ) t on r.id = t.room_id
+		
+	</select>
+	<!-- 更新t_coinflip_room -->
+	<update id="updateById" parameterType="com.webside.coinflip.model.CoinflipRoom" flushCache="true">
+		update t_coinflip_room
+		<set>
+			<trim suffixOverrides=",">
+				<if test="totalGoldNum != null">total_gold_num=#{totalGoldNum},</if><!-- 比赛下注总金币数-->
+				<if test="status != null">status=#{status},</if><!-- 状态：0初始状态   1：已加入   2：未开奖  3：已开奖  4:已取消-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 更新时间-->
+				<if test="updatorId != null">updator_id=#{updatorId},</if><!-- 更新人id-->
+				<if test="joinTime != null">join_time=#{joinTime},</if>
+				<if test="openTime != null">open_time=#{openTime},</if>
+			</trim>
+		</set>
+		where id = #{id} and status in (0,1,2)
+	</update>
+	
+	<!-- 根据ID列表删除t_coinflip_room -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_coinflip_room  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_coinflip_room -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_coinflip_room 
+		where id = #{id}
+	</delete>
+	
+	<select id="queryOverdueGame" parameterType="Map" resultMap="resultMap">
+		select 
+		<include refid="columnList"/>
+		from t_coinflip_room
+		where (status in (0,1) and  create_time <![CDATA[ < ]]> #{time}) or (status = 2 and  update_time <![CDATA[ < ]]> #{time})
+	</select>
+	
+	<!-- 用户参与的游戏次数 -->
+	<select id="findGameCount" parameterType="Map" resultType="Integer">
+		select count(cu.id) from t_coinflip_user cu join t_coinflip_room cr on cu.room_id=cr.id where cu.user_id = #{userId} and cr.`status`=3
+		<if test="today != null and today == 'true'">
+		  and DATE_FORMAT(from_unixtime(cu.create_time/1000),'%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+		</if>
+	</select>
+	
+	<!-- 用户参与的金币总量 -->
+	<select id="findGoldNumSum" parameterType="Map" resultType="Long">
+		select sum(cu.gold_num) from t_coinflip_user cu join t_coinflip_room cr on cu.room_id=cr.id where cu.user_id = #{userId} and cr.`status`=3
+		<if test="today != null and today == 'true'">
+		   and DATE_FORMAT(from_unixtime(cu.create_time/1000),'%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+		</if>
+	</select>
+	
+	<!-- 用户参与的胜利次数 -->
+	<select id="findWinnerCount" parameterType="Map" resultType="Integer">
+		select count(cu.id) from t_coinflip_user cu join t_coinflip_room cr on cu.room_id=cr.id where cu.user_id = #{userId} and cr.`status`=3 and ((cr.random &lt;=0.5 and cu.is_coin_front = 1) or (cr.random>0.5 and cu.is_coin_front = 0))
+		<if test="today != null and today == 'true'">
+		   and DATE_FORMAT(from_unixtime(cu.create_time/1000),'%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+		</if>
+	</select>
+	
+	<!-- 用户参与的胜利时候下注的总量 -->
+	<select id="findWinnerGoldNumSum" parameterType="Map" resultType="Long">
+		select sum(cu.gold_num) from t_coinflip_user cu join t_coinflip_room cr on cu.room_id=cr.id where user_id = #{userId} and cr.`status`=3 and ((cr.random &lt;=0.5 and cu.is_coin_front = 1) or (cr.random>0.5 and cu.is_coin_front = 0))
+		<if test="today != null and today == 'true'">
+		    and DATE_FORMAT(from_unixtime(cu.create_time/1000),'%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+		</if>
+	</select>
+</mapper>

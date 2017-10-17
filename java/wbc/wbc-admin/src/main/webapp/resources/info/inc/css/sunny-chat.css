@@ -1,0 +1,197 @@
+@CHARSET "UTF-8";
+
+html {
+    min-height: 100%;
+    background: url("../img/bg.jpg") no-repeat;
+    background-size: cover;
+}
+
+body {
+    background: none;
+}
+
+.container .form-signin {
+    width: 300px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    margin-left: -150px;
+}
+
+#sunny-chat-container {
+    display: none;
+}
+
+#sunny-chat-container .navbar {
+    background: rgba(0, 0, 0, 0) linear-gradient(#555, #222) repeat scroll 0
+        0;
+}
+
+.container-fluid .title {
+    background: rgba(0, 0, 0, 0) linear-gradient(#555, #222) repeat scroll 0
+        0;
+    color: #fff;
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.sidebar {
+    display: none;
+}
+
+@media ( min-width : 768px) {
+    .sidebar {
+        position: absolute;
+        top: 100px;
+        z-index: 1000;
+        display: block;
+        background-color: #eee;
+        border-right: 1px solid #eee;
+        text-align: center;
+        padding: 0;
+        left: 0;
+    }
+}
+
+.user-list {
+    margin: 0px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+    max-height: 600px;
+}
+
+.user-list>li {
+    border-top: 1px solid #e3e3e3;
+    cursor: pointer;
+    line-height: 100%;
+    padding: 0.15em 1px;
+    background: rgba(0, 0, 0, 0) linear-gradient(#fff, #f1f1f1) repeat
+        scroll 0 0;
+}
+
+.main {
+    margin-top: 100px;
+    margin-bottom: 10px;
+}
+
+#sunny-chat-info {
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0 !important;
+    height: 500px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+#sunny-chat-info .msg-system {
+    text-align: center;
+}
+
+#sunny-chat-info .msg-system span {
+    background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
+    border-radius: 8px;
+    color: #eee;
+    display: inline-block;
+    font-size: 13px;
+    margin: 10px;
+    padding: 2px 8px;
+    text-align: center;
+}
+
+#sunny-chat-info .user-msg-container {
+    padding: 4px 8px;
+    margin-bottom: 10px;
+}
+
+#sunny-chat-info .user-nickname {
+    color: #fff;
+    padding: 4px;
+}
+
+#sunny-chat-info .user-msg {
+    background: rgba(0, 0, 0, 0) linear-gradient(#cf9, #9c3) repeat scroll 0
+        0;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px #000;
+    display: inline-block;
+    line-height: 1.4;
+    max-width: 50%;
+    min-height: 16px;
+    padding: 4px 10px;
+    word-break: break-all;
+    line-height: 20px;
+}
+
+.main .cbox-ats {
+    display: block;
+    padding: 0 4px;
+    height: 50px;
+    line-height: 50px;
+    background: rgba(0, 0, 0, 0) linear-gradient(#555, #222) repeat scroll 0
+        0;
+}
+
+.main  .expression {
+    display: inline-block;
+    padding: 0 6px;
+    font-size: 20px;
+    float: left;
+}
+
+.main  .expression a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.main  .send {
+    display: inline-block;
+    margin-right: 2px;
+    font-size: 16px;
+    float: right;
+}
+
+.main  button {
+    margin-bottom: 2px;
+}
+
+#sunny-chat-input {
+    margin-left: 4px;
+    width: 400px;
+    display: inline;
+}
+
+@media ( max-width : 840px) {
+    #sunny-chat-input {
+        width: 300px;
+    }
+}
+
+@media ( max-width : 470px) {
+    #sunny-chat-input {
+        width: 200px;
+    }
+}
+
+@media ( max-width : 360px) {
+    #sunny-chat-input {
+        width: 140px;
+    }
+}
+
+#sunny-expression-container {
+    display: none;
+    margin-top: 6px;
+}
+
+#sunny-expression-container span {
+    padding: 8px;
+    display: inline-block;
+    border: 1px solid #dedede;
+    border-collapse: collapse;
+    margin: 0 1px 1px 0;
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0 !important;
+    border-radius: 6px;
+}

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.transaction.mapper.IUserTransactionLogMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+<!-- 	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.user.transaction.entities.UserTransactionLog">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="user_id" property="userId"/> <!-- 用户ID-->
+		<result column="ut_type" property="utType"/> <!-- 交易类型 1:竞猜 2：充值 3:兑换 4:推荐好友奖励 5：用户签到 6：充值奖励 7:注册赠送 8:竞猜分享领取 9:提现-->
+		<result column="data_id" property="dataId"/> <!-- 业务ID-->
+		<result column="gold_num" property="goldNum"/> <!-- G币数量-->
+		<result column="gold_type" property="goldType"/> <!-- 货币类型，1金币 2G币-->
+		<result column="ut_time" property="utTime"/> <!-- 交易时间-->
+		<result column="remarks" property="remarks"/> <!-- 备注(信息)-->
+	</resultMap>
+	
+	<!-- t_user_transaction_log字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			utl.id AS  "id", <!-- 唯一标识-->
+			utl.user_id AS "userId", <!-- 用户ID-->
+			utl.ut_type AS "utType", <!-- 交易类型 1:竞猜 2：充值 3:兑换 4:推荐好友奖励 5：用户签到 6：充值奖励 7:注册赠送 8:竞猜分享领取 9:提现-->
+			utl.data_id AS "dataId", <!-- 业务ID-->
+			utl.gold_num AS "goldNum", <!-- G币数量-->
+			utl.gold_type AS "goldType", <!-- 货币类型，1金币 2G币-->
+			utl.ut_time AS "utTime", <!-- 交易时间-->
+			utl.remarks AS "remarks", <!-- 备注(信息)-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_user_transaction_log分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.user.transaction.entities.UserTransactionLog" >
+		select  
+			<include refid="columnList"/>
+		from t_user_transaction_log utl
+		<where>
+			<if test="userId != null and userId != ''">
+				AND utl.user_id=#{userId}
+			</if>
+			<if test="utType != null and utType != ''">
+				AND utl.ut_type=#{utType}
+			</if>
+			<if test="beginUtTime != null and beginUtTime != ''">
+				AND utl.ut_time &gt; #{beginUtTime}
+			</if>
+			<if test="endUtTime != null and endUtTime != ''">
+				AND utl.ut_time &lt; #{endUtTime}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findListForJc" parameterType="map" resultType="com.webside.user.transaction.entities.UserTransactionLog" >
+		select gb.END_TIME as 'utTime',utl.GOLD_NUM from t_user_jc t
+		JOIN t_user_transaction_log utl on utl.DATA_ID = t.ID
+		JOIN t_game_battle gb on gb.ID = t.GB_ID
+		where utl.UT_TYPE = 1
+		<if test="userId != null and userId != ''">
+			AND t.user_id=#{userId}
+		</if>
+		<if test="beginUtTime != null and beginUtTime != ''">
+			AND gb.END_TIME &gt; #{beginUtTime}
+		</if>
+		<if test="endUtTime != null and endUtTime != ''">
+			AND gb.END_TIME &lt; #{endUtTime}
+		</if>
+		order by gb.END_TIME
+	</select>
+	
+	<!-- 新增t_user_transaction_log -->
+	<insert id="insert" parameterType="com.webside.user.transaction.entities.UserTransactionLog">
+		insert into t_user_transaction_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 主键-->
+		<if test="userId != null">user_id,</if><!-- 用户ID-->
+		<if test="utType != null">ut_type,</if><!-- 交易类型 1:竞猜 2：充值 3:兑换 4:推荐好友奖励 5：用户签到 6：充值奖励 7:注册赠送 8:竞猜分享领取 9:提现-->
+		<if test="dataId != null">data_id,</if><!-- 业务ID-->
+		<if test="goldNum != null">gold_num,</if><!-- G币数量-->
+		<if test="goldType != null">gold_type,</if><!-- 货币类型，1金币 2G币-->
+		<if test="utTime != null">ut_time,</if><!-- 交易时间-->
+		<if test="remarks != null">remarks,</if><!-- 备注(信息)-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 主键-->
+		<if test="userId != null">#{userId},</if><!-- 用户ID-->
+		<if test="utType != null">#{utType},</if><!-- 交易类型 1:竞猜 2：充值 3:兑换 4:推荐好友奖励 5：用户签到 6：充值奖励 7:注册赠送 8:竞猜分享领取 9:提现-->
+		<if test="dataId != null">#{dataId},</if><!-- 业务ID-->
+		<if test="goldNum != null">#{goldNum},</if><!-- G币数量-->
+		<if test="goldType != null">#{goldType},</if><!-- 货币类型，1金币 2G币-->
+		<if test="utTime != null">#{utTime},</if><!-- 交易时间-->
+		<if test="remarks != null">#{remarks},</if><!-- 备注(信息)-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_user_transaction_log -->
+	<select id="findById" resultMap="resultMap" parameterType="String">
+		select  
+			<include refid="columnList"/>
+		from t_user_transaction_log utl
+		where utl.id = #{id}
+	</select>
+	
+	<!-- 更新t_user_transaction_log -->
+	<update id="update" parameterType="com.webside.user.transaction.entities.UserTransactionLog">
+		update t_user_transaction_log
+		<set>
+			<trim suffixOverrides=",">
+<!-- 				<if test="userId != null">user_id=#{userId},</if>用户ID -->
+				<if test="utType != null">ut_type=#{utType},</if><!-- 交易类型 1:竞猜 2：充值 3:兑换 4:推荐好友奖励 5：用户签到 6：充值奖励 7:注册赠送 8:竞猜分享领取 9:提现-->
+				<if test="dataId != null">data_id=#{dataId},</if><!-- 业务ID-->
+				<if test="goldNum != null">gold_num=#{goldNum},</if><!-- G币数量-->
+				<if test="goldType != null">gold_type=#{goldType},</if><!-- 货币类型，1金币 2G币-->
+				<if test="utTime != null">ut_time=#{utTime},</if><!-- 交易时间-->
+				<if test="remarks != null">remarks=#{remarks},</if><!-- 备注(信息)-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_user_transaction_log -->
+	<delete id="deleteBatchById" parameterType="list" >
+		delete from t_user_transaction_log  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+</mapper>

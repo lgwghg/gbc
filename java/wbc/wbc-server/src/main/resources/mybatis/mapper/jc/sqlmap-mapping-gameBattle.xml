@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.jc.mapper.IGameBattleMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+<!-- 	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+<!-- 	（1）当为select语句时： -->
+<!-- flushCache默认为false，表示任何时候语句被调用，都不会去清空本地缓存和二级缓存。 -->
+<!-- useCache默认为true，表示会将本条语句的结果进行二级缓存。 -->
+<!-- （2）当为insert、update、delete语句时： -->
+<!-- flushCache默认为true，表示任何时候语句被调用，都会导致本地缓存和二级缓存被清空。 -->
+
+	<sql id="columnInfoList">
+		<trim suffixOverrides=",">
+			g.id AS "id",
+			g.ge_id AS "geId",
+			g.game_id AS "gameId",
+			g.gb_name AS "gbName",
+			g.game_rule AS "gameRule",
+			g.home_team AS "homeTeam",
+			g.away_team AS "awayTeam",
+			g.start_time AS "startTime",
+			g.end_time AS "endTime",
+			g.gb_status AS "gbStatus",
+			g.video_url AS "videoUrl",
+			g.this_gb_profit AS "thisGbProfit",
+			g.home_prt_gold AS "homePrtGold",
+			g.away_prt_gold AS "awayPrtGold",
+			g.sid AS "sid",
+		</trim>
+	</sql>
+	
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			g.id AS "id",
+			g.ge_id AS "geId",
+			g.game_id AS "gameId",
+			g.gb_name AS "gbName",
+			g.game_rule AS "gameRule",
+			g.home_team AS "homeTeam",
+			g.away_team AS "awayTeam",
+			g.start_time AS "startTime",
+			g.end_time AS "endTime",
+			g.gb_status AS "gbStatus",
+			g.video_url AS "videoUrl",
+			g.create_user AS "createUser",
+			u1.nick_name AS "createUserName",
+			g.create_date AS "createDate",
+			g.update_user AS "updateUser",
+			u2.nick_name AS "updateUserName",
+			g.update_date AS "updateDate",
+			g.this_gb_profit AS "thisGbProfit",
+			g.home_prt_gold AS "homePrtGold",
+			g.away_prt_gold AS "awayPrtGold",
+			g.sid AS "sid",
+		</trim>
+	</sql>
+	
+	
+	
+	<sql id="tpcolumnList">
+		<trim suffixOverrides=",">
+			tp.id as tp_Id, <!-- 唯一标识-->
+			tp.gb_id as tp_gb_id, <!-- 比赛对战ID-->
+			tp.pankou_type as tp_pankou_type, <!-- 玩法类型 0：独赢 1：让分2：其他-->
+			tp.pk_name as tp_pk_name, <!-- 玩法名称-->
+			tp.pk_home_rule as tp_pk_home_rule, <!-- 比赛赔率（主战队）-->
+			tp.pk_away_rule as tp_pk_away_rule, <!-- 比赛赔率（副战队）-->
+			tp.pk_home_prt as tp_pk_home_prt, <!-- 参与人数（主战队）-->
+			tp.pk_away_prt as tp_pk_away_prt, <!-- 参与人数（副战队）-->
+			tp.this_pk_profit as tp_this_pk_profit, <!-- 当前比赛平台收益-->
+			tp.pk_home_prt_gold as tp_pk_home_prt_gold, <!-- 主战队下注金额-->
+			tp.pk_away_prt_gold as tp_pk_away_prt_gold, <!-- 副战队下注金额-->
+			tp.pk_victory as tp_pk_victory, <!-- 胜方战队ID-->
+			tp.pk_status as tp_pk_status, <!-- 0：正常 1：取消-->
+			tp.pk_start_time as tp_pk_start_time, <!-- 开始时间-->
+			tp.pk_end_time as tp_pk_end_time, <!-- 结束时间-->
+			tp.pk_rang_fen_team as tp_pk_rang_fen_team, <!-- 让分战队 1:主战队，2：客场战队-->
+			tp.pk_rangfen_num as tp_pk_rangfen_num, <!-- 让分数-->
+			tp.inning_num as tp_inning_num, <!-- 局数 根据比赛BO几， 如果比赛bo3，此选项为 1，2，3，  整场比赛盘口为0-->
+		</trim>
+	</sql>
+	
+	<!-- t_game_event字段列表-->
+	<sql id="gameEventColumnList">
+		<trim suffixOverrides=",">
+			a.id AS "id", <!-- 唯一标识-->
+			a.game_id AS "gameId", <!-- 游戏ID-->
+			g.game_name AS "gameName", <!-- 游戏名称-->
+			a.event_name AS "eventName", <!-- 赛事名称-->
+			a.event_img AS "eventImg", <!-- 赛事图片-->
+			a.start_time AS "startTime", <!-- 开始时间-->
+			a.end_time AS "endTime", <!-- 结束时间-->
+			a.ge_status AS "geStatus", <!-- 状态 1：开始 0：结束 默认1-->
+			a.create_user AS "createOperatorId", <!-- 创建人-->
+			c.nick_name AS "createOperatorName", <!-- 创建者昵称-->
+			a.create_time AS "createTime", <!-- 创建时间-->
+			a.update_user AS "updateOperatorId", <!-- 修改人-->
+			a.update_time AS "updateTime", <!-- 修改时间-->
+			u.nick_name AS "updateOperatorName", <!-- 修改人昵称-->
+		</trim>
+	</sql>
+	
+	<!-- t_game全字段列表-->
+	<sql id="gameColumnList">
+		<trim suffixOverrides=",">
+			a.id AS "id", <!-- 唯一标识-->
+			a.game_name AS "gameName", <!-- 游戏名称-->
+			a.big_img AS "bigImg", <!-- 大图片-->
+			a.little_img AS "littleImg", <!-- 小图片-->
+			a.bg_img AS "bgImg", <!-- 背景图片-->
+			a.sort_num AS "sortNum", <!-- 排序-->
+			a.game_status AS "gameStatus", <!-- 游戏状态   默认值1    0：无效 1 有效-->
+			a.english_name AS "englishName", <!-- 英文简称-->
+			a.user_id AS "createOperatorId", <!-- 创建者-->
+			c.nick_name AS "createOperatorName", <!-- 创建者昵称-->
+			a.create_time AS "createTime", <!-- 添加时间-->
+			a.update_time AS "updateTime", <!-- 修改时间-->
+			a.update_operator_id AS "updateOperatorId", <!-- 修改人-->
+			u.nick_name AS "updateOperatorName", <!-- 修改人昵称-->
+		</trim>
+	</sql>
+	
+	<!-- t_team字段列表-->
+	<sql id="teamColumnList">
+		<trim suffixOverrides=",">
+			a.id AS "id", <!-- 唯一标识-->
+			a.team_name AS "teamName", <!-- 团队名称-->
+			a.team_icon AS "teamIcon", <!-- 战队图标-->
+			a.team_dec AS "teamDec", <!-- 团队说明-->
+			a.team_status AS "teamStatus", <!-- 团队状态: 1:有效 0：无效 默认1-->
+			a.sort_num AS "sortNum", <!-- 排序-->
+			a.create_user AS "createOperatorId", <!-- 创建人-->
+			c.nick_name AS "createOperatorName", <!-- 创建者昵称-->
+			a.create_time AS "createTime", <!-- 创建时间-->
+			a.update_user AS "updateOperatorId", <!-- 修改人-->
+			a.update_time AS "updateTime", <!-- 修改时间-->
+			u.nick_name AS "updateOperatorName", <!-- 修改人昵称-->
+		</trim>
+	</sql>
+	
+	<!-- t_user_jc字段列表-->
+	<sql id="userJccolumnList">
+		<trim suffixOverrides=",">
+			uj.id AS "id", 							  		 <!-- 唯一标识-->
+			uj.user_id AS "userId", 						 <!-- 用户ID-->
+			uj.gb_id AS "gbId",								 <!-- 比赛对战ID-->
+			uj.pankou_id AS "pankouId",						 <!-- 盘口ID-->
+			uj.jc_gold AS "jcGold", 						 <!-- 竞猜G币-->
+			uj.jc_team_type AS "jcTeamType",				 <!-- 竞猜战队分类 1:主战队，2：客场战队-->
+			uj.game_result AS "gameResult", 				 <!-- 比赛结果 默认2     0:输 1：赢  2 ：进行中 3：已取消-->
+			uj.victory_gold_num AS "victoryGoldNum", 		 <!-- 用户赢得G币数量-->
+			uj.jc_time AS "jcTime",							 <!-- 竞猜时间-->
+		</trim>
+	</sql>
+	
+	<sql id="teamJoins">
+		LEFT JOIN tb_user c ON c.u_id = a.create_user
+		LEFT JOIN tb_user u ON u.u_id = a.update_user
+	</sql>
+	
+	
+	<sql id="gameBattleJoins">
+		LEFT JOIN tb_user u1 ON u1.u_id = g.create_user
+		LEFT JOIN tb_user u2 ON u2.u_id = g.update_user
+		LEFT JOIN T_TEAM  t  on t.id = g.home_team
+		LEFT JOIN T_TEAM  t1 on t1.id = g.away_team
+	</sql>
+	
+	<sql id="gameEventJoins">
+		LEFT JOIN tb_user c ON c.u_id = a.create_user
+		LEFT JOIN tb_user u ON u.u_id = a.update_user
+		LEFT JOIN t_game g ON g.id = a.game_id
+	</sql>
+	
+	<sql id="gameJoins">
+		LEFT JOIN tb_user c ON c.u_id = a.user_id
+		LEFT JOIN tb_user u ON u.u_id = a.update_operator_id
+	</sql>
+	
+	
+	<!--lwh：排序规则，未开始比赛，时间小的排前面，然后再是进行中，已结束，已取消的排序，其中后面三种状态时间大的排前面0未开始，1进行中，2已结束，3已取消-->
+	<select id="queryGbDetailsListByPage" parameterType="map" resultMap="gameBattleVoResultMap">
+		SELECT DISTINCT 
+			ntb.id,
+			ntb.geId,
+			ntb.gameId,
+			ntb.gbName,
+			ntb.gameRule,
+			ntb.homeTeam,
+			ntb.awayTeam,
+			ntb.startTime,
+			ntb.endTime,
+			ntb.gbStatus,
+			ntb.videoUrl,
+			ntb.createUser,
+			ntb.createUserName,
+			ntb.createDate,
+			ntb.updateUser,
+			ntb.updateUserName,
+			ntb.updateDate,
+			ntb.thisGbProfit,
+			ntb.homePrtGold,
+			ntb.awayPrtGold,
+			ntb.currentUser,
+			ntb.sid
+		from (
+			SELECT
+			CASE
+			WHEN tp.PK_START_TIME &gt; unix_timestamp(now()) * 1000 and tp.PK_STATUS=0 THEN '0' 
+			WHEN tp.PK_START_TIME &lt; unix_timestamp(now()) * 1000 and tp.PK_STATUS=0 and tp.PK_END_TIME is null THEN '1' 
+			WHEN tp.PK_START_TIME &lt; unix_timestamp(now()) * 1000 and tp.PK_STATUS=0 and tp.PK_END_TIME is not null THEN '2' 
+			ELSE '3' END AS gbstate,#{currentUser} as currentUser,tp.PK_START_TIME,tp.PK_END_TIME,tp.PANKOU_TYPE,
+	 		<include refid="columnList"/>
+			from t_pankou tp
+			LEFT JOIN T_GAME_BATTLE g ON tp.GB_ID = g.ID
+			<include refid="gameBattleJoins"/>
+			WHERE g.GB_STATUS != -1
+				<if test="gbId != null and gbId != ''">
+					AND g.id=#{gbId}
+				</if>
+				<if test="gameId != null and gameId != ''">
+					AND g.game_id=#{gameId}
+				</if>
+				<if test="geId != null and geId != ''">
+					AND g.ge_id=#{geId}
+				</if>
+				<if test="teamName != null and teamName != ''">
+					AND 
+						(lower(t.TEAM_NAME) like concat('%',lower(#{teamName}),'%')
+					or 
+						lower(t1.TEAM_NAME) like concat('%',lower(#{teamName}),'%'))
+				</if>
+			GROUP BY id,gbstate,tp.PK_START_TIME,tp.PK_END_TIME,tp.PANKOU_TYPE
+			ORDER BY  gbstate,(case when  gbstate = '3' or gbstate = '1' then tp.PK_START_TIME else tp.PK_END_TIME end)desc ,tp.PK_START_TIME ASC) ntb
+			<if test="gbstate != null and gbstate != ''">
+				WHERE ntb.gbstate = #{gbstate} and ntb.PANKOU_TYPE = 0
+			</if>
+	</select>
+	
+	<resultMap id="gameBattleVoResultMap" type="com.webside.jc.vo.GameBattleVo">
+		<id property="id" column="id" />
+		<result column="geId" property="geId"/> <!-- 比赛对战ID-->
+		<result column="gameId" property="gameId"/> <!-- 游戏ID-->
+		<result column="homeTeam" property="homeTeam"/> <!-- 主战队ID-->
+		<result column="awayTeam" property="awayTeam"/> <!-- 客战队ID-->
+		<result column="currentUser" property="currentUser"/> <!-- 当前用户ID-->
+		<association property="gevent" column="geId" select="selectGameEvent"/>  <!-- lwh:赛事对象-->
+		<association property="game" column="gameId" select="selectGame"/>  <!-- lwh:游戏对象-->
+		<association property="ht" column="homeTeam" select="selectHomeTeam"/>  <!-- lwh:主战队对象-->
+		<association property="at" column="awayTeam" select="selectAwayTeam"/>  <!-- lwh:客战队对象-->
+		<collection property="pankous" column="{currentUser=currentUser,id=id}" select="selectPankous" />	<!-- lwh:盘口列表 -->
+	</resultMap>
+	
+	<!-- lwh:赛事延迟加载-->
+	<select id="selectGameEvent" resultMap="gameEventResultMap">
+		SELECT <include refid="gameEventColumnList"/> FROM T_GAME_EVENT A <include refid="gameEventJoins"/> WHERE A.id= #{id}
+	</select>
+	
+	<resultMap id="gameEventResultMap" type="com.webside.match.entities.GameEvent">  
+		<id column="id" property="id"/> <!-- 唯一标识-->
+	</resultMap>  
+	
+	<!-- lwh:游戏延迟加载-->
+	<select id="selectGame" resultMap="gameResultMap">
+		SELECT <include refid="gameColumnList"/> FROM T_GAME A <include refid="gameJoins"/> WHERE A.id= #{id}
+	</select>
+	
+	<resultMap id="gameResultMap" type="com.webside.match.entities.Game">  
+		<id column="id" property="id"/> <!-- 唯一标识-->
+	</resultMap>  
+	
+	<!-- lwh:主战队延迟加载-->
+	<select id="selectHomeTeam" resultMap="homeTeamResultMap">
+		SELECT <include refid="teamColumnList"/> FROM T_TEAM A <include refid="teamJoins"/> WHERE A.id= #{id}
+	</select>
+	
+	<resultMap id="homeTeamResultMap" type="com.webside.match.entities.Team">  
+		<id column="id" property="id"/> <!-- 唯一标识-->
+	</resultMap>
+	
+	<!-- lwh:主战队延迟加载-->
+	<select id="selectAwayTeam" resultMap="awayTeamResultMap">
+		SELECT <include refid="teamColumnList"/> FROM T_TEAM A <include refid="teamJoins"/> WHERE A.id= #{id}
+	</select>
+	
+	<resultMap id="awayTeamResultMap" type="com.webside.match.entities.Team">  
+		<id column="id" property="id"/> <!-- 唯一标识-->
+	</resultMap>  
+	
+	<!-- lwh:盘口列表延迟加载 -->
+	<select id="selectPankous" resultMap="pankouResultMap">
+		SELECT
+			CASE
+			WHEN tp.PK_START_TIME &gt; unix_timestamp(now()) * 1000 and tp.PK_STATUS=0 THEN '0' 
+			WHEN tp.PK_START_TIME &lt; unix_timestamp(now()) * 1000 and tp.PK_STATUS=0 and tp.PK_END_TIME is null THEN '1' 
+			WHEN tp.PK_START_TIME &lt; unix_timestamp(now()) * 1000 and tp.PK_STATUS=0 and tp.PK_END_TIME is not null THEN '2' 
+			ELSE '3' END AS gbstate,#{currentUser} as currentUser,
+			<include refid="tpcolumnList"/>,
+			<include refid="userJccolumnList"/>
+			from t_pankou tp
+			left join T_USER_JC UJ on UJ.pankou_id = tp.id and UJ.user_id = #{currentUser} AND UJ.game_result != 3
+			WHERE
+				tp.GB_ID=#{id}
+			<!-- ORDER BY  gbstate,(case when  gbstate = '3' or gbstate = '1' then tp.PK_START_TIME else tp.PK_END_TIME end)desc ,tp.PK_START_TIME,tp.PANKOU_TYPE ASC -->
+			ORDER BY  gbstate,(case when  gbstate = '0' then tp.PK_END_TIME else UJ.jc_gold end)desc ,tp.PK_START_TIME,tp.PANKOU_TYPE ASC
+	</select>
+	
+	
+	<resultMap id="pankouResultMap" type="com.webside.jc.vo.PankouVo">  <!-- 盘口列表 -->
+	        <id column="tp_Id" property="id"  />
+	        <result column="tp_gb_id" property="gbId"/> <!-- 比赛对战ID-->
+			<result column="tp_pankou_type" property="pankouType"/> <!-- 玩法类型 0：独赢 1：让分2：其他-->
+			<result column="tp_pk_name" property="pkName"/> <!-- 玩法名称-->
+			<result column="tp_pk_home_rule" property="pkHomeRule"/> <!-- 比赛赔率（主战队）-->
+			<result column="tp_pk_away_rule" property="pkAwayRule"/> <!-- 比赛赔率（副战队）-->
+			<result column="tp_pk_home_prt" property="pkHomePrt"/> <!-- 参与人数（主战队）-->
+			<result column="tp_pk_away_prt" property="pkAwayPrt"/> <!-- 参与人数（副战队）-->
+			<result column="tp_this_pk_profit" property="thisPkProfit"/> <!-- 当前比赛平台收益-->
+			<result column="tp_pk_home_prt_gold" property="pkHomePrtGold"/> <!-- 主战队下注金额-->
+			<result column="tp_pk_away_prt_gold" property="pkAwayPrtGold"/> <!-- 副战队下注金额-->
+			<result column="tp_pk_victory" property="pkVictory"/> <!-- 胜方战队ID-->
+			<result column="tp_pk_status" property="pkStatus"/> <!-- 0：正常 1：取消-->
+			<result column="tp_pk_start_time" property="pkStartTime"/> <!-- 开始时间-->
+			<result column="tp_pk_end_time" property="pkEndTime"/> <!-- 结束时间-->
+			<result column="tp_pk_rang_fen_team" property="pkRangFenTeam"/> <!-- 让分战队 1:主战队，2：客场战队-->
+			<result column="tp_pk_rangfen_num" property="pkRangfenNum"/> <!-- 让分数-->
+			<result column="tp_inning_num" property="inningNum"/> <!-- 局数 根据比赛BO几， 如果比赛bo3，此选项为 1，2，3，  整场比赛盘口为0-->
+			<result column="gbstate" property="gbstate"/> <!-- 盘口当前状态，0未开始，1进行中，2已结束，3已取消-->
+			<result column="currentUser" property="currentUser"/> <!-- 当前用户ID-->
+			<association property="userJc" resultMap="userJcResultMap" />
+			<!-- <association property="userJc" column="{currentUser=currentUser,tp_Id=tp_Id}" select="selectUserJc"/>  --> <!-- lwh:当前用户下注情况-->
+	</resultMap>
+	
+	<select id="selectUserJc" resultMap="userJcResultMap">
+		SELECT <include refid="userJccolumnList"/> FROM T_USER_JC UJ WHERE UJ.USER_ID = #{currentUser} and UJ.PANKOU_ID = #{tp_Id} AND UJ.game_result != 3
+	</select>
+	
+	<resultMap id="userJcResultMap" type="com.webside.jc.model.UserJc">  
+		<id column="id" property="id"/> <!-- 唯一标识-->
+	</resultMap> 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="webQueryListByPage" parameterType="map" resultType="com.webside.jc.model.GameBattle">
+			SELECT
+				*
+			FROM
+				(
+					(
+						SELECT
+							g.id AS "id",
+							g.ge_id AS "geId",
+							g.game_id AS "gameId",
+							g.gb_name AS "gbName",
+							g.game_rule AS "gameRule",
+							g.home_team AS "homeTeam",
+							g.away_team AS "awayTeam",
+							g.start_time AS "startTime",
+							g.end_time AS "endTime",
+							g.gb_status AS "gbStatus",
+							g.video_url AS "videoUrl",
+							g.create_user AS "createUser",
+							u1.nick_name AS "createUserName",
+							g.create_date AS "createDate",
+							g.update_user AS "updateUser",
+							u2.nick_name AS "updateUserName",
+							g.update_date AS "updateDate",
+							g.this_gb_profit AS "thisGbProfit",
+							g.home_prt_gold AS "homePrtGold",
+							g.away_prt_gold AS "awayPrtGold"
+						FROM
+							T_GAME_BATTLE g
+						LEFT JOIN tb_user u1 ON u1.u_id = g.create_user
+						LEFT JOIN tb_user u2 ON u2.u_id = g.update_user
+						LEFT JOIN T_TEAM t ON t.id = g.home_team
+						LEFT JOIN T_TEAM t1 ON t1.id = g.away_team
+						WHERE
+							1=1
+								<if test="gameId != null and gameId != ''">
+									AND g.game_id=#{gameId}
+								</if>
+								<if test="geId != null and geId != ''">
+									AND g.ge_id=#{geId}
+								</if>
+								<if test="teamName != null and teamName != ''">
+									AND 
+										(lower(t.TEAM_NAME) like concat('%',lower(#{teamName}),'%')
+									or 
+										lower(t1.TEAM_NAME) like concat('%',lower(#{teamName}),'%'))
+								</if>
+<!-- 							g.game_id = '8c70ff73386243c987d530bcd52518f7' -->
+						AND g.START_TIME > unix_timestamp(now()) * 1000
+						AND g.END_TIME IS NULL
+						ORDER BY
+							g.START_TIME ASC
+						LIMIT 100000
+					)
+					UNION ALL
+						(
+							SELECT
+								g.id AS "id",
+								g.ge_id AS "geId",
+								g.game_id AS "gameId",
+								g.gb_name AS "gbName",
+								g.game_rule AS "gameRule",
+								g.home_team AS "homeTeam",
+								g.away_team AS "awayTeam",
+								g.start_time AS "startTime",
+								g.end_time AS "endTime",
+								g.gb_status AS "gbStatus",
+								g.video_url AS "videoUrl",
+								g.create_user AS "createUser",
+								u1.nick_name AS "createUserName",
+								g.create_date AS "createDate",
+								g.update_user AS "updateUser",
+								u2.nick_name AS "updateUserName",
+								g.update_date AS "updateDate",
+								g.this_gb_profit AS "thisGbProfit",
+								g.home_prt_gold AS "homePrtGold",
+								g.away_prt_gold AS "awayPrtGold"
+							FROM
+								T_GAME_BATTLE g
+							LEFT JOIN tb_user u1 ON u1.u_id = g.create_user
+							LEFT JOIN tb_user u2 ON u2.u_id = g.update_user
+							LEFT JOIN T_TEAM t ON t.id = g.home_team
+							LEFT JOIN T_TEAM t1 ON t1.id = g.away_team
+							WHERE
+								1=1
+								<if test="gameId != null and gameId != ''">
+									AND g.game_id=#{gameId}
+								</if>
+								<if test="geId != null and geId != ''">
+									AND g.ge_id=#{geId}
+								</if>
+								<if test="teamName != null and teamName != ''">
+									AND 
+										(lower(t.TEAM_NAME) like concat('%',lower(#{teamName}),'%')
+									or 
+										lower(t1.TEAM_NAME) like concat('%',lower(#{teamName}),'%'))
+								</if>
+<!-- 								g.game_id = '8c70ff73386243c987d530bcd52518f7' -->
+							AND g.START_TIME &lt; unix_timestamp(now()) * 1000
+							ORDER BY
+								g.START_TIME DESC,
+								g.END_TIME DESC
+							LIMIT 100000
+						)
+				) tb1
+<!-- 			LIMIT 100 -->
+	</select>
+	
+	
+	<!-- 查询t_game_battle分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.jc.model.GameBattle">
+		select  
+			<include refid="columnList"/>
+		from T_GAME_BATTLE g
+		<include refid="gameBattleJoins"/>
+		<where>
+			<if test="id != null and id != ''">
+				AND g.id=#{id}
+			</if> 
+			<if test="gameId != null and gameId != ''">
+				AND g.game_id=#{gameId}
+			</if>
+			<if test="geId != null and geId != ''">
+				AND g.ge_id=#{geId}
+			</if>
+			<if test="gameRule != null and gameRule != ''">
+				AND g.game_rule=#{gameRule}
+			</if>
+			<if test="gbType == 1">
+				<!-- 查询未开始比赛 -->
+				AND g.start_time > #{currentTime}
+			</if>
+			<if test="gbType == 2">
+				<!-- 进行中比赛 -->
+				AND	g.start_time &lt;= #{currentTime} 
+				AND g.end_time is null
+			</if>
+			<if test="gbType == 3">
+				<!-- 查询已结束比赛 -->
+				AND g.end_time is not null and g.end_time !=''
+			</if>
+			<if test="gbType == 4">
+				<!-- 查询已取消比赛 -->
+				AND g.gb_status = #{deleteStatus}
+			</if>
+			<if test="gbStatus != null and gbStatus != ''">
+				AND g.gb_status=#{gbStatus}
+			</if>
+			<if test="teamName != null and teamName != ''">
+				AND 
+					(lower(t.TEAM_NAME) like concat('%',lower(#{teamName}),'%')
+				or 
+					lower(t1.TEAM_NAME) like concat('%',lower(#{teamName}),'%'))
+			</if>
+			<if test="teamId != null and teamId != ''">
+				AND (g.home_team=#{teamId} OR g.away_team=#{teamId})
+			</if>
+			<if test="beginCreateTime != null and beginCreateTime != '' and (endCreateTime == null or endCreateTime == '')">
+				 AND g.start_time >= #{beginCreateTime}
+			</if>
+			<if test="(beginCreateTime == null or beginCreateTime == '') and endCreateTime != null and endCreateTime != ''">
+				 AND g.start_time &lt;= #{endCreateTime}
+			</if>
+			<if test="beginCreateTime != null and endCreateTime != null and beginCreateTime != '' and endCreateTime != ''">
+				 AND g.start_time BETWEEN #{beginCreateTime} AND #{endCreateTime}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增t_game_battle -->
+	<insert id="insert" 
+			useGeneratedKeys="true" 
+			keyProperty="sid"
+			parameterType="com.webside.jc.model.GameBattle">
+		insert into t_game_battle 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 主键-->
+		<if test="geId != null">ge_id,</if><!-- 赛事ID-->
+		<if test="gameId != null">game_id,</if><!-- 游戏ID-->
+		<if test="gbName != null">gb_name,</if><!-- 对战名称-->
+		<if test="gameRule != null">game_rule,</if><!-- 比赛规则-->
+		<if test="homeTeam != null">home_team,</if><!-- 主场战队ID-->
+		<if test="awayTeam != null">away_team,</if><!-- 客场战队ID-->
+		<if test="startTime != null">start_time,</if><!-- 开始时间-->
+		<if test="endTime != null and endTime !=''">end_time,</if><!-- 结束时间-->
+		<if test="gbStatus != null">gb_status,</if><!-- 状态 -->
+		<if test="videoUrl != null and videoUrl !=''">video_url,</if><!-- 直播视频地址-->
+		<if test="createUser != null">create_user,</if><!-- 维护人员-->
+		<if test="createDate != null">create_date,</if><!-- 创建时间-->
+		<if test="thisGbProfit != null">this_gb_profit,</if><!-- 当前比赛平台收益-->
+		<if test="homePrtGold != null">home_prt_gold,</if><!-- 主战队下注金额-->
+		<if test="awayPrtGold != null">away_prt_gold,</if><!--客场战队下注金额 -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 主键-->
+		<if test="geId != null">#{geId},</if><!-- 赛事ID-->
+		<if test="gameId != null">#{gameId},</if><!-- 游戏ID-->
+		<if test="gbName != null">#{gbName},</if><!-- 对战名称-->
+		<if test="gameRule != null">#{gameRule},</if><!-- 1：BO1 2:BO2 3:BO3 5:BO5 7:BO7-->
+		<if test="homeTeam != null">#{homeTeam},</if><!-- 主场战队ID-->
+		<if test="awayTeam != null">#{awayTeam},</if><!-- 客场战队ID-->
+		<if test="startTime != null">#{startTime},</if><!-- 开始时间-->
+		<if test="endTime != null and endTime !=''">#{endTime},</if><!-- 结束时间-->
+		<if test="gbStatus != null">#{gbStatus},</if><!-- 状态 -->
+		<if test="videoUrl != null and videoUrl !=''">#{videoUrl},</if><!-- 直播视频地址 可为空-->
+		<if test="createUser != null">#{createUser},</if><!-- 维护人员-->
+		<if test="createDate != null">#{createDate},</if><!-- 创建时间-->
+		<if test="thisGbProfit != null">#{thisGbProfit},</if><!-- 当前比赛平台收益-->
+		<if test="homePrtGold != null">#{homePrtGold},</if><!-- 主战队下注金额-->
+		<if test="awayPrtGold != null">#{awayPrtGold},</if><!--客场战队下注金额 -->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_game_battle -->
+	<select id="findById" resultType="com.webside.jc.model.GameBattle" parameterType="String">
+		select  
+			<include refid="columnList"/>
+		from t_game_battle g
+		<include refid="gameBattleJoins"/>
+		where g.id = #{id}
+	</select>
+	
+	<!-- 根据条件查询t_game_battle -->
+	<select id="find" resultType="com.webside.jc.model.GameBattle" parameterType="map">
+		select  
+			<include refid="columnInfoList"/>
+		from t_game_battle g
+		where g.sid = #{sid}
+		<if test="gbStatus != null and gbStatus != ''">
+				AND g.gb_status=#{gbStatus}
+			</if>
+	</select>
+	
+	
+	<update id="update" parameterType="com.webside.jc.model.GameBattle">
+		update t_game_battle
+		<set>
+			<trim suffixOverrides=",">
+				<if test="geId != null">ge_id=#{geId},</if><!-- 赛事ID-->
+				<if test="gameId != null">game_id=#{gameId},</if><!-- 游戏ID-->
+				<if test="gbName != null">gb_name=#{gbName},</if><!-- 对战名称-->
+				<if test="gameRule != null">game_rule=#{gameRule},</if><!-- 比赛规则-->
+				<if test="homeTeam != null">home_team=#{homeTeam},</if><!-- 主场战队ID-->
+				<if test="awayTeam != null">away_team=#{awayTeam},</if><!-- 客场战队ID-->
+				<if test="startTime != null and startTime !='' ">start_time=#{startTime},</if><!-- 开始时间-->
+				<if test="endTime != ''">end_time=#{endTime},</if><!-- 结束时间-->
+				<if test="gbStatus != null">gb_status=#{gbStatus},</if><!-- 状态-->
+				<if test="videoUrl != null">video_url=#{videoUrl},</if><!-- 直播视频地址 -->
+				<if test="updateUser != null">update_user=#{updateUser},</if><!-- 比赛修改人-->
+				<if test="updateDate != null">update_date=#{updateDate},</if><!-- 修改时间-->
+				<if test="thisGbProfit != 0">this_gb_profit=#{thisGbProfit},</if> <!-- 当前比赛平台收益 -->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 修改对战 战队下注金额 -->
+	<update id="updateGold" parameterType="map">
+		update t_game_battle
+		<set>
+			<trim suffixOverrides=",">
+				<!-- 战队下注金额 -->
+				<if test="prtGoldNum != null ">
+					${prtGoldColumn} = ${prtGoldColumn} + #{prtGoldNum},
+				</if>
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 修改对战 战队下注金额，更换用户下注战队调用 -->
+	<update id="updateGbNum" parameterType="com.webside.jc.model.GameBattle">
+		update t_game_battle
+		<set>
+			<trim suffixOverrides=",">
+				<!-- 战队下注金额-->
+				<if test="homePrtGold != null ">
+					HOME_PRT_GOLD = HOME_PRT_GOLD + ${homePrtGold} ,
+				</if>
+				<if test="awayPrtGold != null ">
+					AWAY_PRT_GOLD = AWAY_PRT_GOLD + ${awayPrtGold} ,
+				</if>
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<select id="countGameBattleNum" resultType="java.lang.Long" parameterType="String">
+		SELECT count(DISTINCT ntb.id)from (
+			SELECT g.id AS "id"
+			from t_pankou tp
+			LEFT JOIN T_GAME_BATTLE g ON tp.GB_ID = g.ID
+			WHERE tp.PK_START_TIME > unix_timestamp(now()) * 1000 and tp.PK_STATUS=0 AND G.GAME_ID = #{gameId}
+			GROUP BY id,tp.PK_START_TIME,tp.PK_END_TIME) ntb
+	</select>
+</mapper>

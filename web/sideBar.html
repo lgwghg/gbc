@@ -1,0 +1,72 @@
+
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
+		<link rel="stylesheet" type="text/css" href="css/ripples.min.css">
+		<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_wp3a5t78p12d42t9.css">
+		<link rel="stylesheet" type="text/css" href="css/base.css">
+		<link rel="stylesheet" type="text/css" href="css/inform.css">
+		<script src="js/jquery.min.js"></script>
+		
+		
+
+
+
+	
+<div class="sidebar" style="height: 100%;">
+						<ul>
+							<li class="btn btn-block c-vnav">
+								<a href="javascript:void(1)"><i class="iconfont icon-aboutme"></i>我的账户</a>
+							</li>
+							<li class="btn btn-block c-vnav">
+								<a href="javascript:void(1)"><i class="iconfont icon-jingcai"></i>我的竞猜</a>
+							</li>
+							<li class="btn btn-block c-vnav">
+								<a href="javascript:void(1)"><i class="iconfont icon-dizhi"></i>收货地址</a>
+							</li>
+							<li class="btn btn-block c-vnav">
+								<a href="javascript:void(1)"><i class="iconfont icon-duihuan"></i>兑换记录</a>
+							</li>
+							<li class="btn btn-block c-vnav">
+								<a href="javascript:void(1)"><i class="iconfont icon-jiaoyijilu"></i>交易记录</a>
+							</li>
+							<li class="btn btn-block c-vnav">
+								<a href="javascript:void(1)"><i class="iconfont icon-wodetongzhi"></i>我的通知</a>
+							</li>
+							<li class="btn btn-block c-vnav">
+								<a href="javascript:void(1)"><i class="iconfont icon-haoyou"></i>推荐好友</a>
+							</li>
+							<li class="btn btn-block c-vnav">
+								<a href="javascript:void(1)"><i class="iconfont icon-FAQ"></i>FAQS</a>
+							</li>
+							
+							<li class="btn btn-block c-vnav" style="border-top: 1px solid #41494d;">
+								<a href="javascript:void(1)"><i class="iconfont icon-yuechiquanxianchaxun"></i>CDKEY兑换</a>
+							</li>
+							<li class="btn btn-block c-vnav last">
+								<a href="javascript:void(1)"><i class="iconfont icon-renwu-zhengchang"></i>任务中心</a>
+							</li>
+							
+						</ul>
+					</div>
+	
+	<script src="js/material.js"></script>
+	<script src="js/ripples.min.js"></script>
+	<script>
+		$.material.init();
+	</script>
+	<script>
+		$(function() {
+			$(".c-informgroup").click(function() {
+				$(this).children('.c-xiala').toggle().closest(".c-informgroup").siblings(".c-informgroup").children(".c-xiala").hide();
+			})
+		})
+		
+			$(function(){
+		$(".sidebar>ul>.c-vnav").click(function(){
+			$(this).addClass("c-active").siblings().removeClass("c-active")
+		})
+	})
+	</script>
+	
+	<!--<script src="js/siderbar.js"></script>-->
+

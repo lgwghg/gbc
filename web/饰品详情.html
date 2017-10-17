@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>饰品详情</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
+    <link rel="stylesheet" media="screen" href="css/bootstrap-slider.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="css/fallback.css">
+    <link rel="stylesheet" type="text/css" href="css/ripples.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.dropdown.css">
+    <link type="text/css" rel="stylesheet" href="css/base.css">
+    <link type="text/css" rel="stylesheet" href="css/x-right.css">
+    <link type="text/css" rel="stylesheet" href="css/x-list.css">
+    <link type="text/css" rel="stylesheet" href="css/x-ornament-details.css">
+    <link type="text/css" rel="stylesheet" href="css/details.css">
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-slider.js"></script>
+    <script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="js/x-right.js"></script>
+</head>
+<body>
+<div class="container-fluid" style="margin:0; padding:0;">
+    <div class="c-bg"></div>
+    <div id="inc_header"></div>
+    <div class="container" style="padding: 0;position: relative;z-index: 1;">
+        <!-- 通知 -->
+        <div class="list-inform mt-5">
+            <span class="list-inform-one iconfont icon-tongzhi ml-10"></span>
+            <ul class="list-inform-two">
+                <li>111111111111111111111111111111111111111111111111111111111111111111</li>
+                <li>222222222222222222222222222222222222222222222222222222222222222222</li>
+                <li>333333333333333333333333333333333333333333333333333333333333333333</li>
+            </ul>
+            <span class="list-inform-three">×</span>
+        </div>
+        <div class="row">
+            <!-- left -->
+            <div class="col-md-6 ornament-left">
+                <div class="ornament-left-explain ornament-left-title">
+                    <p class="view1">
+                        <span class="one"></span>
+                        <span class="two">房间说明</span>
+                        <!--活动已截止或活动正在进行按钮-->
+                        <button type="button" class="btn  btn-raised btn-primary three">活动已截止</button>
+                        <button type="button" class="btn  btn-raised btn-primary four">参加活动</button>
+                        <button type="button" class="btn  btn-raised btn-primary four"><img src="images/bianji.png">编辑活动</button>
+                    </p>
+                    <div class="view2">
+                        <p class="one">
+                            <span class="co-af">活动时间：</span>
+                            <span class="co-31">2017-04-11 10：55 至 2017-04-12 18：00</span>
+                        </p>
+                        <p class="two">
+                            <span>活动简介：</span>
+                            <span>V视角评论抽奖4.5-4.11日~</span>
+                        </p>
+                    </div>
+                </div>
+                <ul class="ornament-left-screen">
+                    <li class="view1 view4 checked">第5次ROLL进行中...</li>
+                    <li class="view2 view4">第4次ROLL</li>
+                    <li class="view2 view4">第3次ROLL</li>
+                    <li class="view2 view4">第2次ROLL</li>
+                    <li class="view3">更多+</li>
+                    <li class="fix"></li>
+                    <li class="view5 hide">
+                        <div class="one">×</div>
+                        <div class="middle-search">
+                            <a href="javascript:;">GO</a>
+                            <input type="text" alt="" placeholder="直达ROLL次">
+                        </div>
+                        <ul class="two">
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                            <li>第2次</li>
+                        </ul>
+                        <div class="three">
+                            <ul class="pagination" id="pagination" style="margin-left: 0;">
+                                <li><a href="#">首页</a></li>
+                                <li><a href="#">&lt;</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#" style="border:none;">...</a></li>
+                                <li><a href="#">23</a></li>
+                                <li><a href="#">&gt;</a></li>
+                                <li><a href="#">尾页</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <!--非自己创建活动的奖品池-->
+                <div class="ornament-left-prize ornament-left-title">
+                    <p class="view1">
+                        <span class="one"></span>
+                        <span class="two">奖品池</span>
+                    </p>
+                    <ul class="view2">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <!--自己创建活动的奖品池-->
+                <div class="ornament-left-prize ornament-left-title">
+                    <p class="view1">
+                        <span class="one"></span>
+                        <span class="two">奖品池</span>
+                    </p>
+                    <ul class="view2">
+                        <li class="add-prize" data-toggle="modal" data-target="#myModalAdd"><img src="images/add-prize.png"></li>
+                        <li><img src="images/delete-prize.png" class="delete-prize"></li>
+                        <li><img src="images/delete-prize.png" class="delete-prize"></li>
+                        <li><img src="images/delete-prize.png" class="delete-prize"></li>
+                        <li><img src="images/delete-prize.png" class="delete-prize"></li>
+                        <li><img src="images/delete-prize.png" class="delete-prize"></li>
+                        <li><img src="images/delete-prize.png" class="delete-prize"></li>
+                        <li><img src="images/delete-prize.png" class="delete-prize"></li>
+                        <li><img src="images/delete-prize.png" class="delete-prize"></li>
+                    </ul>
+                    <div class="view3">
+                        <div class="form-group five">
+                            <div class="checkbox" style="margin-top:0;">
+                                <label>
+                                    <input type="checkbox">该活动已经获奖的人员将不再获奖
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group five">
+                            <div class="checkbox" style="margin-top:0;">
+                                <label>
+                                    <input type="checkbox">ROLL完过后清除所有人员
+                                </label>
+                            </div>
+                        </div>
+                        <span class="one">中奖人数设置</span>
+                        <input type="text" placeholder="0"  class="two">
+                        <button type="button" class="btn  btn-raised btn-primary three">ROLL</button>
+                        <!--<span class="four">*该活动已经获奖的人员将不再获奖</span>-->
+                    </div>
+                </div>
+                <!--暂时还没有用户参加-->
+                <div class="ornament-left-participation ornament-left-title">
+                    <p class="view1">
+                        <span class="one"></span>
+                        <span class="two">参与名单</span>
+                        <span class="three">( 0人 )</span>
+                    </p>
+                    <div class="view2">
+                        暂时还没有用户参加
+                    </div>
+                </div>
+                <!--已有用户参加-->
+                <div class="ornament-left-participation ornament-left-title">
+                    <p class="view1">
+                        <span class="one"></span>
+                        <span class="two">参与名单</span>
+                        <span class="three">( 10人 )</span>
+                        <!--进入自己创建活动有此按钮-->
+                        <button type="button" class="btn  btn-raised btn-primary four">清除</button>
+                    </p>
+                    <div class="view3">
+                        <div>
+                            <img src="images/dazhi_header.png">
+                            <p>Ice_bean</p>
+                        </div>
+                        <div>
+                            <img src="images/dazhi_header.png">
+                            <p>Ice_bean</p>
+                        </div>
+                        <div>
+                            <img src="images/dazhi_header.png">
+                            <p>Ice_bean</p>
+                        </div>
+                        <div>
+                            <img src="images/dazhi_header.png">
+                            <p>Ice_bean</p>
+                        </div>
+                        <div>
+                            <img src="images/dazhi_header.png">
+                            <p>Ice_bean</p>
+                        </div>
+                        <div>
+                            <img src="images/dazhi_header.png">
+                            <p>Ice_bean</p>
+                        </div>
+                        <div>
+                            <img src="images/dazhi_header.png">
+                            <p>Ice_bean</p>
+                        </div>
+                        <div>
+                            <img src="images/dazhi_header.png">
+                            <p>Ice_bean</p>
+                        </div>
+                        <div>
+                            <img src="images/dazhi_header.png">
+                            <p>Ice_bean</p>
+                        </div>
+                        <div>
+                            <img src="images/dazhi_header.png">
+                            <p>Ice_bean</p>
+                        </div>
+                    </div>
+                </div>
+                <!--往期参与名单和结算结果-->
+                <div class="ornament-left-participation-before ornament-left-title">
+                    <p class="view1">
+                        <span class="one"></span>
+                        <span class="two">本期结算结果</span>
+                        <span class="three">( 3人 )</span>
+                    </p>
+                    <ul class="view2">
+                        <!--表头，固定存在-->
+                        <li class="title">
+                            <div class="one">参与时间</div>
+                            <div class="two">玩家</div>
+                            <div class="three">奖品</div>
+                        </li>
+                        <li class="content">
+                            <div class="one">2016-09-09  10:48:55</div>
+                            <div class="two">
+                                <img src="images/dazhi_header.png">
+                                <span>Ice_bean</span>
+                            </div>
+                            <ul class="three">
+                                <li>
+                                    <img src="images/dazhi_header.png" class="prize-img">
+                                    <div class="prize-message hide">
+                                        <img src="images/prize-message-icon.png" class="prize-message-img2">
+                                        <img src="images/dazhi_header.png" class="prize-message-img">
+                                        <p class="prize-message-ms-three">
+                                            <span class="icon">￥</span>
+                                            <span class="co-ff">300</span>
+                                            <span>金币</span>
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="images/dazhi_header.png" class="prize-img">
+                                    <div class="prize-message hide">
+                                        <img src="images/prize-message-icon.png" class="prize-message-img2">
+                                        <img src="images/dazhi_header.png" class="prize-message-img">
+                                        <p class="prize-message-ms-one">
+                                            <span>CDKEY：</span>
+                                            <span class="co-ff">ads15sdafd</span>
+                                        </p>
+                                        <p class="prize-message-ms-two">
+                                            <span>有效期：</span>
+                                            <span class="co-ff">2017-04-30</span>
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="images/dazhi_header.png" class="prize-img">
+                                </li>
+                                <li>
+                                    <img src="images/dazhi_header.png" class="prize-img">
+                                </li>
+                                <li>
+                                    <img src="images/dazhi_header.png" class="prize-img">
+                                </li>
+                                <li>
+                                    <img src="images/dazhi_header.png" class="prize-img">
+                                </li>
+                            </ul>
+                            <div class="fix"></div>
+                        </li>
+                        <li class="content">
+                            <div class="one">2016-09-09  10:48:55</div>
+                            <div class="two">
+                                <img src="images/dazhi_header.png">
+                                <span>Ice_bean</span>
+                            </div>
+                            <ul class="three">
+                                <li>
+                                    <img src="images/dazhi_header.png" class="prize-img">
+                                </li>
+                                <li>
+                                    <img src="images/dazhi_header.png" class="prize-img">
+                                </li>
+                                <li>
+                                    <img src="images/dazhi_header.png" class="prize-img">
+                                </li>
+                                <li>
+                                    <img src="images/dazhi_header.png" class="prize-img">
+                                </li>
+                                <li>
+                                    <img src="images/dazhi_header.png" class="prize-img">
+                                </li>
+                                <li>
+                                    <img src="images/dazhi_header.png" class="prize-img">
+                                </li>
+                            </ul>
+                            <div class="fix"></div>
+                        </li>
+                    </ul>
+                    <div class="view3">
+                        <ul class="pagination" id="pagination" style="margin-left: 0;">
+                            <li><a href="#">首页</a></li>
+                            <li><a href="#">&lt;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#" style="border:none;">...</a></li>
+                            <li><a href="#">23</a></li>
+                            <li><a href="#">&gt;</a></li>
+                            <li><a href="#">尾页</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- right -->
+            <div class="col-md-6 ornament-right">
+                <div class="ornament-personal-information">
+                    <img src="images/grxx_bg.png" class="bg">
+                    <div class="view1">
+                        <div class="left">
+                            <img src="images/dazhi_header.png" class="">
+                            <span class="lv-x lv-x-1"></span>
+                        </div>
+                        <div class="right">
+                            <div class="one">
+                                <span class="first">Ice_bean</span>
+                                <div class="second">
+                                    <span>竞技达人</span>
+                                    <span>竞技达人</span>
+                                </div>
+                            </div>
+                            <p class="two">
+                                火猫TV主播、解说国内外各大比赛、Gbocai编辑福利随时送...  希望能成为新一代线下解说  谢谢大家。
+                            </p>
+                        </div>
+                    </div>
+                    <ul class="view2">
+                        <li>
+                            <img src="images/ornament_wb.png">
+                            <span>新浪微博</span>
+                        </li>
+                        <li>
+                            <img src="images/ornament_dy.png">
+                            <span>直播间</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ornament-left-title ornament--right-room">
+                    <p class="view1">
+                        <span class="one"></span>
+                        <span class="two">直播间</span>
+                    </p>
+                    <div class="view2">
+                        <img src="images/rotate.gif" class="rotate">
+                        <div class="c-video" style="background: transparent;height: 333px;">
+                            <div class="video-wrap" style="padding:0px;">
+                                <embed width="565" height="313" allownetworking="all" allowscriptaccess="always" src="http://static.hdslb.com/miniloader.swf?aid=7568656&page=1" quality="high" bgcolor="#000" wmode="window" allowfullscreen="true" allowFullScreenInteractive="true" type="application/x-shockwave-flash">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-pln ft-14 ornament-left-title" style="padding:0; overflow:hidden; margin-top: 20px;">
+                    <p class="view1">
+                        <span class="one"></span>
+                        <span class="two">达人评论</span>
+                    </p>
+                    <div class="c-morepln">
+                        <div class="row">
+                            <div class="col-xs-1">
+                                <div class=" discussant"></div>
+                                <a href=""><img src="images/nvnv.png" class="img-circle c-img"/></a>
+                            </div>
+                            <div class="col-xs-11">
+                                <div class="c-plnwrap ml-20">
+                                    <div class="form-group label-floating" style="margin: 0 auto; padding: 4px 0; width: 95%;">
+                                        <textarea class="form-control" placeholder="书写你的评论!~" style="margin: 0; padding: 0;"></textarea>
+                                    </div>
+                                    <a href="#" class="pull-right">点击发表</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="critical">
+                            <div class="row pb-20 pt-20 dyde">
+                                <div class="col-xs-1 mr-20">
+                                    <a href=""><img src="images/nvnv.png" class="img-circle c-img dyd"/></a>
+                                </div>
+                                <div class="col-xs-9">
+                                    <p class="mt-5"><span class="pull-left">error</span>
+                                        <span class=" ml-10 lv-x pull-left"></span><span class=" ml-15 pull-left">8</span>分钟前</p>
+
+                                    <p class="pb-5 pt-5 c-word">没比赛好烦呀:(</p>
+                                    <button class="c_huifu">回复</button>
+                                </div>
+                                <span class="chexiaoa"></span>
+                            </div>
+                            <div class="row pb-15 pt-15 dyde">
+                                <div class="col-xs-1 mr-20">
+                                    <a href=""><img src="images/nvnv.png" class="img-circle c-img dyd"/></a>
+                                </div>
+                                <div class="col-xs-9">
+                                    <p class="mt-5"><span class="pull-left">error</span>
+                                        <span class=" ml-10 lv-x pull-left"></span><span class=" ml-15 pull-left">8</span>小时以前</p>
+
+                                    <p class="pb-5 pt-5 c-word">没比赛好烦呀:(</p>
+                                    <button class="c_huifu">回复</button>
+                                </div>
+                                <span class="chexiaoa"></span>
+                            </div>
+                            <div class="row pb-15 pt-15 dyde">
+                                <div class="col-xs-1 mr-20">
+                                    <a href=""><img src="images/nvnv.png" class="img-circle c-img dyd"/></a>
+                                </div>
+                                <div class="col-xs-9 fwei">
+                                    <p class="mt-5"><span class="pull-left">error</span>
+                                        <span class=" ml-10 lv-x pull-left"></span><span class=" ml-15 pull-left">8</span>分钟前</p>
+
+                                    <p style="margin-bottom: 10px;" class="pb-5 pt-5 c-word">没比ppppppp赛好烦呀:(</p>
+
+                                    <div class="row plnmore dyde1">
+                                        <div class="col-xs-1 c-2-pln">
+                                            <a href=""><img src="images/nvnv.png" class="img-circle c-ximg dyd1"/></a>
+                                        </div>
+                                        <div class="col-xs-9">
+                                            <p class="mt-5"><span class="c-span1">error</span>回复
+                                                <span class=" ml-10">peng1ran</span><span class=" ml-10">8</span>分钟前</p>
+
+                                            <p class="pb-5 pt-5 c-word">没比赛好烦呀:(</p>
+                                            <a href="#">回复</a>
+                                        </div>
+                                        <span class="chexiaoa1"></span>
+                                    </div>
+                                    <div class="row plnmore dyde1">
+                                        <div class="col-xs-1 c-2-pln">
+                                            <a href=""><img src="images/nvnv.png" class="img-circle c-ximg dyd1"/></a>
+                                        </div>
+                                        <div class="col-xs-9">
+                                            <p class="mt-5"><span class="c-span1">error</span>回复
+                                                <span class=" ml-10">peng2ran</span><span class=" ml-10">8</span>分钟前</p>
+
+                                            <p class="pb-5 pt-5 c-word">没比赛好烦呀:(</p>
+                                            <a href="#">回复</a>
+                                        </div>
+                                        <span class="chexiaoa1"></span>
+                                    </div>
+                                    <div class="row plnmore dyde1">
+                                        <div class="col-xs-1 c-2-pln">
+                                            <a href=""><img src="images/nvnv.png" class="img-circle c-ximg dyd1"/></a>
+                                        </div>
+                                        <div class="col-xs-9">
+                                            <p class="mt-5"><span class="c-span1">error</span>回复
+                                                <span class=" ml-10">pen3gran</span><span class=" ml-10">8</span>分钟前</p>
+
+                                            <p class="pb-5 pt-5 c-word">没比赛好烦呀:(</p>
+                                            <a href="#">回复</a>
+                                        </div>
+                                        <span class="chexiaoa1"></span>
+                                    </div>
+                                    <div class="row plnmore dyde1">
+                                        <div class="col-xs-1 c-2-pln">
+                                            <a href=""><img src="images/nvnv.png" class="img-circle c-ximg dyd1"/></a>
+                                        </div>
+                                        <div class="col-xs-9">
+                                            <p class="mt-5"><span class="c-span1">error</span>回复
+                                                <span class=" ml-10">pen4gran</span><span class=" ml-10">8</span>分钟前</p>
+
+                                            <p class="pb-5 pt-5 c-word">没比赛好烦呀:(</p>
+                                            <a href="#">回复</a>
+                                        </div>
+                                        <span class="chexiaoa1"></span>
+                                    </div>
+                                    <div class="row plnmore dyde1">
+                                        <div class="col-xs-1 c-2-pln">
+                                            <a href=""><img src="images/nvnv.png" class="img-circle c-ximg dyd1"/></a>
+                                        </div>
+                                        <div class="col-xs-9">
+                                            <p class="mt-5"><span class="c-span1">error</span>回复
+                                                <span class=" ml-10">pen5gran</span><span class=" ml-10">8</span>分钟前</p>
+
+                                            <p class="pb-5 pt-5 c-word">没比赛好烦呀:(</p>
+                                            <a href="#">回复</a>
+                                        </div>
+                                        <span class="chexiaoa1"></span>
+                                    </div>
+                                    <span class="dianjimore">加载更多</span>
+                                </div>
+                                <span class="chexiaoa"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c-mostpln mt-20">
+                        <a href="#">更多评论</a>
+                    </div>
+                </div>
+            </div>
+            <!--弹框-->
+            <div class="modal fade myModalAdd" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" style="margin: -295px 0px 0px -250px!important;position: fixed;top: 50%;left: 50%;width: 500px;">
+                    <div class="modal-content" style="background:#2e3238; color:#fff; width: 500px; height:590px;">
+                        <div class="modal-header" style="overflow: hidden;">
+                            <h2 class="modal-title" id="myModalLabel" style=" font-size: 20px;float:left;"><b>添加奖品</b></h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="view1">
+                                <span class="one">奖品类型</span>
+                                <div class="form-group">
+                                    <select id="provinceId" class="form-control">
+                                        <option value="gold">金币</option>
+                                        <option value="CDKEY">CDKEY</option>
+                                    </select>
+                                </div>
+                                <div class="fix"></div>
+                            </div>
+                            <p class="view1-label">请先选择要添加的商品类型</p>
+                            <div class="team-one">
+                                <div class="view1">
+                                    <span class="one">奖品类型</span>
+                                    <div class="form-group label-floating">
+                                        <input type="text" class="form-control text_input">
+                                        <span class="help-block">您的钱包中有 <span class="co-31">2000</span> 金币余额可使用</span>
+                                    </div>
+                                    <div class="fix"></div>
+                                </div>
+                                <p class="view1-label"></p>
+                                <div class="view1">
+                                    <span class="one">奖品类型</span>
+                                    <div class="form-group label-floating">
+                                        <input type="text" class="form-control text_input">
+                                        <span class="help-block">本次参与活动人数设置 <span class="co-31">10</span> 人</span>
+                                    </div>
+                                    <div class="fix"></div>
+                                </div>
+                                <p class="view1-label"></p>
+                            </div>
+                            <div class="team-two hide">
+                                <div class="view1">
+                                    <span class="one">奖品类型</span>
+                                    <ul class="two">
+                                        <li class="checked"><img src="images/dazhi_header.png"></li>
+                                        <li><img src="images/dazhi_header.png"></li>
+                                        <li><img src="images/dazhi_header.png"></li>
+                                        <li><img src="images/dazhi_header.png"></li>
+                                        <li><img src="images/dazhi_header.png"></li>
+                                        <li><img src="images/dazhi_header.png"></li>
+                                        <li><img src="images/dazhi_header.png"></li>
+                                        <li><img src="images/dazhi_header.png"></li>
+                                    </ul>
+                                    <div class="fix"></div>
+                                </div>
+                            </div>
+                            <div class="form-group view2">
+                                <div class="checkbox" style="margin-top:0;">
+                                    <label style="color: #fff;">
+                                        <input type="checkbox" id="isRead" onchange="isRead()">同意Gbocai《<a href="javascript:;" target = "_blank" style="color: #31c3a2;">ROLL活动相关规则</a>》
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="view3">*当该活动参与人数大于10人时，奖品池中的饰品将无法撤回！</p>
+                            <button type="button" class="btn  btn-raised btn-primary view4">提交</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="inc_footer"></div>
+<!--right-->
+<div class="inc_right hide">
+    <!--left-->
+    <div class="inc_right_tabs_big">
+        <ul class="inc_right_tabs inc_right_tabs_middle">
+            <li class="inc_right_tabs_one inc_right_tabs_three inc_right_tabs_four inc_right_tabs_account">
+                <div class="inc_right_tabs_inside">
+                    <span class="iconfont icon-logo"></span>
+                    <img src="images/dazhi_header.png" class="hide">
+                    <span class="hint_label hide">你的账户</span>
+                </div>
+            </li>
+            <li class="inc_right_tabs_two inc_right_tabs_four inc_right_tabs_history">
+                <div class="inc_right_tabs_history_small inc_right_tabs_inside">
+                    <p>
+                        <span class="iconfont icon-youcetouzhulishi"></span>
+                        <span class="mt-5">投注历史</span>
+                    </p>
+                </div>
+            </li>
+            <li class="inc_right_tabs_one inc_right_tabs_three inc_right_tabs_four inc_right_tabs_record">
+                <div class="inc_right_tabs_inside">
+                    <span class="iconfont icon-youceduihuanjilu"></span>
+                    <span class="hint_label hide">兑换记录</span>
+                </div>
+            </li>
+            <li class="inc_right_tabs_one inc_right_tabs_three inc_right_tabs_four inc_right_tabs_inform">
+                <div class="inc_right_tabs_inside">
+                    <span class="iconfont icon-wodetongzhi2"></span>
+                    <span class="hint_label hide">你的通知</span>
+                </div>
+            </li>
+            <li class="inc_right_tabs_one inc_right_tabs_three inc_right_tabs_four inc_right_tabs_friend">
+                <div class="inc_right_tabs_inside">
+                    <span class="iconfont icon-youcetuijianhaoyou"></span>
+                    <div class="invite_friends hide">
+                        <p class="invite_friends_top">
+                            <img src="images/LOGO_nobeta.png" class="invite_friends_top_logo">
+                            <img src="images/right_close.png" class="invite_friends_top_close">
+                        </p>
+                        <div class="invite_friends_bottom">
+                            <div class="code_one">
+                                <img src="images/fenxerwm.png" class="code_img">
+                            </div>
+                            <p class="invite_friends_bottom_text">推荐好友注册成功可获得金币奖励</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="inc_right_tabs_one inc_right_tabs_three inc_right_tabs_four inc_right_tabs_contact">
+                <div class="inc_right_tabs_inside">
+                    <span class="iconfont icon-youcelianxiwomen"></span>
+                    <span class="hint_label hide">联系我们</span>
+                </div>
+            </li>
+            <li class="inc_right_tabs_one inc_right_tabs_three inc_right_tabs_four inc_right_tabs_help">
+                <div class="inc_right_tabs_inside">
+                    <span class="iconfont icon-youcebangzhuzhongxin"></span>
+                    <span class="hint_label hide">帮助中心</span>
+                </div>
+            </li>
+            <li class="inc_right_tabs_one inc_right_tabs_three inc_right_tabs_four inc_right_tabs_feedback">
+                <div class="inc_right_tabs_inside">
+                    <span class="iconfont icon-bianji"></span>
+                    <span class="hint_label hide">用户反馈</span>
+                </div>
+            </li>
+        </ul>
+        <ul class="inc_right_tabs inc_right_tabs_bottom">
+            <li class="inc_right_tabs_one inc_right_tabs_three inc_right_tabs_weixin hide" title="微信公众号">
+                <div class="inc_right_tabs_inside">
+                    <span class="iconfont icon-youcexiaochengxuerweima"></span>
+                    <div class="hint_label hide"></div>
+                </div>
+            </li>
+            <li class="inc_right_tabs_one inc_right_tabs_top">
+                <div class="inc_right_tabs_inside">
+                    <span class="iconfont icon-youcefanhuitoubu"></span>
+                    <span class="hint_label hide">返回顶部</span>
+                </div>
+            </li>
+        </ul>
+        <div id="inc_right_login" class="modal-content" style="background:#2e3238; color:#fff; width: 350px; height:440px;position: absolute;right: 35px;">
+            <div class="modal-header" style="padding-top: 55px;">
+                <button type="button" class="close close_xa_xa" data-dismiss="modal" aria-hidden="true" style="position: absolute;right: 20px;top: 20px;"><img src="images/close_new.png"></button>
+                <h2 class="modal-title" id="myModalLabel" style=" font-size: 30px;font-weight: bold;"><b>登录开始竞猜</b></h2>
+            </div>
+            <div class="modal-body">
+                <!-- <p style="text-align: center;"><img src="" alt="" style=" width: 70px; height: 70px; line-height:70px; text-align: center;"></p>
+                 <p class=" mt-10" style="text-align: center;">“怦然”<a style=" color: #31C3A2;  text-decoration: underline;">不是你？</a></p>
+                --><form id="loginform" name="loginform" action="/login" method="post">
+                <input name="email" id="email" type="hidden">
+                <input name="mobile" id="mobile" type="hidden" value="">
+
+                <div id="historyLog" style="display: none;">
+                    <p style="text-align: center;"><img src="/upload/avatar/20170103/73dfee9f1e7142a89e47db50c35e1686.jpg" class="img-circle" id="userPhoto" alt="" style=" width: 70px; height: 70px; line-height:70px; text-align: center;"></p>
+                    <p class=" mt-10" style="text-align: center;"><font id="nickName">‘superadmin’</font><a style=" color: #31C3A2;  text-decoration: underline;" id="notMe">不是你？</a></p>
+                </div>
+                <div class="form-group label-floating is-empty" id="loginNameDiv" style="display: block;">
+                    <label for="loginName" class="control-label">手机号/邮箱</label>
+                    <input type="text" class="form-control" name="loginName" id="loginName">
+                    <span class="help-block" id="loginNameError"></span>
+                </div>
+                <div class="form-group label-floating is-empty">
+                    <label for="password" class="control-label">密码</label>
+                    <input type="text" class="form-control" name="password" id="password" autocomplete="off" onfocus="this.type='password'">
+                    <span class="help-block" id="passwordError"></span>
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer" style="text-align: left;">
+                <div style="padding: 0 13px;">
+                    <p style="margin-bottom: 8px;">
+                        <a href="/fp/forgetPassword" style="text-decoration:underline; color:#31bc9c;">忘记密码？</a><br></p>
+                    <span style="color: #d4d4d4;">新成员？</span><a href="javascript:;" style="text-decoration:underline; color:#31bc9c;" onclick="$('#myModal').find('.close').click();" data-toggle="modal" data-target="#myModal2">现在注册</a>
+                    <button type="button" class="btn btn-primary btn-raised pull-right" style="width: 84px; height: 30px; padding-top: 4px; transform:translateY(-21px);" onclick="login();"><strong>登 录</strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--right-->
+    <div class="inc_right_content">
+        <!--你的账户-->
+        <div class="slide hide" id="inc_right_tabs_account">
+            <div class="slide-head"><img class="zjtp zjtp_x" src="images/shuangzuo.png" alt="">
+
+                <h2>你的账户</h2></div>
+            <div class="slide-content">
+                <div style="overflow: hidden; max-height: 80px;">
+                    <a href="#"><img class="p-img img-circle" src="images/nvnv.png"/></a>
+
+                    <p class="user-name">hi,pengpengran</p>
+                    <span class="lv-x" style="float: left;"></span>
+                </div>
+                <div class="item-1">
+                    <dl>
+                        <dt>今天签到已获赠<span>23</span>金币</dt>
+                        <dd>已经签到<span>5</span>天</dd>
+                    </dl>
+                    <button type="button" class="btn  btn-raised btn-primary">
+                        <strong>签到</strong>
+                    </button>
+                </div>
+                <div class="item-2">
+                    <div class="yourswallet">你的钱包</div>
+                    <p><span><b>￥</b></span><span>153</span>金币</p>
+                    <button type="button" class="btn pull-right right_xa_click" data-toggle="modal" data-target="#myModal">
+                        <strong class="right_xa_click">充值</strong>
+                    </button>
+                </div>
+                <div class="item-3">
+                    <dl>
+                        <dt><span>15</span>金币</dt>
+                        <dd>正在参与竞猜未结算的货币</dd>
+                    </dl>
+                </div>
+                <div class="item-4">
+                    <button type="button">全部兑换点卡</button>
+                    <button type="button">商品全部出售</button>
+                </div>
+            </div>
+        </div>
+        <!--投注历史-->
+        <div class="slide hide" id="inc_right_tabs_history">
+            <div class="slide-head">
+                <img class="zjtp zjtp_x" src="images/shuangzuo.png" alt="">
+                <h2>投注历史</h2>
+            </div>
+            <div class="slide-content">
+                <div style="border-bottom: 1px solid #575a60; padding-bottom: 18px;">
+                    <div class="picwrap">
+                        <dl>
+                            <dt><img src="images/jccai.png" alt=""/></dt>
+                            <dd>共竞猜<span>1</span>次</dd>
+                        </dl>
+                        <dl>
+                            <dt style="padding-left: 0;"><img src="images/win.png" alt=""/></dt>
+                            <dd>获胜<span>1</span>次</dd>
+                        </dl>
+                        <dl>
+                            <dt><img src="images/gougouzi.png" alt=""/></dt>
+                            <dd>胜率<span>0.00</span>%</dd>
+                        </dl>
+                    </div>
+                    <div class="picwrap">
+                        <dl>
+                            <dt><img src="images/shouyia.png" alt=""></dt>
+                            <dd>本周收益<span>1000000000000000000</span>金币</dd>
+                        </dl>
+                        <dl>
+                            <dt></dt>
+                            <dd><span></span></dd>
+                        </dl>
+                        <dl>
+                            <dt></dt>
+                            <dd><span></span></dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="jcrecord mb-10">
+                <div class="jc-itemrecord" style="top: -28px; left: 116px;">竞猜记录</div>
+                <div class="jcrecord-title"
+                     style="display: flex; flex-direction: row; justify-content: space-between; padding: 0 56px; color: #fff;">
+                    <div style="white-space: nowrap;">
+                        <sapn class="tip-yuan" style="background: #e4a713;">W</sapn>
+                        赢
+                    </div>
+                    <div style="white-space: nowrap;">
+                        <sapn class="tip-yuan" style="background: #525252;">L</sapn>
+                        输
+                    </div>
+                    <div style="white-space: nowrap;">
+                        <sapn class="tip-yuan" style="background: #0c6954;">N</sapn>
+                        待结束
+                    </div>
+                </div>
+                <div class="jcrecord-content">
+                    <div class="shadow-item">
+                    </div>
+                    <a class="btn btn-primary btn-raised chakan"
+                       style="width: 48px; height: 24px; padding: 0; line-height: 24px;">查 看
+                    </a>
+                    <div style="width: 50px; height: 42px; line-height: 42px; text-align: center;">
+                        <sapn class="tip-yuan" style="background: #e4a713; margin: 0;">W</sapn>
+                    </div>
+                    <div>
+                        <div class="myjc-item" style="margin-bottom: 3px;">
+                            <img src="images/nvnv.png" alt="" class="a-bit"/>
+                            <span>ALL</span>
+                            <span>BO3</span>
+                            <span>JH.gold555555555555555555555555555555555</span>
+                            <span class="timespan">9小时前...</span>
+                        </div>
+                        <div style="justify-content: flex-start;">
+                            <span style="margin-right: 40px;">下注&nbsp;:&nbsp;127823</span><span>收益&nbsp;:&nbsp;<b
+                                style="color: #e4a713;">666</b></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="jcrecord-content">
+                    <div class="shadow-item">
+                    </div>
+                    <a class="btn btn-primary btn-raised chakan"
+                       style="width: 48px; height: 24px; padding: 0; line-height: 24px;">查 看
+                    </a>
+                    <div style="width: 50px; height: 42px; line-height: 42px; text-align: center;">
+                        <sapn class="tip-yuan" style="background: #0c6954; margin: 0;">N</sapn>
+                    </div>
+                    <div>
+                        <div class="myjc-item" style="margin-bottom: 3px;">
+                            <img src="images/nvnv.png" alt="" class="a-bit"/>
+                            <span>ALL1132132132132132</span>
+                            <span>BO3123321321321321321</span>
+                            <span>JH.gold123123123132</span>
+                            <span class="timespan">9小时前...</span>
+                        </div>
+                        <div style="justify-content: flex-start;">
+                            <span style="margin-right: 40px;">下注&nbsp;:&nbsp;127823</span><span>收益&nbsp;:&nbsp;<b
+                                style="color: #e4a713;">666</b></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="jcrecord-content">
+                    <div class="shadow-item">
+                    </div>
+                    <a class="btn btn-primary btn-raised chakan"
+                       style="width: 48px; height: 24px; padding: 0; line-height: 24px;">查 看
+                    </a>
+                    <div style="width: 50px; height: 42px; line-height: 42px; text-align: center;">
+                        <sapn class="tip-yuan" style="background: #525252; margin: 0;">L</sapn>
+                    </div>
+                    <div>
+                        <div class="myjc-item" style="margin-bottom: 3px;">
+                            <img src="images/nvnv.png" alt="" class="a-bit"/>
+                            <span>ALL</span>
+                            <span>BO3</span>
+                            <span>JH.gold</span>
+                            <span class="timespan">9小时前...</span>
+                        </div>
+                        <div style="justify-content: flex-start;">
+                            <span style="margin-right: 40px;">下注&nbsp;:&nbsp;127823</span><span>收益&nbsp;:&nbsp;<b
+                                style="color: #e4a713;">666</b></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item-more">
+                <a href="#"><span class="sxpic"></span>加载更多</a>
+            </div>
+            <div class="item-record">
+                <a href="#"><span class="tzpic"></span>没有更多记录</a>
+            </div>
+        </div>
+        <!--兑换记录-->
+        <div class="slide hide" id="inc_right_tabs_record">
+            <div class="slide-head"><img class="zjtp zjtp_x" src="images/shuangzuo.png" alt="">
+
+                <h2>兑换记录</h2></div>
+            <div class="slide-content" style="padding: 0;">
+                <div class="item-sale">
+                    <div>
+                        <input id="conserve" type="checkbox" class="magic-checkbox" name="all" value=""/>
+                        <label class="hold" for="conserve">全选</label>
+                    </div>
+                    <button type="button" class="btn" style="color: #31c3a2;">全部出售</button>
+                </div>
+                <div class="item-getbag mb-10"
+                     style="display: flex; flex-direction: row; justify-content: space-between; padding: 0 16px; background: #2e3238; overflow: hidden;">
+                    <div style="display: flex; flex-direction: column; flex: 1;">
+                        <p class="mb-10">订单号&nbsp;:&nbsp;4138977865</p>
+
+                        <div style="display: flex; flex-direction: row; justify-content: flex-start;">
+                            <div class="c-checkbox">
+                                <input id="123" type="checkbox" class="magic-checkbox" name="son" value="">
+                                <label class="hold" for="123"></label>
+                            </div>
+                            <a href="" class="ml-10" style="display: inline-block; width:44px; height: 30px;"><img
+                                    title="实物不出售" src="images/c-shouwang.png" width="100%" height="100%"/></a>
+
+                            <div>
+                                <p class="ml-10" style="white-space: nowrap;"><span>守望先锋数字畅玩包</span></p>
+
+                                <p class="ml-10" style="color: #d29b19; white-space: nowrap;">36000金币</p>
+                            </div>
+                        </div>
+                        <p><span>2016.11.17</span>&nbsp;&nbsp;<span>15&nbsp;:&nbsp;00</span></p>
+                    </div>
+                    <div class="liuliu" style="display: flex; flex-direction: column; text-align: right; position: relative;">
+                        <div class="bounced">
+                            <div class="webside_"><b style="white-space: nowrap; color: #31c3a2;">网址&nbsp;:&nbsp;</b><div><a href="#" class="cardpa" style="width: 166px; text-decoration: underline;">fkajfkljasdklfjklsadjf1212312312312312312312112112121212</a></div></div>
+                            <div class="webside_"><b style="white-space: nowrap; color: #31c3a2;">卡号&nbsp;:&nbsp;<span class="cardpa" style="color: #fff;width: 86px; text-align: left; padding-left: 7px; vertical-align: middle; padding-bottom: 3px;">001321321231231321231233</span></b><a href="#" class="cardpa" style="text-align: left;width: 166px; text-decoration: underline;">复制</a></div>
+                            <div class="webside_"><b style="white-space: nowrap; color: #31c3a2;">密码&nbsp;:&nbsp;</b><div><a href="#" class="cardpa" style="width: 166px; text-decoration: underline;">fkajfkljasdklfjklsadjf1212312312312312312312112112121212</a></div></div>
+                        </div>
+                        <a class="" href="#" style="text-align: center; color: #31c3a2;">未领取</a>
+                        <button type="button" class="btn btn-primary btn-raised getlook"
+                                style="width: 48px; height: 24px; padding: 0;"><strong>领 取</strong>
+                        </button>
+                        <button type="button" class="btn"
+                                style=" border: 1px solid #31c3a2; color: #31c3a2; width: 48px; height: 24px; padding: 0;">
+                            出售
+                        </button>
+                    </div>
+                </div>
+                <div class="item-getbag mb-10"
+                     style="display: flex; flex-direction: row; justify-content: space-between; padding: 0 16px; background: #2e3238; overflow: hidden;">
+                    <div style="display: flex; flex-direction: column; flex: 1;">
+                        <p class="mb-10">订单号&nbsp;:&nbsp;4138977865</p>
+
+                        <div style="display: flex; flex-direction: row; justify-content: flex-start;">
+                            <div class="c-checkbox">
+                                <input id="123" type="checkbox" class="magic-checkbox" name="son" value="">
+                                <label class="hold" for="123"></label>
+                            </div>
+                            <a href="" class="ml-10" style="display: inline-block; width:44px; height: 30px;"><img
+                                    title="实物不出售" src="images/c-shouwang.png" width="100%" height="100%"/></a>
+
+                            <div>
+                                <p class="ml-10" style="white-space: nowrap;"><span>守望先锋数字畅玩包</span></p>
+
+                                <p class="ml-10" style="color: #d29b19; white-space: nowrap;">36000金币</p>
+                            </div>
+                        </div>
+                        <p><span>2016.11.17</span>&nbsp;&nbsp;<span>15&nbsp;:&nbsp;00</span></p>
+                    </div>
+                    <div class="liuliu" style="display: flex; flex-direction: column; text-align: right; position: relative;">
+                        <div class="bounced">
+                            <div class="webside_"><b style="white-space: nowrap; color: #31c3a2;">网址&nbsp;:&nbsp;</b><div><a href="#" class="cardpa" style="width: 166px; text-decoration: underline;">fkajfkljasdklfjklsadjf1212312312312312312312112112121212</a></div></div>
+                            <div class="webside_"><b style="white-space: nowrap; color: #31c3a2;">卡号&nbsp;:&nbsp;<span class="cardpa" style="color: #fff;width: 86px; text-align: left; padding-left: 7px; vertical-align: middle; padding-bottom: 3px;">001321321231231321231233</span></b><a href="#" class="cardpa" style="text-align: left;width: 166px; text-decoration: underline;">复制</a></div>
+                            <div class="webside_"><b style="white-space: nowrap; color: #31c3a2;">密码&nbsp;:&nbsp;</b><div><a href="#" class="cardpa" style="width: 166px; text-decoration: underline;">fkajfkljasdklfjklsadjf1212312312312312312312112112121212</a></div></div>
+                        </div>
+                        <a class="" href="#" style="text-align: center; color: #31c3a2;">未领取</a>
+                        <button type="button" class="btn btn-primary btn-raised getlook"
+                                style="width: 48px; height: 24px; padding: 0;"><strong>领 取</strong>
+                        </button>
+                        <button type="button" class="btn"
+                                style=" border: 1px solid #31c3a2; color: #31c3a2; width: 48px; height: 24px; padding: 0;">
+                            出售
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="item-more">
+                <a href="#"><span class="sxpic"></span>加载更多</a>
+            </div>
+            <div class="item-record">
+                <a href="#"><span class="tzpic"></span>没有更多记录</a>
+            </div>
+        </div>
+        <!--你的通知-->
+        <div class="slide hide" id="inc_right_tabs_inform">
+            <div class="slide-head"><img class="zjtp zjtp_x" src="images/shuangzuo.png" alt="">
+
+                <h2>你的通知</h2></div>
+            <div class="slide-content" style="padding:16px 0;">
+                <ul class="list-group">
+                    <li class="c-informgroup">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>充值金币100成功</span>
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>恭喜您，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroupv</span>
+
+                    </li>
+                    <li class="c-informgroup">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>充值金币100成功</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>恭喜您，您参与的竞猜444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                    <li class="c-informgroup">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>充值金币100成功</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>恭喜您44444444444444444444444444444444444，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                    <li class="c-informgroup">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>充值金币100成功</span>
+
+                    </li>
+                    <li class="c-informgroup">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>恭喜您，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                </ul>
+                <div class="item-more">
+                    <a href="#"><span class="sxpic"></span>加载更多</a>
+                </div>
+                <div class="item-record">
+                    <a href="#"><span class="tzpic"></span>没有更多记录</a>
+                </div>
+            </div>
+        </div>
+        <!--推荐好友-->
+        <div class="slide hide" id="inc_right_tabs_friend">
+            <div class="slide-head">
+                <img class="zjtp zjtp_x" src="images/shuangzuo.png" alt="">
+                <h2>推荐好友</h2>
+            </div>
+            <div class="slide-content">
+                <p style="color: #607d8b;width: 300px;">推荐您的好友在平台注册后，您将获得100个金币奖励。</p>
+
+                <div class="x-recommend-link" style="background: none; padding-left: 0; margin-top: 10px;">
+                    <p class="view1"><span class="one">推广链接</span><span class="copy-link two">复制</span><span style="margin-left:42px">邀请码&nbsp;:&nbsp;69a356</span></p>
+
+                    <p class="view2"><input type="text" value="http://www.bocai.com/?fromuid=849"
+                                            style="background: #3d4148;"></p>
+
+                    <p class="view3"><a>兑换</a><a class="ml-20">交易记录</a></p>
+                </div>
+                <div class="item-erweima">
+                    <div class="erweima-title">二维码邀请</div>
+                    <div style="text-align: center;"><img src="images/fenxerwm.png" alt=""></div>
+                    <div class="qxw">
+                        <p style="text-align: center;">分享至&nbsp;:&nbsp;</p>
+                        <div class="qxwfxwrap">
+                            <img src="images/qqicon.png" alt="">
+                            <img src="images/sinlang.png" alt="">
+                            <img src="images/weixfenx.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="item-thistory">
+                    <div class="history-title">推荐历史</div>
+                    <p style="color: #607d8b; width: 300px;">您的好友完成首次竞猜，您将在获得200个金币的奖励。</p>
+                </div>
+            </div>
+            <div class="item-list">
+                <div class="tip-title">
+                    <span>会员昵称</span>
+                    <span>时间</span>
+                    <span>奖励</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-title">
+                    <span>会员昵称</span>
+                    <span>时间</span>
+                    <span>奖励</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-title">
+                    <span>会员昵称</span>
+                    <span>时间</span>
+                    <span>奖励</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-title">
+                    <span>会员昵称</span>
+                    <span>时间</span>
+                    <span>奖励</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-title">
+                    <span>会员昵称</span>
+                    <span>时间</span>
+                    <span>奖励</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-title">
+                    <span>会员昵称</span>
+                    <span>时间</span>
+                    <span>奖励</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+                <div class="tip-main">
+                    <span>怦然</span>
+                    <span>16/09/09&nbsp;10:48</span>
+                    <span>+10金币</span>
+                </div>
+            </div>
+            <div class="item-more">
+                <a href="#"><span class="sxpic"></span>加载更多</a>
+            </div>
+            <div class="item-record">
+                <a href="#"><span class="tzpic"></span>没有更多记录</a>
+            </div>
+        </div>
+        <!--联系我们-->
+        <div class="slide hide" id="inc_right_tabs_contact">
+            <div class="slide-head"><img class="zjtp zjtp_x" src="images/shuangzuo.png" alt="">
+
+                <h2>联系我们</h2></div>
+            <div class="slide-content">
+                <div class="item-pem">
+                    <p>客服电话&nbsp;:&nbsp;027-8977865</p>
+
+                    <p>客户邮箱&nbsp;:&nbsp;wodota@bocai.com</p>
+
+                    <p>商务合作&nbsp;:&nbsp;400-111-111</p>
+
+                    <p>官方QQ群：12345678<button><span class="iconfont icon-qq"></span>加入QQ群</button></p>
+                </div>
+                <div class="processtime">
+                    <div class="processtime-title">受理时间</div>
+                    <p>1）若您在使用我们的服务时遇到问题，您可以拨打咨询电话4009-100-100或者提交工单寻求帮助，我们专业的工程师团队将为您提供7*24小时不间断的技术服务。</p>
+
+                    <p>2）如遇等待时间过长，可以连线官方在线客服咨询，会有工作人员帮您跟进处理。</p>
+                </div>
+                <div class="online-service">
+                    <div class="online-servicetitle">在线客服</div>
+                    <ul>
+                        <li><button><span class="iconfont icon-qq"></span>在线客服1</button></li>
+                        <li><button><span class="iconfont icon-qq"></span>在线客服2</button></li>
+                        <li><button class="disabled" disabled="disabled"><span class="iconfont icon-qq"></span>客服3离线</button></li>
+                        <li><button class="disabled" disabled="disabled"><span class="iconfont icon-qq"></span>客服4离线</button></li>
+                        <li><button class="disabled" disabled="disabled"><span class="iconfont icon-qq"></span>客服5离线</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--帮助中心-->
+        <div class="slide hide" id="inc_right_tabs_help">
+            <div class="slide-head"><img class="zjtp zjtp_x" src="images/shuangzuo.png" alt="">
+
+                <h2>帮助中心</h2></div>
+            <div class="slide-content" style="padding:16px 0;">
+                <ul class="list-group">
+                    <li class="c-informgroup">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>充值金币100成功</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>恭喜您，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroup.c-informgroupv</span>
+
+                    </li>
+                    <li class="c-informgroup">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>充值金币100成功</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>恭喜您，您参与的竞猜444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                    <li class="c-informgroup">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>充值金币100成功</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>恭喜您44444444444444444444444444444444444，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>恭喜您44444444444444444444444444444444444，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>恭喜您44444444444444444444444444444444444，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>恭喜您44444444444444444444444444444444444，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>恭喜您44444444444444444444444444444444444，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>恭喜您44444444444444444444444444444444444，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>恭喜您44444444444444444444444444444444444，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>恭喜您44444444444444444444444444444444444，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>恭喜您44444444444444444444444444444444444，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>恭喜您44444444444444444444444444444444444，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>恭喜您44444444444444444444444444444444444，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                    <li class="c-informgroup addword">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>恭喜您44444444444444444444444444444444444，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                    <li class="c-informgroup">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>充值金币100成功</span>
+
+                    </li>
+                    <li class="c-informgroup">
+                        <i class="iconfont icon-xiaoxitongzhi"></i>
+                        <span>2016-09-09</span>
+                        <span>10:48:45</span>
+                        <span>【公告】</span>
+                        <span>恭喜您，您参与的竞猜(7628902 AllStrike vs JH Gaming.gold)已结束，本次竞猜得780金币。您可以进入我...</span>
+
+                    </li>
+                </ul>
+                <div class="item-more">
+                    <a href="#"><span class="sxpic"></span>加载更多</a>
+                </div>
+                <div class="item-record">
+                    <a href="#"><span class="tzpic"></span>没有更多记录</a>
+                </div>
+            </div>
+        </div>
+        <!--用户反馈-->
+        <div class="slide hide" id="inc_right_tabs_feedback">
+            <div class="slide-head"><img class="zjtp zjtp_x" src="images/shuangzuo.png" alt="">
+
+                <h2>用户反馈</h2></div>
+            <div class="slide-content">
+                <div class="form-group label-floating pull-left" style="width: 288px;">
+                    <label for="i5" class="control-label">请输入标题</label>
+                    <input type="text" class="form-control" id="i5">
+                </div>
+                <textarea name="" id="" placeholder="请输入你的意见"></textarea>
+
+                <div class="form-group label-floating pull-left" style="width: 288px;">
+                    <label for="i51" class="control-label" style="font-size: 15px;">请输入验证码</label>
+                    <span id="spans"
+                          style="background:#fff; cursor: pointer; height: 20px; width: 50px; text-align: center; position: absolute; top:7px; right: 0px;"></span>
+                    <input type="text" class="form-control" id="i51" value="123">
+                </div>
+                <button type="submit" class="btn btn-primary btn-raised" style="width: 288px;"><strong>提交</strong>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/material.js"></script>
+<script src="js/ripples.min.js"></script>
+<script src="js/jquery.dropdown.js"></script>
+<script>
+    $.material.init();
+</script>
+<script type="text/javascript">
+    $(".form-group select").dropdown();
+    $(function () {
+        //异步加载头尾
+        $.get("header.html", function (data) {
+            $(data).appendTo("#inc_header");
+        }, "html");
+        $(".container-fluid").css("min-height",document.body.clientHeight-130);
+        $.get("footer.html", function (data) {
+            $(data).appendTo("#inc_footer");
+        }, "html");
+    });
+    //通知滚动轮播
+    var myInterval;
+    function autoScroll(obj){
+        $(obj).animate({
+            marginTop : "-40px"
+        },500,function(){
+            $(this).css({marginTop : "0px"}).find("li:first").appendTo(this);
+        })
+    }
+    function setMyInterval(){
+        myInterval = setInterval('autoScroll(".list-inform-two")',3000);
+    }
+    $(function(){
+        setMyInterval();
+        $(".list-inform").mouseover(function () {
+            clearInterval(myInterval);
+        }).mouseout(function () {
+            setMyInterval();
+        })
+    })
+    //评论
+    $(function () {
+        $(".dianjimore").click(function () {
+            var $plnmore = $(".dianjimore").parent().find(".plnmore")
+            if ($plnmore.is(':hidden')) {
+                $plnmore.show()
+            } else {
+                $plnmore.hide()
+                $(".plnmore:eq(0),.plnmore:eq(1),.plnmore:eq(2)").show()
+            }
+
+        })
+    })
+    $(function () {
+        $(".plnmore:eq(0),.plnmore:eq(1),.plnmore:eq(2)").show()
+    })
+    $(function () {
+        $(".c_huifu").click(function () {
+            $(".c_huifu").attr("disabled", "disabled")
+            $(".discussant").append("<div class='huifuname'>@error222232323234444444444444444444444444<span class='schf'>X</span></div>")
+        })
+    })
+    $(".discussant").on("click", ".schf", function () {
+        $(".huifuname").remove();
+        $(".c_huifu").removeAttr("disabled");
+    })
+    $(function () {
+        $(".dyde").mouseover(function (e) {
+            e.preventDefault();
+            console.log(1);
+            $(this).find(".dyd").addClass("animation_updown");
+            $(this).find(".chexiaoa").html("撤回");
+        }).mouseleave(function () {
+            $(this).find(".dyd").removeClass("animation_updown");
+            $(this).find(".chexiaoa").html("");
+        });
+        $(".dyde1").mouseover(function (e) {
+            e.stopPropagation();
+            $(".chexiaoa").html("");
+            var _con = $(".fwei");
+            _con.parent(".dyde").find(".dyd").removeClass("animation_updown");
+            $(this).find(".dyd1").addClass("animation_updown");
+            $(this).find(".chexiaoa1").html("撤回");
+        }).mouseleave(function (e) {
+            $(this).find(".dyd1").removeClass("animation_updown");
+            $(this).find(".chexiaoa1").html("");
+        });
+    });
+    $(function () {
+        $(".chexiaoa,.chexiaoa1").on("click", function () {
+            $(this).parent().remove();
+        });
+    });
+
+    $(function () {
+        //活动切换
+        $(".ornament-left-screen .view4").on("click",function(){
+            $(".ornament-left-screen .view4").removeClass("checked");
+            $(this).addClass("checked");
+        })
+
+        //展开更多ROLL
+        $(".ornament-left-screen .view3").on("click",function(){
+            $(".ornament-left-screen .view5").removeClass("hide");
+        })
+        $(".ornament-left-screen .view5").on("mouseenter",function(){
+            $(this).removeClass("hide");
+        }).on("mouseleave",function(){
+            $(this).addClass("hide");
+        })
+        $(".ornament-left-screen .view5 .two li").on("click",function(){
+            $(".ornament-left-screen .view5 .two li").removeClass("checked");
+            $(this).addClass("checked");
+        })
+        $(".ornament-left-screen .view5 .one").on("click",function(){
+            $(".ornament-left-screen .view5").addClass("hide");
+        })
+
+        //获奖结果奖品鼠标经过显示详细信息
+        $(".ornament-left-participation-before .view2 .content .three li .prize-img").on("mouseenter",function(){
+            $(this).parent().find(".prize-message").removeClass("hide");
+        }).on("mouseleave",function(){
+            $(this).parent().find(".prize-message").addClass("hide");
+        })
+
+        //删除奖品池
+        $(".ornament-left-prize .view2 li .delete-prize").on("click",function(){
+            $(this).parent().remove();
+        })
+
+        //CDKEY选择
+        $(".myModalAdd .modal-body .view1 .two li").on("click",function(){
+            if($(this).hasClass("checked") == true){
+                $(this).removeClass("checked");
+            }
+            else{
+                $(this).addClass("checked");
+            }
+        })
+
+        $(".myModalAdd .modal-body .view1 .form-group ul li").on("click",function(){
+            if($(this).attr("value") == "gold"){
+                $(".myModalAdd .modal-body .team-one").removeClass("hide");
+                $(".myModalAdd .modal-body .team-two").addClass("hide");
+            }
+            else{
+                $(".myModalAdd .modal-body .team-one").addClass("hide");
+                $(".myModalAdd .modal-body .team-two").removeClass("hide");
+            }
+        })
+    });
+
+</script>
+</html>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.exchange.mapper.IUserExchangeLogMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.user.exchange.entities.UserExchangeLog">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="stock_id" property="stockId"/> <!-- 库存ID-->
+		<result column="user_id" property="userId"/> <!-- 用户ID-->
+		<result column="exchange_time" property="exchangeTime"/> <!-- 兑换时间-->
+		<result column="exchange_gold" property="exchangeGold"/> <!-- 兑换金额-->
+		<result column="exchange_status" property="exchangeStatus"/> <!-- 兑换状态 默认 1  1：有效 0：无效-->
+		<result column="ue_order_no" property="ueOrderNo"/> <!-- 数字订单编号-->
+		<result column="tracker_no" property="trackerNo"/> <!-- 物流单号-->
+		<result column="cdk_code" property="cdkCode"/> <!-- cd_key内码-->
+		<result column="receiver_name" property="receiverName"/> 
+		<result column="receiver_mobile" property="receiverMobile"/> 
+		<result column="receiver_address" property="receiverAddress"/> 
+	</resultMap>
+	
+	<!-- t_user_exchange_log字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 唯一标识-->
+			stock_id, <!-- 库存ID-->
+			user_id, <!-- 用户ID-->
+			exchange_time, <!-- 兑换时间-->
+			exchange_gold, <!-- 兑换金额-->
+			exchange_status, <!-- 兑换状态 默认 1  1：有效 0：无效-->
+			ue_order_no, <!-- 数字订单编号-->
+			tracker_no, <!-- 物流单号-->
+			cdk_code, 
+			receiver_name, 
+			receiver_mobile, 
+			receiver_address, 
+		</trim>
+	</sql>
+	
+	<!-- 查询t_user_exchange_log分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_exchange_log 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="stockId != null and stockId != ''">
+				AND stock_id=#{stockId}
+			</if>
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="exchangeTimeStart != null and exchangeTimeStart != ''">
+				AND exchange_time >= #{exchangeTimeStart}
+			</if>
+			<if test="exchangeTimeEnd != null and exchangeTimeEnd != ''">
+				AND exchange_time <![CDATA[ <= ]]> #{exchangeTimeEnd}
+			</if>
+			<if test="exchangeGold != null and exchangeGold != ''">
+				AND exchange_gold=#{exchangeGold}
+			</if>
+			<if test="exchangeStatus != null and exchangeStatus != ''">
+				AND exchange_status=#{exchangeStatus}
+			</if>
+			<if test="ueOrderNo != null and ueOrderNo != ''">
+				AND ue_order_no=#{ueOrderNo}
+			</if>
+			<if test="trackerNo != null and trackerNo != ''">
+				AND tracker_no=#{trackerNo}
+			</if>
+			<if test="cdkCode != null and cdkCode != ''">
+				AND cdk_code=#{cdkCode}
+			</if>
+			<if test="receiverName != null and receiverName != ''">
+				AND receiver_name=#{receiverName}
+			</if>
+			<if test="receiverMobile != null and receiverMobile != ''">
+				AND receiver_mobile=#{receiverMobile}
+			</if>
+			<if test="receiverAddress != null and receiverAddress != ''">
+				AND receiver_address=#{receiverAddress}
+			</if>
+		</trim>
+	</select>
+	
+	<select id="findListByPage" parameterType="map" resultType="com.webside.user.exchange.entities.UserExchangeLog" flushCache="true" useCache="true">
+		select g.id as 'goodsVo.goodsId',g.GOODS_IMG as 'goodsVo.goodsImg',g.GOODS_NAME as 'goodsVo.goodsName',g.TYPE as 'goodsVo.goodsType'
+			,gs.CARD_NO AS 'goodsVo.cardNo',gs.CARD_PASS AS 'goodsVo.cardPass',gs.`STATUS` as 'goodsVo.stockStatus',gs.ID as 'goodsVo.stockId'
+			,t.ID,t.EXCHANGE_STATUS,t.EXCHANGE_GOLD,t.EXCHANGE_TIME,t.UE_ORDER_NO,t.TRACKER_NO,t.CDK_CODE,t.STOCK_ID from t_user_exchange_log t
+		left join t_goods_stock gs on gs.id = t.stock_id
+		left join t_goods g on g.id = gs.goods_id
+		where 1=1
+		and t.exchange_status != 0
+		and t.user_id = #{userId} 
+		<if test="id != null and id != ''">
+			AND t.ID = #{id}
+		</if>
+		<if test="statusId != null and statusId != ''">
+			<choose>
+				<when test="statusId == 2">
+					AND t.exchange_status=2 and g.TYPE=2
+				</when>
+				<when test="statusId == 5">
+					AND t.exchange_status=2 and g.TYPE=1
+				</when>
+				<when test="statusId == 6">
+					AND t.TRACKER_NO is not null
+				</when>
+				<otherwise>
+					AND t.exchange_status=#{statusId}
+				</otherwise>
+			</choose>
+		</if>
+		ORDER BY t.EXCHANGE_STATUS , t.EXCHANGE_TIME desc
+	</select>
+	
+	<!-- 新增t_user_exchange_log -->
+	<insert id="insert" parameterType="com.webside.user.exchange.entities.UserExchangeLog">
+		insert into t_user_exchange_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 唯一主键-->
+		<if test="stockId != null">stock_id,</if><!-- 库存ID-->
+		<if test="userId != null">user_id,</if><!-- 用户ID-->
+		<if test="exchangeTime != null">exchange_time,</if><!-- 兑换时间-->
+		<if test="exchangeGold != null">exchange_gold,</if><!-- 兑换金额-->
+		<if test="exchangeStatus != null">exchange_status,</if><!-- 兑换状态 默认 1  1：有效 0：无效-->
+		<if test="ueOrderNo != null">ue_order_no,</if><!-- 数字订单编号-->
+		<if test="cdkCode != null">cdk_code,</if>
+		<if test="receiverName != null">receiver_name,</if>
+		<if test="receiverMobile != null">receiver_mobile,</if>
+		<if test="receiverAddress != null">receiver_address,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 唯一主键-->
+		<if test="stockId != null">#{stockId},</if><!-- 库存ID-->
+		<if test="userId != null">#{userId},</if><!-- 用户ID-->
+		<if test="exchangeTime != null">#{exchangeTime},</if><!-- 兑换时间-->
+		<if test="exchangeGold != null">#{exchangeGold},</if><!-- 兑换金额-->
+		<if test="exchangeStatus != null">#{exchangeStatus},</if><!-- 兑换状态 默认 1  1：有效 0：无效-->
+		<if test="ueOrderNo != null">#{ueOrderNo},</if><!-- 数字订单编号-->
+		<if test="cdkCode != null">#{cdkCode},</if>
+		<if test="receiverName != null">#{receiverName},</if>
+		<if test="receiverMobile != null">#{receiverMobile},</if>
+		<if test="receiverAddress != null">#{receiverAddress},</if>
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_user_exchange_log -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_exchange_log 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_user_exchange_log -->
+	<update id="update" parameterType="com.webside.user.exchange.entities.UserExchangeLog" flushCache="true">
+		update t_user_exchange_log
+		<set>
+			<trim suffixOverrides=",">
+				<if test="stockId != null">stock_id=#{stockId},</if><!-- 库存ID-->
+				<if test="userId != null">user_id=#{userId},</if><!-- 用户ID-->
+				<if test="exchangeTime != null">exchange_time=#{exchangeTime},</if><!-- 兑换时间-->
+				<if test="exchangeGold != null">exchange_gold=#{exchangeGold},</if><!-- 兑换金额-->
+				<if test="exchangeStatus != null">exchange_status=#{exchangeStatus},</if><!-- 兑换状态 默认 1  1：有效 0：无效-->
+				<if test="ueOrderNo != null">ue_order_no=#{ueOrderNo},</if><!-- 数字订单编号-->
+				<if test="trackerNo != null">tracker_no=#{trackerNo},</if>
+				<if test="cdkCode != null">cdk_code=#{cdkCode},</if>
+				<if test="receiverName != null">receiver_name=#{receiverName},</if>
+				<if test="receiverMobile != null">receiver_mobile=#{receiverMobile},</if>
+				<if test="receiverAddress != null">receiver_address=#{receiverAddress},</if>
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_user_exchange_log -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_user_exchange_log  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_user_exchange_log -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_user_exchange_log 
+		where id = #{id}
+	</delete>
+	
+	<update id="updateStatusForSales" parameterType="map" flushCache="true">
+		UPDATE t_user_exchange_log t set t.EXCHANGE_STATUS=3 WHERE t.EXCHANGE_STATUS=1
+		and t.USER_ID = #{userId}
+		and t.STOCK_ID in(
+			SELECT gs.ID FROM t_goods_stock gs
+			LEFT JOIN t_goods g on g.ID = gs.GOODS_ID
+			WHERE g.TYPE = 2
+		)
+		<if test="ids != null and ids.size() > 0">
+			and t.ID in
+			<foreach collection="ids" item="id" open="(" separator="," close=")">
+		    	#{id}  
+		    </foreach>
+		</if>
+	</update>
+	
+	<update id="updateStatusForPool" parameterType="list" flushCache="true">
+		UPDATE t_user_exchange_log SET EXCHANGE_STATUS=0 WHERE EXCHANGE_STATUS=-1
+		and ID in
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</update>
+	
+	<update id="updateStatusForRoll" parameterType="list" flushCache="true">
+		UPDATE t_user_exchange_log SET EXCHANGE_STATUS=-1 WHERE EXCHANGE_STATUS=0
+		and ID in
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</update>
+</mapper>

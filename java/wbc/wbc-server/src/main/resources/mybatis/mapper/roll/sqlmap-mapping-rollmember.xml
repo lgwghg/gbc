@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.roll.mapper.IRollMemberMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.roll.model.RollMember">
+		<id column="id" property="id"/> <!-- 主键ID-->
+		<result column="room_id" property="roomId"/> <!-- 房间ID-->
+		<result column="user_id" property="userId"/> <!-- 成员ID-->
+		<result column="create_time" property="createTime"/> <!-- 参与时间-->
+	</resultMap>
+	
+	<!-- t_roll_member字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 主键ID-->
+			room_id, <!-- 房间ID-->
+			user_id, <!-- 成员ID-->
+			create_time,
+		</trim>
+	</sql>
+	
+	<!-- 查询t_roll_member分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="false" useCache="false">
+		select  
+			<include refid="columnList"/>
+		from t_roll_member t
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="roomId != null and roomId != ''">
+				AND room_id=#{roomId}
+			</if>
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="isUnique != null and isUnique != ''">
+				AND NOT EXISTS (
+					SELECT 1 FROM t_roll_winner rw where rw.USER_ID = t.USER_ID
+				)
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_roll_member -->
+	<insert id="insert" parameterType="com.webside.roll.model.RollMember" flushCache="true">
+		insert into t_roll_member
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!--唯一主键-->
+		<if test="roomId != null">room_id,</if><!-- 房间ID-->
+		<if test="userId != null">user_id,</if><!-- 成员ID-->
+		<if test="createTime != null">create_time,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 唯一主键-->
+		<if test="roomId != null">#{roomId},</if><!-- 房间ID-->
+		<if test="userId != null">#{userId},</if><!-- 成员ID-->
+		<if test="createTime != null">#{createTime},</if>
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_roll_member -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_roll_member 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_roll_member -->
+	<update id="update" parameterType="com.webside.roll.model.RollMember" flushCache="true">
+		update t_roll_member
+		<set>
+			<trim suffixOverrides=",">
+				<if test="roomId != null">room_id=#{roomId},</if><!-- 房间ID-->
+				<if test="userId != null">user_id=#{userId},</if><!-- 成员ID-->
+				<if test="createTime != null">create_time=#{createTime},</if>
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_roll_member -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_roll_member  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_roll_member -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_roll_member 
+		where id = #{id}
+	</delete>
+	
+	<!-- 根据roomId删除t_roll_member -->
+	<delete id="deleteByRoomId" parameterType="String" flushCache="true">
+		delete from t_roll_member 
+		where room_id = #{roomId}
+	</delete>
+	
+	<sql id="columnMemberListVo">
+		<trim suffixOverrides=",">
+			t.ID AS "id",
+		  	t.ROOM_ID AS "roomId",
+			t.USER_ID AS "memberId",
+			u.NICK_NAME AS "memberName",
+			u.PHOTO AS "photo"
+		</trim>
+	</sql>
+	
+	<select id="getVoListByMap" parameterType="map" resultType="com.webside.roll.vo.RollMemberVo" useCache="false">
+		SELECT <include refid="columnMemberListVo"/>
+		FROM t_roll_member t
+		LEFT JOIN tb_user u ON u.u_id = t.USER_ID
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="roomId != null and roomId != ''">
+				AND t.room_id=#{roomId}
+			</if>
+			<if test="userId != null and userId != ''">
+				AND t.user_id=#{userId}
+			</if>
+		</trim>
+	</select>
+</mapper>

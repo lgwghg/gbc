@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.match.mapper.IGameMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.match.entities.Game">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="game_name" property="gameName"/> <!-- 游戏名称-->
+		<result column="big_img" property="bigImg"/> <!-- 大图片-->
+		<result column="little_img" property="littleImg"/> <!-- 小图片-->
+		<result column="bg_img" property="bgImg"/> <!-- 背景图片-->
+		<result column="sort_num" property="sortNum"/> <!-- 排序-->
+		<result column="game_status" property="gameStatus"/> <!-- 游戏状态   默认值1    0：无效 1 有效-->
+		<result column="english_name" property="englishName"/> <!-- 英文简称-->
+		<result column="user_id" property="createOperatorId"/> <!-- 创建者-->
+		<result column="create_time" property="createTime"/> <!-- 添加时间-->
+		<result column="update_time" property="updateTime"/> <!-- 修改时间-->
+		<result column="update_operator_id" property="updateOperatorId"/> <!-- 修改人-->
+	</resultMap>
+	
+	<!-- t_game全字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			a.id AS "id", <!-- 唯一标识-->
+			a.game_name AS "gameName", <!-- 游戏名称-->
+			a.big_img AS "bigImg", <!-- 大图片-->
+			a.little_img AS "littleImg", <!-- 小图片-->
+			a.bg_img AS "bgImg", <!-- 背景图片-->
+			a.sort_num AS "sortNum", <!-- 排序-->
+			a.game_status AS "gameStatus", <!-- 游戏状态   默认值1    0：无效 1 有效-->
+			a.english_name AS "englishName", <!-- 英文简称-->
+			a.user_id AS "createOperatorId", <!-- 创建者-->
+			c.nick_name AS "createOperatorName", <!-- 创建者昵称-->
+			a.create_time AS "createTime", <!-- 添加时间-->
+			a.update_time AS "updateTime", <!-- 修改时间-->
+			a.update_operator_id AS "updateOperatorId", <!-- 修改人-->
+			u.nick_name AS "updateOperatorName", <!-- 修改人昵称-->
+		</trim>
+	</sql>
+	
+	<!-- t_game简字段列表-->
+	<sql id="columnList_j">
+		<trim suffixOverrides=",">
+			a.id AS "id", <!-- 唯一标识-->
+			a.game_name AS "gameName", <!-- 游戏名称-->
+			a.big_img AS "bigImg", <!-- 大图片-->
+			a.little_img AS "littleImg", <!-- 小图片-->
+			a.bg_img AS "bgImg", <!-- 背景图片-->
+			a.english_name AS "englishName", <!-- 英文简称-->
+		</trim>
+	</sql>
+	
+	<sql id="tableJoins">
+		LEFT JOIN tb_user c ON c.u_id = a.user_id
+		LEFT JOIN tb_user u ON u.u_id = a.update_operator_id
+	</sql>
+	
+	<!-- 查询t_game分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.match.entities.Game" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_game a 
+		<include refid="tableJoins"/>
+		<where>  
+			<if test="gameName != null and gameName != ''">
+				AND lower(a.game_name) like concat('%',lower(#{gameName}),'%')
+			</if>
+			<if test="englishName != null and englishName != ''">
+				AND lower(a.english_name) like concat('%',lower(#{englishName}),'%')
+			</if>
+			<if test="gameStatus != null and gameStatus != ''">
+				AND a.game_status=#{gameStatus}
+			</if>
+			<if test="beginCreateTime != null and beginCreateTime != '' and (endCreateTime == null or endCreateTime == '')">
+				AND a.create_time >= #{beginCreateTime}
+			</if>
+			<if test="(beginCreateTime == null or beginCreateTime == '') and endCreateTime != null and endCreateTime != ''">
+				AND a.create_time &lt;= #{endCreateTime}
+			</if>
+			<if test="beginCreateTime != null and endCreateTime != null and beginCreateTime != '' and endCreateTime != ''">
+				AND a.create_time BETWEEN #{beginCreateTime} AND #{endCreateTime}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增t_game -->
+	<insert id="insert" 
+			keyProperty="id"
+			parameterType="com.webside.match.entities.Game" flushCache="true">
+		insert into t_game
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 主键-->
+		<if test="gameName != null">game_name,</if><!-- 主题名称-->
+		<if test="bigImg != null">big_img,</if><!-- 大图片-->
+		<if test="littleImg != null">little_img,</if><!-- 小图片-->
+		<if test="bgImg != null">bg_img,</if><!-- 背景图片-->
+		<if test="sortNum != null">sort_num,</if><!-- 排序-->
+		<if test="gameStatus != null">game_status,</if><!-- 是否删除   默认值1    0：无效 1 有效-->
+		<if test="englishName != null">english_name,</if><!-- 英文简称-->
+		<if test="createOperatorId != null">user_id,</if><!-- 创建者-->
+		<if test="createTime != null">create_time,</if><!-- 添加时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 主键-->
+		<if test="gameName != null">#{gameName},</if><!-- 主题名称-->
+		<if test="bigImg != null">#{bigImg},</if><!-- 大图片-->
+		<if test="littleImg != null">#{littleImg},</if><!-- 小图片-->
+		<if test="bgImg != null">#{bgImg},</if><!-- 背景图片-->
+		<if test="sortNum != null">#{sortNum},</if><!-- 排序-->
+		<if test="gameStatus != null">#{gameStatus},</if><!-- 是否删除   默认值1    0：无效 1 有效-->
+		<if test="englishName != null">#{englishName},</if><!-- 英文简称-->
+		<if test="createOperatorId != null">#{createOperatorId},</if><!-- 创建者-->
+		<if test="createTime != null">#{createTime},</if><!-- 添加时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_game -->
+	<select id="findById" resultType="com.webside.match.entities.Game" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_game a
+		<include refid="tableJoins"/>
+		where a.id = #{id}
+	</select>
+	
+	<!-- 更新t_game -->
+	<update id="update" parameterType="com.webside.match.entities.Game" flushCache="true">
+		update t_game
+		<set>
+			<trim suffixOverrides=",">
+				<if test="gameName != null">game_name=#{gameName},</if><!-- 主题名称-->
+				<if test="bigImg != null">big_img=#{bigImg},</if><!-- 大图片-->
+				<if test="littleImg != null">little_img=#{littleImg},</if><!-- 小图片-->
+				<if test="bgImg != null">bg_img=#{bgImg},</if><!-- 背景图片-->
+				<if test="sortNum != null">sort_num=#{sortNum},</if><!-- 排序-->
+				<if test="gameStatus != null">game_status=#{gameStatus},</if><!-- 是否删除   默认值1    0：无效 1 有效-->
+				<if test="englishName != null">english_name=#{englishName},</if><!-- 英文简称-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+				<if test="updateOperatorId != null">update_operator_id=#{updateOperatorId},</if><!-- 修改人-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除t_game -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_game 
+		where id = #{id}
+	</delete>
+	
+	<!-- 根据名称查询游戏，如id不为空且需要排除id -->
+	<select id="findByGameName" resultType="int" parameterType="map" flushCache="false" useCache="true">
+		select  
+			count(1)
+		from t_game a
+		<where>
+			AND lower(a.game_name) = lower(#{gameName})
+			<if test="id != null and id != ''">
+				AND a.id != #{id}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 根据英文名称查询游戏，如id不为空且需要排除id -->
+	<select id="findByEnglishName" resultType="com.webside.match.entities.Game" parameterType="map" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList_j"/>
+		from t_game a
+		<where>
+			AND lower(a.english_name) = lower(#{englishName})
+			<if test="id != null and id != ''">
+				AND a.id != #{id}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 查询t_game简字段分页 -->
+	<select id="queryPartListByPage" parameterType="map" resultType="com.webside.match.entities.Game" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList_j"/>
+		from t_game a 
+		<where>  
+			<if test="gameName != null and gameName != ''">
+				AND lower(a.game_name) like concat('%',lower(#{gameName}),'%')
+			</if>
+			<if test="englishName != null and englishName != ''">
+				AND lower(a.english_name) like concat('%',lower(#{englishName}),'%')
+			</if>
+			<if test="gameStatus != null and gameStatus != ''">
+				AND a.game_status=#{gameStatus}
+			</if>
+		</where>
+	</select>
+</mapper>

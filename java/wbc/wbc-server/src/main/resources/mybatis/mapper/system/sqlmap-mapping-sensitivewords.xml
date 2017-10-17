@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.system.sw.mapper.ISensitiveWordsMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.system.sw.entities.SensitiveWords">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="content" property="content"/> <!-- 内容-->
+		<result column="content_type" property="contentType"/> <!-- 所属类型-->
+		<result column="use_type" property="useType"/> <!-- 作用域类型-->
+		<result column="create_user" property="createUser"/> <!-- 创建人-->
+		<result column="create_time" property="createTime"/> <!-- 创建日期-->
+		<result column="update_user" property="updateUser"/> <!-- 修改人-->
+		<result column="update_time" property="updateTime"/> <!-- 修改时间-->
+	</resultMap>
+	
+	<!-- t_sensitive_words字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			a.id AS "id", <!-- 唯一标识-->
+			a.content AS "content", <!-- 内容-->
+			a.content_type AS "contentType", <!-- 所属类型-->
+			a.use_type AS "useType", <!-- 作用域类型-->
+			a.create_user AS "createOperatorId", <!-- 创建人-->
+			c.nick_name AS "createOperatorName", <!-- 创建者昵称-->
+			a.create_time AS "createTime", <!-- 创建日期-->
+			a.update_user AS "updateOperatorId", <!-- 修改人-->
+			u.nick_name AS "updateOperatorName", <!-- 修改人昵称-->
+			a.update_time AS "updateTime", <!-- 修改时间-->
+		</trim>
+	</sql>
+	
+	<sql id="tableJoins">
+		LEFT JOIN tb_user c ON c.u_id = a.create_user
+		LEFT JOIN tb_user u ON u.u_id = a.update_user
+	</sql>	
+	
+	<!-- 查询t_sensitive_words分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.system.sw.entities.SensitiveWords" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_sensitive_words a
+		<include refid="tableJoins"/>
+		<where>  
+			<if test="content != null and content != ''">
+				AND lower(a.content) like concat('%',lower(#{content}),'%')
+			</if>
+			<if test="contentType != null and contentType != ''">
+				AND content_type=#{contentType}
+			</if>
+			<if test="useType != null and useType != ''">
+				AND use_type=#{useType}
+			</if>
+			<if test="beginCreateTime != null and beginCreateTime != '' and (endCreateTime == null or endCreateTime == '')">
+				AND a.create_time >= #{beginCreateTime}
+			</if>
+			<if test="(beginCreateTime == null or beginCreateTime == '') and endCreateTime != null and endCreateTime != ''">
+				AND a.create_time &lt;= #{endCreateTime}
+			</if>
+			<if test="beginCreateTime != null and endCreateTime != null and beginCreateTime != '' and endCreateTime != ''">
+				AND a.create_time BETWEEN #{beginCreateTime} AND #{endCreateTime}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增t_sensitive_words -->
+	<insert id="insert" 
+			keyProperty="id"
+			parameterType="com.webside.system.sw.entities.SensitiveWords" flushCache="true">
+		insert into t_sensitive_words
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 主键-->
+		<if test="content != null">content,</if><!-- 内容-->
+		<if test="contentType != null">content_type,</if><!-- 所属类型-->
+		<if test="useType != null">use_type,</if><!-- 作用域类型-->
+		<if test="createOperatorId != null">create_user,</if><!-- 创建人-->
+		<if test="createTime != null">create_time,</if><!-- 创建日期-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 主键-->
+		<if test="content != null">#{content},</if><!-- 内容-->
+		<if test="contentType != null">#{contentType},</if><!-- 所属类型-->
+		<if test="useType != null">#{useType},</if><!-- 作用域类型-->
+		<if test="createOperatorId != null">#{createOperatorId},</if><!-- 创建人-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建日期-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_sensitive_words -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_sensitive_words a
+		<include refid="tableJoins"/>
+		where a.id = #{id}
+	</select>
+	
+	<!-- 更新t_sensitive_words -->
+	<update id="update" parameterType="com.webside.system.sw.entities.SensitiveWords" flushCache="true">
+		update t_sensitive_words
+		<set>
+			<trim suffixOverrides=",">
+				<if test="content != null">content=#{content},</if><!-- 内容-->
+				<if test="contentType != null">content_type=#{contentType},</if><!-- 所属类型-->
+				<if test="useType != null">use_type=#{useType},</if><!-- 作用域类型-->
+				<if test="updateOperatorId != null">update_user=#{updateOperatorId},</if><!-- 修改人-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除t_sensitive_words -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_sensitive_words 
+		where id = #{id}
+	</delete>
+</mapper>

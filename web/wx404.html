@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>出错啦~</title>
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_7d5yvokkelgzaor.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="css/fallback.css">
+    <link rel="stylesheet" type="text/css" href="css/ripples.min.css">
+    <link type="text/css" rel="stylesheet" href="css/base.css">
+    <link type="text/css" rel="stylesheet" href="css/wx404.css">
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="c-bg">
+    <img src="images/weixin_404.png">
+    <p class="error-one">抱歉，你访问的页面找不到了</p>
+    <button class="btn btn-primary btn-raised error-two">返回</button>
+</div>
+</body>
+<script src="js/material.js"></script>
+<script src="js/ripples.min.js"></script>
+<script>
+    $.material.init();
+</script>
+<script>
+    $(function(){
+        $(".lottery-btn1").click(function(){
+            $(".lottery-btn1,.lottery-text").addClass("hide");
+            $(".lottery-btn2,.lottery-number,.luck-title,.luck-rank").removeClass("hide");
+            $(".lottery-title").html("获得<img src='images/money2_x.png'>币:");
+        })
+        $(".lottery-btn2").click(function(){
+            $(".fenxiang").removeClass("hide");
+        })
+        $(".fenxiang").click(function(){
+            $(".fenxiang").addClass("hide");
+        })
+    })
+</script>
+</html>

@@ -1,0 +1,115 @@
+.c-centerwrap{
+	background: #2d3137;
+	width: 600px;
+	padding: 3px 10px 45px 10px;
+	float: left;
+}
+.img_editor{
+	position: absolute;
+	top: 15px;
+	left: 12px;
+	color: #d4d4d4;
+	display: none;
+}
+.c-accountwrapright{
+	margin-left: 6px;
+	margin-top: -49px;
+	transform: translateX(22px);
+}
+p{
+	color: #fff;
+}
+.c-accountwrapright>ul{
+	background: #2d3137;
+	margin-bottom: 15px;
+}
+.c-accountwrapright>ul>li{
+    width: 300px;
+    height:67px;
+    line-height: 67px;
+    padding:14px 20px 14px 20px;
+    border-top:1px solid #485156; 
+    background: #363b41;
+    color:#fff;
+}
+.c-accountwrapright>ul>li:nth-child(1){
+	padding-top: 0;
+	border-top: 0;
+}
+.c-accountwrapright>ul>li:nth-child(1)>span:nth-child(1){
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #e4a713;
+    color: #363b42;
+    vertical-align: middle;
+    line-height: 20px;
+    text-align: center;
+    margin-right: 8px;
+}
+.c-accountwrapright>ul>li:nth-child(1)>.btn{
+    width: 80px;
+    height: 30px;
+    border: 2px solid #c9961a;
+    border-radius: 50px;
+    color: #c9961a;
+    background: #363b42;
+    line-height: 10px;
+    margin-top: 18px;
+    padding-left: 25px; 
+}
+.c-accountwrapright>ul>li>dl>dt{
+    color: #5f7c8c;
+}
+.choosefd{
+	width: 300px;
+	padding: 15px 20px;
+    background: #363b41;
+    color: #5f7c8c; 
+}
+.x-recommend-link{background-color: #363b41;margin-top: 20px;padding: 0 0 0 20px; width: 300px;}
+.x-recommend-link .view1{height: 40px;line-height: 40px;}
+.x-recommend-link .view1 .one{color:#fff;}
+.x-recommend-link .view1 .two{color:#31c3a2;margin-left: 20px;cursor: pointer;}
+.x-recommend-link .view2{height:30px;line-height:30px;}
+.x-recommend-link .view2 input{width: 260px;border: 1px solid #424b4f;height: 30px;background-color: #363b41;color: #607d8b;padding:0 15px;outline: none;}
+.x-recommend-link .view3{height: 40px;line-height: 40px;}
+.x-recommend-link .view3 a{color: #31C3A2;text-decoration: underline;}
+
+.savebtn{
+	width: 106px;
+	height: 42px;
+	margin-left: 493px;
+	padding: 0;
+	clear: both;
+}
+.passwordwrap,.emailwrap1,.emailwrap2,.numwrap1,.numwrap2,.apaywrap1{
+	display: none;
+}
+.c_greyicon{ 
+	color: #878b8e;
+	position: absolute;
+	top: 8px;
+	right: 0;
+	cursor: pointer;
+}
+.embtn,.numbtn,.paybtn{
+	width: 50px;
+	height: 30px;
+	padding: 0;
+	margin: 0;
+}
+.embtn1,
+.numbtn1,
+.paybtn1{
+	width: 75px;
+	height: 30px;
+	padding: 0;
+	margin: 0;
+}
+@media screen and (max-width: 1199px){
+	.c-accountwrapright{
+		display: none;
+	}
+}

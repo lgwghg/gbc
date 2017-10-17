@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.jc.mapper.IUserJcMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+<!-- 	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.jc.model.UserJc">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="user_id" property="userId"/> <!-- 用户ID-->
+		<result column="gb_id" property="gbId"/> <!-- 比赛对战ID-->
+		<result column="pankou_id" property="pankouId"/> <!-- 盘口ID-->
+		<result column="jc_gold" property="jcGold"/> <!-- 竞猜G币-->
+		<result column="jc_team_type" property="jcTeamType"/> <!-- 竞猜战队分类 1:主战队，2：客场战队-->
+		<result column="game_result" property="gameResult"/> <!-- 比赛结果 默认2     0:输 1：赢  2 ：进行中 3：已取消-->
+		<result column="victory_gold_num" property="victoryGoldNum"/> <!-- 用户赢得G币数量-->
+		<result column="jc_time" property="jcTime"/> <!-- 竞猜时间-->
+	</resultMap>
+	
+	<!-- t_user_jc字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			uj.id AS "id", 							  		 <!-- 唯一标识-->
+			uj.user_id AS "userId", 						 <!-- 用户ID-->
+			uj.gb_id AS "gbId",								 <!-- 比赛对战ID-->
+			uj.pankou_id AS "pankouId",						 <!-- 盘口ID-->
+			uj.jc_gold AS "jcGold", 						 <!-- 竞猜G币-->
+			uj.jc_team_type AS "jcTeamType",				 <!-- 竞猜战队分类 1:主战队，2：客场战队-->
+			uj.game_result AS "gameResult", 				 <!-- 比赛结果 默认2     0:输 1：赢  2 ：进行中 3：已取消-->
+			uj.victory_gold_num AS "victoryGoldNum", 		 <!-- 用户赢得G币数量-->
+			uj.jc_time AS "jcTime",							 <!-- 竞猜时间-->
+		</trim>
+	</sql>
+	<!-- 查询t_user_jc分页 -->
+	<select id="queryJcListByPage" parameterType="map" resultType="com.webside.jc.model.UserJc">
+		select 
+			htt.TEAM_NAME homeTeam,
+			att.TEAM_NAME awayTeam,
+			ge.EVENT_NAME eventName,
+			sd.label gameRule,
+			gb.START_TIME startTime,
+			gb.END_TIME endTime,
+			p.pk_name pkName,
+			p.inning_num inningNum,
+			p.PANKOU_TYPE pankouType,
+			p.PK_RANG_FEN_TEAM pkRangFenTeam, 
+			p.PK_RANGFEN_NUM pkRangfenNum,
+			<include refid="columnList"/>
+		<!-- from t_user_jc t -->
+		from t_user_jc uj
+		left join t_game_battle gb on gb.ID = uj.GB_ID
+		left join t_pankou p on p.ID = uj.PANKOU_ID
+		left join t_game_event ge on ge.ID = gb.GE_ID
+		left join t_team htt on htt.ID = gb.HOME_TEAM
+		left join t_team att on att.ID = gb.AWAY_TEAM
+		left join sys_dict sd on sd.`value` = gb.GAME_RULE and sd.type = 'game_rule'
+		<where>
+			<if test="userId != null and userId != ''">
+				AND uj.user_id=#{userId}
+			</if>
+			<if test="gbId != null and gbId != ''">
+				AND uj.gb_id=#{gbId}
+			</if>
+			<if test="pankouId != null and pankouId != ''">
+				AND uj.pankou_id=#{pankouId}
+			</if>
+			<if test="jcTeamType != null and jcTeamType != ''">
+				AND uj.jc_team_type=#{jcTeamType}
+			</if>
+			<if test="gameResult != null and gameResult != ''">
+				AND uj.game_result=#{gameResult}
+			</if>
+			<if test="jcId != null and jcId != ''">
+				AND uj.id=#{jcId}
+			</if>
+			and uj.game_result != 3
+		</where>
+	</select>
+	
+	<!-- 查询t_user_jc分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.jc.model.UserJc">
+		select 
+			<include refid="columnList"/>
+		from t_user_jc uj
+		<where>
+			<if test="userId != null and userId != ''">
+				AND uj.user_id=#{userId}
+			</if>
+			<if test="gbId != null and gbId != ''">
+				AND uj.gb_id=#{gbId}
+			</if>
+			<if test="pankouId != null and pankouId != ''">
+				AND uj.pankou_id=#{pankouId}
+			</if>
+			<if test="gbIds != null">
+				AND uj.gb_id in
+				<foreach collection="gbIds" index="index" item = "id" open="(" separator="," close=")">
+			    	#{id}  
+			    </foreach>
+			</if>
+			<if test="jcTeamType != null and jcTeamType != ''">
+				AND uj.jc_team_type=#{jcTeamType}
+			</if>
+			<choose>
+				<when test="gameResult != null and gameResult != ''">
+					AND uj.game_result=#{gameResult}
+				</when>
+				<otherwise>
+					and uj.game_result != 3
+				</otherwise>
+			</choose>
+		</where>
+		<if test="order != null and order != ''">
+				ORDER BY jcTime DESC
+		</if>
+	</select>
+	
+	<select id="getUserJcGold" parameterType="map" resultType="java.lang.String">
+		select
+			sum(uj.jc_gold)
+		from t_user_jc uj
+		where uj.user_id=#{userId}
+		and	 uj.game_result = #{gameResult}
+	</select>
+	
+	<select id="findListByUserId" parameterType="String" resultType="com.webside.jc.model.UserJc">
+		select htt.TEAM_NAME homeTeam,att.TEAM_NAME awayTeam,ge.EVENT_NAME eventName,sd.label gameRule
+			  ,p.PK_START_TIME startTime,p.PK_END_TIME endTime,p.INNING_NUM inningNum,p.PK_NAME pkName,g.LITTLE_IMG gameImg
+			  ,t.JC_GOLD jcGold,t.GB_ID gbId,t.PANKOU_ID pankouId,t.GAME_RESULT gameResult,t.VICTORY_GOLD_NUM victoryGoldNum,t.JC_TEAM_TYPE jcTeamType,t.JC_TIME jcTime
+			  ,ROUND(CASE WHEN t.JC_TEAM_TYPE=1 THEN t.JC_GOLD*p.PK_HOME_RULE ELSE t.JC_GOLD*p.PK_AWAY_RULE END)-t.JC_GOLD expectGold
+			  ,p.PANKOU_TYPE pankouType, p.PK_RANG_FEN_TEAM pkRangFenTeam, p.PK_RANGFEN_NUM pkRangfenNum
+		from t_user_jc t
+		join t_game_battle gb on gb.ID = t.GB_ID
+		LEFT JOIN t_pankou p on p.ID = t.PANKOU_ID
+		LEFT JOIN t_game g on g.ID = gb.GAME_ID
+		left join t_game_event ge on ge.ID = gb.GE_ID
+		left join t_team htt on htt.ID = gb.HOME_TEAM
+		left join t_team att on att.ID = gb.AWAY_TEAM
+		left join sys_dict sd on sd.`value` = gb.GAME_RULE and sd.type = 'game_rule'
+		where t.user_id = #{userId}
+		AND t.game_result != 3
+	</select>
+	
+	<!-- 新增t_user_jc -->
+	<insert id="insert" parameterType="com.webside.jc.model.UserJc">
+		insert into t_user_jc
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 主键-->
+		<if test="userId != null">user_id,</if><!-- 用户ID-->
+		<if test="gbId != null">gb_id,</if><!-- 比赛对战ID-->
+		<if test="pankouId != null">pankou_id,</if><!-- 盘口ID-->
+		<if test="jcGold != null">jc_gold,</if><!-- 竞猜G币-->
+		<if test="jcTeamType != null">jc_team_type,</if><!-- 竞猜战队分类 1:主战队，2：客场战队-->
+		<if test="gameResult != null">game_result,</if><!-- 比赛结果 默认2  0:输 1：赢  2 ：进行中 3：已取消-->
+		<if test="victoryGoldNum != null">victory_gold_num,</if><!-- 用户赢得G币数量-->
+		<if test="jcTime != null">jc_time,</if><!-- 竞猜时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 主键-->
+		<if test="userId != null">#{userId},</if><!-- 用户ID-->
+		<if test="gbId != null">#{gbId},</if><!-- 比赛对战ID-->
+		<if test="pankouId != null">#{pankouId},</if><!-- 盘口ID-->
+		<if test="jcGold != null">#{jcGold},</if><!-- 竞猜G币-->
+		<if test="jcTeamType != null">#{jcTeamType},</if><!-- 竞猜战队分类 1:主战队，2：客场战队-->
+		<if test="gameResult != null">#{gameResult},</if><!-- 比赛结果 默认2     0:输 1：赢  2 ：进行中 3：已取消-->
+		<if test="victoryGoldNum != null">#{victoryGoldNum},</if><!-- 用户赢得G币数量-->
+		<if test="jcTime != null">#{jcTime},</if><!-- 竞猜时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_user_jc -->
+	<select id="findById" resultMap="resultMap" parameterType="String" >
+		select  
+			<include refid="columnList"/>
+		from t_user_jc  uj
+		where uj.id = #{id}
+	</select>
+	
+	<!-- 根据用户ID查询t_user_jc -->
+	<select id="findByMap" resultType="com.webside.jc.model.UserJc" parameterType="map">
+		select  
+			<include refid="columnList"/>
+		from t_user_jc uj
+		<where>
+			<if test="userId != null and userId != ''">
+				AND uj.user_id=#{userId}
+			</if>
+			<if test="gbId != null and gbId != ''">
+				AND uj.gb_id=#{gbId}
+			</if>
+			<if test="pankouId != null and pankouId != ''">
+				AND uj.pankou_id=#{pankouId}
+			</if>
+			AND uj.game_result != 3
+		</where>
+		order by jc_time desc
+	</select>
+	
+	<!-- 更新t_user_jc -->
+	<update id="update" parameterType="com.webside.jc.model.UserJc">
+		update t_user_jc
+		<set>
+			<trim suffixOverrides=",">
+				<if test="jcGold != null">jc_gold=#{jcGold},</if>  <!--  竞猜G币 -->
+ 				<if test="jcTeamType != null">jc_team_type=#{jcTeamType},</if><!--竞猜战队分类 1:主战队，2：客场战队 -->
+				<if test="gameResult != null">game_result=#{gameResult},</if><!-- 比赛结果 默认2     0:输 1：赢  2 ：进行中 3：已取消-->
+				<if test="victoryGoldNum != null">victory_gold_num=#{victoryGoldNum},</if><!-- 用户赢得G币数量-->
+ 				<if test="jcTime != null">jc_time=#{jcTime},</if><!--竞猜时间 -->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_user_jc -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_user_jc  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+</mapper>

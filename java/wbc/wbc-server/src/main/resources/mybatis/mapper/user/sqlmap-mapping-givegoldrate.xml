@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.wallet.mapper.IGiveGoldRateMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.user.wallet.entities.GiveGoldRate">
+		<result column="id" property="id"/> <!-- -->
+		<result column="amount" property="amount"/> <!-- 充值金额-->
+		<result column="give_rate" property="giveRate"/> <!-- 赠送G币百分比，直接输入整数-->
+		<result column="update_time" property="updateTime"/> <!-- 更新时间-->
+	</resultMap>
+	
+	<!-- t_give_gold_rate字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- -->
+			amount, <!-- 充值金额-->
+			give_rate, <!-- 赠送G币百分比，直接输入整数-->
+			update_time, <!-- 更新时间-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_give_gold_rate分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_give_gold_rate 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="id != null and id != ''">
+				AND id=#{id}
+			</if>
+			<if test="amount != null and amount != ''">
+				AND amount=#{amount}
+			</if>
+			<if test="giveRate != null and giveRate != ''">
+				AND give_rate=#{giveRate}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND update_time=#{updateTime}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_give_gold_rate -->
+	<insert id="insert" 
+			useGeneratedKeys="true" 
+			parameterType="com.webside.user.wallet.entities.GiveGoldRate">
+		insert into t_give_gold_rate
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- -->
+		<if test="amount != null">amount,</if><!-- 充值金额-->
+		<if test="giveRate != null">give_rate,</if><!-- 赠送G币百分比，直接输入整数-->
+		<if test="updateTime != null">update_time,</if><!-- 更新时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- -->
+		<if test="amount != null">#{amount},</if><!-- 充值金额-->
+		<if test="giveRate != null">#{giveRate},</if><!-- 赠送G币百分比，直接输入整数-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 更新时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_give_gold_rate -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_give_gold_rate 
+	</select>
+	
+	<!-- 更新t_give_gold_rate -->
+	<update id="update" parameterType="com.webside.user.wallet.entities.GiveGoldRate" flushCache="true">
+		update t_give_gold_rate
+		<set>
+			<trim suffixOverrides=",">
+				<if test="id != null">id=#{id},</if><!-- -->
+				<if test="amount != null">amount=#{amount},</if><!-- 充值金额-->
+				<if test="giveRate != null">give_rate=#{giveRate},</if><!-- 赠送G币百分比，直接输入整数-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 更新时间-->
+			</trim>
+		</set>
+	</update>
+	
+	<!-- 根据ID列表删除t_give_gold_rate -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_give_gold_rate  
+	</delete>
+	
+	<!-- 根据ID删除t_give_gold_rate -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_give_gold_rate 
+	</delete>
+	
+	<select id="queryGiveRateByAmount" parameterType="Long" resultType="Integer">
+		select give_rate from t_give_gold_rate where amount <![CDATA[ <= ]]> #{amount}
+		order by amount DESC
+		limit 1
+	</select>
+</mapper>

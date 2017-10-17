@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.jc.mapper.IPankouMapper">
+
+	<!-- t_pankou字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			p.id AS "id", <!-- 唯一标识-->
+			p.gb_id AS "gbId", <!-- 比赛对战ID-->
+			p.pankou_type AS "pankouType", <!-- 玩法类型 0：独赢 1：让分2：其他-->
+			p.pk_name AS "pkName", <!-- 玩法名称-->
+			p.pk_home_rule AS "pkHomeRule", <!-- 比赛赔率（主战队）-->
+			p.pk_away_rule AS "pkAwayRule", <!-- 比赛赔率（副战队）-->
+			p.pk_home_prt AS "pkHomePrt", <!-- 参与人数（主战队）-->
+			p.pk_away_prt AS "pkAwayPrt", <!-- 参与人数（副战队）-->
+			p.this_pk_profit AS "thisPkProfit", <!-- 当前比赛平台收益-->
+			p.pk_home_prt_gold AS "pkHomePrtGold", <!-- 主战队下注金额-->
+			p.pk_away_prt_gold AS "pkAwayPrtGold", <!-- 副战队下注金额-->
+			p.pk_victory AS "pkVictory", <!-- 胜方战队ID-->
+			p.pk_status AS "pkStatus", <!-- 0：正常 1：取消-->
+			p.pk_start_time AS "pkStartTime", <!-- 开始时间-->
+			p.pk_end_time AS "pkEndTime", <!-- 结束时间-->
+			p.pk_rang_fen_team AS "pkRangFenTeam", <!-- 让分战队 1:主战队，2：客场战队-->
+			p.pk_rangfen_num AS "pkRangfenNum", <!-- 让分数-->
+			p.inning_num AS "inningNum", <!-- 局数 根据比赛BO几， 如果比赛bo3，此选项为 1，2，3，  整场比赛盘口为0-->
+			gb.home_team AS "homeTeamId",<!-- 主场战队id -->
+			gb.away_team AS "awayTeamId",<!-- 客场战队id -->
+			ht.team_name AS "homeTeamName",<!-- 主场战队名称 -->
+			at.team_name AS "awayTeamName",<!-- 客场战队名称 -->
+		</trim>
+	</sql>
+	
+	<sql id="tpcolumnList">
+		<trim suffixOverrides=",">
+			tp.id as tp_Id, <!-- 唯一标识-->
+			tp.gb_id as tp_gb_id, <!-- 比赛对战ID-->
+			tp.pankou_type as tp_pankou_type, <!-- 玩法类型 0：独赢 1：让分2：其他-->
+			tp.pk_name as tp_pk_name, <!-- 玩法名称-->
+			tp.pk_home_rule as tp_pk_home_rule, <!-- 比赛赔率（主战队）-->
+			tp.pk_away_rule as tp_pk_away_rule, <!-- 比赛赔率（副战队）-->
+			tp.pk_home_prt as tp_pk_home_prt, <!-- 参与人数（主战队）-->
+			tp.pk_away_prt as tp_pk_away_prt, <!-- 参与人数（副战队）-->
+			tp.this_pk_profit as tp_this_pk_profit, <!-- 当前比赛平台收益-->
+			tp.pk_home_prt_gold as tp_pk_home_prt_gold, <!-- 主战队下注金额-->
+			tp.pk_away_prt_gold as tp_pk_away_prt_gold, <!-- 副战队下注金额-->
+			tp.pk_victory as tp_pk_victory, <!-- 胜方战队ID-->
+			tp.pk_status as tp_pk_status, <!-- 0：正常 1：取消-->
+			tp.pk_start_time as tp_pk_start_time, <!-- 开始时间-->
+			tp.pk_end_time as tp_pk_end_time, <!-- 结束时间-->
+			tp.pk_rang_fen_team as tp_pk_rang_fen_team, <!-- 让分战队 1:主战队，2：客场战队-->
+			tp.pk_rangfen_num as tp_pk_rangfen_num, <!-- 让分数-->
+			tp.inning_num as tp_inning_num, <!-- 局数 根据比赛BO几， 如果比赛bo3，此选项为 1，2，3，  整场比赛盘口为0-->
+		</trim>
+	</sql>
+	
+	<!-- t_user_jc字段列表-->
+	<sql id="userJccolumnList">
+		<trim suffixOverrides=",">
+			uj.id AS "id", 							  		 <!-- 唯一标识-->
+			uj.user_id AS "userId", 						 <!-- 用户ID-->
+			uj.gb_id AS "gbId",								 <!-- 比赛对战ID-->
+			uj.pankou_id AS "pankouId",						 <!-- 盘口ID-->
+			uj.jc_gold AS "jcGold", 						 <!-- 竞猜G币-->
+			uj.jc_team_type AS "jcTeamType",				 <!-- 竞猜战队分类 1:主战队，2：客场战队-->
+			uj.game_result AS "gameResult", 				 <!-- 比赛结果 默认2     0:输 1：赢  2 ：进行中 3：已取消-->
+			uj.victory_gold_num AS "victoryGoldNum", 		 <!-- 用户赢得G币数量-->
+			uj.jc_time AS "jcTime",							 <!-- 竞猜时间-->
+		</trim>
+	</sql>
+	
+	<sql id="tableJoins">
+		LEFT JOIN t_game_battle gb ON gb.id = p.gb_id
+		LEFT JOIN t_team ht ON ht.id = gb.home_team
+		LEFT JOIN t_team at ON at.id = gb.away_team
+	</sql>
+	
+	
+	<select id="queryVoByidAndUser" parameterType="map" resultMap="pankouVoResultMap">
+		SELECT
+			CASE
+			WHEN tp.PK_START_TIME &gt; unix_timestamp(now()) * 1000 and tp.PK_STATUS=0 THEN '0' 
+			WHEN tp.PK_START_TIME &lt; unix_timestamp(now()) * 1000 and tp.PK_STATUS=0 and tp.PK_END_TIME is null THEN '1' 
+			WHEN tp.PK_START_TIME &lt; unix_timestamp(now()) * 1000 and tp.PK_STATUS=0 and tp.PK_END_TIME is not null THEN '2' 
+			ELSE '3' END AS gbstate,#{currentUser} as currentUser,
+			<include refid="tpcolumnList"/>
+			from t_pankou tp
+			WHERE
+				tp.ID=#{id}
+			ORDER BY  gbstate,(case when  gbstate = '3' or gbstate = '1' then tp.PK_START_TIME else tp.PK_END_TIME end)desc ,tp.PK_START_TIME,tp.PANKOU_TYPE ASC
+	</select>
+	
+	<resultMap id="pankouVoResultMap" type="com.webside.jc.vo.PankouVo">  <!-- 盘口列表 -->
+	        <id column="tp_Id" property="id"  />
+	        <result column="tp_gb_id" property="gbId"/> <!-- 比赛对战ID-->
+			<result column="tp_pankou_type" property="pankouType"/> <!-- 玩法类型 0：独赢 1：让分2：其他-->
+			<result column="tp_pk_name" property="pkName"/> <!-- 玩法名称-->
+			<result column="tp_pk_home_rule" property="pkHomeRule"/> <!-- 比赛赔率（主战队）-->
+			<result column="tp_pk_away_rule" property="pkAwayRule"/> <!-- 比赛赔率（副战队）-->
+			<result column="tp_pk_home_prt" property="pkHomePrt"/> <!-- 参与人数（主战队）-->
+			<result column="tp_pk_away_prt" property="pkAwayPrt"/> <!-- 参与人数（副战队）-->
+			<result column="tp_this_pk_profit" property="thisPkProfit"/> <!-- 当前比赛平台收益-->
+			<result column="tp_pk_home_prt_gold" property="pkHomePrtGold"/> <!-- 主战队下注金额-->
+			<result column="tp_pk_away_prt_gold" property="pkAwayPrtGold"/> <!-- 副战队下注金额-->
+			<result column="tp_pk_victory" property="pkVictory"/> <!-- 胜方战队ID-->
+			<result column="tp_pk_status" property="pkStatus"/> <!-- 0：正常 1：取消-->
+			<result column="tp_pk_start_time" property="pkStartTime"/> <!-- 开始时间-->
+			<result column="tp_pk_end_time" property="pkEndTime"/> <!-- 结束时间-->
+			<result column="tp_pk_rang_fen_team" property="pkRangFenTeam"/> <!-- 让分战队 1:主战队，2：客场战队-->
+			<result column="tp_pk_rangfen_num" property="pkRangfenNum"/> <!-- 让分数-->
+			<result column="tp_inning_num" property="inningNum"/> <!-- 局数 根据比赛BO几， 如果比赛bo3，此选项为 1，2，3，  整场比赛盘口为0-->
+			<result column="gbstate" property="gbstate"/> <!-- 盘口当前状态，0未开始，1进行中，2已结束，3已取消-->
+			<result column="currentUser" property="currentUser"/> <!-- 当前用户ID-->
+			<association property="userJc" column="{currentUser=currentUser,tp_Id=tp_Id}" select="selectUserJc"/>  <!-- lwh:当前用户下注情况-->
+	</resultMap>
+	
+	<select id="selectUserJc" resultMap="userJcResultMap">
+		SELECT <include refid="userJccolumnList"/> FROM T_USER_JC UJ WHERE UJ.USER_ID = #{currentUser} and UJ.PANKOU_ID = #{tp_Id} AND UJ.game_result != 3
+	</select>
+	
+	<resultMap id="userJcResultMap" type="com.webside.jc.model.UserJc">  
+		<id column="id" property="id"/> <!-- 唯一标识-->
+	</resultMap> 
+	
+	<!-- 查询t_pankou分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.jc.model.Pankou">
+		select  
+			<include refid="columnList"/>
+		from t_pankou p
+		<include refid="tableJoins"/>
+		<where>  
+			<if test="gbId != null and gbId != ''">
+				AND p.gb_id=#{gbId}
+			</if>
+			<if test="pankouType != null and pankouType != ''">
+				AND p.pankou_type=#{pankouType}
+			</if>
+			<if test="pkName != null and pkName != ''">
+				AND p.pk_name=#{pkName}
+			</if>
+			<if test="pkStatus != null and pkStatus != ''">
+				AND p.pk_status=#{pkStatus}
+			</if>
+			<if test="pkStatusType != null and pkStatusType != ''">
+				<if test="pkStatusType == 1">
+					<!-- 查询未开始比赛 -->
+					AND p.pk_start_time > #{currentTime}
+				</if>
+				<if test="pkStatusType == 2">
+					<!-- 进行中比赛 -->
+					AND	p.pk_start_time &lt;= #{currentTime} 
+					AND p.pk_end_time is null
+				</if>
+				<if test="pkStatusType == 3">
+					<!-- 查询已结束比赛 -->
+					AND p.pk_end_time is not null and pk_end_time !=''
+				</if>
+				<if test="pkStatusType == 4">
+					<!-- 查询已取消比赛 -->
+					AND p.pk_status = #{deleteStatus}
+				</if>
+			</if>
+			<if test="beginCreateTime != null and beginCreateTime != '' and (endCreateTime == null or endCreateTime == '')">
+				AND p.pk_start_time >= #{beginCreateTime}
+			</if>
+			<if test="(beginCreateTime == null or beginCreateTime == '') and endCreateTime != null and endCreateTime != ''">
+				AND p.pk_start_time &lt;= #{endCreateTime}
+			</if>
+			<if test="beginCreateTime != null and endCreateTime != null and beginCreateTime != '' and endCreateTime != ''">
+				AND p.pk_start_time BETWEEN #{beginCreateTime} AND #{endCreateTime}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增t_pankou -->
+	<insert id="insert" 
+			parameterType="com.webside.jc.model.Pankou">
+		insert into t_pankou
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- ID-->
+		<if test="gbId != null">gb_id,</if><!-- 比赛对战ID-->
+		<if test="pankouType != null">pankou_type,</if><!-- 玩法类型 0：独赢 1：让分2：其他-->
+		<if test="pkName != null">pk_name,</if><!-- 玩法名称-->
+		<if test="pkHomeRule != null">pk_home_rule,</if><!-- 比赛赔率（主战队）-->
+		<if test="pkAwayRule != null">pk_away_rule,</if><!-- 比赛赔率（副战队）-->
+		pk_home_prt,<!-- 参与人数（主战队）-->
+		pk_away_prt,<!-- 参与人数（副战队）-->
+		this_pk_profit,<!-- 当前比赛平台收益-->
+		pk_home_prt_gold,<!-- 主战队下注金额-->
+		pk_away_prt_gold,<!-- 副战队下注金额-->
+		<if test="pkVictory != null">pk_victory,</if><!-- 胜方战队ID-->
+		<if test="pkStatus != null">pk_status,</if><!-- 0：正常 1：取消-->
+		<if test="pkStartTime != null">pk_start_time,</if><!-- 开始时间-->
+		<if test="pkEndTime != null">pk_end_time,</if><!-- 结束时间-->
+		<if test="pkRangFenTeam != null">pk_rang_fen_team,</if><!-- 让分战队 1:主战队，2：客场战队-->
+		<if test="pkRangfenNum != null">pk_rangfen_num,</if><!-- 让分数-->
+		<if test="inningNum != null">inning_num,</if><!-- 局数 根据比赛BO几， 如果比赛bo3，此选项为 1，2，3，  整场比赛盘口为0-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- ID-->
+		<if test="gbId != null">#{gbId},</if><!-- 比赛对战ID-->
+		<if test="pankouType != null">#{pankouType},</if><!-- 玩法类型 0：独赢 1：让分2：其他-->
+		<if test="pkName != null">#{pkName},</if><!-- 玩法名称-->
+		<if test="pkHomeRule != null">#{pkHomeRule},</if><!-- 比赛赔率（主战队）-->
+		<if test="pkAwayRule != null">#{pkAwayRule},</if><!-- 比赛赔率（副战队）-->
+		<if test="pkHomePrt != null">#{pkHomePrt},</if><!-- 参与人数（主战队）-->
+		<if test="pkHomePrt == null">0,</if><!-- 参与人数（主战队）-->
+		<if test="pkAwayPrt != null">#{pkAwayPrt},</if><!-- 参与人数（副战队）-->
+		<if test="pkAwayPrt == null">0,</if><!-- 参与人数（副战队）-->
+		<if test="thisPkProfit != null">#{thisPkProfit},</if><!-- 当前比赛平台收益-->
+		<if test="thisPkProfit == null">0,</if><!-- 当前比赛平台收益-->
+		<if test="pkHomePrtGold != null">#{pkHomePrtGold},</if><!-- 主战队下注金额-->
+		<if test="pkHomePrtGold == null">0,</if><!-- 主战队下注金额-->
+		<if test="pkAwayPrtGold != null">#{pkAwayPrtGold},</if><!-- 副战队下注金额-->
+		<if test="pkAwayPrtGold == null">0,</if><!-- 副战队下注金额-->
+		<if test="pkVictory != null">#{pkVictory},</if><!-- 胜方战队ID-->
+		<if test="pkStatus != null">#{pkStatus},</if><!-- 0：正常 1：取消-->
+		<if test="pkStartTime != null">#{pkStartTime},</if><!-- 开始时间-->
+		<if test="pkEndTime != null">#{pkEndTime},</if><!-- 结束时间-->
+		<if test="pkRangFenTeam != null">#{pkRangFenTeam},</if><!-- 让分战队 1:主战队，2：客场战队-->
+		<if test="pkRangfenNum != null">#{pkRangfenNum},</if><!-- 让分数-->
+		<if test="inningNum != null">#{inningNum},</if><!-- 局数 根据比赛BO几， 如果比赛bo3，此选项为 1，2，3，  整场比赛盘口为0-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_pankou -->
+	<select id="findById" resultType="com.webside.jc.model.Pankou" parameterType="String">
+		select  
+			<include refid="columnList"/>
+		from t_pankou p
+		<include refid="tableJoins"/>
+		where p.id = #{id}
+	</select>
+	
+	<!-- 更新t_pankou -->
+	<update id="update" parameterType="com.webside.jc.model.Pankou">
+		update t_pankou
+		<set>
+			<trim suffixOverrides=",">
+				<if test="gbId != null">gb_id=#{gbId},</if><!-- 比赛对战ID-->
+				<if test="pankouType != null">pankou_type=#{pankouType},</if><!-- 玩法类型 0：独赢 1：让分2：其他-->
+				<if test="pkName != null">pk_name=#{pkName},</if><!-- 玩法名称-->
+				<if test="pkHomeRule != null">pk_home_rule=#{pkHomeRule},</if><!-- 比赛赔率（主战队）-->
+				<if test="pkAwayRule != null">pk_away_rule=#{pkAwayRule},</if><!-- 比赛赔率（副战队）-->
+				<if test="pkHomePrt != null">pk_home_prt=#{pkHomePrt},</if><!-- 参与人数（主战队）-->
+				<if test="pkAwayPrt != null">pk_away_prt=#{pkAwayPrt},</if><!-- 参与人数（副战队）-->
+				<if test="thisPkProfit != null">this_pk_profit=#{thisPkProfit},</if><!-- 当前比赛平台收益-->
+				<if test="pkHomePrtGold != null">pk_home_prt_gold=#{pkHomePrtGold},</if><!-- 主战队下注金额-->
+				<if test="pkAwayPrtGold != null">pk_away_prt_gold=#{pkAwayPrtGold},</if><!-- 副战队下注金额-->
+				<if test="pkVictory != null">pk_victory=#{pkVictory},</if><!-- 胜方战队ID-->
+				<if test="pkStatus != null">pk_status=#{pkStatus},</if><!-- 0：正常 1：取消-->
+				<if test="pkStartTime != null">pk_start_time=#{pkStartTime},</if><!-- 开始时间-->
+				<if test="pkEndTime != null">pk_end_time=#{pkEndTime},</if><!-- 结束时间-->
+				<if test="pkRangFenTeam != null">pk_rang_fen_team=#{pkRangFenTeam},</if><!-- 让分战队 1:主战队，2：客场战队-->
+				<if test="pkRangfenNum != null">pk_rangfen_num=#{pkRangfenNum},</if><!-- 让分数-->
+				<if test="inningNum != null">inning_num=#{inningNum},</if><!-- 局数 根据比赛BO几， 如果比赛bo3，此选项为 1，2，3，  整场比赛盘口为0-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 修改对战参与人数 和 战队下注金额 -->
+	<update id="updatePrtGold" parameterType="map">
+		update t_pankou
+		<set>
+			<trim suffixOverrides=",">
+				<!-- 战队下注金额 -->
+				<if test="prtGoldNum != null ">
+					${prtGoldColumn} = ${prtGoldColumn} + #{prtGoldNum},
+				</if>
+				<!-- 战队参与人数 -->
+				<if test="prtNum != null ">
+					${prtNumColumn} = ${prtNumColumn} + #{prtNum},
+				</if>
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 修改盘口参与人数 和 战队下注金额，更换用户下注战队调用 -->
+	<update id="updatePkPrtGold" parameterType="com.webside.jc.model.Pankou">
+		update t_pankou
+		<set>
+			<trim suffixOverrides=",">
+				<!-- 战队下注金额 -->
+				<if test="pkHomePrtGold != null ">
+					PK_HOME_PRT_GOLD = PK_HOME_PRT_GOLD + ${pkHomePrtGold} ,
+				</if>
+				<if test="pkAwayPrtGold != null ">
+					PK_AWAY_PRT_GOLD = PK_AWAY_PRT_GOLD + ${pkAwayPrtGold} ,
+				</if>
+				<!-- 战队参与人数 -->
+				<if test="pkHomePrt != null ">
+					PK_HOME_PRT = PK_HOME_PRT + ${pkHomePrt} ,
+				</if>
+				<if test="pkAwayPrt != null ">
+					PK_AWAY_PRT = PK_AWAY_PRT + ${pkAwayPrt} ,
+				</if>
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据比赛对战ID、盘口局数获取比赛盘口 -->
+	<select id="findByGbIdInningNum" parameterType="map" resultType="com.webside.jc.model.Pankou">
+		select PK_START_TIME from t_pankou 
+		<where>  
+			<if test="gbId != null and gbId != ''">
+				AND gb_id=#{gbId}
+			</if>
+			<if test="inningNum != null and inningNum != ''">
+				AND inning_num=#{inningNum}
+			</if>
+		</where>
+		limit 1
+	</select>
+	
+</mapper>

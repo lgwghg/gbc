@@ -1,0 +1,267 @@
+.c-centerwrap {
+	background: #2d3137;
+	width: 600px;
+	padding: 3px 10px 45px 10px;
+	float: left;
+}
+
+.img_editor {
+	position: absolute;
+	top: 15px;
+	left: 12px;
+	color: #d4d4d4;
+	display: none;
+}
+
+.c-accountwrapright {
+	margin-left: 6px;
+	margin-top: -49px;
+	transform: translateX(22px);
+}
+
+p {
+	color: #fff;
+}
+
+.c-accountwrapright>ul {
+	background: #2d3137;
+	margin-bottom: 15px;
+}
+
+.c-accountwrapright>ul>li {
+	width: 300px;
+	/*  height:67px;  */
+	line-height: 50px;
+	padding: 0 20px;
+	border-top: 1px solid #485156;
+	background: #363b41;
+	color: #fff;
+}
+
+.c-accountwrapright>ul>li:nth-child(3) {
+	height: 123px;
+	padding-bottom: 20px;
+}
+
+.c-accountwrapright .c-allcard,.c-accountwrapright .c-allsale {
+	margin-top: 20px;
+	width: 122px;
+	height: 34px;
+	border-radius: 8px;
+	color: #31c3a2;
+	border: 1px solid #31c3a2;
+	background: #2d3137;
+	padding: 0;
+}
+
+.c-accountwrapright>ul>li:first-child,.c-accountwrapright>ul>li:nth-child(2)
+	{
+	padding-top: 0;
+	border-top: 0;
+}
+
+.c-accountwrapright>ul>li:first-child>span:first-child {
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	background: #e4a713;
+	color: #363b42;
+	vertical-align: middle;
+	line-height: 35px;
+	text-align: center;
+	margin-right: 8px;
+	margin-bottom: 4px;
+	font-size: 30px;
+}
+
+.c-accountwrapright>ul>li:nth-child(2)>span:first-child {
+	background: #31c3a2;
+	color: #666666;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	font-size: 15px;
+	color: #363b42;
+	vertical-align: middle;
+	line-height: 20px;
+	text-align: center;
+	margin-right: 8px;
+	margin-bottom: 4px;
+}
+
+.c-accountwrapright>ul>li:first-child>.btn {
+	width: 80px;
+	height: 30px;
+	border: 2px solid #c9961a;
+	border-radius: 50px;
+	color: #c9961a;
+	background: #363b42;
+	line-height: 10px;
+	margin-top: 18px;
+	padding-left: 25px;
+}
+
+.c-accountwrapright>ul>li:nth-child(2) {
+	border-top: 1px solid #485156;
+}
+
+.c-accountwrapright>ul>li:nth-child(2)>a {
+	float: right;
+	color: #31c3a2;
+	padding: 0 !important;
+	font-size: 14px !important;
+	line-height: 50px;
+	text-decoration: underline;
+}
+
+.c-accountwrapright>ul>li>dl>dt {
+	color: #5f7c8c;
+}
+
+.choosefd {
+	width: 300px;
+	padding: 15px 20px;
+	background: #363b41;
+	color: #5f7c8c;
+}
+
+.x-recommend-link {
+	background-color: #363b41;
+	margin-top: 20px;
+	padding: 0 0 0 20px;
+	width: 300px;
+}
+
+.x-recommend-link .view1 {
+	height: 40px;
+	line-height: 40px;
+}
+
+.x-recommend-link .view1 .one {
+	color: #fff;
+}
+
+.x-recommend-link .view1 .two {
+	color: #31c3a2;
+	margin-left: 20px;
+	cursor: pointer;
+}
+
+.x-recommend-link .view2 {
+	height: 30px;
+	line-height: 30px;
+}
+
+.x-recommend-link .view2 input {
+	width: 260px;
+	border: 1px solid #424b4f;
+	height: 30px;
+	background-color: #363b41;
+	color: #607d8b;
+	padding: 0 15px;
+	outline: none;
+}
+
+.x-recommend-link .view3 {
+	height: 40px;
+	line-height: 40px;
+}
+
+.x-recommend-link .view3 a {
+	color: #31C3A2;
+	text-decoration: underline;
+}
+
+.savebtn {
+	width: 106px;
+	height: 42px;
+	margin-left: 493px;
+	padding: 0;
+	clear: both;
+}
+
+.passwordwrap,.emailwrap1,.emailwrap2,.numwrap1,.numwrap2,.apaywrap1,.paypasswordwrap
+	{
+	display: none;
+}
+
+.c_greyicon {
+	color: #878b8e;
+	position: absolute;
+	top: 8px;
+	right: 0;
+	cursor: pointer;
+}
+
+.embtn,.numbtn,.paybtn,.payPasswordBtn {
+	width: 50px;
+	height: 30px;
+	padding: 0;
+	margin: 0;
+}
+
+.embtn1,.numbtn1,.paybtn1 {
+	width: 75px;
+	height: 30px;
+	padding: 0;
+	margin: 0;
+}
+
+#userInfoSysGold{
+	max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 1199px) {
+	.c-accountwrapright {
+		display: none;
+	}
+}
+
+
+	code {
+		    display: block;
+			height: 40px;
+			position: fixed;
+			width: 40px;
+			left:110px;
+            top: 203px;
+            background:none;
+				}
+				
+				.demoSpan1 {
+					height:20px;
+					width: 20px;
+					display: inline-block;
+					border: 2px solid #4e636e;
+					border-radius: 100px;
+					-webkit-border-radius: 100px;
+					-moz-border-radius: 100px;
+					vertical-align: middle;
+    				position:relative;
+    				left:0;
+            		top: 0;
+            		margin-bottom: 2px;
+            		margin-left: 3px;
+				}
+				
+				.demoSpan1:after {
+					content: '?';
+					height: 16px;
+					width: 16px;
+					display: block;
+					-webkit-border-radius: 20px;
+					-moz-border-radius: 20px;
+					position: absolute;
+					top: -16px;
+					left: 4px; 
+					color:#4e636e;
+					font-size: 15px;
+					font-family: arial;
+				}

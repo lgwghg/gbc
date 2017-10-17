@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webside.user.mapper.UserMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+	<sql id="userAttributes">
+		u.u_id,
+		u.is_deleted,
+		u.u_locked,
+		u.u_password,
+		u.pay_password,
+		u.pay_password_salt,
+		u.u_credentials_salt,
+		u.u_creator_name,
+		u.u_create_time,
+		u.u_updator_name,
+		u.u_update_time,
+		u.nick_name,
+		u.Mobile,
+		u.photo,
+		u.email,
+		u.sign,
+		u.steam_key,
+		u.qq_key,
+		u.wechat_key,
+		u.weibo_key,
+		u.rank_level,
+		u.campaign_key,
+		i.ID,
+		i.USER_ID,
+		i.JC_NUM,
+		i.VICTORY_NUM,
+		i.VICTORY_RATE,
+		i.TOTAL_PROFIT_GOLD_NUM,
+		i.is_involvement_in_jc,
+		i.UNREAD_NUM,
+		i.sign_num
+	</sql>
+	<sql id="userAttributesFront">
+		u.u_id,
+		u.is_deleted,
+		u.u_creator_name,
+		u.u_create_time,
+		u.u_updator_name,
+		u.u_update_time,
+		u.nick_name,
+		u.Mobile,
+		u.photo,
+		u.email,
+		u.sign,
+		u.steam_key,
+		u.qq_key,
+		u.wechat_key,
+		u.weibo_key,
+		u.rank_level,
+		u.campaign_key,
+		i.ID,
+		i.USER_ID,
+		i.JC_NUM,
+		i.VICTORY_NUM,
+		i.VICTORY_RATE,
+		i.TOTAL_PROFIT_GOLD_NUM,
+		i.is_involvement_in_jc,
+		i.UNREAD_NUM,
+		i.sign_num
+	</sql>
+	<resultMap id="userMap" type="com.webside.user.model.UserEntity">
+		<id property="id" column="u_id"/>
+		<result property="nickName" column="nick_name"/>
+		<result property="mobile" column="mobile"/>
+		<result property="email" column="email"/>
+		<result property="isDeleted" column="is_deleted"/>
+		<result property="locked" column="u_locked"/>
+		<result property="password" column="u_password"/>
+		<result property="payPassword" column="pay_password"/>
+		<result property="payPasswordSalt" column="pay_password_salt"/>
+		<result property="credentialsSalt" column="u_credentials_salt"/>
+		<result property="sign" column="sign"/>
+		<result property="photo" column="photo"/>
+		<result property="rankLevel" column="rank_level"/>
+		<result property="campaignKey" column="campaign_key"/>
+		<result property="steamKey" column="steam_key"/>
+		<result property="steamNick" column="steam_nick"/>
+		<result property="qqKey" column="qq_key"/>
+		<result property="qqNick" column="qq_nick"/>
+		<result property="wechatKey" column="wechat_key"/>
+		<result property="wechatNick" column="wechat_nick"/>
+		<result property="weiboKey" column="weibo_key"/>
+		<result property="weiboNick" column="weibo_nick"/>
+		<result property="creatorName" column="u_creator_name"/>
+		<result property="updatorName" column="u_updator_name"/>
+		<result property="createTime" column="u_create_time"/>
+		<result property="updateTime" column="u_update_time"/>
+		<result property="alipayAccount" column="alipay_account"/>
+		<association property="role" column="id" javaType="com.webside.role.model.RoleEntity">
+			<id property="id" column="r_id"/>
+			<result property="name" column="r_name"/>
+			<result property="key" column="r_key"/>
+			<result property="status" column="r_status"/>
+			<result property="description" column="r_description"/>
+			<result property="createTime" column="r_create_time"/>
+			<result property="updateTime" column="r_update_time"/>
+		</association>
+		<association property="userIncrement" column="id" javaType = "com.webside.user.model.UserIncrement">
+			<id property="id" column="ID"/>
+			<result property="userId" column="USER_ID"/>
+			<result property="jcNum" column="JC_NUM"/>
+			<result property="victoryNum" column="VICTORY_NUM"/>
+			<result property="victoryRate" column="VICTORY_RATE"/>
+			<result property="totalProfitGoldNum" column="TOTAL_PROFIT_GOLD_NUM"/>
+			<result property="isInvolvementInJc" column="is_involvement_in_jc" />
+			<result property="unreadNum" column="UNREAD_NUM"/>
+			<result property="signNum" column="sign_num"/>
+			<result property="createTime" column="create_Time"/>
+			<result property="updateTime" column="update_Time"/>
+			<result property="createOperatorId" column="create_Operator_Id"/>
+			<result property="updateOperatorId" column="update_Operator_Id"/>
+		</association>
+	</resultMap>
+	<resultMap id="userIncrementMap" type="com.webside.user.model.UserIncrement">
+		<id property="id" column="ID"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="jcNum" column="JC_NUM"/>
+		<result property="victoryNum" column="VICTORY_NUM"/>
+		<result property="victoryRate" column="VICTORY_RATE"/>
+		<result property="totalProfitGoldNum" column="TOTAL_PROFIT_GOLD_NUM"/>
+		<result property="isInvolvementInJc" column="is_involvement_in_jc" />
+		<result property="unreadNum" column="UNREAD_NUM"/>
+		<result property="signNum" column="sign_num"/>
+		<result property="createTime" column="create_Time"/>
+		<result property="updateTime" column="update_Time"/>
+		<result property="createOperatorId" column="create_Operator_Id"/>
+		<result property="updateOperatorId" column="update_Operator_Id"/>
+	</resultMap>
+	<select id="queryListByPage" parameterType="map" resultMap="userMap">
+		<!-- 
+			偏移offset较小的时候，直接使用limit较优；
+			偏移offset较大的时候，使用下面子查询的方式较优；
+			具体可以根据业务情况选择 
+		-->
+		<!-- 
+		select <include refid="userAttributes" /> from tb_user Where u_id >=(
+		select u_id from tb_user order by u_id limit ${start},1
+		) limit ${pageNumber}
+		 -->
+		SELECT u.u_id,
+		u.is_deleted,
+		u.u_locked,
+		u.u_creator_name,
+		u.u_create_time,
+		u.u_updator_name,
+		u.u_update_time,
+		u.nick_name,
+		u.Mobile,
+		u.photo,
+		u.email,
+		u.sign,
+		u.steam_key,
+		u.qq_key,
+		u.wechat_key,
+		u.weibo_key,
+		u.steam_nick,
+		u.qq_nick,
+		u.wechat_nick,
+		u.weibo_nick,
+		u.rank_level,
+		u.campaign_key
+		FROM tb_user u
+		<where>
+			<if test="nickName != null and nickName != ''">
+				u.nick_name like concat('%',#{nickName},'%')  or u.mobile like concat('%',#{nickName},'%')  or u.email like concat('%',#{nickName},'%') 
+			</if>
+			<if test="creatorName !=null and creatorName != ''">
+				and u.u_creator_name = #{creatorName}
+			</if>
+			<if test="beginCreateTime !=null and beginCreateTime != ''">
+				and u.u_create_time &gt; #{beginCreateTime}
+			</if>
+			<if test="endCreateTime !=null and endCreateTime != ''">
+				and u.u_create_time &lt; #{endCreateTime}
+			</if>
+			<if test="beginUpdateTime !=null and beginUpdateTime != ''">
+				and u.u_update_time &gt; #{beginUpdateTime}
+			</if>
+			<if test="endUpdateTime !=null and endUpdateTime != ''">
+				and u.u_update_time &lt; #{endUpdateTime}
+			</if>
+		</where>
+	</select>
+	<select id="findUserByMobileOrEmailOrIdOrThirdKey" parameterType="com.webside.user.model.UserEntity" resultMap="userMap"> 
+		SELECT <include refid="userAttributes" />
+		FROM tb_user u join t_user_increment i on u.u_id=i.user_id
+		where u.is_deleted = 0
+		<if test="email != null and email != ''">
+		and u.email = #{email} 
+		</if>
+		<if test="id != null and id != ''">
+		and u.u_id = #{id} 
+		</if>
+		<if test="mobile != null and mobile != ''">
+		and u.mobile = #{mobile} 
+		</if>
+		<if test="qqKey != null and qqKey != ''">
+		and u.qq_key = #{qqKey} 
+		</if>
+		<if test="steamKey != null and steamKey != ''">
+		and u.steam_key = #{steamKey} 
+		</if>
+		<if test="weiboKey != null and weiboKey != ''">
+		and u.weibo_key = #{weiboKey} 
+		</if>
+		<if test="wechatKey != null and wechatKey != ''">
+		and u.wechat_key = #{wechatKey} 
+		</if>
+	</select>
+	
+	<select id="findByEmail" parameterType="String" resultMap="userMap"> 
+		SELECT <include refid="userAttributes" />
+		FROM tb_user u join t_user_increment i on u.u_id=i.user_id
+		where u.email = #{email} and u.is_deleted = 0
+	</select>
+	
+	<select id="findById" parameterType="String" resultMap="userMap">
+		SELECT <include refid="userAttributes" />,alipay_account
+		FROM tb_user u join t_user_increment i on u.u_id=i.user_id
+		where u.u_id = #{id} and u.is_deleted = 0
+		
+		<!-- 这种映射方式可以不用写resultMap,同时加双引号是为了mybatis可以识别映射
+			SELECT u.u_id id,
+		u.u_name userName,
+		u.u_account_name accountName,
+		u.u_password password,
+		u.u_delete_status deleteStatus,
+		u.u_locked locked,
+		u.u_description description,
+		u.u_credentials_salt credentialsSalt,
+		u.u_creator_name creatorName,
+		u.u_create_time createTime,
+		u.u_update_time updateTime,
+		r.r_id "role.id",
+		r.r_name "role.name",
+		r.r_key "role.key",
+		r.r_status "role.status",
+		r.r_description "role.description",
+		r.r_create_time "role.createTime",
+		r.r_update_time "role.updateTime",
+		i.u_sex "userInfo.sex",
+		i.u_birthday "userInfo.birthday",
+		i.u_telephone "userInfo.telephone",
+		i.u_email "userInfo.email",
+		i.u_address "userInfo.address"
+		FROM tb_user u JOIN tb_role_user ru ON u.u_id = ru.u_id JOIN tb_role r ON ru.r_id = r.r_id JOIN tb_user_info i ON u.u_id = i.u_id 
+		where u.u_id = ${id}
+		 -->
+	</select>
+	
+	<insert id="insert" parameterType="com.webside.user.model.UserEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_user (
+			u_id,
+			u_password,
+			u_credentials_salt,
+			u_creator_name,
+			u_create_time,
+			mobile,
+			nick_name,
+			photo,
+			campaign_key,
+			rank_level
+			<if test="steamKey != null and steamKey != ''">
+			,steam_key
+			</if>
+			<if test="steamNick != null and steamNick != ''">
+			,steam_nick
+			</if>
+			<if test="qqKey != null and qqKey != ''">
+			,qq_key
+			</if>
+			<if test="qqNick != null and qqNick != ''">
+			,qq_nick
+			</if>
+			<if test="weiboKey != null and weiboKey != ''">
+			,weibo_key
+			</if>
+			<if test="weiboNick != null and weiboNick != ''">
+			,weibo_nick
+			</if>
+			<if test="wechatKey != null and wechatKey != ''">
+			,wechat_key
+			</if>
+			<if test="wechatNick != null and wechatNick != ''">
+			,wechat_nick
+			</if>
+			)   
+		values (
+			#{id},
+			#{password},
+			#{credentialsSalt},
+			#{creatorName},
+			#{createTime},
+			#{mobile},
+			#{nickName},
+			#{photo},
+			#{campaignKey},
+			1
+			<if test="steamKey != null and steamKey != ''">
+			,#{steamKey}
+			</if>
+			<if test="steamNick != null and steamNick != ''">
+			,#{steamNick}
+			</if>
+			<if test="qqKey != null and qqKey != ''">
+			,#{qqKey}
+			</if>
+			<if test="qqNick != null and qqNick != ''">
+			,#{qqNick}
+			</if>
+			<if test="weiboKey != null and weiboKey != ''">
+			,#{weiboKey}
+			</if>
+			<if test="weiboNick != null and weiboNick != ''">
+			,#{weiboNick}
+			</if>
+			<if test="wechatKey != null and wechatKey != ''">
+			,#{wechatKey}
+			</if>
+			<if test="wechatNick != null and wechatNick != ''">
+			,#{wechatNick}
+			</if>
+			)  
+	</insert>
+	
+	<insert id="insertUserRole" parameterType="com.webside.role.model.RoleUser" >
+		insert into tb_role_user (
+			id,
+			u_id,
+			r_id,
+			t_create_time
+			)   
+		values (
+			#{id},
+			#{userId},
+			#{roleId},
+			now()
+			)  
+	</insert>
+	
+	<update id="update" parameterType="com.webside.user.model.UserEntity" >
+		update tb_user
+		<set>
+				u_update_time = #{updateTime},
+				u_updator_name = #{updatorName}
+			<if test="password != null and password != ''">
+				,u_password = #{password}
+			</if>
+			<if test="payPassword != null and payPassword != ''">
+				,pay_password = #{payPassword}
+			</if>
+			<if test="payPasswordSalt != null and payPasswordSalt != ''">
+				,pay_password_salt = #{payPasswordSalt}
+			</if>
+			<if test="credentialsSalt != null and credentialsSalt != ''">
+				,u_credentials_salt = #{credentialsSalt}
+			</if>
+			<if test="isDeleted != null">
+				,is_deleted = #{isDeleted}
+			</if>
+			<if test="locked != null">
+				,u_locked = #{locked}
+			</if>
+			<if test="sign != null">
+				,sign = #{sign}
+			</if>
+			<if test="email != null and email != '' ">
+				,email = #{email}
+			</if>
+			<if test="mobile != null and mobile != ''">
+				,mobile = #{mobile}
+			</if>
+			<if test="photo != null and photo != ''">
+				,photo = #{photo}
+			</if>
+			<if test="rankLevel != null">
+				,rank_level = #{rankLevel}
+			</if>
+			<if test="alipayAccount != null and alipayAccount != ''">
+				,alipay_account = #{alipayAccount}
+			</if>
+			<if test="steamKey != null and steamKey != ''">
+				,steam_key = #{steamKey}
+			</if>
+			<if test="steamNick != null and steamNick != ''">
+				,steam_nick = #{steamNick}
+			</if>
+			<if test="qqKey != null and qqKey != ''">
+				,qq_key = #{qqKey}
+			</if>
+			<if test="qqNick != null and qqNick != ''">
+				,qq_nick = #{qqNick}
+			</if>
+			<if test="weiboKey != null and weiboKey != ''">
+				,weibo_key = #{weiboKey}
+			</if>
+			<if test="weiboNick != null and weiboNick != ''">
+				,weibo_nick = #{weiboNick}
+			</if>
+			<if test="wechatKey != null and wechatKey != ''">
+				,wechat_key = #{wechatKey}
+			</if>
+			<if test="wechatNick != null and wechatNick != ''">
+				,wechat_nick = #{wechatNick}
+			</if>
+			<if test="nickName != null and nickName != ''">
+				,nick_name = #{nickName}
+			</if>
+		</set>
+		where u_id = #{id} and is_deleted = 0
+	</update>
+	<select id = "findUserRoleByUserId" parameterType="String" resultType="com.webside.user.model.UserRole">
+		select id as id , u_id as userId, r_id as roleId, t_create_time as createTime from tb_role_user where u_id = #{id}
+	</select>
+	<update id="updateUserRole" parameterType="com.webside.user.model.UserEntity" >
+		update tb_role_user
+		set r_id = #{role.id}
+		where u_id = #{id}
+	</update>
+	<delete id="deleteUserRoleById">
+		delete from tb_role_user where id = #{id}
+	</delete>
+	<delete id="deleteBatchById" parameterType="list">
+		<![CDATA[  
+       delete from tb_user where u_id in  
+    	]]>  
+	    <foreach collection="list" item = "id" open="(" separator="," close=")">
+	    #{id}  
+	    </foreach>  
+	</delete>
+	
+	<delete id="deleteBatchUserRole" parameterType="list">
+		<![CDATA[  
+       delete from tb_role_user where u_id in  
+    	]]>  
+	    <foreach collection="list" item = "id" open="(" separator="," close=")">
+	    #{id}  
+	    </foreach>  
+	</delete>
+	<select id="findByMobile" parameterType ="String" resultMap="userMap">
+		SELECT <include refid="userAttributes" />
+		FROM tb_user u join t_user_increment i on u.u_id=i.user_id
+		where u.mobile = #{mobile} and u.is_deleted = 0
+	</select>
+	
+	<select id="findByNickName" parameterType ="String" resultMap="userMap">
+		SELECT u.u_id,
+		u.is_deleted,
+		u.u_locked,
+		u.u_password,
+		u.u_credentials_salt,
+		u.u_creator_name,
+		u.u_create_time,
+		u.u_updator_name,
+		u.u_update_time,
+		u.nick_name,
+		u.Mobile,
+		u.photo,
+		u.email,
+		u.sign,
+		u.steam_key,
+		u.qq_key,
+		u.wechat_key,
+		u.weibo_key,
+		u.rank_level,
+		u.campaign_key
+		from tb_user u
+		where u.nick_name = #{nickName} and u.is_deleted = 0
+	</select>
+	<select id="findRoleUserByRoleId" parameterType="Map" resultMap="userMap">
+		SELECT u.u_id,
+		u.is_deleted,
+		u.u_locked,
+		u.u_password,
+		u.u_credentials_salt,
+		u.u_creator_name,
+		u.u_create_time,
+		u.u_updator_name,
+		u.u_update_time,
+		u.nick_name,
+		u.Mobile,
+		u.photo,
+		u.email,
+		u.sign,
+		u.steam_key,
+		u.qq_key,
+		u.wechat_key,
+		u.weibo_key,
+		u.rank_level,
+		u.campaign_key,
+		r.r_id,
+		r.r_name,
+		r.r_key,
+		r.r_status,
+		r.r_description,
+		r.r_create_time,
+		r.r_update_time 
+		FROM tb_user u JOIN tb_role_user ru ON u.u_id = ru.u_id JOIN tb_role r ON ru.r_id = r.r_id 
+		where r.r_id = #{roleId} and u.is_deleted = 0 and r.r_status = 0
+		<if test="nickName != null and nickName != ''">
+ 			and (nick_name like concat('%',#{nickName},'%')  or  mobile like concat('%',#{nickName},'%') or email like concat('%',#{nickName},'%'))
+ 		</if>
+	</select>
+	
+	<select id="countAllUser"  resultType="Integer">
+		SELECT count(u.u_id) FROM tb_user u JOIN  t_user_increment i ON u.u_id = i.USER_ID
+ 		WHERE u.is_deleted = 0 AND i.IS_DELETED = 0 
+	</select>
+	
+	<select id="findUserEntity" parameterType="com.webside.user.model.UserEntity" resultMap="userMap">
+		SELECT u.u_id,
+		u.is_deleted,
+		u.u_locked,
+		u.nick_name,
+		u.Mobile,
+		u.photo,
+		u.email,
+		u.sign,
+		u.steam_key,
+		u.qq_key,
+		u.wechat_key,
+		u.weibo_key,
+		u.steam_nick,
+		u.qq_nick,
+		u.wechat_nick,
+		u.weibo_nick,
+		u.rank_level,
+		u.campaign_key
+		from tb_user u
+		where u.is_deleted = 0
+		<if test="id != null and id != '' ">
+			and u.u_id = #{id}
+		</if>
+		<if test="nickName != null and nickName != '' ">
+			and u.nick_name = #{nickName}
+		</if>
+		<if test="mobile != null and mobile != '' ">
+			and u.mobile = #{mobile}
+		</if>
+		<if test="email != null and email != '' ">
+			and u.email = #{email}
+		</if>
+		<if test="steamKey != null and steamKey != '' ">
+			and u.steam_key = #{steamKey}
+		</if>
+		<if test="qqKey != null and qqKey != '' ">
+			and u.qq_key = #{qqKey}
+		</if>
+		<if test="weiboKey != null and weiboKey != '' ">
+			and u.weibo_key = #{weiboKey}
+		</if>
+		<if test="wechatKey != null and wechatKey != '' ">
+			and u.wechat_key = #{wechatKey}
+		</if>
+	</select>
+	
+	<select id="findUserWithRoleAndIncrement" parameterType="com.webside.user.model.UserEntity" resultMap="userMap">
+		SELECT u.u_id,
+		u.nick_name,
+		u.Mobile,
+		u.photo,
+		u.email,
+		u.sign,
+		u.steam_key,
+		u.qq_key,
+		u.wechat_key,
+		u.weibo_key,
+		u.rank_level,
+		u.campaign_key,
+		r.r_id,
+		r.r_name,
+		r.r_key,
+		r.r_status,
+		r.r_description,
+		i.jc_NUM,
+		i.victory_NUM,
+		i.victory_rate,
+		i.total_profit_gold_num,
+		i.is_involvement_in_jc,
+		i.UNREAD_NUM
+		FROM tb_user u join t_user_increment i on u.u_id=i.user_id left JOIN tb_role_user ru ON u.u_id = ru.u_id left JOIN tb_role r ON ru.r_id = r.r_id 
+		where u.is_deleted = 0
+		<if test="id != null and id != '' ">
+			and u.u_id = #{id}
+		</if>
+		<if test="nickName != null and nickName != '' ">
+			and u.nick_name = #{nickName}
+		</if>
+		<if test="mobile != null and mobile != '' ">
+			and u.mobile = #{mobile}
+		</if>
+		<if test="email != null and email != '' ">
+			and u.email = #{email}
+		</if>
+	</select>
+	
+	<select id="findAlipayAccountByUserId" parameterType="String" resultType="String">
+		select alipay_account from tb_user where u_id = #{userId}
+	</select>
+	
+	<update id="updateCancalBind" parameterType="map">
+		update tb_user set u_update_time = #{updateTime}
+		<if test="thirdType != null and thirdType == 'steam'">
+			,steam_key = ''
+			,steam_nick = ''
+		</if>
+		<if test="thirdType != null and thirdType == 'qq'">
+			,qq_key = ''
+			,qq_nick = ''
+		</if>
+		<if test="thirdType != null and thirdType == 'weibo'">
+			,weibo_key = ''
+			,weibo_nick = ''
+		</if>
+		<if test="thirdType != null and thirdType == 'wechat'">
+			,wechat_key = ''
+			,wechat_nick = ''
+		</if>
+		where u_id = #{userId}
+	</update>
+	
+	<!-- 新增t_user_wallet -->
+	<insert id="insertUserWallet" parameterType="com.webside.user.model.UserWallet">
+		insert into t_user_wallet
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="userId != null">user_id,</if><!-- 用户ID-->
+		<if test="gold != null">gold,</if><!-- G币-->
+		<if test="sysGoldNum != null">sys_gold_num,</if><!-- 赠送G币-->
+		<if test="updateTime != null">update_time,</if><!-- 修改时间-->
+		<if test="createTime != null">create_time,</if>
+		<if test="createOperatorId != null">create_operator_id,</if>
+		<if test="updateOperatorId != null">update_operator_id,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="userId != null">#{userId},</if><!-- 用户ID-->
+		<if test="gold != null">#{gold},</if><!-- G币-->
+		<if test="sysGoldNum != null">#{sysGoldNum},</if><!-- 赠送G币-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 修改时间-->
+		<if test="createTime != null">#{createTime},</if>
+		<if test="createOperatorId != null">#{createOperatorId},</if>
+		<if test="updateOperatorId != null">#{updateOperatorId},</if>
+		</trim>
+	</insert>
+	
+	<!-- 根据推广key查询用户信息 -->
+	<select id="findByCampaignKey" parameterType="String" resultMap="userMap"> 
+		SELECT <include refid="userAttributes" />
+		FROM tb_user u join t_user_increment i on u.u_id=i.user_id
+		where u.campaign_key = #{campaignKey} and u.is_deleted = 0
+	</select>
+</mapper>

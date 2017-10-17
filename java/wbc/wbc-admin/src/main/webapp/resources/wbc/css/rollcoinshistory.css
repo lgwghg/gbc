@@ -1,0 +1,222 @@
+.roll-coins-history .my-message{
+    padding: 10px 20px;
+    background-color: #2e3238;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+.roll-coins-history .my-message .top{
+    height: 34px;
+    line-height: 34px;
+}
+.roll-coins-history .my-message .top .view1{
+    width: 34px;
+    height: 34px;
+    float: left;
+    display: block;
+    border-radius: 50%;
+}
+.roll-coins-history .my-message .top .view2{
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    float: left;
+    margin-left: 10px;
+}
+.roll-coins-history .my-message .top .view3{
+    font-size: 14px;
+    float: left;
+    margin-left: 15px;
+}
+.roll-coins-history .my-message .top .view3 .one{
+    color: #31C3A2;
+    font-weight: bold;
+    float: left;
+}
+.roll-coins-history .my-message .top .view3 .two{
+    color: #fff;
+    float: left;
+}
+.roll-coins-history .my-message .bottom{
+    color: #afb0b2;
+    overflow: hidden;
+}
+.roll-coins-history .my-message .bottom li{
+    float: left;
+    width: 25%;
+    margin-top: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.roll-coins-history .my-message .bottom li .view2{
+    font-weight: bold;
+}
+.roll-coins-history .message-details-outside{
+    width: 100%;
+    overflow: auto;
+}
+.roll-coins-history .message-details-outside .message-details{
+    padding: 30px 10px;
+    background-color: #2E3238;
+    margin-top: 20px;
+    border-radius: 10px;
+    width: 1200px;
+}
+.roll-coins-history .message-details .message-details-header{
+    height: 36px;
+    line-height: 36px;
+    color: #fff;
+    padding: 0 20px;
+}
+.roll-coins-history .message-details .message-details-header span{
+    float: left;
+}
+.roll-coins-history .message-details .message-details-header .view1{
+    width: 165px;
+}
+.roll-coins-history .message-details .message-details-header .view2{
+    width: 195px;
+}
+.roll-coins-history .message-details .message-details-header .view3{
+    width: 80px;
+    text-align: center;
+}
+.roll-coins-history .message-details .message-details-header .view4{
+    width: 195px;
+    text-align: center;
+}
+.roll-coins-history .message-details .message-details-header .view5{
+    width: 140px;
+}
+.roll-coins-history .message-details .message-details-header .view6{
+    width: 185px;
+    text-align: center;
+}
+.roll-coins-history .message-details .message-details-header .view7{
+    width: 115px;
+    text-align: center;
+}
+.roll-coins-history .message-details .message-details-body li{
+    line-height: 64px;
+    border-bottom: 1px solid #42494e;
+    color: #afb0b2;
+    padding: 0 20px;
+    overflow: hidden;
+}
+.roll-coins-history .message-details .message-details-body li .view1{
+    float: left;
+    width: 165px;
+    min-height: 64px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.roll-coins-history .message-details .message-details-body li .view1 .one{
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+}
+.roll-coins-history .message-details .message-details-body li .view1 .two{
+    margin-left: 5px;
+}
+.roll-coins-history .message-details .message-details-body li .view2{
+    float: left;
+    width: 195px;
+    min-height: 64px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.roll-coins-history .message-details .message-details-body li .view2 .content{
+    width: 195px;
+    height: 64px;
+}
+.roll-coins-history .message-details .message-details-body li .view2 .content .one{
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+}
+.roll-coins-history .message-details .message-details-body li .view2 .content .two{
+    margin-left: 5px;
+}
+.roll-coins-history .message-details .message-details-body li .view3{
+    width: 80px;
+    min-height: 64px;
+    text-align: center;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.roll-coins-history .message-details .message-details-body li .view4{
+    width: 195px;
+    min-height: 64px;
+    text-align: center;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.roll-coins-history .message-details .message-details-body li .view5{
+    width: 140px;
+    min-height: 64px;
+    float: left;
+}
+.roll-coins-history .message-details .message-details-body li .view5 .left{
+    width: 48px;
+    float: left;
+}
+.roll-coins-history .message-details .message-details-body li .view5 .left img{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+.roll-coins-history .message-details .message-details-body li .view5 .right{
+    width: 48px;
+    float: left;
+    margin-left: 21px;
+}
+.roll-coins-history .message-details .message-details-body li .view5 .right img{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+.roll-coins-history .message-details .message-details-body li .view6{
+    width: 185px;
+    min-height: 64px;
+    text-align: center;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.roll-coins-history .message-details .message-details-body li .view7{
+    width: 115px;
+    min-height: 64px;
+    text-align: center;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.roll-coins-history .message-details .message-details-body li .view8{
+    width: 65px;
+    min-height: 64px;
+    float: left;
+}
+.roll-coins-history .message-details .message-details-body li .view8 button{
+    width: 65px;
+    height: 32px;
+    padding: 0;
+    background-color: #31C3A2;
+    color: #fff;
+    outline: none;
+}
+.roll-coins-history .message-details .message-details-fy{
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+}
+.roll-coins-history .message-details .message-details-fy .pagination{
+    margin: 20px 0 0 0;
+}

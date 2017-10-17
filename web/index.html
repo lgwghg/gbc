@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html xmlns:og="http://ogp.me/ns#" class="alt-layout">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+
+    <title>首页</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="css/ripples.min.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+    <script>
+        document.createElement('video');
+    </script>
+    <![endif]-->
+    <style>
+        .dexlistwrap{
+            display: flex;
+            flex-direction:row;
+            height: 104px;
+            width: 862px;
+            background: #1e2124;
+            color: #fff;
+            margin: 0 15px;
+        }
+        .dexlistwrap:hover{
+            background: #3d4148;
+        }
+        .listbisaione,.listbisaitwo{
+            display: flex;
+            flex-direction:row;
+            width: 355px;
+        }
+        .listbisaione>div,.listbisaitwo>div{
+            flex: 1;
+        }
+        .vs-c{
+            width: 162px;
+            text-align: center;
+            line-height: 106px;
+        }
+        .vs-c img{
+            border-radius: 50%;
+            height: 36px;
+            width: 36px;
+            line-height: 36px;
+        }
+        .item_c{
+            vertical-align: middle;
+        }
+        .item_c img{ 
+            height: 60px;
+            width: 60px;
+            line-height: 60px;
+         }
+         .item_c .titleimg{
+            height: 32px;
+            width: 32px;
+            line-height: 32px;
+            margin-right: 6px;
+            transform: translateY(-5px);
+         }
+        .ssword{
+            display: inline-block;
+            width: 80px;
+            height: 20px;
+            line-height: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+<div class="bodyer"></div>
+<div class="container-fluid" style="margin: 0; padding: 0;">
+    <div class="container" style="padding:0;">
+        <div class="header mt-30">
+            <div class="pull-left logo"><img src="images/LOGO.png"></div>
+            <div class="pull-right">
+                <button type="button" class="btn btn-primary btn-raised" data-toggle="modal" data-target="#myModal2">
+                    <strong>注 册</strong></button>
+                <button type="button" class="btn btn-default btn-raised" data-toggle="modal" data-target="#myModal">
+                    <strong>登 录</strong></button>
+            </div>
+        </div>
+
+        <div class="fix"></div>
+        <h5 class="text-center welc mt-80">WELCOME TO BOCAI</h5>
+
+        <h1 class="text-center link-white mt-30 ft-60">专注电子竞技比赛竞猜</h1>
+        <h4 class="text-center welc mt-30 ft-16">通过你的知识、技艺参与比赛竞猜，并在比赛结束赢得相应的参与激励</h4>
+
+        <p class="text-center">
+            <button type="button" class="btn btn-primary btn-raised mt-35 ft-18" style="height:48px; width:265px;"
+                    onClick="location.href='2.0bocai比赛列表页.html'"><strong>开始竞猜</strong></button>
+        </p>
+
+        <h2 class="text-center link-white mt-100"><strong>最近比赛</strong></h2>
+
+        <div class="row mt-35" style="padding:0; margin:0">
+            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="padding:0 10px 0 0;">
+                <div class="match_thing">
+                    <div class="title">
+                        <ul>
+                            <li>赛事名称</li>
+                            <li class="text-center">对阵</li>
+                            <li class="text-center">开始倒计时</li>
+
+                        </ul>
+                    </div>
+
+                  <div class="dexlistwrap">
+        <div class="listbisaione">
+            <p class="item_c" style="padding-left: 10px; line-height: 104px;"><img class="titleimg" src="images/li_icon.png" alt=""><span class="ssword">2016年冬rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr季赛</span></p>
+            <div class="item_c" style="display: flex; flex-direction:row; justify-content: flex-end;">
+                <div style="display: flex; flex-direction:column; margin-right: 5px; justify-content: center;">
+                <p><span style="vertical-align: top;color: #ffba00;">[-0.5]</span><span class="ssword" style="text-align: right;">SKT33333333333333333333333333</span></p>
+                <span class="ssword" style="margin-left: 40px;">5%333333333</span>
+                </div>
+                <img src="images/li_icon.png" alt="" style="margin-top: 20px;">   
+            </div>
+        </div>
+        <div class="vs-c"><img src="images/li_icon.png" alt=""></div>
+        <div class="listbisaitwo">
+            <div class="item_c" style="display: flex; flex-direction:row;">
+                <img src="nvnv.png" weight="60" height="60" alt="" style="margin-top: 20px;">   
+                <div style="display: flex; flex-direction:column; margin-left: 5px; justify-content: center;">
+                <p><span class="ssword">SKT4444444444444rrrrrrrrrrrrrrrrrrrrrrrrrrrrr4444444</span><span style="vertical-align: top;color: #ffba00;">[-0.5]</span></p>
+                <span class="ssword">5%444444444rrrrrrrrrrrrrrrrrrrrr4</span>
+                </div>
+            </div>
+            <p style="width: 100px; line-height: 104px;">22小时后</p>
+        </div>  
+    </div>
+
+                    <div class="list">
+                        <img src="images/list_bj.png" class="list-bg">
+                        <div class="table-responsive">
+                            <table class="table">
+
+
+                                <tbody>
+                                <tr onClick="location.href='details.html'">
+                                    <td width="20%"><img src="images/li_icon.png">　PorDotA</td>
+                                    <td width="12%" align="right"><p>IG</p>
+
+                                        <p>47%</p></td>
+                                    <td width="13%"><img src="images/r_ic.png"></td>
+                                    <td width="12%"><img src="images/r_vs.png"></td>
+                                    <td width="7%"><img src="images/r_logo.png"></td>
+                                    <td width="16%" align="left"><p>LGD</p>
+
+                                        <p>53%</p></td>
+                                    <td width="20%" align="center">12分56秒</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div class="list">
+                        <img src="images/list_bj.png" class="list-bg">
+                        <div class="table-responsive">
+                            <table class="table">
+
+
+                                <tbody>
+                                <tr onClick="location.href='details.html'">
+                                    <td width="20%"><img src="images/li_icon.png">　PorDotA</td>
+                                    <td width="12%" align="right"><p>IG</p>
+
+                                        <p>47%</p></td>
+                                    <td width="13%"><img src="images/r_ic.png"></td>
+                                    <td width="12%"><img src="images/r_vs.png"></td>
+                                    <td width="7%"><img src="images/r_logo.png"></td>
+                                    <td width="16%" align="left"><p>LGD</p>
+
+                                        <p>53%</p></td>
+                                    <td width="20%" align="center">12分56秒</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div class="list">
+                        <img src="images/list_bj.png" class="list-bg">
+                        <div class="table-responsive">
+                            <table class="table">
+
+
+                                <tbody>
+                                <tr onClick="location.href='details.html'">
+                                    <td width="20%"><img src="images/li_icon.png">　PorDotA</td>
+                                    <td width="12%" align="right"><p>IG</p>
+
+                                        <p>47%</p></td>
+                                    <td width="13%"><img src="images/r_ic.png"></td>
+                                    <td width="12%"><img src="images/r_vs.png"></td>
+                                    <td width="7%"><img src="images/r_logo.png"></td>
+                                    <td width="16%" align="left"><p>LGD</p>
+
+                                        <p>53%</p></td>
+                                    <td width="20%" align="center">12分56秒</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div class="list">
+                        <img src="images/list_bj.png" class="list-bg">
+                        <div class="table-responsive">
+                            <table class="table">
+
+
+                                <tbody>
+                                <tr onClick="location.href='details.html'">
+                                    <td width="20%"><img src="images/li_icon.png">　PorDotA</td>
+                                    <td width="12%" align="right"><p>IG</p>
+
+                                        <p>47%</p></td>
+                                    <td width="13%"><img src="images/r_ic.png"></td>
+                                    <td width="12%"><img src="images/r_vs.png"></td>
+                                    <td width="7%"><img src="images/r_logo.png"></td>
+                                    <td width="16%" align="left"><p>LGD</p>
+
+                                        <p>53%</p></td>
+                                    <td width="20%" align="center">12分56秒</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div class="list">
+                        <img src="images/list_bj.png" class="list-bg">
+                        <div class="table-responsive">
+                            <table class="table">
+
+
+                                <tbody>
+                                <tr onClick="location.href='details.html'">
+                                    <td width="20%"><img src="images/li_icon.png">　PorDotA</td>
+                                    <td width="12%" align="right"><p>IG</p>
+
+                                        <p>47%</p></td>
+                                    <td width="13%"><img src="images/r_ic.png"></td>
+                                    <td width="12%"><img src="images/r_vs.png"></td>
+                                    <td width="7%"><img src="images/r_logo.png"></td>
+                                    <td width="16%" align="left"><p>LGD</p>
+
+                                        <p>53%</p></td>
+                                    <td width="20%" align="center">12分56秒</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <div class="col-xs-2 hidden-xs hidden-sm col-md-3 col-lg-3" style="padding:0 0px 0 0;">
+                <div class="profit_top">
+                    <div class="title"><span class="fr"><!--<a href="javascript:;">更多>></a>--></span>盈利TOP</div>
+
+
+                   <a href="javascript:">
+                        <div class="row mt-10 page-header_2" style="color:white; margin: 0px 10px 0 10px;">
+                            <span class="fl guess-rank-list media guess_f" style="margin: 0; border: none;"></span>
+                    <span class="fl" style="margin: 0 10px;">
+                        <img src="images/i.png" class="img-circle" alt="Cinque Terre" width="48" height="48">
+                    </span>
+                    <span class="fl">
+                        <p>我这个人</p>
+                        <p><span class="lv-x"></span></p>
+                    </span>
+                    <span class="fr mt-15" style="padding:0">
+                       48512500金币
+                    </span>
+                        </div>
+                    </a>
+
+                    <a href="javascript:">
+                        <div class="row mt-10 page-header_2" style="color:white; margin: 0px 10px 0 10px;">
+                            <span class="fl guess-rank-list media" style="margin: 0;">2</span>
+                    <span class="fl" style="margin: 0 10px;">
+                        <img src="images/i.png" class="img-circle" alt="Cinque Terre" width="48" height="48">
+                    </span>
+                    <span class="fl">
+                        <p>我这个人</p>
+                        <p><span class="lv-x"></span></p>
+                    </span>
+                    <span class="fr mt-15" style="padding:0">
+                       48512500金币
+                    </span>
+                        </div>
+                    </a>
+
+                    <div class="row mt-10 page-header_2" style="color:white; margin: 0px 10px 0 10px;">
+                        <span class="fl guess-rank-list" style="margin: 0;">3</span>
+                    <span class="fl" style="margin: 0 10px;">
+                        <img src="images/i.png" class="img-circle" alt="Cinque Terre" width="48" height="48">
+                    </span>
+                    <span class="fl">
+                        <p>ErroR</p>
+                        <p><span class="lv-x"></span></p>
+                    </span>
+                    <span class="fr mt-15" style="padding:0">
+                       48512500金币
+                    </span>
+                    </div>
+
+                    <div class="row mt-10 page-header_2" style="color:white; margin: 0px 10px 0 10px;">
+                        <span class="fl guess-rank-list" style="margin: 0;">4</span>
+                    <span class="fl" style="margin: 0 10px;">
+                        <img src="images/i.png" class="img-circle" alt="Cinque Terre" width="48" height="48">
+                    </span>
+                    <span class="fl">
+                        <p>ErroR</p>
+                        <p><span class="lv-x"></span></p>
+                    </span>
+                    <span class="fr mt-15" style="padding:0">
+                       48512500金币
+                    </span>
+                    </div>
+
+
+                    <div class="row mt-10 page-header_2 last" style="color:white; margin: 0px 10px 0 10px;">
+                        <span class="fl guess-rank-list" style="margin: 0;">5</span>
+                    <span class="fl" style="margin: 0 10px;">
+                        <img src="images/i.png" class="img-circle" alt="Cinque Terre" width="48" height="48">
+                    </span>
+                    <span class="fl">
+                        <p>ErroR</p>
+                        <p><span class="lv-x"></span></p>
+                    </span>
+                    <span class="fr mt-15" style="padding:0">
+                       48512500金币
+                    </span>
+                    </div>
+
+
+                </div>
+
+
+                <div class="profit_top mt-15">
+                    <div class="title"><span class="fr"><!--<a href="javascript:;">更多>></a>--></span>盈利TOP</div>
+
+
+                    <div class="row mt-10 page-header_2" style="color:white; margin: 0px 10px 0 10px;">
+                        <span class="guess fl" style="margin: 0;"></span>
+                    <span class="col-xs-2 hidden-xs" style="padding:0">
+                        <img src="images/i.png" class="img-circle" alt="Cinque Terre" width="48" height="48">
+                    </span>
+                    <span class="col-xs-2">
+                        <p>ErroR</p>
+                        <p><span class="lv-x"></span></p>
+                    </span>
+                    <span class="fr mt-15" style="padding:0">
+                             85% <font class="link-orange">win</font>
+                    </span>
+                    </div>
+
+                    <a href="javascript:">
+                        <div class="row mt-10 page-header_2" style="color:white; margin: 0px 10px 0 10px;">
+                            <span class="fl guess-rank-list media" style="margin: 0;">2</span>
+                    <span class="fl" style="margin: 0 10px;">
+                        <img src="images/i.png" class="img-circle" alt="Cinque Terre" width="48" height="48">
+                    </span>
+                    <span class="fl">
+                        <p>ErroR</p>
+                        <p><span class="lv-x"></span></p>
+                    </span>
+                    <span class="fr mt-15" style="padding:0">
+                             85% <font class="link-orange">win</font>
+                    </span>
+                        </div>
+                    </a>
+
+                    <div class="row mt-10 page-header_2" style="color:white; margin: 0px 10px 0 10px;">
+                        <span class="fl guess-rank-list" style="margin: 0;">3</span>
+                    <span class="fl" style="margin: 0 10px;">
+                        <img src="images/i.png" class="img-circle" alt="Cinque Terre" width="48" height="48">
+                    </span>
+                    <span class="fl">
+                        <p>ErroR</p>
+                        <p><span class="lv-x"></span></p>
+                    </span>
+                    <span class="fr mt-15" style="padding:0">
+                            85% <font class="link-orange">win</font>
+                    </span>
+                    </div>
+
+                    <div class="row mt-10 page-header_2" style="color:white; margin: 0px 10px 0 10px;">
+                        <span class="fl guess-rank-list" style="margin: 0;">4</span>
+                    <span class="fl" style="margin: 0 10px;">
+                        <img src="images/i.png" class="img-circle" alt="Cinque Terre" width="48" height="48">
+                    </span>
+                    <span class="fl">
+                        <p>ErroR</p>
+                        <p><span class="lv-x"></span></p>
+                    </span>
+                    <span class="fr mt-15" style="padding:0">
+                            85% <font class="link-orange">win</font>
+                    </span>
+                    </div>
+
+
+                    <div class="row mt-10 page-header_2 last" style="color:white; margin: 0px 10px 0 10px;">
+                        <span class="fl guess-rank-list" style="margin: 0;">5</span>
+                    <span class="fl" style="margin: 0 10px;">
+                        <img src="images/i.png" class="img-circle" alt="Cinque Terre" width="48" height="48">
+                    </span>
+                    <span class="fl">
+                        <p>ErroR</p>
+                        <p><span class="lv-x"></span></p>
+                    </span>
+                    <span class="fr mt-15" style="padding:0">
+                       85% <font class="link-orange">win</font>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-center link-white mt-100 mb-50"><strong>如何竞猜</strong></h2>
+
+        <div class="row" style="margin: 0 70px;">
+            <div class="col-xs-4 pr-40">
+                <div class="media">
+				 <span class="pull-left">
+				 	<a class="get">1</a></span>
+
+                    <div class="media-body">
+                        <h4 class="media-heading link-white ft-16">
+                            注册即送金币奖励
+                        </h4>
+
+                        <p class="link-blue">赠送100金币作为注册奖励</p>
+                    </div>
+                </div>
+
+                <div class="page-header link-white mt-45">
+                    <p><span class="fr">100金币</span>
+                        守望先锋</p>
+
+                    <p class="small link-blue"><span class="fr"><a href="javascript:;">奖金</a> </span>
+                        <a href="javascript:;">比赛</a></p>
+
+                </div>
+
+                <div class="page-header link-white">
+                    <p><span class="fr">100金币</span>
+                        守望先锋</p>
+
+                    <p class="small link-blue"><span class="fr"><a href="javascript:;">奖金</a> </span>
+                        <a href="javascript:;">比赛</a></p>
+
+                </div>
+
+                <div class="page-header link-white">
+                    <p><span class="fr">100金币</span>
+                        守望先锋</p>
+
+                    <p class="small link-blue"><span class="fr"><a href="javascript:;">奖金</a> </span>
+                        <a href="javascript:;">比赛</a></p>
+
+                </div>
+
+            </div>
+            <div class="col-xs-4 pr-40">
+                <div class="media">
+				 <span class="pull-left">
+				 	<a class="get">2</a></span>
+
+                    <div class="media-body">
+                        <h4 class="media-heading link-white ft-16">
+                            选择你认为会获胜的队伍
+                        </h4>
+
+                        <p class="link-blue">开始下注并确认</p>
+                    </div>
+                </div>
+                <div class="page-header-groub link-white mt-20">
+                    <table class="table">
+
+
+                        <tbody>
+                        <tr>
+
+                            <td width="12%" align="right"><p>IG</p>
+
+                                <p>47%</p></td>
+                            <td width="13%"><img src="images/r_ic.png" width="50" height="50"></td>
+                            <td width="12%"><img src="images/r_vs_small.png"></td>
+                            <td width="7%"><img src="images/r_logo.png" width="50" height="50"></td>
+                            <td width="16%" align="left"><p>LGD</p>
+
+                                <p>53%</p></td>
+
+                        </tr>
+                        <tr>
+
+                            <td width="12%" align="right"><p>IG</p>
+
+                                <p>47%</p></td>
+                            <td width="13%"><img src="images/r_ic.png" width="50" height="50"></td>
+                            <td width="12%"><img src="images/r_vs_small.png"></td>
+                            <td width="7%"><img src="images/r_logo.png" width="50" height="50"></td>
+                            <td width="16%" align="left"><p>LGD</p>
+
+                                <p>53%</p></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td width="12%" align="right"><p>IG</p>
+
+                                <p>47%</p></td>
+                            <td width="13%"><img src="images/r_ic.png" width="50" height="50"></td>
+                            <td width="12%"><img src="images/r_vs_small.png"></td>
+                            <td width="7%"><img src="images/r_logo.png" width="50" height="50"></td>
+                            <td width="16%" align="left"><p>LGD</p>
+
+                                <p>53%</p></td>
+
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+            <div class="col-xs-4">
+                <div class="media">
+				 <span class="pull-left">
+				 	<a class="get">3</a></span>
+
+                    <div class="media-body">
+                        <h4 class="media-heading link-white ft-16">
+                            商城兑换你喜欢的礼品
+                        </h4>
+
+                        <p class="link-blue">赢得相应的参与激励</p>
+                    </div>
+                </div>
+
+
+                <div class="tip mt-20">
+                    2000
+                    <div class="gren"></div>
+                    <div class="pos"></div>
+                </div>
+
+                <div class="page-header-3 link-white">
+                    <span class="text-right fr">2000金币</span>
+
+                    <p class="text-left text-st">1<font class="st"></font>
+                        <span><img src="images/r_ic.png" class="img-circle" width="32" height="32"></span>
+                        <font class="link-white">剑姬皮肤</font>
+                    </p>
+                </div>
+
+                <div class="page-header-3 link-white">
+                    <span class="text-right fr">2000金币</span>
+
+                    <p class="text-left text-st">2<font class="ed"></font>
+                        <span><img src="images/r_ic.png" class="img-circle" width="32" height="32"></span>
+                        <font class="link-white">剑姬皮肤</font>
+                    </p>
+                </div>
+
+                <div class="page-header-3 link-white">
+                    <span class="text-right fr">2000金币</span>
+
+                    <p class="text-left text-st">3<font class="rd"></font>
+                        <span><img src="images/r_ic.png" class="img-circle" width="32" height="32"></span>
+                        <font class="link-white">剑姬皮肤</font>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <h2 class="text-center link-white mt-70 mb-50"><strong>热门游戏</strong></h2>
+
+       
+        
+        <div class="row pic_pot" style="margin: 0 20px;">
+    <div class="col-md-4 hot-game hot_meidia">
+    	<a href="javascript:">
+    		<img src="images/game_1.png">
+    		<p class="ab_text">守望先锋</p>
+    	</a>
+    </div>
+    <div class="col-md-4 hot-game bordder hot_meidia">
+    	<div class="line"></div>
+    	<a href="javascript:">
+    		<img src="images/game_1.png">
+    		<p class="ab_text">先锋</p>
+    	</a>
+    </div>
+    <div class="col-md-4 hot-game bordder hot_meidia">
+    	
+    	<a href="javascript:">
+    		<img src="images/game_1.png">
+    		<p class="ab_text">守望先锋</p>
+    	</a>
+    </div>
+        	
+        </div>
+ 
+    </div>
+    
+    <div class="fix"></div>
+
+    <!--footer ==S -->
+    <div id="inc_footer"></div>
+    <!--footer ==E -->
+
+
+</div>
+<!--登录弹框-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background:#2e3238; color:#fff; width: 600px; height:355px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title" id="myModalLabel"><b>登录开始竞猜</b></h2>
+            </div>
+            <div class="modal-body">
+                <form action="">
+                    <div class="form-group label-floating">
+                        <label for="i5" class="control-label">手机号码</label>
+                        <input type="email" class="form-control" id="i5">
+                        <span class="help-block">不存在号码</span>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label for="i5" class="control-label">密码</label>
+                        <input type="email" class="form-control" id="i5">
+                        <span class="help-block">密码和账户不配</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="text-align: left;">
+                <div style="padding: 0 13px;">
+                    <p style="margin-bottom: 8px;">
+                        <a href="#" style="text-decoration:underline; color:#31bc9c;">忘记密码？</a><br/></p>
+                    <span style="color: #d4d4d4;">新成员？</span><a href="#"
+                                                                style="text-decoration:underline; color:#31bc9c;">现在注册</a>
+                    <button type="button" class="btn btn-primary btn-raised pull-right"
+                            style="width: 84px; height: 30px; padding-top: 5px; transform:translateY(-21px);"><strong>登
+                        录</strong></button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+<!--注册弹框-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background:#2e3238; color:#fff; width: 600px; height:auto;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title" id="myModalLabel"><b>注册开始竞猜</b></h2>
+            </div>
+            <div class="modal-body">
+                <form action="">
+                    <div class="form-group label-floating" style="">
+                        <label for="i5" class="control-label">昵称</label>
+                        <input type="email" class="form-control" id="i5">
+                        <span class="help-block">昵称已被占用</span>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label for="i5" class="control-label">密码</label>
+                        <input type="email" class="form-control" id="i5">
+                        <span class="help-block">密码已被占用</span>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label for="i5" class="control-label">确认密码</label>
+                        <input type="email" class="form-control" id="i5">
+                        <span class="help-block">两次密码不匹配</span>
+                    </div>
+                    <div class="form-group label-floating" style=" position: relative;">
+                        <label for="i5" class="control-label">手机号码</label>
+                        <button type="button" id="countdown" class="btn btn-primary btn-raised pull-right" style="position: absolute; top:0px; right: 4px; width: 98px; height: 24px; line-height: 8px;padding: 0; background-color: #607d8b;"><strong>获取验证码</strong></button>
+                        <input type="email" class="form-control" id="i5">
+                        <span class="help-block">不存在号码</span>
+                    </div>
+                    <div class="form-group label-floating">
+                        <label for="i5" class="control-label">验证码</label>
+                        <input type="email" class="form-control" id="i5">
+                        <span class="help-block">昵称已被占用</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="text-align: left;">
+                <div style="padding: 0 13px;">
+                    <p style="color: #d4d4d4;margin-bottom: 8px;">*提交即表示你同意并遵循&nbsp;<a href="#"
+                                                                                       style="text-decoration:underline; color:#31bc9c;">XXX服务协议</a>
+                    </p>
+                    <span style="color: #d4d4d4;">已经是会员</span>&nbsp;<a href="#"
+                                                                       style="text-decoration:underline; color:#31bc9c;">登录</a>
+                    <button type="button" class="btn btn-primary btn-raised pull-right"
+                            style="width: 84px; height: 30px; padding-top: 5px; transform:translateY(-21px);"><strong>提
+                        交</strong></button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+
+
+</body>
+<script src="js/material.js"></script>
+<script src="js/ripples.min.js"></script>
+<script>
+    $.material.init();
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $.get("footer.html", function (data) {
+            $(data).appendTo("#inc_footer");
+        }, "html");
+
+    });
+    //弹窗居中
+    $("[data-toggle='modal']").click(function () {
+        var _target = $(this).attr('data-target')
+        t = setTimeout(function () {
+            var _modal = $(_target).find(".modal-dialog")
+            _modal.animate({'margin-top': parseInt(($(window).height() - _modal.height()) / 4)}, 10)
+        }, 10)
+    });
+    $(function () {
+        $("#countdown").click(function () {
+            $(this).attr("disabled", "disabled")
+            var timer = 60;
+            var DSQ = setInterval(function () {
+                timer--;
+                if (timer > 0) {
+                    $("#countdown").html("(" + timer + ")" + "秒后重发")
+                } else {
+                    clearInterval(DSQ)
+                    $("#countdown").html("获取验证码")
+                    $("#countdown").removeAttr("disabled")
+                }
+            }, 1000)
+        })
+    })
+
+</script>
+
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html xmlns:og="http://ogp.me/ns#" class="alt-layout">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+
+    <title>header</title>
+
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_laknqv4ohbvgqfr.css">
+    <link rel="stylesheet" type="text/css" href="css/nprogress.css">
+    <script src='js/nprogress.js'></script>
+
+</head>
+<body>
+<!--menu ==S-->
+<div class="navbar navbar-default" id="c-navbar" style="padding: 0; background: #22262A;">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target=".navbar-responsive-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h2 class="c-header-h2"><img src="images/LOGO.png"></h2>
+            </div>
+
+            <!--未登录-->
+            <!--             <div class="pull-right" style="margin-top:12px;margin-bottom: 14px;">
+                            <button type="button" class="btn btn-primary btn-raised" data-toggle="modal" data-target="#myModal2">
+                                <strong>注 册</strong></button>
+                            <button type="button" class="btn btn-default btn-raised" data-toggle="modal" data-target="#myModal">
+                                <strong>登 录</strong></button>
+                        </div> -->
+            <!--登录-->
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="c-nav nav navbar-nav navbar-right">
+                    <li><a href="2.0bocai比赛列表页.html"><i class="iconfont icon-index"></i>首页
+                        <div class="ripple-container"></div>
+                    </a></li>
+                    <li><a href="12.0bocai商城页.html"><i class="iconfont icon-shangcheng"></i>商城</a></li>
+                    <li><a href="我的竞猜.html"><i class="iconfont icon-jingcai2"></i>我的竞猜</a></li>
+                    <li><a href="inform.html"><i class="iconfont icon-wodetongzhi2"></i>我的通知</a><a
+                            href="#">99</a></li>
+
+                    <li class="dropdown">
+                        <a href="###" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="images/nvnv.png" class="h-img img-circle"/>
+                            怦然
+                            <b class="caret"></b></a>
+                        <ul class="dropdown-menu c-header-menu" style="right:-44px;">
+                            <li style="margin-top: 2px;">
+                                <span><b>￥</b></span><span>153</span>金币
+                                <button type="button" class="btn pull-right" data-toggle="modal" data-target="#myModal">
+                                    <strong>充值</strong></button>
+                            </li>
+                            <li>
+                                <dl class="pull-left">
+                                    <dd>签到&nbsp;+10&nbsp;~100&nbsp;金币</dd>
+                                    <dt>已经连续签到<span>0</span>天</dt>
+                                </dl>
+                                <!--未签到-->
+                                <button type="button" class="btn  btn-raised btn-primary pull-right" id="wqd">
+                                    <strong>签到</strong>
+                                </button>
+                                <!--已签到-->
+                                <button type="button" class="btn  btn-raised btn-primary pull-right btn-yqd hide"
+                                        id="yqd" disabled>
+                                    <strong>已签到</strong>
+                                </button>
+                            </li>
+                            <li>
+                                <dl>
+                                    <dd>15金</dd>
+                                    <dt>正在参与竞猜未结算的货币</dt>
+                                </dl>
+                            </li>
+                            <li><a href="#" id="c_general1">编辑个人资料</a></li>
+                            <li><a href="#" id="c_general2">兑换</a></li>
+                            <li><a href="#" id="c_general3">交易记录</a></li>
+                            <li>推荐好友
+                                <a href="javascript:;" class="btn-money  btn-raised pull-right c_link5">赚取奖励
+                                    <a/>
+                            </li>
+                            <li><a href="#" id="c_general4">退出</a></li>
+                            <div class="triangle_border_up">
+                                <span></span>
+                            </div>
+                        </ul>
+                    </li>
+                    <li style="height: 80px;line-height: 80px;padding-right: 10px;padding-left: 5px;">123金币</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+<!--menu ==E-->
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:500px; background:#2E3238;">
+        <div class="modal-content" style="background:#2E3238">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title link-white" id="myModalLabel">
+                    <strong>金币充值</strong>
+                </h4>
+                <h5 class="link-white mt-20">充值金额</h5>
+            </div>
+            <div class="modal-body">
+                <div class="jingbi">
+                    <ul>
+                        <li><a href="javascript:;" class="btn btn-primary">10元</a><span>+ 10 金币</span></li>
+                        <li><a href="javascript:;" class="btn btn-primary">20元</a><span>+ 10 金币</span></li>
+                        <li><a href="javascript:;" class="btn btn-primary">50元</a><span>+ 10 金币</span></li>
+                        <li><a href="javascript:;" class="last btn btn-primary">100元</a><span>+ 10 金币</span></li>
+                        <li><a href="javascript:;" class="btn btn-primary">200元</a><span>+ 10 金币</span></li>
+                        <li><a href="javascript:;" class="btn btn-primary">500元</a><span>+ 10 金币</span></li>
+                        <li><a href="javascript:;" class="btn btn-primary">1000元</a><span>+ 10 金币</span></li>
+                        <li>
+                            <div class="form-group label-floating">
+                                <input type="text" class="form-control text_input" placeholder="30">
+                            </div>
+                            <span>+ 30 金币</span>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <p class="young mt-20">*充值金币后，您将可以使用金币进行竞猜。
+                    <a href="javascript:;">如何竞猜？</a>
+                </p>
+
+
+                <p class="link-white mt-30">请选择支付方式</p>
+
+                <div class="mt-5 pos-r" style="width:60%;">
+                    <div class="line_s"></div>
+                    <label class="myradio-label">
+                        <span><img src="images/wx.png">微信支付</span>
+                        <input class="myradio-radio" type="radio" name="myradio-radio">
+                        <span class="myradio-radioInput"></span>
+                    </label>
+
+                    <label class="myradio-label fr">
+                        <span><img src="images/zf.png">微信支付</span>
+                        <input class="myradio-radio" type="radio" name="myradio-radio">
+                        <span class="myradio-radioInput"></span>
+                    </label>
+
+
+                    <p>
+                        <button type="button" class="btn btn-primary btn-raised mt-25" data-dismiss="modal"
+                                aria-hidden="true" data-toggle="modal" data-target="#myModal-zhifu" style="width:105px">
+                            <strong>确认充值</strong>
+                        </button>
+                    </p>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal-zhifu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="width:500px; background:#2E3238;">
+        <div class="modal-content" style="background:#2E3238">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title link-white" id="myModalLabel">
+                    <strong>金币充值</strong>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="c-zhifuphoto">
+                    <img src="images/zhifu.gif" alt=""/>
+
+                    <p class="mt-30">等待支付</p>
+                </div>
+                <div class="c-zhifumoney mt-30 mb-30">
+                    <p>支付:<span>20</span>元</p>
+
+                    <p class="mt-5">充值金币:<span>2000</span></p>
+                </div>
+                <div class="c-zhifufoot mt-30">
+                    <button type="button" class="btn btn-primary btn-raised mt-25">
+                        <strong>返回继续充值</strong>
+                    </button>
+                    <a href="#" class="pull-right">支付中遇到问题？</a>
+                    <button type="button" class="btn-raised mt-25 pull-right c-zhifuguesss">
+                        <strong>去看看&nbsp;竞猜</strong>
+                    </button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="modal fade" id="myModal-weixinzf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true"> -->
+    <div class="modal-dialog hide" style="width:500px; background:#2E3238;">
+        <div class="modal-content" style="background:#2E3238">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title link-white" id="myModalLabel">
+                    <strong>G币充值</strong>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p class="item-w1">请使用<span>&nbsp;微信&nbsp;</span><span><img style="margin-bottom: 4px;" src="images/sysao.png" alt="" /></span><span>&nbsp;扫一扫</span></p>
+                <p class="item-w1">扫描二维码支付</p>
+                <div style="text-align: center; margin: 24px 0;">
+                    <img src="images/fyjterwm.png" alt="">
+                </div>
+                <p class="item-w2"><span><img style="margin:0 12px 4px 0;" src="images/oclock.png" alt="" /></span>二维码有效时间为两小时，请尽快支付</p>
+                <p class="item-w3">支付&nbsp;:&nbsp;<span>20</span>元，&nbsp;充值金币&nbsp;:&nbsp;<span>2000</span></p>
+                <div class="c-zhifufoot mt-30">
+                    <button type="button" class="btn btn-primary btn-raised">
+                        <strong>返回继续充值</strong>
+                    </button>
+                    <button type="button" class="btn-raised c-zhifuguesss" style="transform: translateY(2px);">
+                        <strong>已完成支付</strong>
+                    </button>
+                    <a href="#" class="pull-right" style="margin-top: 15px;">支付中遇到问题？</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- </div> -->
+</body>
+
+<script>
+    $.material.init();
+</script>
+<script type="text/javascript">
+    //点击签到
+    $('#wqd').click(function (e) {
+        $('#wqd').addClass("hide");
+        $('#yqd').removeClass("hide");
+        e.stopPropagation();
+    });
+
+    //header进度条
+    NProgress.start();
+    setTimeout(function () {
+        NProgress.done();
+    }, 1000);
+
+    //弹窗居中
+    $("body").delegate("[data-toggle='modal']", "click", function () {
+        var _target = $(this).attr('data-target')
+        t = setTimeout(function () {
+            var _modal = $(_target).find(".modal-dialog");
+            var _model_margintop = -(_modal.find(".modal-content").height()/2)+"px";
+            var _model_marginleft = -(_modal.find(".modal-content").width()/2)+"px";
+            /*_modal.animate({'margin-top': parseInt(($(window).height() - _modal.height()) / 4)}, 10)*/
+            _modal.css({
+                'margin': _model_margintop + ' 0 0 ' + _model_marginleft,
+                'position':'fixed',
+                'top':'50%',
+                'left':'50%'
+            })
+        }, 10)
+    })
+    $(function () {
+        $(".jingbi .btn").click(function () {
+            $(this).addClass("moneybackgd").parent().siblings().find(".btn").removeClass("moneybackgd");
+        })
+    })
+</script>
+</html>

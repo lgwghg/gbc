@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.roll.mapper.IRollPoolMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.roll.model.RollPool">
+		<id column="id" property="id"/> <!-- 主键ID-->
+		<result column="room_id" property="roomId"/> <!-- 房间ID-->
+		<result column="gold" property="gold"/> <!-- 金币-->
+		<result column="exchange_id" property="exchangeId"/> <!-- CD_KEY兑换码-->
+		<result column="add_time" property="addTime"/> <!-- 创建时间-->
+		<result column="user_id" property="userId"/>
+	</resultMap>
+	
+	<!-- t_roll_pool字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			t.id, <!-- 主键ID-->
+			t.room_id, <!-- 房间ID-->
+			t.gold, <!-- 金币-->
+			t.exchange_id, <!-- CD_KEY兑换码-->
+			t.add_time,
+			rr.user_id,
+		</trim>
+	</sql>
+	
+	<!-- 查询t_roll_pool分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="false">
+		select  
+			<include refid="columnList"/>
+		from t_roll_pool t
+		LEFT JOIN t_roll_room rr on rr.ID = t.ROOM_ID
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="idList != null and idList.size() > 0">
+				AND t.id in 
+				<foreach collection="idList" item = "id" open="(" separator="," close=")">
+			    	#{id}  
+			    </foreach>
+			</if>
+			<if test="roomId != null and roomId != ''">
+				AND t.room_id=#{roomId}
+			</if>
+			<if test="gold != null and gold != ''">
+				AND t.gold=#{gold}
+			</if>
+			<if test="exchangeId != null and exchangeId != ''">
+				AND t.exchange_id=#{exchangeId}
+			</if>
+			<if test="addTime != null and addTime != ''">
+				AND t.add_time=#{addTime}
+			</if>
+			<if test="isCurrent != null and isCurrent != ''">
+				AND NOT EXISTS (
+					SELECT 1 FROM t_roll_winner rw where rw.POOL_ID = t.ID
+				)
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_roll_pool -->
+	<insert id="insert" parameterType="com.webside.roll.model.RollPool" flushCache="true">
+		insert into t_roll_pool
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!--唯一主键-->
+		<if test="roomId != null">room_id,</if><!-- 房间ID-->
+		<if test="gold != null">gold,</if><!-- 金币-->
+		<if test="exchangeId != null">exchange_id,</if><!-- CD_KEY兑换码-->
+		<if test="addTime != null">add_time,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 唯一主键-->
+		<if test="roomId != null">#{roomId},</if><!-- 房间ID-->
+		<if test="gold != null">#{gold},</if><!-- 金币-->
+		<if test="exchangeId != null">#{exchangeId},</if><!-- CD_KEY兑换码-->
+		<if test="addTime != null">#{addTime},</if>
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_roll_pool -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_roll_pool t
+		LEFT JOIN t_roll_room rr on rr.ID = t.ROOM_ID
+		where t.id = #{id}
+	</select>
+	
+	<!-- 更新t_roll_pool -->
+	<update id="update" parameterType="com.webside.roll.model.RollPool" flushCache="true">
+		update t_roll_pool
+		<set>
+			<trim suffixOverrides=",">
+				<if test="roomId != null">room_id=#{roomId},</if><!-- 房间ID-->
+				<if test="gold != null">gold=#{gold},</if><!-- 金币-->
+				<if test="exchangeId != null">exchange_id=#{exchangeId},</if><!-- CD_KEY兑换码-->
+				<if test="addTime != null">add_time=#{addTime},</if>
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_roll_pool -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_roll_pool  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_roll_pool -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_roll_pool 
+		where id = #{id}
+	</delete>
+	
+	<select id="getIdByRoomId" resultType="String" parameterType="String" flushCache="false" useCache="false">
+		SELECT t.ID FROM t_roll_pool t
+		WHERE t.ROOM_ID = #{roomId}
+		AND NOT EXISTS (
+				  SELECT 1 FROM t_roll_winner rw where rw.POOL_ID = t.ID
+				)
+	</select>
+</mapper>
